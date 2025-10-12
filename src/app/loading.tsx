@@ -10,6 +10,7 @@ export default function Loading() {
       justifyContent="center"
       position="relative"
       zIndex={4000}
+      
     >
       <Box
         component="img"

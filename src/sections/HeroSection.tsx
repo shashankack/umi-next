@@ -98,7 +98,7 @@ const HeroSection = () => {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 2,
+          zIndex: 4000,
         }}
       >
         <Box

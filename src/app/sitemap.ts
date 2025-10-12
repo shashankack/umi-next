@@ -14,6 +14,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/farm-to-foam',
     '/contact',
     '/blogs',
+    '/faq',
+    '/policies/privacy-policy',
+    '/policies/terms-of-service',
+    '/policies/refund-policy',
+    '/policies/shipping-policy',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

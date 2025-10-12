@@ -10,16 +10,16 @@ export default function Footer() {
     [
       { title: "FAQ", path: "/faq" },
       { title: "Shop", path: "/shop" },
-      { title: "Story", path: "/story" },
+      { title: "Story", path: "/about" },
       { title: "Contact", path: "/contact" },
-      { title: "Our Matcha", path: "/our-matcha" },
+      { title: "Our Matcha", path: "/farm-to-foam" },
     ],
     [
       { title: "Blogs", path: "/blogs" },
-      { title: "Refund Policy", path: "/refund-policy" },
-      { title: "Privacy Policy", path: "/privacy-policy" },
-      { title: "Shipping Policy", path: "/shipping-policy" },
-      { title: "Terms of service", path: "/terms-of-service" },
+      { title: "Refund Policy", path: "/policies/refund-policy" },
+      { title: "Privacy Policy", path: "/policies/privacy-policy" },
+      { title: "Shipping Policy", path: "/policies/shipping-policy" },
+      { title: "Terms of service", path: "/policies/terms-of-service" },
     ],
     [
       {
@@ -47,7 +47,7 @@ export default function Footer() {
     transition: "all 0.3s ease",
     "&:hover": {
       color: "text.primary",
-      letterSpacing: "1px",
+      transform: "scale(1.05)",
     },
   };
 
