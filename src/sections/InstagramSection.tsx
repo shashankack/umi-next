@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState } from "react";
 
@@ -110,6 +117,9 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
 }
 
 export default function InstagramSection() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const posts = [
     {
       thumbnail:
@@ -308,7 +318,7 @@ export default function InstagramSection() {
           component="img"
           src="/images/neko/hello.png"
           sx={{
-            width: { xs: 90, md: 180 },
+            width: { xs: 80, md: 180 },
             position: "relative",
             zIndex: 20,
           }}
@@ -321,14 +331,16 @@ export default function InstagramSection() {
             mt: { xs: 0, md: 2 },
             mb: { xs: 2, md: 0 },
             color: "background.default",
-            fontSize: { xs: "4vw", md: "1.5vw" },
+            fontSize: { xs: "3.6vw", sm: "2.4vw", md: "1.5vw" },
             fontWeight: 500,
             position: "relative",
             zIndex: 20,
-            width: { xs: "50%", md: "100%" },
+            width: { xs: "40%", sm: "30%", md: "100%" },
           }}
         >
-          Matcha your flow, Shipping Pan India
+          {isMobile
+            ? "Matcha your flow shipping pan India"
+            : "Matcha your flow, shipping pan India"}
         </Typography>
 
         <Box

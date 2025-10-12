@@ -37,7 +37,7 @@ const CurvedMarquee: React.FC = () => {
   return (
     <div className="curved-marquee">
       {isMobile ? (
-        <svg viewBox="0 0 550 73">
+        <svg viewBox="0 0 550 70">
           <defs>
             <path
               id="curve"

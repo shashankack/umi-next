@@ -43,7 +43,7 @@ export default function Footer() {
   const LinkStyles = {
     color: "text.secondary",
     mb: 1,
-    fontSize: { xs: 12, md: "1.6vw", xl: "1.2vw" },
+    fontSize: { xs: 10, md: "1.6vw", xl: "1.2vw" },
     transition: "all 0.3s ease",
     "&:hover": {
       color: "text.primary",
@@ -56,7 +56,7 @@ export default function Footer() {
     bgcolor: "secondary.main",
     transition: "all 0.3s ease",
     p: { xs: 0.5, md: 1 },
-    "& svg": { fontSize: { xs: 18, md: 30 } },
+    "& svg": { fontSize: { xs: 16, md: 30 } },
 
     "&:hover": {
       bgcolor: "secondary.main",
@@ -67,7 +67,7 @@ export default function Footer() {
   return (
     <>
       <Stack
-        py={{ xs: 2, md: 4 }}
+        py={{ xs: 1, md: 4 }}
         bgcolor="background.default"
         justifyContent="space-around"
         alignItems="stretch"
@@ -78,9 +78,9 @@ export default function Footer() {
           component="img"
           src="/images/vectors/whisk.svg"
           sx={{
-            bottom: { xs: "-7%", md: -50 },
+            bottom: { xs: "-20%", md: -50 },
             right: { xs: "10%", md: "10%" },
-            width: { xs: "20vw", md: "20vw", lg: "10vw" },
+            width: { xs: "16vw", md: "16vw", lg: "10vw" },
             position: "absolute",
           }}
         />
@@ -94,12 +94,12 @@ export default function Footer() {
           <Box
             component="img"
             src="/images/icons/pink_monogram.png"
-            width={{ xs: 80, md: 140 }}
+            width={{ xs: 60, md: 140 }}
           />
           <Box
             component="img"
             src="/images/vectors/bowl.svg"
-            width={{ xs: 80, md: 140 }}
+            width={{ xs: 60, md: 140 }}
           />
           <Typography
             sx={{
@@ -166,8 +166,7 @@ export default function Footer() {
           variant="body1"
           sx={{
             color: "text.secondary",
-            mb: 1,
-            fontSize: { xs: 12, md: "1.2vw" },
+            fontSize: { xs: 9, md: "1.2vw" },
           }}
         >
           © 2025 Umi. All rights reserved.

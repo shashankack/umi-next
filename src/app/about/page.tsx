@@ -1,7 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 
 export const metadata = {
-  title: "About Us - Umi Matcha",
+  title: "About",
+  // Add other metadata as needed
 };
 
 export default function AboutPage() {
@@ -13,9 +14,10 @@ export default function AboutPage() {
           color: "primary.main",
           textShadow: "0.3px 2px 0 #B5D782",
           textAlign: "center",
-          fontSize: { xs: "4rem", sm: "4.5rem", md: "5.5rem" },
-          mb: 5,
-          mt: 3,
+          fontSize: { xs: "2.4rem", sm: "3rem", md: "4rem" },
+          fontWeight: 600,
+          mb: 2,
+          mt: 4,
         }}
       >
         About Us
@@ -26,7 +28,7 @@ export default function AboutPage() {
         sx={{
           px: { xs: 2, md: 10 },
           mb: { xs: 3, md: 5 },
-          fontSize: { xs: "3vw", md: "1.2vw" },
+          fontSize: { xs: "2.6vw", md: "1.2vw" },
           textAlign: "justify",
           color: { xs: "#000", md: "#000" },
         }}
@@ -34,12 +36,12 @@ export default function AboutPage() {
         Umi 海 comes from the Japanese word ocean.
         <br />
         <br />
-        The concept of Umi is inspired by the famous Japanese painting, &quot;The
-        Great Wave of Kanagawa&quot;. Matcha has been a constant in my life through
-        its highest highs and lowest lows and just like that, the great wave
-        depicts life&apos;s journey. It is a never-ending process where once we
-        conquer our fear and meet our goal, we&apos;ll be met again with other
-        vicious waves, other bigger problems & difficulties.
+        The concept of Umi is inspired by the famous Japanese painting,
+        &quot;The Great Wave of Kanagawa&quot;. Matcha has been a constant in my
+        life through its highest highs and lowest lows and just like that, the
+        great wave depicts life&apos;s journey. It is a never-ending process
+        where once we conquer our fear and meet our goal, we&apos;ll be met
+        again with other vicious waves, other bigger problems & difficulties.
         <br />
         <br />
         However, our tiredness towards the journey will also have its sweetness
@@ -49,21 +51,27 @@ export default function AboutPage() {
         symbolic shift within the matcha community.
         <br />
         <br />
-        Life is always better with a matcha in hand. I&apos;m thrilled to have Umi
-        become a part of your daily routine because it&apos;s truly the most magical
-        part of mine.
+        Life is always better with a matcha in hand. I&apos;m thrilled to have
+        Umi become a part of your daily routine because it&apos;s truly the most
+        magical part of mine.
       </Typography>
 
       <Box>
-        <Box
-          component="img"
-          src="/images/backgrounds/about.png"
-          sx={{
-            width: { xs: "140%", md: "100%" },
-            height: "auto",
-            objectFit: "cover",
-          }}
-        />
+        <picture>
+          <source
+            srcSet="/images/backgrounds/about_mobile.png"
+            media="(max-width: 768px)"
+          />
+          <img
+            src="/images/backgrounds/about.png"
+            alt="About"
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "cover",
+            }}
+          />
+        </picture>
       </Box>
     </Stack>
   );

@@ -111,8 +111,8 @@ const BestSellersClient = ({
         overflow="hidden"
         position="relative"
         bgcolor="primary.main"
-        pt={{ xs: 7, md: 10 }}
-        pb={{ xs: 15, md: 20 }}
+        pt={{ xs: 5, md: 10 }}
+        pb={{ xs: 12, md: 20 }}
         px={2}
       >
         <Typography
@@ -123,7 +123,7 @@ const BestSellersClient = ({
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
-            fontSize: { xs: "8vw", md: "4vw" },
+            fontSize: { xs: "7vw", md: "4vw" },
           }}
         >
           Kinder rituals that <br /> fill your cup
@@ -200,7 +200,7 @@ const BestSellersClient = ({
         )}
       </Stack>
       <Stack
-        height={800}
+        height={{ xs: 480, sm: 300, md: 800 }}
         bgcolor="background.default"
         position="relative"
         alignItems="center"
@@ -221,8 +221,8 @@ const BestSellersClient = ({
           sx={{
             position: "relative",
             zIndex: 20,
-            mt: { xs: 20, md: 15 },
-            width: { xs: 150, md: 200 },
+            mt: { xs: 10, md: 15 },
+            width: { xs: 130, md: 200 },
           }}
           animate={{ y: [0, -20, 0] }}
           transition={{
@@ -284,7 +284,7 @@ const BestSellersClient = ({
           }
           sx={{
             position: "relative",
-            width: { xs: 350, md: 900 },
+            width: { xs: 270, md: 900 },
             mt: 6,
           }}
         />
@@ -299,8 +299,8 @@ const BestSellersClient = ({
             borderRadius: 2,
             px: 2,
             py: 0,
-            my: { xs: 8, md: 10 },
-            fontSize: { xs: "4vw", md: "1.5rem" },
+            my: { xs: 4, md: 10 },
+            fontSize: { xs: "5vw", md: "1.5rem" },
           }}
         >
           Shop All

@@ -42,8 +42,8 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          width: { xs: "103%", md: "30vw" },
-          ml: -1,
+          width: { xs: "103%", sm: "103%", md: 500 },
+          ml: { xs: -1, sm: -2, md: 0 },
           height: "101vh",
           borderRadius: 0,
           boxShadow: "none",
@@ -114,7 +114,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                   onClick={link.hasDropdown ? undefined : onClose}
                   sx={{
                     fontFamily: "Gliker",
-                    letterSpacing: 2,
                     textDecoration: "none",
                     color: "background.default",
                     fontWeight: 700,
@@ -140,7 +139,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                       p: 0.5,
                       mr: -1,
                       top: 15,
-                      right: 210,
+                      right: { xs: "33%", sm: "40%", md: "35%" },
                     }}
                   >
                     <Box
@@ -200,27 +199,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             </ListItem>
           ))}
         </List>
-
-        {/* Neko illustration at bottom */}
-        {/* <Box
-          sx={{
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: 150,
-            mb: 10,
-            mt: "auto",
-          }}
-        >
-          <Box
-            component="img"
-            src="/images/neko/hello.png"
-            alt="Menu Illustration"
-            sx={{ width: "100%", maxWidth: 150 }}
-            loading="lazy"
-          />
-        </Box> */}
       </Box>
     </Drawer>
   );

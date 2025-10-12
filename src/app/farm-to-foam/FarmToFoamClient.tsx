@@ -1,10 +1,18 @@
 "use client";
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  Button,
+  Collapse,
+  useMediaQuery,
+} from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useState } from "react";
 
 export default function FarmToFoamClient() {
   const galleryImages = [
@@ -17,6 +25,9 @@ export default function FarmToFoamClient() {
     "/images/matcha-gallery/image_7.png",
     "/images/matcha-gallery/image_8.png",
   ];
+
+  const isMobile = useMediaQuery("(max-width:768px)");
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <Stack minHeight="100vh" bgcolor="background.default" pt={14}>
@@ -33,7 +44,8 @@ export default function FarmToFoamClient() {
             color: "background.default",
             zIndex: 2,
             textTransform: "uppercase",
-            fontSize: { xs: 60, sm: 80, md: 100 },
+            fontSize: { xs: 35, sm: 80, md: 100 },
+            fontWeight: 600,
           }}
         >
           Farm to Foam
@@ -77,14 +89,14 @@ export default function FarmToFoamClient() {
 
       <Box
         sx={{
-          m: { xs: 4, md: 6 },
-          p: { xs: 4, md: 6 },
+          m: { xs: 3, md: 6 },
+          p: { xs: 3, md: 6 },
           borderRadius: { xs: 4, md: 8 },
           bgcolor: "primary.main",
         }}
       >
         <Typography
-          fontSize={{ xs: 16, md: 22 }}
+          fontSize={{ xs: 14, md: 22 }}
           textAlign="justify"
           sx={{ color: "background.default" }}
         >
@@ -94,25 +106,89 @@ export default function FarmToFoamClient() {
           Wazuka, a tiny region where the fog off the river keeps the leaves
           shaded and the soil just moist enough. The result? smooth, milky,
           buttery matcha with no bitterness. single cultivar, all organic.
-          <br />
-          <br />
-          Our farm is rooted in integrity, where matcha is grown without
-          herbicides, pesticides, or synthetic fertilizers. Every leaf is
-          nurtured in harmony with nature, picked by hand, tana shaded with
-          care, and stone-milled to preserve its rich umami and vivid hue.
-          <br />
-          <br />
-          In these quiet hills of Wazuka, Japan where morning mists cling gently
-          to the tea fields - we stood among rows of vibrant green leaves at the
-          farm. This wasn&apos;t just a visit; it was a pilgrimage to the source of
-          purity. From the soils of Wazuka to the matcha bowls of India, this
-          journey is a tribute to the beauty of intention. It&apos;s about honouring
-          tradition while embracing a global vision - where every sip carries
-          the story of a farm, a philosophy, and a promise of a brand.
-          <br />
-          <br />
-          This is farm to foam and it&apos;s only the beginning.
         </Typography>
+        {isMobile ? (
+          <>
+            {!showMore && (
+              <Button
+                variant="text"
+                sx={{
+                  ml: -1,
+                  color: "background.default",
+                  fontWeight: 400,
+                  boxShadow: "none",
+                  textTransform: "none",
+                }}
+                onClick={() => setShowMore(true)}
+              >
+                Read More...
+              </Button>
+            )}
+            <Collapse in={showMore} timeout={400}>
+              <Typography
+                fontSize={14}
+                textAlign="justify"
+                sx={{
+                  color: "background.default",
+                  mt: 2,
+                  transformOrigin: "top center",
+                }}
+              >
+                Our farm is rooted in integrity, where matcha is grown without
+                herbicides, pesticides, or synthetic fertilizers. Every leaf is
+                nurtured in harmony with nature, picked by hand, tana shaded
+                with care, and stone-milled to preserve its rich umami and vivid
+                hue.
+                <br />
+                <br />
+                In these quiet hills of Wazuka, Japan where morning mists cling
+                gently to the tea fields - we stood among rows of vibrant green
+                leaves at the farm. This wasn&apos;t just a visit; it was a
+                pilgrimage to the source of purity. From the soils of Wazuka to
+                the matcha bowls of India, this journey is a tribute to the
+                beauty of intention. It&apos;s about honouring tradition while
+                embracing a global vision - where every sip carries the story of
+                a farm, a philosophy, and a promise of a brand.
+                <br />
+                <br />
+                This is farm to foam and it&apos;s only the beginning.
+              </Typography>
+            </Collapse>
+          </>
+        ) : (
+          <Typography
+            fontSize={{ xs: 14, md: 22 }}
+            textAlign="justify"
+            sx={{ color: "background.default" }}
+          >
+            Umi partners up exclusively with certified organic farms in Japan,
+            where matcha is cultivated with care, free from pesticides and
+            harmful additives. Our organic matcha comes from a 300+ year old
+            farm in Wazuka, a tiny region where the fog off the river keeps the
+            leaves shaded and the soil just moist enough. The result? smooth,
+            milky, buttery matcha with no bitterness. single cultivar, all
+            organic.
+            <br />
+            <br />
+            Our farm is rooted in integrity, where matcha is grown without
+            herbicides, pesticides, or synthetic fertilizers. Every leaf is
+            nurtured in harmony with nature, picked by hand, tana shaded with
+            care, and stone-milled to preserve its rich umami and vivid hue.
+            <br />
+            <br />
+            In these quiet hills of Wazuka, Japan where morning mists cling
+            gently to the tea fields - we stood among rows of vibrant green
+            leaves at the farm. This wasn&apos;t just a visit; it was a
+            pilgrimage to the source of purity. From the soils of Wazuka to the
+            matcha bowls of India, this journey is a tribute to the beauty of
+            intention. It&apos;s about honouring tradition while embracing a
+            global vision - where every sip carries the story of a farm, a
+            philosophy, and a promise of a brand.
+            <br />
+            <br />
+            This is farm to foam and it&apos;s only the beginning.
+          </Typography>
+        )}
       </Box>
     </Stack>
   );

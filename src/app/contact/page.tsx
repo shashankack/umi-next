@@ -44,19 +44,20 @@ export default function ContactPage() {
         alignItems="center"
       >
         <Box
-          width="55%"
+          width={{ xs: "65%", md: "55%" }}
           bgcolor="background.default"
-          borderRadius="200px 200px 0 0"
+          borderRadius={{ xs: "50px 50px 0 0", md: "200px 200px 0 0" }}
           boxShadow="6px 0 0 #F6A09E"
         >
           <Typography
             variant="h6"
             sx={{
-              transform: "translateY(30%)",
+              transform: { xs: "translateY(20%)", md: "translateY(30%)" },
               color: "text.secondary",
-              fontSize: { xs: 20, sm: 40, md: 70 },
+              fontSize: { xs: 35, sm: 40, md: 70 },
               textAlign: "center",
               width: "100%",
+              fontWeight: 400,
             }}
           >
             Contact us
@@ -66,7 +67,7 @@ export default function ContactPage() {
           width="100%"
           bgcolor="background.default"
           alignItems="center"
-          borderRadius={10}
+          borderRadius={{ xs: 6, md: 10 }}
           boxShadow="6px 6px 0 #F6A09E"
         >
           <Typography
@@ -75,7 +76,8 @@ export default function ContactPage() {
               color: "text.secondary",
               fontSize: { xs: 16, md: 30 },
               textAlign: "center",
-              width: "100%",
+              width: { xs: "60%", md: "100%" },
+              fontWeight: 500,
               mt: 6,
             }}
           >

@@ -135,12 +135,12 @@ export const AboutSection = () => {
             }}
           />
 
-          <Box bgcolor="primary.main" pt={3} px={3} pb={8}>
+          <Box bgcolor="primary.main" pt={3} px={2} pb={10}>
             <Typography
               variant="body1"
               sx={{
                 color: "background.default",
-                fontSize: 16,
+                fontSize: 14,
                 textAlign: "justify",
                 fontWeight: 500,
               }}
@@ -156,7 +156,7 @@ export const AboutSection = () => {
             </Typography>
           </Box>
 
-          <Stack direction="row" p={4} position="relative">
+          <Stack direction="row" p={2} position="relative">
             <Box
               component="img"
               src="/images/backgrounds/green_wave.png"
@@ -172,9 +172,9 @@ export const AboutSection = () => {
             />
 
             <Box
-              p={3}
+              p={2}
               bgcolor="background.default"
-              borderRadius={8}
+              borderRadius={6}
               position="relative"
               zIndex={20}
             >
@@ -182,9 +182,9 @@ export const AboutSection = () => {
                 component="img"
                 src="/images/founder.png"
                 sx={{
-                  borderRadius: 8,
+                  borderRadius: 6,
                   width: "100%",
-                  height: 450,
+                  height: 350,
                   objectFit: "cover",
                 }}
               />
@@ -193,9 +193,10 @@ export const AboutSection = () => {
                 variant="body1"
                 sx={{
                   color: "#000",
-                  mt: 4,
+                  mt: 2,
+                  fontWeight: 500,
                   textAlign: "justify",
-                  fontSize: 16,
+                  fontSize: 13,
                 }}
               >
                 “Umi was born out of my deep love for matcha and Japan. I’ve

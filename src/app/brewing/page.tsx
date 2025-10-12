@@ -3,7 +3,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Brewing Guide - How to Make Matcha",
-  description: "Learn how to brew perfect matcha the Umi way. Step-by-step guide for preparing delicious matcha lattes at home with our ceremonial grade matcha powder.",
+  description:
+    "Learn how to brew perfect matcha the Umi way. Step-by-step guide for preparing delicious matcha lattes at home with our ceremonial grade matcha powder.",
   keywords: [
     "how to make matcha",
     "matcha brewing guide",
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Brewing Guide - How to Make Matcha | Umi Matcha",
-    description: "Learn how to brew perfect matcha the Umi way. Step-by-step guide for preparing delicious matcha lattes.",
+    description:
+      "Learn how to brew perfect matcha the Umi way. Step-by-step guide for preparing delicious matcha lattes.",
     type: "website",
   },
 };
@@ -71,6 +73,7 @@ export default function BrewingPage() {
           position: "relative",
           fontSize: { xs: 30, sm: 50, md: 80 },
           textAlign: "center",
+          fontWeight: 600,
           zIndex: 2,
         }}
       >
@@ -87,7 +90,7 @@ export default function BrewingPage() {
         />
         <Grid container width="100%" position="relative" spacing={1}>
           {steps.map((step, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Stack
                 spacing={2}
                 alignItems="center"
@@ -102,7 +105,9 @@ export default function BrewingPage() {
                 <Typography
                   variant="body1"
                   textAlign="center"
-                  width={{ xs: "40%", md: "60%" }}
+                  fontWeight={500}
+                  width={{ xs: "80%", md: "60%" }}
+                  fontSize={{ xs: "3vw", md: "1.2vw" }}
                 >
                   {step.desc}
                 </Typography>
