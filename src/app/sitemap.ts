@@ -25,12 +25,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let productRoutes: MetadataRoute.Sitemap = [];
   try {
     const productsData = await getAllProducts(250, null, null, false); // Get up to 250 products
-    productRoutes = productsData.edges.map(({ node: product }) => ({
-      url: `${baseUrl}/shop/${slugify(product.title)}`,
-      lastModified: new Date(product.updatedAt),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+    productRoutes = productsData.edges
+      .map(({ node: product }) => {
+        const lastModified = product.updatedAt ? new Date(product.updatedAt) : new Date();
+        // Validate the date is valid
+        if (isNaN(lastModified.getTime())) {
+          return null;
+        }
+        return {
+          url: `${baseUrl}/shop/${slugify(product.title)}`,
+          lastModified,
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+        };
+      })
+      .filter((route): route is NonNullable<typeof route> => route !== null);
   } catch (error) {
     console.error('Error fetching products for sitemap:', error);
   }
@@ -39,12 +48,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let blogRoutes: MetadataRoute.Sitemap = [];
   try {
     const articles = await getLatestArticles(100); // Get up to 100 articles
-    blogRoutes = articles.map((article) => ({
-      url: `${baseUrl}/blogs/${article.blog.handle}/${article.handle}`,
-      lastModified: new Date(article.publishedAt),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }));
+    blogRoutes = articles
+      .map((article) => {
+        const lastModified = article.publishedAt ? new Date(article.publishedAt) : new Date();
+        // Validate the date is valid
+        if (isNaN(lastModified.getTime())) {
+          return null;
+        }
+        return {
+          url: `${baseUrl}/blogs/${article.blog.handle}/${article.handle}`,
+          lastModified,
+          changeFrequency: 'monthly' as const,
+          priority: 0.6,
+        };
+      })
+      .filter((route): route is NonNullable<typeof route> => route !== null);
   } catch (error) {
     console.error('Error fetching articles for sitemap:', error);
   }

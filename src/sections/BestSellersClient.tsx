@@ -12,6 +12,7 @@ import {
 import ProductCard from "../components/ProductCard";
 import CurvedMarquee from "@/components/CurvedMarquee";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
+import { Collection } from "@/lib/shopify";
 
 type ProductImage = {
   url: string;
@@ -30,7 +31,7 @@ type Product = {
 type BestSellersClientProps = {
   matchaProducts: { node: Product }[];
   matchaWareProducts: { node: Product }[];
-  collectionInfo: any | null;
+  collectionInfo: Collection | null;
 };
 
 /**
@@ -48,8 +49,11 @@ const BestSellersClient = ({
 
   // Scroll-linked animation for the wave y value
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let ctx: any = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let ScrollTrigger: any = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let gsap: any = null;
 
     const start = isMobile ? "top 30%" : "top center";
@@ -79,7 +83,7 @@ const BestSellersClient = ({
           onUpdate: () => {
             try {
               waveUseRef.current?.setAttribute("y", String(proxy.y));
-            } catch (e) {
+            } catch {
               // ignore
             }
           },
@@ -87,14 +91,17 @@ const BestSellersClient = ({
       }, sectionRef.current);
     };
 
-    setup().catch((e) => console.error("GSAP setup failed", e));
+    setup().catch(() => console.error("GSAP setup failed"));
 
     return () => {
       try {
         if (ctx) ctx.revert();
         if (ScrollTrigger)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ScrollTrigger.getAll?.().forEach((t: any) => t.kill());
-      } catch (e) {}
+      } catch {
+        // ignore
+      }
     };
   }, [isMobile]);
 

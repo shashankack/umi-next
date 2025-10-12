@@ -1,4 +1,4 @@
-import { getProductsByCollectionName, searchProducts } from "./shopify";
+import { getProductsByCollectionName, searchProducts, Collection } from "./shopify";
 
 type ProductImage = {
   url: string;
@@ -16,7 +16,7 @@ type Product = {
 
 export type CollectionData = {
   products: { node: Product }[];
-  collectionInfo: any | null;
+  collectionInfo: Collection | null;
 };
 
 /**

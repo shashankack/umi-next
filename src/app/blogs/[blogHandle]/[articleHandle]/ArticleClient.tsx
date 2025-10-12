@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import {
   useTheme,
   Box,
@@ -62,7 +62,7 @@ export default function ArticleClient({
   };
 
   // Extract TOC items dynamically from HTML content
-  const extractTocItems = (htmlContent: string) => {
+  const extractTocItems = useCallback((htmlContent: string) => {
     if (!htmlContent) return [];
 
     const parser = new DOMParser();
@@ -206,7 +206,7 @@ export default function ArticleClient({
     });
 
     return tocItems;
-  };
+  }, []);
 
   // Update TOC items when article content changes
   useEffect(() => {
@@ -214,7 +214,7 @@ export default function ArticleClient({
       const items = extractTocItems(article.contentHtml);
       setTocItems(items);
     }
-  }, [article?.contentHtml]);
+  }, [article?.contentHtml, extractTocItems]);
 
   const chips = useMemo(
     () => (Array.isArray(article?.tags) ? article.tags.slice(0, 12) : []),

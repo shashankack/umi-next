@@ -49,6 +49,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Initialize cart on mount
   useEffect(() => {
     initializeCart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

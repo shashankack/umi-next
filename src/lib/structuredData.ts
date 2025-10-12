@@ -1,3 +1,5 @@
+import { Product, Article } from './shopify';
+
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -40,7 +42,7 @@ export function generateWebsiteSchema() {
   };
 }
 
-export function generateProductSchema(product: any) {
+export function generateProductSchema(product: Product) {
   const price = product.priceRange?.minVariantPrice;
   const image = product.featuredImage?.url || product.images?.edges?.[0]?.node?.url;
   
@@ -79,15 +81,15 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
   };
 }
 
-export function generateArticleSchema(article: any) {
+export function generateArticleSchema(article: Article) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: article.title,
-    description: article.excerpt || article.description,
+    description: article.excerpt || article.excerptHtml,
     image: article.image?.url,
     datePublished: article.publishedAt,
-    dateModified: article.updatedAt || article.publishedAt,
+    dateModified: article.publishedAt,
     author: {
       '@type': 'Organization',
       name: 'Umi Matcha',

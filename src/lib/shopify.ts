@@ -3,10 +3,10 @@ export interface ShopifyError {
   message: string;
   locations?: Array<{ line: number; column: number }>;
   path?: string[];
-  extensions?: Record<string, any>;
+  extensions?: Record<string, unknown>;
 }
 
-export interface ShopifyResponse<T = any> {
+export interface ShopifyResponse<T = unknown> {
   data?: T;
   errors?: ShopifyError[];
 }
@@ -316,7 +316,7 @@ interface CacheEntry<T> {
 }
 
 class ShopifyCache {
-  private cache = new Map<string, CacheEntry<any>>();
+  private cache = new Map<string, CacheEntry<unknown>>();
   private defaultTTL = 5 * 60 * 1000; // 5 minutes
 
   set<T>(key: string, data: T, ttl: number = this.defaultTTL): void {
@@ -337,7 +337,7 @@ class ShopifyCache {
       return null;
     }
 
-    return entry.data;
+    return entry.data as T;
   }
 
   clear(): void {
@@ -349,7 +349,7 @@ class ShopifyCache {
   }
 
   // Create cache key from query and variables
-  createKey(query: string, variables: Record<string, any>): string {
+  createKey(query: string, variables: Record<string, unknown>): string {
     return `${query.replace(/\s+/g, " ").trim()}_${JSON.stringify(variables)}`;
   }
 }
@@ -399,9 +399,9 @@ async function withRetry<T>(
 }
 
 // Base fetch function for Shopify API with caching, timeout, and retry
-async function shopifyFetch<T = any>(
+async function shopifyFetch<T = unknown>(
   query: string,
-  variables: Record<string, any> = {},
+  variables: Record<string, unknown> = {},
   options: {
     cache?: boolean;
     cacheTTL?: number;
@@ -918,7 +918,8 @@ export async function searchProducts(
 interface BatchRequest {
   id: string;
   query: string;
-  variables: Record<string, any>;
+  variables: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resolve: (data: any) => void;
   reject: (error: Error) => void;
 }
@@ -929,7 +930,7 @@ class RequestBatcher {
   private readonly maxBatchSize = 10;
   private readonly batchDelay = 50; // 50ms
 
-  add<T>(query: string, variables: Record<string, any> = {}): Promise<T> {
+  add<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
     return new Promise((resolve, reject) => {
       const request: BatchRequest = {
         id: Math.random().toString(36).substr(2, 9),
@@ -979,9 +980,9 @@ class RequestBatcher {
 const batcher = new RequestBatcher();
 
 // Batched fetch function
-export async function shopifyFetchBatched<T = any>(
+export async function shopifyFetchBatched<T = unknown>(
   query: string,
-  variables: Record<string, any> = {}
+  variables: Record<string, unknown> = {}
 ): Promise<T> {
   return batcher.add<T>(query, variables);
 }
@@ -1968,7 +1969,7 @@ export const performanceUtils = {
 };
 
 // Main export object with all functions
-export default {
+const shopifyClient = {
   // Core API functions
   getAllProducts,
   getProductByHandle,
@@ -2013,3 +2014,5 @@ export default {
     // These would be type-only exports in a real implementation
   },
 };
+
+export default shopifyClient;

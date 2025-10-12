@@ -8,7 +8,6 @@ import {
   IconButton,
 } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { slugify } from "../lib/slug";
 import { useCart } from "@/context/CartContext";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";

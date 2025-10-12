@@ -54,8 +54,6 @@ const nextConfig: NextConfig = {
   // React strict mode for better development experience
   reactStrictMode: true,
 
-  // Optimize production builds
-  swcMinify: true,
 };
 
 export default nextConfig;

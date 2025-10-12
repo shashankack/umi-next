@@ -135,9 +135,11 @@ export default function Footer() {
                 href={link.path}
                 style={{ textDecoration: "none" }}
               >
-                <IconButton sx={socialLinkStyles} aria-label={link.title}>
-                  {link.logo}
-                </IconButton>
+                {"logo" in link && (
+                  <IconButton sx={socialLinkStyles} aria-label={link.title}>
+                    {link.logo}
+                  </IconButton>
+                )}
               </Link>
             ))}
           </Stack>

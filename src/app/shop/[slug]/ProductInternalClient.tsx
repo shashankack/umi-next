@@ -12,6 +12,7 @@ import {
   Stack,
   Snackbar,
   Alert,
+  SelectChangeEvent,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { FaShoppingCart } from "react-icons/fa";
@@ -60,8 +61,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     setSelectedImage(imageUrl);
   };
 
-  const handleQuantityChange = (e: any) => {
-    setQuantity(parseInt(e.target.value));
+  const handleQuantityChange = (e: SelectChangeEvent<number>) => {
+    setQuantity(Number(e.target.value));
   };
 
   const handleAddToCart = async () => {
@@ -92,7 +93,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     setErrorMessage("");
   };
 
-  const handleVariantChange = (e: any) => {
+  const handleVariantChange = (e: SelectChangeEvent<string>) => {
     const variantId = e.target.value;
     const newVariant = product.variants.edges.find(
       (edge) => edge.node.id === variantId
