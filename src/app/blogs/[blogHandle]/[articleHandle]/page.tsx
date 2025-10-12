@@ -1,0 +1,99 @@
+import { notFound } from "next/navigation";
+import {
+  getBlogByHandle,
+  getArticleByHandle,
+  blogHelpers,
+} from "@/lib/shopify";
+import type { Article } from "@/lib/shopify";
+import type { Metadata } from "next";
+import ArticleClient from "./ArticleClient";
+
+interface ArticlePageProps {
+  params: Promise<{
+    blogHandle: string;
+    articleHandle: string;
+  }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ArticlePageProps): Promise<Metadata> {
+  const { blogHandle, articleHandle } = await params;
+  try {
+    const article = await getArticleByHandle(
+      blogHandle,
+      articleHandle
+    );
+
+    if (!article) {
+      return {
+        title: "Article Not Found",
+      };
+    }
+
+    const excerpt = article.excerpt
+      ? blogHelpers.stripHtml(article.excerpt)
+      : blogHelpers.formatExcerpt(article, 160);
+
+    return {
+      title: article.seo?.title || article.title,
+      description: article.seo?.description || excerpt,
+      keywords: article.tags,
+      openGraph: {
+        title: article.title,
+        description: excerpt,
+        type: "article",
+        publishedTime: article.publishedAt,
+        authors: [blogHelpers.getAuthorName(article)],
+        tags: article.tags,
+        images: article.image
+          ? [
+              {
+                url: article.image.url,
+                width: article.image.width,
+                height: article.image.height,
+                alt: article.image.altText || article.title,
+              },
+            ]
+          : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: excerpt,
+        images: article.image ? [article.image.url] : undefined,
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Article",
+    };
+  }
+}
+
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { blogHandle, articleHandle } = await params;
+  let article;
+  let relatedArticles: Article[] = [];
+
+  try {
+    article = await getArticleByHandle(blogHandle, articleHandle);
+
+    if (!article) {
+      notFound();
+    }
+
+    // Get related articles from the same blog
+    const blog = await getBlogByHandle(blogHandle, 20);
+    if (blog) {
+      const allArticles = blog.articles.edges.map(({ node }) => node);
+      relatedArticles = blogHelpers.getRelatedArticles(article, allArticles, 3);
+    }
+  } catch (error) {
+    console.error("Error fetching article:", error);
+    notFound();
+  }
+
+  return <ArticleClient article={article} relatedArticles={relatedArticles} />;
+}
