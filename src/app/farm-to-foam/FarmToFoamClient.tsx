@@ -31,7 +31,11 @@ export default function FarmToFoamClient() {
 
   return (
     <Stack minHeight="100vh" bgcolor="background.default" pt={14}>
-      <Box height={"70vh"} position="relative" overflow="hidden">
+      <Box
+        height={{ xs: "35vh", sm: "50vh", md: "60vh" }}
+        position="relative"
+        overflow="hidden"
+      >
         <Typography
           variant="h1"
           sx={{
@@ -44,7 +48,7 @@ export default function FarmToFoamClient() {
             color: "background.default",
             zIndex: 2,
             textTransform: "uppercase",
-            fontSize: { xs: 35, sm: 80, md: 100 },
+            fontSize: { xs: 35, sm: 50, md: 80 },
             fontWeight: 600,
           }}
         >
@@ -106,6 +110,8 @@ export default function FarmToFoamClient() {
           Wazuka, a tiny region where the fog off the river keeps the leaves
           shaded and the soil just moist enough. The result? smooth, milky,
           buttery matcha with no bitterness. single cultivar, all organic.
+          <br />
+          <br />
         </Typography>
         {isMobile ? (
           <>
@@ -161,15 +167,6 @@ export default function FarmToFoamClient() {
             textAlign="justify"
             sx={{ color: "background.default" }}
           >
-            Umi partners up exclusively with certified organic farms in Japan,
-            where matcha is cultivated with care, free from pesticides and
-            harmful additives. Our organic matcha comes from a 300+ year old
-            farm in Wazuka, a tiny region where the fog off the river keeps the
-            leaves shaded and the soil just moist enough. The result? smooth,
-            milky, buttery matcha with no bitterness. single cultivar, all
-            organic.
-            <br />
-            <br />
             Our farm is rooted in integrity, where matcha is grown without
             herbicides, pesticides, or synthetic fertilizers. Every leaf is
             nurtured in harmony with nature, picked by hand, tana shaded with

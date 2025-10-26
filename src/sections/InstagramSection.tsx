@@ -269,7 +269,7 @@ export default function InstagramSection() {
       </Box>
 
       {/* Follow Button */}
-      <Box>
+      <Box mt={{ xs: 4, md: 10 }}>
         <Button
           href="https://www.instagram.com/umimatchaclub"
           target="_blank"
@@ -279,9 +279,10 @@ export default function InstagramSection() {
             color: "background.default",
             bgcolor: "secondary.main",
             borderRadius: 2,
+            textTransform: "none",
             px: 2,
             py: 0,
-            my: { xs: 8, md: 10 },
+            my: { xs: 6, md: 6 },
             fontSize: { xs: "4vw", md: "1.5rem" },
           }}
         >
@@ -300,27 +301,28 @@ export default function InstagramSection() {
         <Box
           component="img"
           src="/images/neko/social_left.png"
-          width={{ xs: 100, md: 200 }}
+          width={{ xs: 80, md: 200 }}
           position="absolute"
           left={{ xs: "2%", md: "5%" }}
-          top={{ xs: -120, md: -170 }}
+          top={{ xs: -100, md: -170 }}
         />
         <Box
           component="img"
           src="/images/neko/social_right.png"
-          width={{ xs: 100, md: 200 }}
+          width={{ xs: 80, md: 200 }}
           position="absolute"
           right={{ xs: "2%", md: "5%" }}
-          top={{ xs: -120, md: -170 }}
+          top={{ xs: -100, md: -170 }}
         />
 
         <Box
           component="img"
           src="/images/neko/hello.png"
           sx={{
-            width: { xs: 80, md: 180 },
+            width: { xs: 90, md: "12vw" },
             position: "relative",
             zIndex: 20,
+            mt: { xs: 0, md: 4 },
           }}
         />
 
@@ -331,16 +333,13 @@ export default function InstagramSection() {
             mt: { xs: 0, md: 2 },
             mb: { xs: 2, md: 0 },
             color: "background.default",
-            fontSize: { xs: "3.6vw", sm: "2.4vw", md: "1.5vw" },
+            fontSize: { xs: "3.6vw", sm: "2.4vw", md: "2vw" },
             fontWeight: 500,
             position: "relative",
             zIndex: 20,
-            width: { xs: "40%", sm: "30%", md: "100%" },
           }}
         >
-          {isMobile
-            ? "Matcha your flow shipping pan India"
-            : "Matcha your flow, shipping pan India"}
+          Matcha your flow <br /> Shipping pan India
         </Typography>
 
         <Box
@@ -361,7 +360,7 @@ export default function InstagramSection() {
               left: 0,
               right: 0,
               zIndex: 10,
-              width: { xs: "150vw", md: "175%" },
+              width: { xs: "180vw", md: "175%" },
               objectFit: "cover",
             }}
           />

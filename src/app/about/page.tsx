@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <Stack pt={15} bgcolor="background.default" minHeight="100vh">
+    <Stack pt={15} bgcolor="background.default">
       <Typography
         variant="h1"
         sx={{
@@ -15,9 +15,10 @@ export default function AboutPage() {
           textShadow: "0.3px 2px 0 #B5D782",
           textAlign: "center",
           fontSize: { xs: "2.4rem", sm: "3rem", md: "4rem" },
-          fontWeight: 600,
+          fontWeight: 700,
+          letterSpacing: 1,
           mb: 2,
-          mt: 4,
+          mt: { xs: 8, md: 4 },
         }}
       >
         About Us
@@ -26,6 +27,7 @@ export default function AboutPage() {
       <Typography
         variant="body1"
         sx={{
+          mt: { xs: 2, md: 4 },
           px: { xs: 2, md: 10 },
           mb: { xs: 3, md: 5 },
           fontSize: { xs: "2.6vw", md: "1.2vw" },
@@ -48,12 +50,9 @@ export default function AboutPage() {
         when we reach a calm sea, where its wave is gentle, and we can feel the
         summer breeze warm our mind, body, and soul. But, with the knowledge
         that another wave is waiting to be conquered. Umi Matcha represents a
-        symbolic shift within the matcha community.
-        <br />
-        <br />
-        Life is always better with a matcha in hand. I&apos;m thrilled to have
-        Umi become a part of your daily routine because it&apos;s truly the most
-        magical part of mine.
+        symbolic shift within the matcha community. Life is always better with a
+        matcha in hand. I&apos;m thrilled to have Umi become a part of your
+        daily routine because it&apos;s truly the most magical part of mine.
       </Typography>
 
       <Box>

@@ -25,7 +25,7 @@ export default function BrewingPage() {
   const steps = [
     {
       image: "/images/vectors/steps/step1.svg",
-      desc: "Sift 2-3 tsp of umi matcha into a bowl",
+      desc: "Sift 2-3 tsp of <br />umi matcha into a bowl",
     },
     {
       image: "/images/vectors/steps/step2.svg",
@@ -33,11 +33,11 @@ export default function BrewingPage() {
     },
     {
       image: "/images/vectors/steps/step3.svg",
-      desc: "Pour milk of your choice",
+      desc: "Pour milk of <br /> your choice",
     },
     {
       image: "/images/vectors/steps/step4.svg",
-      desc: "Add sweetener of your choice",
+      desc: "Add sweetener of <br />  your choice",
     },
   ];
 
@@ -46,24 +46,31 @@ export default function BrewingPage() {
       sx={{
         alignItems: "center",
         justifyContent: "start",
-        bgcolor: "background.default",
-        pt: { xs: 18, md: 20 },
-        pb: { xs: 20, md: 30 },
+        bgcolor: "primary.main",
+        pt: { xs: 25, md: 20 },
+        pb: { xs: 10, md: 20 },
         position: "relative",
         overflow: "hidden",
       }}
     >
       <Box
         component="img"
-        src="/images/backgrounds/pink_wave.png"
+        src="/images/backgrounds/green_wave.png"
         sx={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
+          width: { xs: 1250, sm: 1500, md: 2000 },
           transform: "rotate(180deg)",
           position: "absolute",
-          zIndex: 0,
-          top: { xs: -100, sm: -80, md: -50 },
+          top: { xs: -320, sm: -400, md: -800 },
+          zIndex: 2,
+        }}
+      />
+      <Box
+        component="img"
+        src="/images/backgrounds/beige_wave.png"
+        sx={{
+          width: { xs: 1250, sm: 1500, md: 2000 },
+          position: "absolute",
+          bottom: { xs: -550, sm: -670, md: -870 },
         }}
       />
 
@@ -71,10 +78,10 @@ export default function BrewingPage() {
         variant="h1"
         sx={{
           position: "relative",
-          fontSize: { xs: 30, sm: 50, md: 80 },
+          fontSize: { xs: 30, sm: 40, md: 70 },
           textAlign: "center",
-          fontWeight: 600,
           zIndex: 2,
+          letterSpacing: 1,
         }}
       >
         Brew it the Umi way
@@ -86,9 +93,9 @@ export default function BrewingPage() {
           src="/images/neko/playful.png"
           width={{ xs: 100, sm: 150, md: 200 }}
           position="relative"
-          pt={{ xs: 2, sm: 4, md: 6 }}
+          py={{ xs: 2, sm: 4, md: 6 }}
         />
-        <Grid container width="100%" position="relative" spacing={1}>
+        <Grid container width="100%" position="relative" spacing={3}>
           {steps.map((step, index) => (
             <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Stack
@@ -100,17 +107,16 @@ export default function BrewingPage() {
                 <Box
                   component="img"
                   src={step.image}
-                  width={{ xs: 60, sm: 100, md: 150 }}
+                  width={{ xs: 60, sm: 100, md: 130 }}
                 />
                 <Typography
                   variant="body1"
                   textAlign="center"
                   fontWeight={500}
                   width={{ xs: "80%", md: "60%" }}
-                  fontSize={{ xs: "3vw", md: "1.2vw" }}
-                >
-                  {step.desc}
-                </Typography>
+                  fontSize={{ xs: "3vw", md: "1vw" }}
+                  dangerouslySetInnerHTML={{ __html: step.desc }}
+                />
               </Stack>
             </Grid>
           ))}

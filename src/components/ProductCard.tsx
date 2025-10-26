@@ -232,6 +232,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             height: height,
             borderRadius: 6,
             cursor: "pointer",
+            overflow: "hidden",
             textDecoration: "none",
             bgcolor: "background.default",
             transition: interactive
@@ -261,21 +262,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
               className="product-title"
               variant="h2"
               sx={{
-                textAlign: "start",
+                position: "absolute",
+                bottom: "5%",
+                width: "100%",
+                textAlign: "center",
                 mt: 1,
                 px: 1,
-                color: "text.primary",
+                color: "text.secondary",
                 textDecoration: "none",
-                fontSize: { xs: 16, md: 18 },
+                fontSize: { xs: 12, md: 18 },
                 textTransform: "uppercase",
                 transition: "all 0.3s ease",
-                transform: "translateY(100px)",
+                transform: {
+                  xs: "none",
+                  md: "translateY(100px)",
+                },
               }}
             >
               {product.title}
             </Typography>
           </Box>
-
           <Box
             component="img"
             src={
@@ -289,7 +295,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               top: "50%",
               left: "50%",
               width: "100%",
-              height: "80%",
+              height: "70%",
               objectFit: "cover",
               transition: interactive
                 ? "transform 0.2s ease-out"
@@ -306,15 +312,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <ButtonGroup
           variant="contained"
           sx={{
-            border: 2,
-            borderColor: "background.default",
             mt: 2,
             width: "100%",
-            borderRadius: 10,
+            borderRadius: 4,
             bgcolor: "secondary.main",
             boxShadow: "none",
             display: "flex",
             overflow: "hidden",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: { xs: 30, md: 48 },
             "& .MuiButtonGroup-grouped": {
               border: "none",
             },
@@ -332,6 +339,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               bgcolor: "secondary.main",
               boxShadow: "none",
               minWidth: 0,
+              py: 0,
               px: 2,
               transition: "background 0.2s",
               "&:hover": {
@@ -381,8 +389,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   src="/images/vectors/cart.svg"
                   alt="Add to cart"
                   sx={{
-                    width: 24,
-                    height: 24,
+                    width: { xs: 18, md: 24 },
+                    height: { xs: 18, md: 24 },
                   }}
                 />
               </Button>

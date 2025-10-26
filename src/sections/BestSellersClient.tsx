@@ -111,8 +111,8 @@ const BestSellersClient = ({
         overflow="hidden"
         position="relative"
         bgcolor="primary.main"
-        pt={{ xs: 5, md: 10 }}
-        pb={{ xs: 12, md: 20 }}
+        pt={{ xs: 3, md: 8 }}
+        pb={{ xs: 10, md: 20 }}
         px={2}
       >
         <Typography
@@ -123,10 +123,10 @@ const BestSellersClient = ({
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
-            fontSize: { xs: "7vw", md: "4vw" },
+            fontSize: { xs: "4vw", md: "4vw" },
           }}
         >
-          Kinder rituals that <br /> fill your cup
+          Kinder rituals that fill your cup
         </Typography>
         <CheckeredGrid bottom={0} left={0} right={0} />
       </Box>
@@ -141,7 +141,7 @@ const BestSellersClient = ({
           sx={{
             textAlign: "center",
             fontWeight: 500,
-            fontSize: { xs: "8vw", md: "3vw" },
+            fontSize: { xs: "10vw", md: "3vw" },
           }}
         >
           Best Sellers
@@ -187,12 +187,20 @@ const BestSellersClient = ({
                 }}
               >
                 {matchaWareProducts.map(({ node: product }) => (
-                  <ProductCard
+                  <Box
                     key={product.id}
-                    size={{ xs: 150, sm: 200, md: 204 }}
-                    product={product}
-                    showControls={false}
-                  />
+                    sx={{
+                      minWidth: { xs: 150, sm: 200, md: 204 },
+                      flex: "0 0 auto",
+                      pointerEvents: "auto",
+                    }}
+                  >
+                    <ProductCard
+                      size={{ xs: 150, sm: 200, md: 204 }}
+                      product={product}
+                      showControls={false}
+                    />
+                  </Box>
                 ))}
               </Box>
             )}
@@ -200,7 +208,7 @@ const BestSellersClient = ({
         )}
       </Stack>
       <Stack
-        height={{ xs: 480, sm: 300, md: 800 }}
+        height={{ xs: 480, sm: 300, md: 700 }}
         bgcolor="background.default"
         position="relative"
         alignItems="center"
@@ -221,7 +229,7 @@ const BestSellersClient = ({
           sx={{
             position: "relative",
             zIndex: 20,
-            mt: { xs: 10, md: 15 },
+            mt: { xs: 7, md: 15 },
             width: { xs: 130, md: 200 },
           }}
           animate={{ y: [0, -20, 0] }}
@@ -299,7 +307,7 @@ const BestSellersClient = ({
             borderRadius: 2,
             px: 2,
             py: 0,
-            my: { xs: 4, md: 10 },
+            my: { xs: 4, md: 6 },
             fontSize: { xs: "5vw", md: "1.5rem" },
           }}
         >

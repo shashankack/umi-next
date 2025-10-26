@@ -111,7 +111,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                 <ListItemButton
                   component={Link}
                   href={link.path}
-                  onClick={link.hasDropdown ? undefined : onClose}
+                  onClick={onClose}
                   sx={{
                     fontFamily: "Gliker",
                     textDecoration: "none",

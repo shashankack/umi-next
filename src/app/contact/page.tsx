@@ -26,27 +26,29 @@ export default function ContactPage() {
     color: "background.default",
     fontFamily: "Stolzl",
     fontSize: { xs: 16, md: 24 },
-    boxShadow: "2px 2px 0 #B5D782",
+    boxShadow: "4px 4px 0 #B5D782",
     borderRadius: { xs: 2, md: 4 },
     textTransform: "lowercase",
+    transition: "all 0.3s ease",
 
     "&:hover": {
+      transform: "translateY(-2px)",
+      boxShadow: "6px 6px 0 #B5D782",
       backgroundColor: "primary.main",
-      boxShadow: "4px 4px 0 #B5D782",
     },
   };
 
   return (
-    <Stack alignItems="center" pt={{ xs: 20, md: 22 }} pb={{ xs: 10, md: 20 }}>
+    <Stack alignItems="center" pt={{ xs: 16, md: 22 }} pb={{ xs: 10, md: 20 }}>
       <Stack
         position="relative"
-        width={{ xs: 350, sm: 600, md: 1000 }}
+        width={{ xs: 330, sm: 600, md: 1000 }}
         alignItems="center"
       >
         <Box
           width={{ xs: "65%", md: "55%" }}
           bgcolor="background.default"
-          borderRadius={{ xs: "50px 50px 0 0", md: "200px 200px 0 0" }}
+          borderRadius={{ xs: "30px 30px 0 0", md: "200px 200px 0 0" }}
           boxShadow="6px 0 0 #F6A09E"
         >
           <Typography
@@ -57,7 +59,7 @@ export default function ContactPage() {
               fontSize: { xs: 35, sm: 40, md: 70 },
               textAlign: "center",
               width: "100%",
-              fontWeight: 400,
+              fontWeight: 200,
             }}
           >
             Contact us
@@ -67,18 +69,18 @@ export default function ContactPage() {
           width="100%"
           bgcolor="background.default"
           alignItems="center"
-          borderRadius={{ xs: 6, md: 10 }}
+          borderRadius={{ xs: 3, md: 10 }}
           boxShadow="6px 6px 0 #F6A09E"
         >
           <Typography
             variant="body1"
             sx={{
               color: "text.secondary",
-              fontSize: { xs: 16, md: 30 },
+              fontSize: { xs: 18, md: 32 },
               textAlign: "center",
               width: { xs: "60%", md: "100%" },
               fontWeight: 500,
-              mt: 6,
+              mt: { xs: 4, md: 6 },
             }}
           >
             Your Matcha Moments Matter to us
@@ -90,11 +92,14 @@ export default function ContactPage() {
             direction={{ xs: "column-reverse", md: "row" }}
             px={{ xs: 2, md: 4 }}
             pt={{ xs: 4, md: 8 }}
-            pb={{ xs: 6, md: 15 }}
+            pb={{ xs: 6, md: 12 }}
             alignItems="center"
             spacing={{ xs: 4, md: 0 }}
           >
-            <Stack spacing={2} alignItems={{ xs: "center", md: "start" }}>
+            <Stack
+              spacing={{ xs: 2, md: 4 }}
+              alignItems={{ xs: "center", md: "start" }}
+            >
               <Button
                 href="https://wa.me/9568480048"
                 variant="contained"
@@ -111,10 +116,10 @@ export default function ContactPage() {
               </Button>
               <Button
                 variant="contained"
-                href="mailto:umimatchaclub@gmail.com"
+                href="mailto:hello@umimatchashop.com"
                 sx={linkStyles}
               >
-                umimatchaclub@gmail.com
+                hello@umimatchashop.com
               </Button>
             </Stack>
 

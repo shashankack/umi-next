@@ -7,7 +7,7 @@ export const AboutSection = () => {
 
   return (
     <Stack overflow={"hidden"}>
-      <Box height={60} bgcolor="primary.main"></Box>
+      <Box height={{ xs: 40, md: 60 }} bgcolor="primary.main"></Box>
 
       {!isMobile && (
         <Stack overflow="hidden">
@@ -76,18 +76,37 @@ export const AboutSection = () => {
             sx={{
               position: "relative",
               zIndex: 20,
-              justifyContent: "space-evenly",
+              justifyContent: "start",
               alignItems: "center",
-              p: 10,
+              pt: 0,
+              pb: 10,
+              pl: 20,
               flexDirection: "row",
             }}
           >
             <Box
               width={400}
-              p={3}
+              p={2}
               bgcolor="background.default"
               borderRadius={8}
+              position="relative"
             >
+              <Box
+                component="img"
+                src={"/images/vectors/founder_badge.png"}
+                sx={{
+                  position: "absolute",
+                  width: 170,
+                  top: "-12%",
+                  left: "-15%",
+                  animation: "umi-rotate 6s linear infinite",
+                  "@keyframes umi-rotate": {
+                    from: { transform: "rotate(0deg)" },
+                    to: { transform: "rotate(360deg)" },
+                  },
+                }}
+              />
+
               <Box
                 component="img"
                 src="/images/founder.png"
@@ -100,7 +119,7 @@ export const AboutSection = () => {
               />
             </Box>
 
-            <Box width={"40%"} mr={-15}>
+            <Box width={"50%"} ml={15}>
               <Typography
                 variant="body1"
                 sx={{
@@ -117,7 +136,16 @@ export const AboutSection = () => {
                 connection back home to India, something beyond the grades and
                 the mass-produced matcha that’s sold here.”
                 <br />
-                <br />- Adviti
+                <Box
+                  component="span"
+                  sx={{
+                    display: "block",
+                    textAlign: "right",
+                    mt: 2,
+                  }}
+                >
+                  - Adviti
+                </Box>
               </Typography>
             </Box>
           </Stack>
@@ -156,7 +184,7 @@ export const AboutSection = () => {
             </Typography>
           </Box>
 
-          <Stack direction="row" p={2} position="relative">
+          <Stack direction="row" p={4} position="relative">
             <Box
               component="img"
               src="/images/backgrounds/green_wave.png"
@@ -172,12 +200,30 @@ export const AboutSection = () => {
             />
 
             <Box
-              p={2}
+              p={1}
               bgcolor="background.default"
               borderRadius={6}
               position="relative"
               zIndex={20}
+              border={1}
+              borderColor="primary.main"
             >
+              <Box
+                component="img"
+                src={"/images/vectors/founder_badge.png"}
+                sx={{
+                  position: "absolute",
+                  width: 130,
+                  top: "-7%",
+                  left: "-10%",
+                  animation: "umi-rotate 6s linear infinite",
+                  "@keyframes umi-rotate": {
+                    from: { transform: "rotate(0deg)" },
+                    to: { transform: "rotate(360deg)" },
+                  },
+                }}
+              />
+
               <Box
                 component="img"
                 src="/images/founder.png"
@@ -194,9 +240,9 @@ export const AboutSection = () => {
                 sx={{
                   color: "#000",
                   mt: 2,
-                  fontWeight: 500,
                   textAlign: "justify",
-                  fontSize: 13,
+                  fontSize: 14,
+                  px: 1,
                 }}
               >
                 “Umi was born out of my deep love for matcha and Japan. I’ve
@@ -207,7 +253,17 @@ export const AboutSection = () => {
                 connection back home to India, something beyond the grades and
                 the mass-produced matcha that’s sold here.”
                 <br />
-                <br />- Adviti
+                <Box
+                  component="span"
+                  sx={{
+                    display: "block",
+                    textAlign: "right",
+                    mt: 1,
+                    fontSize: 14,
+                  }}
+                >
+                  - Adviti
+                </Box>
               </Typography>
             </Box>
           </Stack>

@@ -67,7 +67,7 @@ export default function Footer() {
   return (
     <>
       <Stack
-        py={{ xs: 1, md: 4 }}
+        py={{ xs: 2, md: 4 }}
         bgcolor="background.default"
         justifyContent="space-around"
         alignItems="stretch"

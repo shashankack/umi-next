@@ -17,10 +17,11 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Stolzl",
+    fontFamily: "Bricolage",
 
     h1: {
       fontFamily: "Gliker",
+      fontWeight: 700,
     },
 
     h6: {

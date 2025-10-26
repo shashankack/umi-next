@@ -9,7 +9,7 @@ interface MarqueeSliderProps {
   speed?: number;
   direction?: "left" | "right";
   color?: string;
-  size?: string | number;
+  fontSize?: string | number | { [key: string]: string | number };
 }
 
 export default function MarqueeSlider({
@@ -17,7 +17,7 @@ export default function MarqueeSlider({
   speed = 50,
   direction = "left",
   color = "#FDF8CE",
-  size,
+  fontSize,
 }: MarqueeSliderProps) {
   const marqueeRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -67,7 +67,7 @@ export default function MarqueeSlider({
           sx={{
             display: "inline-block",
             color: color,
-            fontSize: size,
+            fontSize,
           }}
         >
           {repeatedText}
@@ -77,7 +77,7 @@ export default function MarqueeSlider({
           sx={{
             display: "inline-block",
             color: color,
-            fontSize: size,
+            fontSize,
           }}
         >
           {repeatedText}

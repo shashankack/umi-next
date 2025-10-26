@@ -28,151 +28,156 @@ export default async function ShopPage() {
           bgcolor: "primary.main",
           minHeight: "100vh",
           alignItems: "center",
-          pt: 15,
+          pt: 8,
           position: "relative",
           overflow: "hidden",
         }}
       >
-      {/* Background Wave */}
-      <Box
-        component="img"
-        src="/images/backgrounds/green_wave.png"
-        sx={{
-          width: { xs: 1250, sm: 1500, md: 2000 },
-          transform: "rotate(180deg)",
-          position: "absolute",
-          top: { xs: -250, sm: -300, md: -450 },
-          zIndex: 0,
-        }}
-      />
-
-      {/* Marquee */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: { xs: 140, sm: 170, md: 200 },
-          width: "100%",
-          zIndex: 1,
-        }}
-      >
-        <MarqueeSlider text="shop •" speed={50} direction="left" size={30} />
-      </Box>
-
-      {/* Collections Content */}
-      <Box
-        sx={{
-          width: "100%",
-          mt: { xs: 25, sm: 30, md: 35 },
-        }}
-      >
-        {categoriesData.map(({ handle, title }) => {
-          const collectionData = collections[handle];
-          const products = collectionData?.products || [];
-
-          if (products.length === 0) return null;
-
-          return (
-            <Stack
-              key={handle}
-              id={handle}
-              spacing={4}
-              mb={10}
-              justifyContent="center"
-              alignItems="center"
-              width="100%"
-              sx={{
-                scrollMarginTop: { xs: "120px", md: "150px" }, // Offset for fixed navbar
-              }}
-            >
-              {/* Collection Title */}
-              <Typography
-                variant="h1"
-                sx={{
-                  textAlign: "center",
-                  fontWeight: 600,
-                  fontSize: { xs: "9vw", sm: "6vw", md: "3vw" },
-                  color: "background.default",
-                  textTransform: "capitalize",
-                  letterSpacing: 2,
-                }}
-              >
-                {collectionData?.collectionInfo?.title || title}
-              </Typography>
-
-              {/* Products Grid */}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                  gap: { xs: 2, md: 3 },
-                  width: "100%",
-                  px: { xs: 2, md: 4 },
-                }}
-              >
-                {products.map(({ node: product }) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    size={{ xs: 150, sm: 200, md: 350 }}
-                    showControls
-                    interactive={false}
-                  />
-                ))}
-              </Box>
-            </Stack>
-          );
-        })}
-      </Box>
-
-      <Stack
-        position="relative"
-        width="100%"
-        overflow="hidden"
-        justifyContent="center"
-        alignItems="center"
-        pt={10}
-        pb={{ xs: 0, md: 5 }}
-      >
+        {/* Background Wave */}
         <Box
           component="img"
           src="/images/backgrounds/green_wave.png"
           sx={{
             width: { xs: 1250, sm: 1500, md: 2000 },
+            transform: "rotate(180deg)",
             position: "absolute",
-            bottom: { xs: -250, sm: -320, md: -420 },
+            top: { xs: -280, sm: -300, md: -450 },
             zIndex: 0,
           }}
         />
 
+        {/* Marquee */}
         <Box
-          component="img"
-          src="/images/neko/hello.png"
           sx={{
-            width: { xs: 90, sm: 135, md: 180 },
-            position: "relative",
-            zIndex: 20,
-          }}
-        />
-
-        <Typography
-          variant="body1"
-          sx={{
-            textAlign: "center",
-            mt: { xs: 0, md: 2 },
-            mb: { xs: 2, md: 0 },
-            color: "background.default",
-            fontSize: { xs: "4vw", sm: "3vw", md: "1.5vw" },
-            fontWeight: 500,
-            position: "relative",
-            zIndex: 20,
-            width: { xs: "50%", sm: "30%", md: "100%" },
+            position: "absolute",
+            top: { xs: 120, sm: 170, md: 180 },
+            width: "100%",
+            zIndex: 1,
           }}
         >
-          Matcha your flow Shipping Pan India
-        </Typography>
+          <MarqueeSlider
+            text="shop •"
+            speed={50}
+            direction="left"
+            fontSize={{ xs: 20, md: 30 }}
+          />
+        </Box>
+
+        {/* Collections Content */}
+        <Box
+          sx={{
+            width: "100%",
+            mt: { xs: 25, sm: 30, md: 35 },
+          }}
+        >
+          {categoriesData.map(({ handle, title }) => {
+            const collectionData = collections[handle];
+            const products = collectionData?.products || [];
+
+            if (products.length === 0) return null;
+
+            return (
+              <Stack
+                key={handle}
+                id={handle}
+                spacing={4}
+                mb={10}
+                justifyContent="center"
+                alignItems="center"
+                width="100%"
+                sx={{
+                  scrollMarginTop: { xs: "120px", md: "150px" }, // Offset for fixed navbar
+                }}
+              >
+                {/* Collection Title */}
+                <Typography
+                  variant="h1"
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: 600,
+                    fontSize: { xs: "9vw", sm: "6vw", md: "3vw" },
+                    color: "background.default",
+                    textTransform: "capitalize",
+                    letterSpacing: 2,
+                  }}
+                >
+                  {collectionData?.collectionInfo?.title || title}
+                </Typography>
+
+                {/* Products Grid */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: { xs: 2, md: 3 },
+                    width: "100%",
+                    px: { xs: 2, md: 4 },
+                  }}
+                >
+                  {products.map(({ node: product }) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      size={{ xs: 150, sm: 200, md: 350 }}
+                      showControls
+                      interactive={false}
+                    />
+                  ))}
+                </Box>
+              </Stack>
+            );
+          })}
+        </Box>
+
+        <Stack
+          position="relative"
+          width="100%"
+          overflow="hidden"
+          justifyContent="center"
+          alignItems="center"
+          pt={10}
+          pb={{ xs: 0, md: 5 }}
+        >
+          <Box
+            component="img"
+            src="/images/backgrounds/green_wave.png"
+            sx={{
+              width: { xs: 1250, sm: 1500, md: 2000 },
+              position: "absolute",
+              bottom: { xs: -250, sm: -320, md: -420 },
+              zIndex: 0,
+            }}
+          />
+
+          <Box
+            component="img"
+            src="/images/neko/hello.png"
+            sx={{
+              width: { xs: 90, sm: 135, md: 180 },
+              position: "relative",
+              zIndex: 20,
+            }}
+          />
+
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: "center",
+              mt: { xs: 0, md: 2 },
+              mb: { xs: 2, md: 0 },
+              color: "background.default",
+              fontSize: { xs: "4vw", sm: "3vw", md: "1.5vw" },
+              fontWeight: 500,
+              position: "relative",
+              zIndex: 20,
+              width: { xs: "50%", sm: "30%", md: "100%" },
+            }}
+          >
+            Matcha your flow Shipping Pan India
+          </Typography>
+        </Stack>
       </Stack>
-    </Stack>
     </ShopClientWrapper>
   );
 }
