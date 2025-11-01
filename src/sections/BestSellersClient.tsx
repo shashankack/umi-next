@@ -10,7 +10,6 @@ import {
   Button,
 } from "@mui/material";
 import ProductCard from "../components/ProductCard";
-import CurvedMarquee from "@/components/CurvedMarquee";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { Collection } from "@/lib/shopify";
 import WavyMarquee from "@/components/WavyMarquee";
@@ -46,7 +45,7 @@ const BestSellersClient = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const waveUseRef = useRef<SVGUseElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 

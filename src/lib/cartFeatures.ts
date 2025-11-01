@@ -76,17 +76,17 @@ export async function handleDecrease({
   variantId: string | undefined;
   localQuantity: number;
   setIsAddingToCart: (b: boolean) => void;
-  cart: any;
+  cart: import("@/lib/shopify").Cart | null;
   addItem: (variantId: string, quantity: number) => Promise<void>;
   setLocalQuantity: (fn: (prev: number) => number) => void;
 }) {
   e.preventDefault();
   e.stopPropagation();
-  if (!variantId || localQuantity <= 0) return;
+  if (!variantId || localQuantity <= 0 || !cart) return;
   setIsAddingToCart(true);
   try {
-    const cartLine = cart?.lines.edges.find(
-      ({ node }: any) => node.merchandise.id === variantId
+    const cartLine = cart.lines.edges.find(
+      ({ node }) => node.merchandise.id === variantId
     )?.node;
     if (cartLine) {
       const newQuantity = cartLine.quantity - 1;

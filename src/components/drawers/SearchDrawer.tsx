@@ -5,12 +5,10 @@ import React, {
   useMemo,
   useRef,
   useState,
-  RefObject
 } from "react";
 import {
   Avatar,
   Box,
-  Divider,
   Drawer,
   IconButton,
   InputAdornment,
@@ -32,6 +30,7 @@ import {
 } from "@mui/icons-material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { searchProducts } from "@/lib/shopify";
+import type { Product } from "@/lib/shopify";
 import { slugify } from "@/lib/slug";
 
 export default function SearchDrawer({
@@ -59,9 +58,9 @@ export default function SearchDrawer({
 
   // Inline results state
   const [loading, setLoading] = useState(false);
-  const [rows, setRows] = useState<any[]>([]);
+  const [rows, setRows] = useState<Product[]>([]);
   const [error, setError] = useState("");
-  const debounceRef = useRef<any>(0);
+  const debounceRef = useRef<number>(0);
 
   // Reset / re-seed when drawer opens or closes
   useEffect(() => {
@@ -76,8 +75,7 @@ export default function SearchDrawer({
       setLoading(false);
       window.clearTimeout(debounceRef.current);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, searchParams]);
 
   // Debounced inline search for list rows
   useEffect(() => {
@@ -94,7 +92,7 @@ export default function SearchDrawer({
         setError("");
         const result = await searchProducts(keyword, 8);
         const arr = Array.isArray(result?.edges)
-          ? result.edges.map((e: any) => e.node)
+          ? result.edges.map((e) => e.node)
           : [];
         setRows(arr);
         if (!arr.length) setError("No products found.");
@@ -106,7 +104,6 @@ export default function SearchDrawer({
     }, 220);
 
     return () => window.clearTimeout(debounceRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, open]);
 
   const close = useCallback(() => onClose?.(), [onClose]);

@@ -10,6 +10,7 @@ import {
   MenuItem,
   Typography,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,17 +30,13 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const { itemCount } = useCart();
   const theme = useTheme();
-  const isMobile = theme.breakpoints
-    ? require("@mui/material").useMediaQuery(theme.breakpoints.down("md"))
-    : false;
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // Desktop submenu state with hover/focus timers
   const [shopAnchorEl, setShopAnchorEl] = useState<null | HTMLElement>(null);
   const [moreAnchorEl, setMoreAnchorEl] = useState<null | HTMLElement>(null);
-  const shopMenuTimer = useRef<NodeJS.Timeout | null>(null);
-  const moreMenuTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const isHomePage = pathname === "/";
   const isArticlePage =
     pathname.startsWith("/blogs/") && pathname.split("/").length === 4;

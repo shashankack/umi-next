@@ -1,14 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState } from "react";
 
@@ -117,9 +110,6 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
 }
 
 export default function InstagramSection() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const posts = [
     {
       thumbnail:

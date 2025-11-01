@@ -13,21 +13,20 @@ import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import { searchProducts } from "@/lib/shopify";
+import type { Product } from "@/lib/shopify";
 import { slugify } from "@/lib/slug";
 import { alpha } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { FiArrowUpRight } from "react-icons/fi";
 
-const BRAND = "Brand";
-
 export default function SearchPage() {
   const theme = useTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const q = (searchParams.get("q") || "").trim();
+  const q = (searchParams?.get("q") || "").trim();
 
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Product[]>([]);
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(24);
 
@@ -57,8 +56,8 @@ export default function SearchPage() {
           searchTerms.map((term) => searchProducts(term, 24))
         );
         const seen = new Set();
-        const scored: any[] = [];
-        const pushList = (list: any[], baseScore: number) => {
+  const scored: (Product & { __score: number })[] = [];
+  const pushList = (list: Product[], baseScore: number) => {
           (list || []).forEach((p, i) => {
             const key = (p.handle || p.id || p.title || "").toLowerCase();
             if (!key || seen.has(key)) return;
@@ -67,12 +66,12 @@ export default function SearchPage() {
           });
         };
         // Each result is a SearchConnection, so map to .edges[].node
-        pushList(allResults[0]?.edges?.map((e: any) => e.node) || [], 0);
+  pushList(allResults[0]?.edges?.map((e) => e.node) || [], 0);
         allResults
           .slice(1)
           .forEach((conn, idx) =>
             pushList(
-              conn?.edges?.map((e: any) => e.node) || [],
+              conn?.edges?.map((e) => e.node) || [],
               (idx + 1) * 1000
             )
           );
@@ -81,7 +80,7 @@ export default function SearchPage() {
           .map(({ __score, ...rest }) => rest);
         if (!cancelled) setResults(merged);
         if (!cancelled && merged.length === 0) setError("No products found.");
-      } catch (e) {
+      } catch {
         if (!cancelled) setError("Search failed. Please try again.");
       } finally {
         if (!cancelled) setLoading(false);

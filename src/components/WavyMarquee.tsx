@@ -73,10 +73,7 @@ const WavyMarquee: React.FC<WavyMarqueeProps> = ({
         viewBox="0 0 1200 200"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
-        sx={{
-          width: "100%",
-          height,
-        }}
+        sx={{ width: "100%", ...(height ? { height } : {}) }}
       >
         <defs>
           {/* This path defines both the centerline and the text path */}
