@@ -18,7 +18,7 @@ export default function AboutPage() {
           fontWeight: 700,
           letterSpacing: 1,
           mb: 2,
-          mt: { xs: 8, md: 4 },
+          mt: { xs: 6, md: 4 },
         }}
       >
         About Us

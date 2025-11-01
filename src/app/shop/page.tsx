@@ -1,7 +1,7 @@
 import MarqueeSlider from "@/components/MarqueeSlider";
 import ProductCard from "@/components/ProductCard";
 import { fetchMultipleCollections } from "@/lib/fetchCollection";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Grid } from "@mui/material";
 import ShopClientWrapper from "./ShopClientWrapper";
 
 export const metadata = {
@@ -28,6 +28,7 @@ export default async function ShopPage() {
           bgcolor: "primary.main",
           minHeight: "100vh",
           alignItems: "center",
+          justifyContent: "center",
           pt: 8,
           position: "relative",
           overflow: "hidden",
@@ -77,7 +78,8 @@ export default async function ShopPage() {
             if (products.length === 0) return null;
 
             return (
-              <Stack
+              <Grid
+                container
                 key={handle}
                 id={handle}
                 spacing={4}
@@ -89,43 +91,37 @@ export default async function ShopPage() {
                   scrollMarginTop: { xs: "120px", md: "150px" }, // Offset for fixed navbar
                 }}
               >
-                {/* Collection Title */}
-                <Typography
-                  variant="h1"
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: 600,
-                    fontSize: { xs: "9vw", sm: "6vw", md: "3vw" },
-                    color: "background.default",
-                    textTransform: "capitalize",
-                    letterSpacing: 2,
-                  }}
-                >
-                  {collectionData?.collectionInfo?.title || title}
-                </Typography>
+                <Box justifyContent="center" mx="auto" width={750}>
+                  {/* Collection Title */}
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: 600,
+                      fontSize: { xs: "9vw", sm: "6vw", md: "3vw" },
+                      color: "background.default",
+                      textTransform: "capitalize",
+                      letterSpacing: 2,
+                      mb: 5,
+                    }}
+                  >
+                    {collectionData?.collectionInfo?.title || title}
+                  </Typography>
 
-                {/* Products Grid */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    gap: { xs: 2, md: 3 },
-                    width: "100%",
-                    px: { xs: 2, md: 4 },
-                  }}
-                >
-                  {products.map(({ node: product }) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      size={{ xs: 150, sm: 200, md: 350 }}
-                      showControls
-                      interactive={false}
-                    />
-                  ))}
+                  {/* Products Grid */}
+                  <Grid container spacing={2} columnSpacing={0} mb={5}>
+                    {products.map(({ node: product }) => (
+                      <Grid size={6} key={product.id}>
+                        <ProductCard
+                          product={product}
+                          size={{ xs: 180, sm: 300, md: 350 }}
+                          showControls
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Box>
-              </Stack>
+              </Grid>
             );
           })}
         </Box>
@@ -145,7 +141,7 @@ export default async function ShopPage() {
             sx={{
               width: { xs: 1250, sm: 1500, md: 2000 },
               position: "absolute",
-              bottom: { xs: -250, sm: -320, md: -420 },
+              bottom: { xs: -300, sm: -350, md: -520 },
               zIndex: 0,
             }}
           />

@@ -13,6 +13,7 @@ import ProductCard from "../components/ProductCard";
 import CurvedMarquee from "@/components/CurvedMarquee";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { Collection } from "@/lib/shopify";
+import WavyMarquee from "@/components/WavyMarquee";
 
 type ProductImage = {
   url: string;
@@ -44,6 +45,8 @@ const BestSellersClient = ({
 }: BestSellersClientProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const waveUseRef = useRef<SVGUseElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -106,7 +109,7 @@ const BestSellersClient = ({
   }, [isMobile]);
 
   return (
-    <Stack>
+    <Stack overflow="hidden">
       <Box
         overflow="hidden"
         position="relative"
@@ -123,7 +126,8 @@ const BestSellersClient = ({
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
-            fontSize: { xs: "4vw", md: "4vw" },
+            whiteSpace: "nowrap",
+            fontSize: { xs: "3.8vw", md: "4vw" },
           }}
         >
           Kinder rituals that fill your cup
@@ -136,12 +140,14 @@ const BestSellersClient = ({
         pb={{ xs: 10, sm: 10, md: 20 }}
         px={2}
         spacing={5}
+        position="relative"
+        zIndex={20}
       >
         <Typography
           sx={{
             textAlign: "center",
             fontWeight: 500,
-            fontSize: { xs: "10vw", md: "3vw" },
+            fontSize: { xs: "10vw", md: "4vw" },
           }}
         >
           Best Sellers
@@ -215,12 +221,17 @@ const BestSellersClient = ({
       >
         <Box
           position="absolute"
-          width="100%"
-          top={{ xs: -210, sm: -90, md: -100, lg: "-13%", xl: "-20%" }}
-          left={0}
-          zIndex={100}
+          top={{ xs: "-20%", sm: "-42%", md: "-15%", lg: "-20%" }}
+          left={{ xs: "-17%", sm: "-30%", md: 0 }}
+          width={{ xs: "250%", sm: "195%", md: "100%" }}
+          zIndex={10}
         >
-          <CurvedMarquee />
+          <WavyMarquee
+            speed={30}
+            direction="left"
+            fontSize={isMobile ? "16px" : isTablet ? "22px" : "28px"}
+            height={{ xs: 200, sm: 240, md: 200, lg: 250 }}
+          />
         </Box>
 
         <Box

@@ -10,6 +10,11 @@ import {
 import Link from "next/link";
 import { slugify } from "../lib/slug";
 import { useCart } from "@/context/CartContext";
+import {
+  handleAddToCart,
+  handleIncrease,
+  handleDecrease,
+} from "@/lib/cartFeatures";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 
 type ProductImage = {
@@ -47,7 +52,10 @@ type Product = {
 
 interface ProductCardProps {
   product: Product;
-  size?: number | { xs: number; sm: number; md: number };
+  size?:
+    | number
+    | { xs: number | string; sm: number | string; md: number | string }
+    | string;
   showControls?: boolean;
   interactive?: boolean;
   sensitivity?: number;
@@ -122,73 +130,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const quantityAvailable = firstVariant?.quantityAvailable ?? 0;
   const isOutOfStock = !isAvailableForSale || quantityAvailable === 0;
 
-  // Handle add to cart
-  const handleAddToCart = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!variantId || isComingSoon || isOutOfStock) return;
-
-    setIsAddingToCart(true);
-    try {
-      await addItem(variantId, 1);
-      setLocalQuantity((prev) => prev + 1);
-    } catch (error) {
-      console.error("Failed to add to cart:", error);
-    } finally {
-      setIsAddingToCart(false);
-    }
-  };
-
-  // Handle quantity increase
-  const handleIncrease = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!variantId || isComingSoon || isOutOfStock) return;
-
-    setIsAddingToCart(true);
-    try {
-      await addItem(variantId, 1);
-      setLocalQuantity((prev) => prev + 1);
-    } catch (error) {
-      console.error("Failed to add to cart:", error);
-    } finally {
-      setIsAddingToCart(false);
-    }
-  };
-
-  // Handle quantity decrease
-  const handleDecrease = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!variantId || localQuantity <= 0) return;
-
-    setIsAddingToCart(true);
-    try {
-      // Find the cart line for this product
-      const cartLine = cart?.lines.edges.find(
-        ({ node }) => node.merchandise.id === variantId
-      )?.node;
-
-      if (cartLine) {
-        const newQuantity = cartLine.quantity - 1;
-        if (newQuantity > 0) {
-          // Update quantity
-          await addItem(variantId, -1);
-        } else {
-          // Remove from cart (implement removeItem from cart context)
-          // For now, just update local state
-        }
-        setLocalQuantity((prev) => Math.max(0, prev - 1));
-      }
-    } catch (error) {
-      console.error("Failed to update cart:", error);
-    } finally {
-      setIsAddingToCart(false);
-    }
-  };
+  // Cart handlers are now imported from cartFeatures
 
   // Sync local quantity with cart
   React.useEffect(() => {
@@ -230,7 +172,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             width: size,
             position: "relative",
             height: height,
-            borderRadius: 6,
+            borderRadius: 4,
             cursor: "pointer",
             overflow: "hidden",
             textDecoration: "none",
@@ -309,157 +251,190 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </Box>
       </Link>
       {showControls && (
-        <ButtonGroup
-          variant="contained"
-          sx={{
-            mt: 2,
-            width: "100%",
-            borderRadius: 4,
-            bgcolor: "secondary.main",
-            boxShadow: "none",
-            display: "flex",
-            overflow: "hidden",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: { xs: 30, md: 48 },
-            "& .MuiButtonGroup-grouped": {
-              border: "none",
-            },
-          }}
-        >
-          {/* Price Button (clickable) */}
-          <Button
-            href={`/shop/${slug}`}
+        <Box sx={{ width: size }}>
+          <ButtonGroup
+            variant="contained"
             sx={{
-              flexGrow: 0.5,
-              fontSize: { xs: ".7rem", md: "1rem" },
-              fontWeight: 700,
-              textTransform: "uppercase",
-              color: "background.default",
+              mt: 2,
+              width: "100%",
+              borderRadius: 4,
               bgcolor: "secondary.main",
               boxShadow: "none",
-              minWidth: 0,
-              py: 0,
-              px: 2,
-              transition: "background 0.2s",
-              "&:hover": {
-                bgcolor: "primary.main",
-                boxShadow: "none",
-                color: "background.default",
+              display: "flex",
+              overflow: "hidden",
+              justifyContent: "space-between",
+              alignItems: "center",
+              height: { xs: 30, md: 48 },
+              "& .MuiButtonGroup-grouped": {
+                border: "none",
               },
             }}
           >
-            {/* {isComingSoon ? "COMING SOON" : `₹${Math.floor(price)}`} */}
-            COMING SOON
-          </Button>
-
-          {/* Cart Controls Button/Group */}
-          {!isComingSoon &&
-            (localQuantity === 0 ? (
-              <Button
-                onClick={handleAddToCart}
-                disabled={isAddingToCart || isLoading || isOutOfStock}
-                sx={{
-                  flex: 1,
-                  bgcolor: "transparent",
-                  color: "background.default",
-                  height: 48,
-                  px: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.2s ease",
+            {/* Price Button (clickable) */}
+            <Button
+              href={`/shop/${slug}`}
+              sx={{
+                height: "100%",
+                flexGrow: 0.7,
+                fontSize: { xs: ".7rem", md: "1rem" },
+                fontWeight: 700,
+                textTransform: "uppercase",
+                color: "background.default",
+                bgcolor: "secondary.main",
+                boxShadow: "none",
+                minWidth: 0,
+                py: 0,
+                px: 2,
+                transition: "background 0.2s",
+                "&:hover": {
+                  bgcolor: "primary.main",
                   boxShadow: "none",
-                  borderRadius: 2,
-                  "&:hover": {
-                    bgcolor: "primary.main",
-                    color: "background.default",
-                    boxShadow: "none",
-                    transform: "scale(1.05)",
-                  },
-                  "&:disabled": {
-                    bgcolor: "transparent",
-                    color: "grey.500",
-                    opacity: 0.5,
-                  },
-                }}
-              >
-                <Box
-                  component="img"
-                  src="/images/vectors/cart.svg"
-                  alt="Add to cart"
-                  sx={{
-                    width: { xs: 18, md: 24 },
-                    height: { xs: 18, md: 24 },
-                  }}
-                />
-              </Button>
-            ) : (
-              <ButtonGroup
-                sx={{
-                  bgcolor: "background.default",
-                  borderRadius: 2,
-                  boxShadow: `0px 3px 0px 0px`,
-                  boxShadowColor: "text.secondary",
-                  border: 1,
-                  borderColor: "text.primary",
-                  "& .MuiButtonGroup-grouped": {
-                    minWidth: "50px",
-                  },
-                }}
-              >
-                <IconButton
-                  onClick={handleDecrease}
-                  disabled={isAddingToCart || isLoading}
-                  size="small"
-                  sx={{
-                    color: "text.secondary",
-                    "&:hover": {
-                      bgcolor: "primary.main",
-                      color: "background.default",
-                    },
-                    "&:disabled": {
-                      color: "grey.400",
-                    },
-                  }}
-                >
-                  <RemoveIcon fontSize="small" />
-                </IconButton>
+                  color: "background.default",
+                },
+              }}
+            >
+              {/* {isComingSoon ? "COMING SOON" : `₹${Math.floor(price)}`} */}
+              COMING SOON
+            </Button>
+
+            {/* Cart Controls Button/Group */}
+            {!isComingSoon &&
+              (localQuantity === 0 ? (
                 <Button
-                  disabled
+                  onClick={(e) =>
+                    handleAddToCart({
+                      e,
+                      variantId,
+                      isComingSoon,
+                      isOutOfStock,
+                      setIsAddingToCart,
+                      addItem,
+                      setLocalQuantity,
+                    })
+                  }
+                  disabled={isAddingToCart || isLoading || isOutOfStock}
                   sx={{
-                    color: "text.secondary",
-                    fontWeight: 600,
-                    fontSize: "1rem",
-                    minWidth: "45px",
-                    cursor: "default",
-                    "&.Mui-disabled": {
-                      color: "text.secondary",
-                    },
-                  }}
-                >
-                  {localQuantity}
-                </Button>
-                <IconButton
-                  onClick={handleIncrease}
-                  disabled={isAddingToCart || isLoading}
-                  size="small"
-                  sx={{
-                    color: "text.secondary",
+                    flex: 1,
+                    bgcolor: "transparent",
+                    color: "background.default",
+                    height: 48,
+                    px: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.2s ease",
+                    boxShadow: "none",
+                    borderRadius: 2,
                     "&:hover": {
                       bgcolor: "primary.main",
                       color: "background.default",
+                      boxShadow: "none",
+                      transform: "scale(1.05)",
                     },
                     "&:disabled": {
-                      color: "grey.400",
+                      bgcolor: "transparent",
+                      color: "grey.500",
+                      opacity: 0.5,
                     },
                   }}
                 >
-                  <AddIcon fontSize="small" />
-                </IconButton>
-              </ButtonGroup>
-            ))}
-        </ButtonGroup>
+                  <Box
+                    component="img"
+                    src="/images/vectors/cart.svg"
+                    alt="Add to cart"
+                    sx={{
+                      width: { xs: 18, md: 24 },
+                      height: { xs: 18, md: 24 },
+                    }}
+                  />
+                </Button>
+              ) : (
+                <ButtonGroup
+                  sx={{
+                    bgcolor: "background.default",
+                    borderRadius: 2,
+                    boxShadow: `0px 3px 0px 0px`,
+                    boxShadowColor: "text.secondary",
+                    border: 1,
+                    borderColor: "text.primary",
+                    "& .MuiButtonGroup-grouped": {
+                      minWidth: "50px",
+                    },
+                  }}
+                >
+                  <IconButton
+                    onClick={(e) =>
+                      handleDecrease({
+                        e,
+                        variantId,
+                        localQuantity,
+                        setIsAddingToCart,
+                        cart,
+                        addItem,
+                        setLocalQuantity,
+                      })
+                    }
+                    disabled={isAddingToCart || isLoading}
+                    size="small"
+                    sx={{
+                      color: "text.secondary",
+                      "&:hover": {
+                        bgcolor: "primary.main",
+                        color: "background.default",
+                      },
+                      "&:disabled": {
+                        color: "grey.400",
+                      },
+                    }}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </IconButton>
+                  <Button
+                    disabled
+                    sx={{
+                      color: "text.secondary",
+                      fontWeight: 600,
+                      fontSize: "1rem",
+                      minWidth: "45px",
+                      cursor: "default",
+                      "&.Mui-disabled": {
+                        color: "text.secondary",
+                      },
+                    }}
+                  >
+                    {localQuantity}
+                  </Button>
+                  <IconButton
+                    onClick={(e) =>
+                      handleIncrease({
+                        e,
+                        variantId,
+                        isComingSoon,
+                        isOutOfStock,
+                        setIsAddingToCart,
+                        addItem,
+                        setLocalQuantity,
+                      })
+                    }
+                    disabled={isAddingToCart || isLoading}
+                    size="small"
+                    sx={{
+                      color: "text.secondary",
+                      "&:hover": {
+                        bgcolor: "primary.main",
+                        color: "background.default",
+                      },
+                      "&:disabled": {
+                        color: "grey.400",
+                      },
+                    }}
+                  >
+                    <AddIcon fontSize="small" />
+                  </IconButton>
+                </ButtonGroup>
+              ))}
+          </ButtonGroup>
+        </Box>
       )}
     </Box>
   );

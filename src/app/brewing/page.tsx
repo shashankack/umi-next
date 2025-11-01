@@ -95,13 +95,18 @@ export default function BrewingPage() {
           position="relative"
           py={{ xs: 2, sm: 4, md: 6 }}
         />
-        <Grid container width="100%" position="relative" spacing={3}>
+        <Grid
+          container
+          width="100%"
+          position="relative"
+          spacing={{ xs: 3, md: 6 }}
+        >
           {steps.map((step, index) => (
             <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Stack
                 spacing={2}
                 alignItems="center"
-                justifyContent="space-evenly"
+                justifyContent="space-between"
                 height="100%"
               >
                 <Box
@@ -113,7 +118,6 @@ export default function BrewingPage() {
                   variant="body1"
                   textAlign="center"
                   fontWeight={500}
-                  width={{ xs: "80%", md: "60%" }}
                   fontSize={{ xs: "3vw", md: "1vw" }}
                   dangerouslySetInnerHTML={{ __html: step.desc }}
                 />

@@ -241,7 +241,7 @@ export const AboutSection = () => {
                   color: "#000",
                   mt: 2,
                   textAlign: "justify",
-                  fontSize: 14,
+                  fontSize: 12,
                   px: 1,
                 }}
               >

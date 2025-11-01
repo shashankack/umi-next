@@ -319,7 +319,7 @@ export default function InstagramSection() {
           component="img"
           src="/images/neko/hello.png"
           sx={{
-            width: { xs: 90, md: "12vw" },
+            width: { xs: 90, md: 200 },
             position: "relative",
             zIndex: 20,
             mt: { xs: 0, md: 4 },
