@@ -44,6 +44,20 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
+    // Preload menu/drawer images so they are ready when the user opens the menu.
+    // This prevents the Drawer background/logo from loading only when opened,
+    // reducing the visible delay.
+    const preloadImage = (src: string) => {
+      try {
+        const img = new Image();
+        img.src = src;
+      } catch (e) {
+        // ignore
+      }
+    };
+    preloadImage("/images/backgrounds/navbar_bg.png");
+    preloadImage("/images/icons/beige_logo.png");
+    preloadImage("/images/neko/neko.gif");
     const scrollThreshold = isTransparentPage ? 600 : 80;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -67,7 +81,7 @@ export default function Navbar() {
 
   const shouldBeTransparent = isTransparentPage && !isScrolled;
 
-  // Shop submenu items (scroll to section)
+  // Shop submenu items (navigate to /shop#handle)
   const shopSubmenu = [
     { label: "Matcha", handle: "matcha" },
     { label: "Matchaware", handle: "matchaware" },
@@ -187,7 +201,12 @@ export default function Navbar() {
                         key={item.handle}
                         onClick={() => {
                           setShopAnchorEl(null);
-                          // Scroll to section on /shop
+                          // If the item is Matcha, redirect to /shop (no in-page scroll)
+                          if (item.handle === "matcha") {
+                            window.location.href = "/shop";
+                            return;
+                          }
+                          // For other items, if already on /shop try in-page scroll/hash, otherwise navigate to /shop#handle
                           if (window.location.pathname === "/shop") {
                             const el = document.getElementById(item.handle);
                             if (el) {
@@ -244,6 +263,40 @@ export default function Navbar() {
                   >
                     More
                   </Typography>
+                  <IconButton
+                    aria-label="Toggle More submenu"
+                    aria-expanded={Boolean(moreAnchorEl)}
+                    size="small"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setMoreAnchorEl(
+                        moreAnchorEl ? null : (e.currentTarget as HTMLElement)
+                      );
+                    }}
+                    sx={{
+                      p: 0.5,
+                      ml: -1,
+                      mt: 0.5,
+                      color: "background.default",
+                      transition: "transform 0.3s ease",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/images/vectors/dropdown.svg"
+                      alt="Dropdown Arrow"
+                      sx={{
+                        width: 20,
+                        height: 20,
+                        transformOrigin: "center",
+                        transform: moreAnchorEl
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                        transition: "transform 0.3s ease",
+                      }}
+                    />
+                  </IconButton>
                   <Menu
                     anchorEl={moreAnchorEl}
                     open={Boolean(moreAnchorEl)}

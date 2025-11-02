@@ -4,6 +4,8 @@ import { Stack, Box, Typography, IconButton } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PinterestIcon from "@mui/icons-material/Pinterest";
+import { SiSubstack } from "react-icons/si";
+
 
 export default function Footer() {
   const navLinks = [
@@ -12,7 +14,7 @@ export default function Footer() {
       { title: "Shop", path: "/shop" },
       { title: "Story", path: "/about" },
       { title: "Contact", path: "/contact" },
-      { title: "Our Matcha", path: "/farm-to-foam" },
+      { title: "Farm to Foam", path: "/farm-to-foam" },
     ],
     [
       { title: "Blogs", path: "/blogs" },
@@ -36,6 +38,11 @@ export default function Footer() {
         title: "Pinterest",
         path: "https://pin.it/5YQInpBIg",
         logo: <PinterestIcon />,
+      },
+      {
+        title: "Substack",
+        path: "https://substack.com/@umimatcha?r=6sb5u5&utm_medium=ios&utm_source=profile",
+        logo: <SiSubstack />,
       },
     ],
   ];
@@ -77,11 +84,24 @@ export default function Footer() {
         <Box
           component="img"
           src="/images/vectors/whisk.svg"
+          loading="eager"
+          decoding="async"
           sx={{
             bottom: { xs: "-20%", md: -50 },
             right: { xs: "10%", md: "10%" },
             width: { xs: "16vw", md: "16vw", lg: "10vw" },
             position: "absolute",
+            // iOS Safari sometimes glitches/flickers when rasterizing or compositing
+            // positioned SVGs during scroll/resizes. Forcing its own compositing
+            // layer and hiding backface often prevents that.
+            transform: "translateZ(0)",
+            WebkitTransform: "translate3d(0,0,0)",
+            willChange: "transform, opacity",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            // A tiny opacity tweak can avoid subpixel flicker on some iOS versions
+            // without visual impact.
+            opacity: 0.99,
           }}
         />
 

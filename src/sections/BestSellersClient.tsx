@@ -220,16 +220,16 @@ const BestSellersClient = ({
       >
         <Box
           position="absolute"
-          top={{ xs: "-20%", sm: "-42%", md: "-15%", lg: "-20%" }}
+          top={{ xs: "-20%", sm: "-42%", md: "-15%", lg: "-17%" }}
           left={{ xs: "-17%", sm: "-30%", md: 0 }}
           width={{ xs: "250%", sm: "195%", md: "100%" }}
           zIndex={10}
         >
           <WavyMarquee
-            speed={30}
+            speed={10}
             direction="left"
             fontSize={isMobile ? "16px" : isTablet ? "22px" : "28px"}
-            height={{ xs: 200, sm: 240, md: 200, lg: 250 }}
+            height={{ xs: 200, sm: 240, md: 200, lg: 200 }}
           />
         </Box>
 

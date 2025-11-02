@@ -212,6 +212,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 px: 1,
                 color: "text.secondary",
                 textDecoration: "none",
+                fontWeight: 600,
                 fontSize: { xs: 12, md: 18 },
                 textTransform: "uppercase",
                 transition: "all 0.3s ease",

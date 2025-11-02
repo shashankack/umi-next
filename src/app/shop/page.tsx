@@ -102,14 +102,19 @@ export default async function ShopPage() {
                       color: "background.default",
                       textTransform: "capitalize",
                       letterSpacing: 2,
-                      mb: 5,
+                      mb: { xs: 2, md: 5 },
                     }}
                   >
                     {collectionData?.collectionInfo?.title || title}
                   </Typography>
 
                   {/* Products Grid */}
-                  <Grid container spacing={2} columnSpacing={0} mb={5}>
+                  <Grid
+                    container
+                    spacing={2}
+                    columnSpacing={0}
+                    mb={{ xs: -3, md: 0 }}
+                  >
                     {products.map(({ node: product }) => (
                       <Grid size={6} key={product.id}>
                         <ProductCard

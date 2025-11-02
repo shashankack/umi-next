@@ -94,13 +94,19 @@ const HeroSection = () => {
           left: 0,
           right: 0,
           zIndex: 4000,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          textAlign: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
         }}
       >
-        <Box sx={{ position: 'relative', width: { xs: '40vw', sm: '11vw' }, height: { xs: '40vw', sm: '11vw' } }}>
+        <Box
+          sx={{
+            position: "relative",
+            width: { xs: "40vw", sm: "11vw" },
+            height: { xs: "40vw", sm: "11vw" },
+          }}
+        >
           <Box
             ref={cloudRef}
             component="img"
@@ -110,9 +116,9 @@ const HeroSection = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
             }}
           />
           <Box
@@ -121,12 +127,12 @@ const HeroSection = () => {
             src="/images/icons/pink_monogram.png"
             sx={{
               position: "absolute",
-              top: "50%",
+              top: "40%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: { xs: "50%", sm: "55%" },
-              height: 'auto',
-              objectFit: 'contain',
+              height: "auto",
+              objectFit: "contain",
             }}
           />
         </Box>

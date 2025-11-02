@@ -107,7 +107,8 @@ const WavyMarquee: React.FC<WavyMarqueeProps> = ({
               fontSize,
               fill: "#FDF8CE",
               textTransform: "lowercase",
-              fontFamily: "Stolzl, sans-serif",
+              fontFamily: "Bricolage",
+              fontWeight: 600,
             }}
           >
             {Array.from({ length: textCopies })

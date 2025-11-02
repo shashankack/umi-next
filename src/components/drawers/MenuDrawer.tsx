@@ -56,7 +56,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
         component="img"
         src="/images/icons/beige_logo.png"
         alt="Logo"
-        width={{ xs: 100, md: 130 }}
+        width={{ xs: 90, md: 130 }}
         sx={{
           position: "absolute",
           top: 16,
@@ -81,13 +81,14 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             component="img"
             src="/images/vectors/close.svg"
             alt="Close Icon"
+            width={{ xs: 24, md: 32 }}
           />
         </IconButton>
 
         <List
           sx={{
             width: "100%",
-            mt: 15,
+            mt: "20%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -199,6 +200,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             </ListItem>
           ))}
         </List>
+        <Box m="auto" component="img" src="/images/neko/neko.gif" width={160} />
       </Box>
     </Drawer>
   );

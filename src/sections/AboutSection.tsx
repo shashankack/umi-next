@@ -205,8 +205,7 @@ export const AboutSection = () => {
               borderRadius={6}
               position="relative"
               zIndex={20}
-              border={1}
-              borderColor="primary.main"
+              
             >
               <Box
                 component="img"

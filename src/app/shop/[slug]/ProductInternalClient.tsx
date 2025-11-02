@@ -307,7 +307,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 variant="h6"
                 mt={isMobile ? 0 : -4}
                 mb={isMobile ? -4 : 0}
-                fontSize={isMobile ? "8vw" : "2.6vw"}
+                fontSize={{ xs: "8vw", sm: "2.6vw" }}
                 fontWeight={500}
                 textAlign="start"
                 width="100%"
@@ -380,7 +380,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                           COMING SOON
                         </Box>
                       ) : (
-                        `₹ ${Math.floor(currentPrice)}/-`
+                        // `₹ ${Math.floor(currentPrice)}/-`
+                        `₹COMING SOON`
                       )}
                     </Typography>
                   )}
