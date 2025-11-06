@@ -142,7 +142,7 @@ export default function InstagramSection() {
       bgcolor="background.default"
       justifyContent="center"
       alignItems="center"
-      pt={{ xs: 10, md: 15 }}
+      pt={{ xs: 9, md: 11, lg: 13, xl: 15 }}
     >
       <CheckeredGrid top={0} right={0} left={0} primaryColor="primary.main" />
 
@@ -265,7 +265,7 @@ export default function InstagramSection() {
           target="_blank"
           variant="contained"
           sx={{
-            fontFamily: "Stolzl",
+            fontFamily: "Bricolage",
             color: "background.default",
             bgcolor: "secondary.main",
             borderRadius: 2,
@@ -281,7 +281,7 @@ export default function InstagramSection() {
       </Box>
 
       <Stack
-        height={{ xs: "100%", md: 400 }}
+        height={{ xs: "100%", md: "25vw", lg: "20vw" }}
         borderColor="primary.main"
         width="100%"
         position="relative"

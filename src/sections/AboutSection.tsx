@@ -48,12 +48,13 @@ export const AboutSection = () => {
                 component="img"
                 src="/images/our_matcha_title.png"
                 sx={{
-                  width: "24vw",
+                  width: "100%",
                 }}
               />
               <Typography
                 variant="body1"
                 sx={{
+                  mt: 2,
                   color: "text.secondary",
                   fontSize: { md: "1.1vw" },
                   textAlign: "justify",
@@ -205,7 +206,6 @@ export const AboutSection = () => {
               borderRadius={6}
               position="relative"
               zIndex={20}
-              
             >
               <Box
                 component="img"

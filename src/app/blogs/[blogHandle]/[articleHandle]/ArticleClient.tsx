@@ -249,7 +249,7 @@ export default function ArticleClient({
       return (
         <Box
           sx={{
-            fontFamily: "Stolzl",
+            fontFamily: "Bricolage",
             color: "secondary.main",
             lineHeight: 1.9,
             mb: 6,
@@ -370,7 +370,7 @@ export default function ArticleClient({
           <Box
             key={`before-faq-${sectionIndex}`}
             sx={{
-              fontFamily: "Stolzl",
+              fontFamily: "Bricolage",
               color: "secondary.main",
               fontSize: "1.125rem",
               lineHeight: 1.9,
@@ -554,7 +554,7 @@ export default function ArticleClient({
               >
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     color: theme.palette.primary.main,
                     fontWeight: 600,
                     fontSize: { xs: "1rem", md: "1.1rem" },
@@ -576,7 +576,7 @@ export default function ArticleClient({
               >
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     color: "secondary.main",
                     fontSize: { xs: "0.95rem", md: "1rem" },
                     lineHeight: 1.7,
@@ -607,7 +607,7 @@ export default function ArticleClient({
         <Box
           key="after-last-faq"
           sx={{
-            fontFamily: "Stolzl",
+            fontFamily: "Bricolage",
             color: "secondary.main",
             fontSize: "1.125rem",
             lineHeight: 1.9,
@@ -722,7 +722,7 @@ export default function ArticleClient({
           px: 2,
           borderRadius: 2,
           fontSize: isMobile ? "0.9rem" : "0.95rem",
-          fontFamily: "Stolzl",
+          fontFamily: "Bricolage",
           transition: "all 0.2s ease",
           cursor: "pointer",
           "&:hover": {
@@ -732,7 +732,7 @@ export default function ArticleClient({
           "&.sub-item": {
             ml: 2,
             fontSize: isMobile ? "0.8rem" : "0.85rem",
-            fontFamily: "Stolzl",
+            fontFamily: "Bricolage",
             opacity: 0.9,
             pl: 4,
           },
@@ -831,7 +831,7 @@ export default function ArticleClient({
                   mt: 2,
                   px: 2.2,
                   py: 0.8,
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   textTransform: "none",
                   "&:hover": {
                     bgcolor: "primary.main",
@@ -909,7 +909,7 @@ export default function ArticleClient({
                       </Avatar>
                       <Typography
                         sx={{
-                          fontFamily: "Stolzl",
+                          fontFamily: "Bricolage",
                           color: "secondary.main",
                           fontWeight: 600,
                         }}
@@ -927,7 +927,7 @@ export default function ArticleClient({
                       <Typography
                         variant="body2"
                         sx={{
-                          fontFamily: "Stolzl",
+                          fontFamily: "Bricolage",
                           color: "primary.main",
                         }}
                       >
@@ -940,7 +940,7 @@ export default function ArticleClient({
                       <Typography
                         variant="body2"
                         sx={{
-                          fontFamily: "Stolzl",
+                          fontFamily: "Bricolage",
                           color: "primary.main",
                         }}
                       >
@@ -958,7 +958,7 @@ export default function ArticleClient({
                       borderRadius: "24px",
                       px: 2.5,
                       py: 1,
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                       textTransform: "none",
                       "&:hover": {
                         bgcolor: "primary.main",
@@ -977,7 +977,7 @@ export default function ArticleClient({
                   <Typography
                     variant="body1"
                     sx={{
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                       color: "secondary.main",
                       fontSize: "1.125rem",
                       lineHeight: 1.9,
@@ -996,7 +996,7 @@ export default function ArticleClient({
                       textAlign: "center",
                       mb: 6,
                       color: "primary.main",
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                     }}
                   >
                     📝 Full blog content would appear here…
@@ -1024,7 +1024,7 @@ export default function ArticleClient({
                           sx={{
                             bgcolor: "secondary.main",
                             color: "background.default",
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             "&:hover": { bgcolor: "primary.main" },
                           }}
                         />
@@ -1085,7 +1085,7 @@ export default function ArticleClient({
                                 <Typography
                                   variant="caption"
                                   sx={{
-                                    fontFamily: "Stolzl",
+                                    fontFamily: "Bricolage",
                                     color: "primary.main",
                                   }}
                                 >
@@ -1124,7 +1124,7 @@ export default function ArticleClient({
                       sx={{
                         bgcolor: "primary.main",
                         color: "background.default",
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         fontSize: "1.05rem",
                         py: 1.3,
                         px: 3.6,

@@ -6,7 +6,6 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import { SiSubstack } from "react-icons/si";
 
-
 export default function Footer() {
   const navLinks = [
     [
@@ -83,7 +82,7 @@ export default function Footer() {
       >
         <Box
           component="img"
-          src="/images/vectors/whisk.svg"
+          src="/images/vectors/whisk.png"
           loading="eager"
           decoding="async"
           sx={{
@@ -91,17 +90,6 @@ export default function Footer() {
             right: { xs: "10%", md: "10%" },
             width: { xs: "16vw", md: "16vw", lg: "10vw" },
             position: "absolute",
-            // iOS Safari sometimes glitches/flickers when rasterizing or compositing
-            // positioned SVGs during scroll/resizes. Forcing its own compositing
-            // layer and hiding backface often prevents that.
-            transform: "translateZ(0)",
-            WebkitTransform: "translate3d(0,0,0)",
-            willChange: "transform, opacity",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            // A tiny opacity tweak can avoid subpixel flicker on some iOS versions
-            // without visual impact.
-            opacity: 0.99,
           }}
         />
 

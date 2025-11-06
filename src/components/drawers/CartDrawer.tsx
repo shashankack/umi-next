@@ -144,7 +144,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                   mt: 3,
                   bgcolor: "primary.main",
                   color: "background.default",
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   fontWeight: 500,
                   fontSize: { xs: "4vw", md: "1rem" },
                   px: 4,
@@ -188,7 +188,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                         <Typography
                           variant="body1"
                           sx={{
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             fontSize: { xs: "3.8vw", md: "0.95vw" },
                             fontWeight: 600,
                             color: theme.palette.secondary.main,
@@ -207,7 +207,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                           key={option.name}
                           variant="body2"
                           sx={{
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             fontSize: { xs: "3.5vw", md: "0.85vw" },
                             fontWeight: 400,
                             color: theme.palette.secondary.main,
@@ -227,7 +227,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                         <Typography
                           variant="body1"
                           sx={{
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             fontSize: { xs: "4.4vw", md: "1.05vw" },
                             fontWeight: 500,
                             color: theme.palette.primary.main,
@@ -259,7 +259,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                         </IconButton>
                         <Typography
                           sx={{
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             color: theme.palette.secondary.main,
                             fontWeight: 600,
                             minWidth: 24,
@@ -320,7 +320,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
               <Stack direction="row" justifyContent="space-between">
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "4.4vw" : "1.05vw",
                     fontWeight: 500,
                     color: theme.palette.secondary.main,
@@ -330,7 +330,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "4.4vw" : "1.05vw",
                     fontWeight: 500,
                     color: theme.palette.primary.main,
@@ -342,7 +342,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
               <Stack direction="row" justifyContent="space-between">
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "4.4vw" : "1.05vw",
                     fontWeight: 500,
                     color: theme.palette.secondary.main,
@@ -352,7 +352,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "4.4vw" : "1.05vw",
                     fontWeight: 500,
                     color: theme.palette.primary.main,
@@ -368,7 +368,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
               <Stack direction="row" justifyContent="space-between" mb={1}>
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "3.8vw" : "0.95vw",
                     fontWeight: 400,
                     color: theme.palette.secondary.main,
@@ -378,7 +378,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     fontSize: isMobile ? "3.8vw" : "0.95vw",
                     fontWeight: 400,
                     color: theme.palette.primary.main,
@@ -393,7 +393,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
             <Stack direction="row" justifyContent="space-between" mb={3} mt={2}>
               <Typography
                 sx={{
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   fontSize: isMobile ? "5vw" : "1.3rem",
                   fontWeight: 700,
                   color: theme.palette.secondary.main,
@@ -403,7 +403,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   fontSize: isMobile ? "5vw" : "1.3rem",
                   fontWeight: 700,
                   color: theme.palette.primary.main,
@@ -425,7 +425,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                 borderRadius: 2,
                 bgcolor: theme.palette.primary.main,
                 color: theme.palette.background.default,
-                fontFamily: "Stolzl",
+                fontFamily: "Bricolage",
                 fontWeight: 600,
                 fontSize: isMobile ? "4vw" : "1rem",
                 "&:hover": {

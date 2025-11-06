@@ -77,7 +77,7 @@ export default function BlogsClient({
             variant="h5"
             sx={{
               fontSize: { xs: "3.4vw", md: "1.6vw" },
-              fontFamily: "Stolzl",
+              fontFamily: "Bricolage",
               color: "background.default",
               maxWidth: 820,
               mx: "auto",
@@ -125,7 +125,7 @@ export default function BlogsClient({
                     borderRadius: 999,
                     px: 1.5,
                     height: 36,
-                    fontFamily: "Stolzl",
+                    fontFamily: "Bricolage",
                     textTransform: "capitalize",
                     color: active
                       ? theme.palette.primary.main
@@ -153,7 +153,7 @@ export default function BlogsClient({
             <Typography
               variant="h5"
               color="background.default"
-              fontFamily="Stolzl"
+              fontFamily="Bricolage"
             >
               No articles found in this category.
             </Typography>
@@ -228,7 +228,7 @@ export default function BlogsClient({
                           left: 16,
                           backgroundColor: theme.palette.primary.main,
                           color: theme.palette.background.default,
-                          fontFamily: "Stolzl",
+                          fontFamily: "Bricolage",
                           fontSize: "0.9rem",
                           height: 32,
                           borderRadius: 2,
@@ -267,7 +267,7 @@ export default function BlogsClient({
                         <Typography
                           variant="body1"
                           sx={{
-                            fontFamily: "Stolzl",
+                            fontFamily: "Bricolage",
                             color: theme.palette.background.default,
                             opacity: 0.95,
                             lineHeight: 1.6,
@@ -313,7 +313,7 @@ export default function BlogsClient({
                             />
                             <Typography
                               sx={{
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 fontSize: "0.9rem",
                               }}
                             >
@@ -333,7 +333,7 @@ export default function BlogsClient({
                             />
                             <Typography
                               sx={{
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 fontSize: "0.9rem",
                               }}
                             >
@@ -353,7 +353,7 @@ export default function BlogsClient({
                             color={theme.palette.background.default}
                           />
                           <Typography
-                            sx={{ fontFamily: "Stolzl", fontSize: "0.9rem" }}
+                            sx={{ fontFamily: "Bricolage", fontSize: "0.9rem" }}
                           >
                             {blogHelpers.getReadingTime(featured)} min read
                           </Typography>
@@ -452,7 +452,7 @@ export default function BlogsClient({
                                 sx={{
                                   backgroundColor: theme.palette.secondary.main,
                                   color: theme.palette.background.default,
-                                  fontFamily: "Stolzl",
+                                  fontFamily: "Bricolage",
                                   height: 24,
                                   borderRadius: 1,
                                   textTransform: "capitalize",
@@ -462,7 +462,7 @@ export default function BlogsClient({
                             <Typography
                               variant="caption"
                               sx={{
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 color: theme.palette.primary.main,
                               }}
                             >
@@ -491,7 +491,7 @@ export default function BlogsClient({
                             <Typography
                               variant="body2"
                               sx={{
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 color: theme.palette.secondary.main,
                                 opacity: 0.85,
                                 lineHeight: 1.5,
@@ -516,7 +516,7 @@ export default function BlogsClient({
                             <Typography
                               variant="caption"
                               sx={{
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 color: theme.palette.primary.main,
                               }}
                             >
@@ -526,7 +526,7 @@ export default function BlogsClient({
                               size="small"
                               sx={{
                                 textTransform: "none",
-                                fontFamily: "Stolzl",
+                                fontFamily: "Bricolage",
                                 backgroundColor: theme.palette.primary.main,
                                 color: theme.palette.background.default,
                                 px: 1.5,
@@ -571,7 +571,7 @@ export default function BlogsClient({
               sx={{
                 backgroundColor: theme.palette.primary.main,
                 color: theme.palette.background.default,
-                fontFamily: "Stolzl",
+                fontFamily: "Bricolage",
                 fontSize: "1.05rem",
                 py: 1.4,
                 px: 4,

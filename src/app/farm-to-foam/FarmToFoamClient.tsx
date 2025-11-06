@@ -6,6 +6,7 @@ import {
   Button,
   Collapse,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative } from "swiper/modules";
@@ -15,19 +16,31 @@ import "swiper/css/navigation";
 import { useState } from "react";
 
 export default function FarmToFoamClient() {
-  const galleryImages = [
-    "/images/matcha-gallery/image_1.png",
-    "/images/matcha-gallery/image_2.png",
-    "/images/matcha-gallery/image_3.png",
-    "/images/matcha-gallery/image_4.png",
-    "/images/matcha-gallery/image_5.png",
-    "/images/matcha-gallery/image_6.png",
-    "/images/matcha-gallery/image_7.png",
-    "/images/matcha-gallery/image_8.png",
-  ];
-
-  const isMobile = useMediaQuery("(max-width:768px)");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [showMore, setShowMore] = useState(false);
+
+  // Use desktop images if not mobile, else use original images
+  const galleryImages = isMobile
+    ? [
+        "/images/matcha-gallery/image_1.png",
+        "/images/matcha-gallery/image_2.png",
+        "/images/matcha-gallery/image_3.png",
+        "/images/matcha-gallery/image_4.png",
+        "/images/matcha-gallery/image_5.png",
+        "/images/matcha-gallery/image_6.png",
+        "/images/matcha-gallery/image_7.png",
+        "/images/matcha-gallery/image_8.png",
+      ]
+    : [
+        "/images/matcha-gallery/desktop/image1.webp",
+        "/images/matcha-gallery/desktop/image2.webp",
+        "/images/matcha-gallery/desktop/image3.webp",
+        "/images/matcha-gallery/desktop/image4.webp",
+        "/images/matcha-gallery/desktop/image5.webp",
+        "/images/matcha-gallery/desktop/image6.webp",
+        "/images/matcha-gallery/desktop/image7.webp",
+      ];
 
   return (
     <Stack minHeight="100vh" bgcolor="background.default" pt={14}>

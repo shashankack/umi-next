@@ -44,9 +44,6 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    // Preload menu/drawer images so they are ready when the user opens the menu.
-    // This prevents the Drawer background/logo from loading only when opened,
-    // reducing the visible delay.
     const preloadImage = (src: string) => {
       try {
         const img = new Image();

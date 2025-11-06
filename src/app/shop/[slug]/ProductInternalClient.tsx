@@ -160,7 +160,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
         bgcolor={theme.palette.secondary.main}
         width="100%"
         minHeight="100vh"
-        pt={isMobile ? 10 : 16}
+        pt={isMobile ? 10 : 10}
       >
         {/* Top Section - Product Details */}
         <Stack
@@ -292,6 +292,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               color={theme.palette.background.default}
               alignItems="start"
               justifyContent="start"
+              pt={3}
               px={{ xs: 1, sm: 0 }}
               gap={
                 isMobile
@@ -299,7 +300,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     ? 4
                     : 2
                   : parsedData.fullDescription
-                  ? 2
+                  ? 1
                   : 2
               }
             >
@@ -325,7 +326,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   <Typography
                     variant="h5"
                     sx={{
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                       fontWeight: 700,
                       textAlign: "justify",
                       fontSize: isMobile ? "3.4vw" : "1.2vw",
@@ -399,7 +400,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         color: theme.palette.text.secondary,
                         borderRadius: 2,
                         boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         fontWeight: 500,
                         fontSize: isMobile ? "1rem" : "0.9vw",
                         minWidth: 160,
@@ -419,7 +420,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                             boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
                             borderRadius: 2,
                             "& .MuiMenuItem-root": {
-                              fontFamily: "Stolzl",
+                              fontFamily: "Bricolage",
                               fontSize: isMobile ? "3.5vw" : "0.9vw",
                               "&:hover": {
                                 backgroundColor: theme.palette.text.secondary,
@@ -474,7 +475,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         color: theme.palette.text.secondary,
                         borderRadius: 2,
                         boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         fontWeight: 500,
                         fontSize: isMobile ? "0.7rem" : "0.9vw",
                         minWidth: 80,
@@ -501,7 +502,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                             boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
                             borderRadius: 2,
                             "& .MuiMenuItem-root": {
-                              fontFamily: "Stolzl",
+                              fontFamily: "Bricolage",
                               fontSize: isMobile ? "3.5vw" : "0.9vw",
                               "&:hover": {
                                 backgroundColor: theme.palette.text.secondary,
@@ -535,7 +536,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     }
                     fullWidth={isMobile}
                     sx={{
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                       fontWeight: 400,
                       textAlign: "justify",
                       fontSize: isMobile ? "0.7rem" : "1rem",
@@ -588,7 +589,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         borderRadius: isMobile ? 1 : 3,
                         textAlign: "justify",
                         color: theme.palette.text.secondary,
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         backgroundColor: theme.palette.background.default,
                         fontSize: isMobile ? "3vw" : ".9vw",
                         boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
@@ -606,7 +607,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         borderRadius: isMobile ? 1 : 3,
                         textAlign: "justify",
                         color: theme.palette.text.secondary,
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         backgroundColor: theme.palette.background.default,
                         fontSize: isMobile ? "3vw" : ".9vw",
                         boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
@@ -618,13 +619,13 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 </Stack>
               </Stack>
 
-              <Stack fontFamily="Stolzl" fontWeight={200} textAlign="justify">
+              <Stack fontFamily="Bricolage" fontWeight={200} textAlign="justify">
                 {parsedData.paragraphs.map((paragraph, index) => (
                   <Typography
                     key={index}
                     gutterBottom
                     sx={{
-                      fontFamily: "Stolzl",
+                      fontFamily: "Bricolage",
                       fontWeight: 200,
                       textAlign: "justify",
                       fontSize: isMobile ? "2.8vw" : "1vw",
@@ -644,7 +645,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       key={index}
                       gutterBottom
                       sx={{
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         fontWeight: 200,
                         textAlign: "justify",
                         fontSize: isMobile ? "2.8vw" : "1vw",
@@ -659,7 +660,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     <Typography
                       variant="h5"
                       sx={{
-                        fontFamily: "Stolzl",
+                        fontFamily: "Bricolage",
                         fontWeight: 800,
                         textAlign: isMobile ? "justify" : "start",
                         fontSize: isMobile ? "3vw" : "1.2vw",
@@ -713,7 +714,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   alignItems="center"
                   border={`4px solid ${theme.palette.text.secondary}`}
                   borderRadius={isMobile ? 2 : 8}
-                  fontFamily="Stolzl"
+                  fontFamily="Bricolage"
                   overflow="hidden"
                 >
                   <Box
@@ -876,7 +877,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             <Typography
               color={theme.palette.background.default}
               fontSize={20}
-              fontFamily="Stolzl"
+              fontFamily="Bricolage"
               fontWeight={600}
             >
               Full description:
@@ -884,7 +885,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             <Typography
               variant="body1"
               sx={{
-                fontFamily: "Stolzl",
+                fontFamily: "Bricolage",
                 fontWeight: 200,
                 textAlign: "justify",
                 fontSize: isMobile ? "3.4vw" : "1vw",
@@ -910,7 +911,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               width: "100%",
               backgroundColor: theme.palette.secondary.main,
               color: theme.palette.background.default,
-              fontFamily: "Stolzl",
+              fontFamily: "Bricolage",
               fontWeight: 500,
               "& .MuiAlert-icon": {
                 color: theme.palette.background.default,
@@ -933,7 +934,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             severity="error"
             sx={{
               width: "100%",
-              fontFamily: "Stolzl",
+              fontFamily: "Bricolage",
               fontWeight: 500,
             }}
           >

@@ -15,13 +15,13 @@ const HeroSection = () => {
   useEffect(() => {
     const hasPlayed = sessionStorage.getItem("hasPlayed") === "true";
 
-    if (hasPlayed) {
-      gsap.set(introContainerRef.current, { display: "none" });
-      gsap.set(videoContainerRef.current, { y: "0vh" });
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
-      return;
-    }
+    // if (hasPlayed) {
+    //   gsap.set(introContainerRef.current, { display: "none" });
+    //   gsap.set(videoContainerRef.current, { y: "0vh" });
+    //   document.body.style.overflow = "auto";
+    //   document.body.style.height = "auto";
+    //   return;
+    // }
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
@@ -130,7 +130,7 @@ const HeroSection = () => {
               top: "40%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "50%", sm: "55%" },
+              width: { xs: "55%", sm: "60%" },
               height: "auto",
               objectFit: "contain",
             }}

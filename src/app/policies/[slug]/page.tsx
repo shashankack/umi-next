@@ -52,7 +52,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
       <Typography
         component="h1"
         sx={{
-          fontFamily: "Stolzl",
+          fontFamily: "Bricolage",
           color: "primary.main",
           fontWeight: 700,
           marginBottom: "1rem",
@@ -68,7 +68,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
             <Stack key={index} mb={4} maxWidth="1600px" px={2}>
               <Typography
                 sx={{
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   fontWeight: 700,
                   fontSize: { xs: "4vw", md: "1.4vw" },
                   color: "primary.main",
@@ -82,7 +82,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
                 sx={{
                   textAlign: "justify",
                   lineHeight: "1.3",
-                  fontFamily: "Stolzl",
+                  fontFamily: "Bricolage",
                   fontSize: { xs: "3vw", md: "1vw" },
                   color: "secondary.main",
                   "& table": {

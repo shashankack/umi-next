@@ -114,7 +114,7 @@ const BestSellersClient = ({
         position="relative"
         bgcolor="primary.main"
         pt={{ xs: 3, md: 8 }}
-        pb={{ xs: 10, md: 20 }}
+        pb={{ xs: 12, md: 14, lg: 15, xl: 18 }}
         px={2}
       >
         <Typography
@@ -135,7 +135,7 @@ const BestSellersClient = ({
       </Box>
 
       <Stack
-        pt={{ xs: 5, md: 10 }}
+        pt={{ xs: 5, md: 6 }}
         pb={{ xs: 10, sm: 10, md: 20 }}
         px={2}
         spacing={5}
@@ -213,7 +213,7 @@ const BestSellersClient = ({
         )}
       </Stack>
       <Stack
-        height={{ xs: 480, sm: 300, md: 700 }}
+        height={{ xs: 480, sm: 300, md: 650 }}
         bgcolor="background.default"
         position="relative"
         alignItems="center"
@@ -256,7 +256,7 @@ const BestSellersClient = ({
           width="100%"
           height="100%"
           position="absolute"
-          bottom={0}
+          bottom={{xs: 0 , md: -50}}
           left={0}
           overflow="hidden"
         >
@@ -311,7 +311,7 @@ const BestSellersClient = ({
           href="/shop"
           variant="contained"
           sx={{
-            fontFamily: "Stolzl",
+            fontFamily: "Bricolage",
             color: "background.default",
             bgcolor: "secondary.main",
             borderRadius: 2,

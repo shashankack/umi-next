@@ -88,7 +88,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
         <List
           sx={{
             width: "100%",
-            mt: "20%",
+            mt: 5,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -200,7 +200,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             </ListItem>
           ))}
         </List>
-        <Box m="auto" component="img" src="/images/neko/neko.gif" width={160} />
+        <Box mx="auto" component="img" src="/images/neko/neko.gif" width={160} />
       </Box>
     </Drawer>
   );

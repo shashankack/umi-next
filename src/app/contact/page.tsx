@@ -24,7 +24,7 @@ export default function ContactPage() {
   const linkStyles = {
     backgroundColor: "primary.main",
     color: "background.default",
-    fontFamily: "Stolzl",
+    fontFamily: "Bricolage",
     fontSize: { xs: 16, md: 24 },
     boxShadow: "4px 4px 0 #B5D782",
     borderRadius: { xs: 2, md: 4 },

@@ -122,7 +122,7 @@ const CurvedMarquee: React.FC = () => {
           font-size: 30px;
           font-weight: bold;
           font-weight: 500;
-          font-family: "Stolzl";
+          font-family: "Bricolage";
         }
 
         /* Tablet (1560px) */
