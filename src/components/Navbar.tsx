@@ -13,7 +13,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import MenuDrawer from "@/components/drawers/MenuDrawer";
 import CartDrawer from "@/components/drawers/CartDrawer";
@@ -31,6 +31,7 @@ export default function Navbar() {
   const { itemCount } = useCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
 
   // Desktop submenu state with hover/focus timers
   const [shopAnchorEl, setShopAnchorEl] = useState<null | HTMLElement>(null);
@@ -48,7 +49,7 @@ export default function Navbar() {
       try {
         const img = new Image();
         img.src = src;
-      } catch (e) {
+      } catch {
         // ignore
       }
     };
@@ -78,11 +79,11 @@ export default function Navbar() {
 
   const shouldBeTransparent = isTransparentPage && !isScrolled;
 
-  // Shop submenu items (navigate to /shop#handle)
+  // Shop submenu items
   const shopSubmenu = [
-    { label: "Matcha", handle: "matcha" },
-    { label: "Matchaware", handle: "matchaware" },
-    { label: "Bundles", handle: "bundles" },
+    { label: "Matcha", path: "/shop" }, // Direct redirect to /shop
+    { label: "Matchaware", handle: "matchaware" }, // Scroll to section
+    { label: "Bundles", handle: "bundles" }, // Scroll to section
   ];
   // More submenu items
   const moreSubmenu = [
@@ -195,27 +196,27 @@ export default function Navbar() {
                   >
                     {shopSubmenu.map((item) => (
                       <MenuItem
-                        key={item.handle}
+                        key={item.label}
                         onClick={() => {
                           setShopAnchorEl(null);
-                          // If the item is Matcha, redirect to /shop (no in-page scroll)
-                          if (item.handle === "matcha") {
-                            window.location.href = "/shop";
+                          // If the item has a direct path, navigate to it
+                          if ('path' in item && item.path) {
+                            router.push(item.path);
                             return;
                           }
-                          // For other items, if already on /shop try in-page scroll/hash, otherwise navigate to /shop#handle
-                          if (window.location.pathname === "/shop") {
-                            const el = document.getElementById(item.handle);
-                            if (el) {
-                              el.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start",
-                              });
+                          // For items with handle, scroll to the section on /shop page
+                          if ('handle' in item && item.handle) {
+                            if (pathname === "/shop") {
+                              const el = document.getElementById(item.handle);
+                              if (el) {
+                                el.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "start",
+                                });
+                              }
                             } else {
-                              window.location.hash = `#${item.handle}`;
+                              router.push(`/shop#${item.handle}`);
                             }
-                          } else {
-                            window.location.href = `/shop#${item.handle}`;
                           }
                         }}
                         sx={{
@@ -313,7 +314,7 @@ export default function Navbar() {
                         key={item.label}
                         onClick={() => {
                           setMoreAnchorEl(null);
-                          window.location.href = item.path;
+                          router.push(item.path);
                         }}
                         sx={{
                           color: "background.default",

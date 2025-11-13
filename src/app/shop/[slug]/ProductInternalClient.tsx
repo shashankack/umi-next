@@ -32,7 +32,7 @@ interface ProductInternalClientProps {
 const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   product,
 }) => {
-  console.log("ProductInternalClient received product:", product);
+  // console.log("ProductInternalClient received product:", product);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -131,7 +131,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const quantityAvailable = selectedVariant?.quantityAvailable ?? 0;
   const isOutOfStock = !isAvailable || quantityAvailable === 0;
 
-  console.log("Rendering ProductInternalClient, product title:", product.title);
+  // console.log("Rendering ProductInternalClient, product title:", product.title);
 
   // Generate structured data
   const productSchema = generateProductSchema(product);
@@ -331,7 +331,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       textAlign: "justify",
                       fontSize: isMobile ? "3.4vw" : "1.2vw",
                       lineHeight: isMobile ? 1.3 : 0.8,
-                      mb: -4,
                     }}
                     dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
                   />
@@ -619,16 +618,20 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 </Stack>
               </Stack>
 
-              <Stack fontFamily="Bricolage" fontWeight={200} textAlign="justify">
+              <Stack
+                fontFamily="Bricolage"
+                fontWeight={200}
+                textAlign="justify"
+              >
                 {parsedData.paragraphs.map((paragraph, index) => (
                   <Typography
                     key={index}
                     gutterBottom
                     sx={{
                       fontFamily: "Bricolage",
-                      fontWeight: 200,
+                      fontWeight: 500,
                       textAlign: "justify",
-                      fontSize: isMobile ? "2.8vw" : "1vw",
+                      fontSize: isMobile ? "2.8vw" : "1.2vw",
                       mt: isMobile ? 0 : 2,
                       mb: 2,
                       "& strong": {
@@ -757,7 +760,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                                 backgroundColor:
                                   theme.palette.background.default,
                                 color: theme.palette.text.secondary,
-                                fontWeight: 300,
+                                fontWeight: 500,
                                 fontSize: isMobile ? "0.8rem" : "1rem",
                                 textAlign: "left",
                               }}
@@ -813,7 +816,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                             variant="body1"
                             sx={{
                               position: "relative",
-                              zIndex: 2000,
                               textAlign: "start",
                               fontWeight: "bold",
                               mb: 1,
@@ -876,7 +878,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
           >
             <Typography
               color={theme.palette.background.default}
-              fontSize={20}
+              fontSize={26}
               fontFamily="Bricolage"
               fontWeight={600}
             >
@@ -886,7 +888,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               variant="body1"
               sx={{
                 fontFamily: "Bricolage",
-                fontWeight: 200,
+                fontWeight: 500,
                 textAlign: "justify",
                 fontSize: isMobile ? "3.4vw" : "1vw",
                 color: theme.palette.background.default,

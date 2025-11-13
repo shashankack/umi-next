@@ -1,6 +1,11 @@
+
 import { getLatestArticles } from "@/lib/shopify";
 import type { Article } from "@/lib/shopify";
 import BlogsClient from "./BlogsClient";
+
+// Force dynamic rendering and always fetch fresh data
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: "Matcha Stories - Blog | UMI Matcha",
@@ -45,6 +50,7 @@ export default async function BlogsPage() {
   let error = null;
 
   try {
+    // Always fetch fresh articles, no cache
     articles = await getLatestArticles(20);
   } catch (err) {
     console.error("Error fetching blog articles:", err);

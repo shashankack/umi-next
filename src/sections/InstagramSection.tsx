@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState } from "react";
 
@@ -19,7 +19,6 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
     setIsHovered(true);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch((e) => console.log("Play error:", e));
     }
   };
 
@@ -112,26 +111,22 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
 export default function InstagramSection() {
   const posts = [
     {
-      thumbnail:
-        "https://scontent.cdninstagram.com/v/t51.82787-15/558882235_17886160635366812_8483348263721488992_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=MzczNDYwMTgxNzE2Mzc1NzMyNQ%3D%3D.3-ccb1-7&ccb=1-7&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjEwODB4MTM1MC5zZHIuQzMifQ%3D%3D&_nc_ohc=0Cf3awg0DBYQ7kNvwH1ISj9&_nc_oc=AdmoPZylP9doI6nJH_WZSfogv-_lY60NvIpMwi8SfHicZA9Qxz9MduRLms2GQDFlDnk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=82ZXfQk00Nk8IUoZzE2R1w&oh=00_AfeCVBO4aPSeXW6aFMGW-B-U-AOFgNia0IMsv_5CAIUTJQ&oe=68EFB8F1",
-      video: "",
-      href: "https://www.instagram.com/p/DPT-JLPElfW/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    },
-    {
-      thumbnail: "",
       video: "/videos/posts/reel1.mp4",
-      href: "https://www.instagram.com/reel/DPRM1TRCNCO/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      href: "https://www.instagram.com/reel/DJ9K0bHSDBF/",
     },
     {
-      thumbnail:
-        "https://scontent.cdninstagram.com/v/t51.82787-15/552845281_17885342913366812_8908256978590034148_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=MzcyOTQwNzE1NzI0NzQ0Mzg5Ng%3D%3D.3-ccb1-7&ccb=1-7&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjEwOTd4MTI2OC5zZHIuQzMifQ%3D%3D&_nc_ohc=cSm9ma8Xp18Q7kNvwFZG1l9&_nc_oc=AdlPmR8sjKLan4Tnkock8wS2kwKvb6BKo8IA4xWLGGkRjQ3g9R7u_HiqVSNfDLNhUT4&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=82ZXfQk00Nk8IUoZzE2R1w&oh=00_Afc0_RkvmlvZQCqIeh6WDGX-WlvQlQMwiYQCvFHoalMDpA&oe=68EFD3F5",
-      video: "",
-      href: "https://www.instagram.com/p/DPBhA9PiGBZ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      video: "/videos/posts/reel2.mp4",
+      href: "https://www.instagram.com/umimatchaclub/reel/DPRM1TRCNCO/",
+    },
+    {
+      thumbnail: "/videos/posts/post3.png",
+      video: "/videos/posts/reel3.mp4",
+      href: "https://www.instagram.com/reel/DJ31hzUy4jr/",
     },
     {
       thumbnail: "/videos/posts/post4.jpg",
       video: "/videos/posts/reel4.mp4",
-      href: "https://www.instagram.com/p/DOPCkrpkzeo/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      href: "https://www.instagram.com/p/DOPCkrpkzeo/",
     },
   ];
 

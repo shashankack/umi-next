@@ -26,7 +26,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
 
   // Define the shop categories that match your shop page sections
   const shopCategories = [
-    { handle: "matcha", title: "Matcha" },
+    { handle: "", title: "Matcha" },
     { handle: "matchaware", title: "Matchaware" },
     { handle: "bundles", title: "Bundles" },
   ];
@@ -200,7 +200,12 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             </ListItem>
           ))}
         </List>
-        <Box mx="auto" component="img" src="/images/neko/neko.gif" width={160} />
+        <Box
+          mx="auto"
+          component="img"
+          src="/images/neko/neko.gif"
+          width={160}
+        />
       </Box>
     </Drawer>
   );

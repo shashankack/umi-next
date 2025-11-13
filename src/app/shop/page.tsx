@@ -10,6 +10,9 @@ export const metadata = {
   keywords: ["shop", "products", "ecommerce"],
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const categoriesData = [
   { handle: "matcha", title: "Matcha", limit: 12 },
   { handle: "matchaware", title: "Matchaware", limit: 12 },
@@ -155,7 +158,7 @@ export default async function ShopPage() {
             component="img"
             src="/images/neko/hello.png"
             sx={{
-              width: { xs: 90, sm: 135, md: 180 },
+              width: { xs: 120, sm: 135, md: 180 },
               position: "relative",
               zIndex: 20,
             }}
@@ -168,7 +171,7 @@ export default async function ShopPage() {
               mt: { xs: 0, md: 2 },
               mb: { xs: 2, md: 0 },
               color: "background.default",
-              fontSize: { xs: "4vw", sm: "3vw", md: "1.5vw" },
+              fontSize: { xs: 20, sm: "3vw", md: "1.5vw" },
               fontWeight: 500,
               position: "relative",
               zIndex: 20,

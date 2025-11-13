@@ -49,6 +49,14 @@ const BestSellersClient = ({
   const waveUseRef = useRef<SVGUseElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
+  // Filter out "UMI DUO BUNDLE" from both product lists
+  const filteredMatchaProducts = matchaProducts.filter(
+    ({ node: product }) => product.title !== "Umi Duo Bundle"
+  );
+  const filteredMatchaWareProducts = matchaWareProducts.filter(
+    ({ node: product }) => product.title !== "Umi Duo Bundle"
+  );
+
   // Scroll-linked animation for the wave y value
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,14 +122,14 @@ const BestSellersClient = ({
         position="relative"
         bgcolor="primary.main"
         pt={{ xs: 3, md: 8 }}
-        pb={{ xs: 12, md: 14, lg: 15, xl: 18 }}
+        pb={{ xs: 9, md: 14, lg: 15, xl: 18 }}
         px={2}
       >
         <Typography
           variant="h1"
           sx={{
             textAlign: "center",
-            textShadow: " 0.323px 2.258px 0 #B5D782",
+            // textShadow: " 0.323px 2.258px 0 #B5D782",
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
@@ -152,7 +160,7 @@ const BestSellersClient = ({
           Best Sellers
         </Typography>
 
-        {matchaProducts.length === 0 ? (
+        {filteredMatchaProducts.length === 0 ? (
           <Box sx={{ textAlign: "center", py: 4 }}>
             <Typography variant="h6" color="text.secondary">
               No products found
@@ -171,7 +179,7 @@ const BestSellersClient = ({
                 },
               }}
             >
-              {matchaProducts.map(({ node: product }) => (
+              {filteredMatchaProducts.map(({ node: product }) => (
                 <ProductCard
                   key={product.id}
                   product={product}
@@ -179,7 +187,7 @@ const BestSellersClient = ({
                 />
               ))}
             </Box>
-            {matchaWareProducts.length > 0 && (
+            {filteredMatchaWareProducts.length > 0 && (
               <Box
                 sx={{
                   display: "flex",
@@ -191,7 +199,7 @@ const BestSellersClient = ({
                   },
                 }}
               >
-                {matchaWareProducts.map(({ node: product }) => (
+                {filteredMatchaWareProducts.map(({ node: product }) => (
                   <Box
                     key={product.id}
                     sx={{

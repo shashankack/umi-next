@@ -67,10 +67,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  console.log("Fetching product with slug:", slug);
+  // console.log("Fetching product with slug:", slug);
 
   const product = await getProductBySlug(slug);
-  console.log("Product fetched:", product ? product.title : "Not found");
+  // console.log("Product fetched:", product ? product.title : "Not found");
 
   if (!product) {
     notFound();

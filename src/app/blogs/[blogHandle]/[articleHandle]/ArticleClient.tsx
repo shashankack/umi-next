@@ -38,7 +38,6 @@ interface ArticleClientProps {
 }
 
 const CONTENT_MAX = 1160;
-const DEBUG_TOC = false;
 
 export default function ArticleClient({
   article,
@@ -71,7 +70,7 @@ export default function ArticleClient({
     // Strategy 1: Try to extract from existing nav TOC
     const tocNav = doc.querySelector("nav[aria-label='Table of Contents']");
 
-    if (DEBUG_TOC) console.log("TOC Nav found:", !!tocNav);
+    // if (DEBUG_TOC) console.log("TOC Nav found:", !!tocNav);
 
     if (tocNav) {
       const tocItems: Array<{
@@ -82,19 +81,11 @@ export default function ArticleClient({
       }> = [];
       const topLevelItems = Array.from(tocNav.querySelectorAll("ul > li"));
 
-      if (DEBUG_TOC)
-        console.log("Top level items found:", topLevelItems.length);
+      // if (DEBUG_TOC)
+      //   console.log("Top level items found:", topLevelItems.length);
 
-      topLevelItems.forEach((li, index) => {
+      topLevelItems.forEach((li) => {
         const isTopLevel = !li.parentElement?.closest("li");
-
-        if (DEBUG_TOC)
-          console.log(
-            `Item ${index}:`,
-            li.textContent?.trim(),
-            "isTopLevel:",
-            isTopLevel
-          );
 
         if (!isTopLevel) return;
 
@@ -172,7 +163,7 @@ export default function ArticleClient({
         }
       });
 
-      if (DEBUG_TOC) console.log("Final TOC items:", tocItems);
+      // if (DEBUG_TOC) console.log("Final TOC items:", tocItems);
 
       return tocItems;
     }
@@ -460,7 +451,9 @@ export default function ArticleClient({
 
         while (nextElement && nextElement.tagName !== "H3") {
           if (nextElement.tagName === "P") {
-            const answerText = nextElement.innerHTML.trim().replace(/^A:\s*/, "");
+            const answerText = nextElement.innerHTML
+              .trim()
+              .replace(/^A:\s*/, "");
             answer += answerText;
             break;
           }
@@ -743,9 +736,9 @@ export default function ArticleClient({
         <a
           key={item.id}
           onClick={() => {
-            if (DEBUG_TOC) console.log(`Attempting to scroll to: ${item.id}`);
+            // if (DEBUG_TOC) console.log(`Attempting to scroll to: ${item.id}`);
             const element = document.getElementById(item.id);
-            if (DEBUG_TOC) console.log(`Found element:`, element);
+            // if (DEBUG_TOC) console.log(`Found element:`, element);
 
             if (element) {
               element.scrollIntoView({
@@ -755,8 +748,8 @@ export default function ArticleClient({
             } else {
               setTimeout(() => {
                 const delayedElement = document.getElementById(item.id);
-                if (DEBUG_TOC)
-                  console.log(`Delayed search found element:`, delayedElement);
+                // if (DEBUG_TOC)
+                //   console.log(`Delayed search found element:`, delayedElement);
                 if (delayedElement) {
                   delayedElement.scrollIntoView({
                     behavior: "smooth",

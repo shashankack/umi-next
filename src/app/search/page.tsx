@@ -77,6 +77,7 @@ export default function SearchPage() {
           );
         const merged = scored
           .sort((a, b) => a.__score - b.__score)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .map(({ __score, ...rest }) => rest);
         if (!cancelled) setResults(merged);
         if (!cancelled && merged.length === 0) setError("No products found.");

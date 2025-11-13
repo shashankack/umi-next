@@ -8,6 +8,7 @@ import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/structu
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GlobalLoader from "@/components/GlobalLoader";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://umimatchashop.com'),
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <ThemeRegistry>
           <CartProvider>
+            <GlobalLoader />
             <Navbar />
             {children}
             <Footer />

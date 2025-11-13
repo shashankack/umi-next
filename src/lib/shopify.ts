@@ -909,7 +909,7 @@ export async function searchProducts(
   const data = await shopifyFetch<{ search: SearchConnection }>(
     SEARCH_PRODUCTS,
     variables,
-    { cacheTTL: 3 * 60 * 1000 } // 3 minutes for search results
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
   return data.search;
 }
@@ -1344,7 +1344,7 @@ export async function getProductsByCollectionName(
   }>(
     GET_PRODUCTS_BY_COLLECTION_NAME,
     variables,
-    { cacheTTL: 5 * 60 * 1000 } // 5 minutes for collection products
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   if (!data.collection) {
@@ -1444,7 +1444,7 @@ export async function getAllBlogs(first: number = 10): Promise<Blog[]> {
   }>(
     GET_BLOGS,
     { first },
-    { cacheTTL: 10 * 60 * 1000 } // 10 minutes cache
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   return data.blogs.edges.map(({ node }) => node);
@@ -1482,7 +1482,7 @@ export async function getBlogByHandle(
   const data = await shopifyFetch<{ blog: Blog | null }>(
     GET_BLOG,
     { handle, articlesFirst },
-    { cacheTTL: 5 * 60 * 1000 } // 5 minutes cache
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   return data.blog;
@@ -1509,7 +1509,7 @@ export async function getArticleByHandle(
   }>(
     GET_ARTICLE,
     { blogHandle, articleHandle },
-    { cacheTTL: 10 * 60 * 1000 } // 10 minutes cache
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   return data.blog?.articleByHandle || null;
@@ -1562,7 +1562,7 @@ export async function getArticlesByBlog(
   }>(
     GET_ARTICLES,
     variables,
-    { cacheTTL: 5 * 60 * 1000 } // 5 minutes cache
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   if (!data.blog) {
@@ -1612,7 +1612,7 @@ export async function getLatestArticles(
   }>(
     GET_LATEST_ARTICLES,
     { first },
-    { cacheTTL: 5 * 60 * 1000 } // 5 minutes cache
+    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
   );
 
   return data.articles.edges.map(({ node }) => node);
@@ -1929,8 +1929,7 @@ export const performanceUtils = {
     const start = performance.now();
     try {
       const result = await apiCall();
-      const duration = performance.now() - start;
-      console.log(`[Shopify API] ${name}: ${duration.toFixed(2)}ms`);
+      // console.log(`[Shopify API] ${name}: ${duration.toFixed(2)}ms`);
       return result;
     } catch (error) {
       const duration = performance.now() - start;
@@ -1950,12 +1949,11 @@ export const performanceUtils = {
     const start = performance.now();
     try {
       const results = await Promise.all(operations.map((op) => op()));
-      const duration = performance.now() - start;
-      console.log(
-        `[Shopify API Batch] ${name}: ${duration.toFixed(2)}ms for ${
-          operations.length
-        } operations`
-      );
+      // console.log(
+      //   `[Shopify API Batch] ${name}: ${duration.toFixed(2)}ms for ${
+      //     operations.length
+      //   } operations`
+      // );
       return results;
     } catch (error) {
       const duration = performance.now() - start;

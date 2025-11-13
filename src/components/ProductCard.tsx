@@ -48,6 +48,7 @@ type Product = {
   variants?: {
     edges: Array<{ node: ProductVariant }>;
   };
+  tags?: string[];
 };
 
 interface ProductCardProps {
@@ -88,7 +89,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   // Log the alt tag value for the product image
   const altTag = product.featuredImage?.altText || product.title;
-  console.log("ProductCard alt tag:", altTag);
+  // console.log("ProductCard alt tag:", altTag);
 
   const handleClick = () => {
     if (onProductClick) {
@@ -153,6 +154,27 @@ const ProductCard: React.FC<ProductCardProps> = ({
     isHovered && interactive ? mousePosition.x * 20 * sensitivity : 0; // Image tilts toward cursor
   const imageScale = isHovered && interactive ? 1.1 : 1;
 
+  // Get sticker based on tags
+  const getStickerImage = () => {
+    if (!product.tags) return null;
+
+    const lowerCaseTags = product.tags.map((tag) => tag.toLowerCase());
+
+    if (
+      lowerCaseTags.includes("bestseller") ||
+      lowerCaseTags.includes("best seller")
+    ) {
+      return "/images/vectors/stickers/best_seller.png";
+    }
+    if (lowerCaseTags.includes("limited")) {
+      return "/images/vectors/stickers/limited.png";
+    }
+
+    return null;
+  };
+
+  const stickerImage = getStickerImage();
+
   return (
     <Box
       sx={{
@@ -189,7 +211,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             "&:hover": !interactive
               ? {
                   transform: "scale(.97)",
-                  "& img": {
+                  "& .product-image": {
                     transform: "translate(-50%, -50%) scale(1.07)",
                   },
                   "& h2": { transform: "translateY(0)" },
@@ -225,21 +247,43 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {product.title}
             </Typography>
           </Box>
+
+          {/* Sticker overlay */}
+          {stickerImage && (
+            <Box
+              component="img"
+              src={stickerImage}
+              alt="Product sticker"
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                width: { xs: 60, sm: 80, md: 100 },
+                height: { xs: 60, sm: 80, md: 100 },
+                objectFit: "contain",
+                zIndex: 10,
+                pointerEvents: "none",
+                transform: "rotate(20deg)",
+              }}
+            />
+          )}
+
           <Box
             component="img"
+            className="product-image"
             src={
               product.featuredImage?.url ||
               product.images?.edges?.[0]?.node?.url ||
               "/api/placeholder/300/350"
             }
-            alt={product.featuredImage?.altText || product.title}
+            alt={altTag}
             sx={{
               position: "absolute",
               top: "50%",
               left: "50%",
               width: "100%",
               height: "70%",
-              objectFit: "cover",
+              objectFit: "contain",
               transition: interactive
                 ? "transform 0.2s ease-out"
                 : "transform 0.3s ease",

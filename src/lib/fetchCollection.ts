@@ -34,7 +34,7 @@ export async function fetchCollection(
   fallbackSearch: boolean = true
 ): Promise<CollectionData> {
   try {
-    // Try to fetch the collection by handle
+    // Try to fetch the collection by handle with no cache
     const collectionData = await getProductsByCollectionName(
       collectionHandle,
       limit

@@ -54,9 +54,9 @@ export const AboutSection = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  mt: 2,
+                  mt: 6,
                   color: "text.secondary",
-                  fontSize: { md: "1.1vw" },
+                  fontSize: { md: "1.4vw" },
                   textAlign: "justify",
                   fontWeight: 500,
                 }}
