@@ -909,7 +909,7 @@ export async function searchProducts(
   const data = await shopifyFetch<{ search: SearchConnection }>(
     SEARCH_PRODUCTS,
     variables,
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 2 * 60 * 1000 } // 2 minutes cache for search results
   );
   return data.search;
 }
@@ -1344,7 +1344,7 @@ export async function getProductsByCollectionName(
   }>(
     GET_PRODUCTS_BY_COLLECTION_NAME,
     variables,
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 5 * 60 * 1000 } // 5 minutes cache for collections
   );
 
   if (!data.collection) {
@@ -1444,7 +1444,7 @@ export async function getAllBlogs(first: number = 10): Promise<Blog[]> {
   }>(
     GET_BLOGS,
     { first },
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 10 * 60 * 1000 } // 10 minutes cache for blogs
   );
 
   return data.blogs.edges.map(({ node }) => node);
@@ -1482,7 +1482,7 @@ export async function getBlogByHandle(
   const data = await shopifyFetch<{ blog: Blog | null }>(
     GET_BLOG,
     { handle, articlesFirst },
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 5 * 60 * 1000 } // 5 minutes cache for blog articles
   );
 
   return data.blog;
@@ -1509,7 +1509,7 @@ export async function getArticleByHandle(
   }>(
     GET_ARTICLE,
     { blogHandle, articleHandle },
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 10 * 60 * 1000 } // 10 minutes cache for individual articles
   );
 
   return data.blog?.articleByHandle || null;
@@ -1562,7 +1562,7 @@ export async function getArticlesByBlog(
   }>(
     GET_ARTICLES,
     variables,
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 5 * 60 * 1000 } // 5 minutes cache for article lists
   );
 
   if (!data.blog) {
@@ -1612,7 +1612,7 @@ export async function getLatestArticles(
   }>(
     GET_LATEST_ARTICLES,
     { first },
-    { cache: false, cacheTTL: 0 } // No cache - always fetch fresh data
+    { cache: true, cacheTTL: 3 * 60 * 1000 } // 3 minutes cache for latest articles
   );
 
   return data.articles.edges.map(({ node }) => node);

@@ -8,17 +8,39 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCreative } from "swiper/modules";
+import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { useState } from "react";
+
+// Dynamically import Swiper to reduce initial bundle size
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let SwiperComponent: any = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let SwiperSlideComponent: any = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let SwiperModules: any = null;
 
 export default function FarmToFoamClient() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [showMore, setShowMore] = useState(false);
+  const [swiperLoaded, setSwiperLoaded] = useState(false);
+
+  // Load Swiper dynamically
+  useEffect(() => {
+    const loadSwiper = async () => {
+      const [{ Swiper, SwiperSlide }, { Autoplay, EffectCreative }] =
+        await Promise.all([import("swiper/react"), import("swiper/modules")]);
+
+      SwiperComponent = Swiper;
+      SwiperSlideComponent = SwiperSlide;
+      SwiperModules = { Autoplay, EffectCreative };
+      setSwiperLoaded(true);
+    };
+
+    loadSwiper();
+  }, []);
 
   // Use desktop images if not mobile, else use original images
   const galleryImages = isMobile
@@ -68,40 +90,45 @@ export default function FarmToFoamClient() {
           Farm to Foam
         </Typography>
 
-        <Swiper
-          style={{ height: "100%" }}
-          loop
-          autoplay={{
-            delay: 1000,
-          }}
-          grabCursor={true}
-          effect={"creative"}
-          creativeEffect={{
-            prev: {
-              shadow: true,
-              translate: ["-20%", 0, -1],
-            },
-            next: {
-              translate: ["100%", 0, 0],
-            },
-          }}
-          modules={[EffectCreative, Autoplay]}
-        >
-          {galleryImages.map((image, index) => (
-            <SwiperSlide key={index}>
-              <Box
-                component="img"
-                src={image}
-                alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {swiperLoaded &&
+          SwiperComponent &&
+          SwiperSlideComponent &&
+          SwiperModules && (
+            <SwiperComponent
+              style={{ height: "100%" }}
+              loop
+              autoplay={{
+                delay: 1000,
+              }}
+              grabCursor={true}
+              effect={"creative"}
+              creativeEffect={{
+                prev: {
+                  shadow: true,
+                  translate: ["-20%", 0, -1],
+                },
+                next: {
+                  translate: ["100%", 0, 0],
+                },
+              }}
+              modules={[SwiperModules.EffectCreative, SwiperModules.Autoplay]}
+            >
+              {galleryImages.map((image, index) => (
+                <SwiperSlideComponent key={index}>
+                  <Box
+                    component="img"
+                    src={image}
+                    alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </SwiperSlideComponent>
+              ))}
+            </SwiperComponent>
+          )}
       </Box>
 
       <Box

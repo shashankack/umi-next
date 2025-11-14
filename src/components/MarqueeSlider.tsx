@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { Box, Typography } from "@mui/material";
 
 interface MarqueeSliderProps {
@@ -30,22 +29,28 @@ export default function MarqueeSlider({
     // Get the width of a single text instance
     const contentWidth = contentElement.offsetWidth;
 
-    // Set initial position
-    gsap.set(contentElement, { x: 0 });
-
     // Calculate duration based on speed (lower number = faster)
     const duration = contentWidth / speed;
 
-    // Create the infinite loop animation
-    const animation = gsap.to(contentElement, {
-      x: direction === "left" ? -contentWidth / 2 : contentWidth / 2,
-      duration: duration,
-      ease: "none",
-      repeat: -1,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let animation: any;
+
+    // Dynamically import GSAP
+    import("gsap").then(({ default: gsap }) => {
+      // Set initial position
+      gsap.set(contentElement, { x: 0 });
+
+      // Create the infinite loop animation
+      animation = gsap.to(contentElement, {
+        x: direction === "left" ? -contentWidth / 2 : contentWidth / 2,
+        duration: duration,
+        ease: "none",
+        repeat: -1,
+      });
     });
 
     return () => {
-      animation.kill();
+      if (animation) animation.kill();
     };
   }, [speed, direction, text]);
 

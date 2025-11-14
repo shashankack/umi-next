@@ -40,7 +40,7 @@ export default function SearchPage() {
       if (t.endsWith("s")) set.add(t.slice(0, -1));
       else set.add(`${t}s`);
     }
-    return Array.from(set).slice(0, 6);
+    return Array.from(set).slice(0, 3); // Reduced from 6 to 3 for better performance
   }, [q]);
 
   useEffect(() => {

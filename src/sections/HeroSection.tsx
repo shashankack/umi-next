@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Stack, useTheme, useMediaQuery } from "@mui/material";
-import { gsap } from "gsap";
 
 const HeroSection = () => {
   const theme = useTheme();
@@ -11,7 +10,8 @@ const HeroSection = () => {
   const videoContainerRef = useRef(null);
   const cloudRef = useRef(null);
   const monogramRef = useRef(null);
-  const colorAnimationRef = useRef<gsap.core.Tween | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const colorAnimationRef = useRef<any>(null);
 
   const [assetsLoaded, setAssetsLoaded] = useState(false);
 
@@ -19,19 +19,27 @@ const HeroSection = () => {
     const hasPlayed = sessionStorage.getItem("hasPlayed") === "true";
 
     if (hasPlayed) {
-      gsap.set(introContainerRef.current, { display: "none" });
-      gsap.set(videoContainerRef.current, { y: "0vh" });
+      import("gsap").then((gsap) => {
+        gsap.default.set(introContainerRef.current, { display: "none" });
+        gsap.default.set(videoContainerRef.current, { y: "0vh" });
+      });
       document.body.style.overflow = "auto";
       document.body.style.height = "auto";
       return;
     }
 
+    // Immediately disable scroll when intro starts
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
 
-    gsap.set(videoContainerRef.current, { y: "100vh" });
-    gsap.set(cloudRef.current, { scale: 30 });
-    gsap.set(monogramRef.current, { scale: 0 });
+    // Dynamic import GSAP
+    import("gsap").then((gsap) => {
+      gsap.default.set(videoContainerRef.current, { y: "100vh" });
+      gsap.default.set(cloudRef.current, { scale: 30 });
+      gsap.default.set(monogramRef.current, { scale: 0 });
+    });
 
     // Track all assets that need to be loaded
     const trackAssetLoading = async () => {
@@ -77,17 +85,16 @@ const HeroSection = () => {
       // Wait for all assets to load
       await Promise.all(assetsToLoad);
 
-      // Wait an extra 2 seconds to ensure everything is loaded
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
       setAssetsLoaded(true);
     };
 
     trackAssetLoading();
 
     return () => {
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
       if (colorAnimationRef.current) {
         colorAnimationRef.current.kill();
       }
@@ -97,64 +104,71 @@ const HeroSection = () => {
   useEffect(() => {
     if (!assetsLoaded) return;
 
-    // Kill the color animation when assets are loaded
-    if (colorAnimationRef.current) {
-      colorAnimationRef.current.kill();
-    }
+    // Dynamic import GSAP for animations
+    import("gsap").then(({ default: gsap }) => {
+      // Kill the color animation when assets are loaded
+      if (colorAnimationRef.current) {
+        colorAnimationRef.current.kill();
+      }
 
-    const tl = gsap.timeline();
+      const tl = gsap.timeline();
 
-    tl.to(introContainerRef.current, {
-      y: "-100vh",
-      duration: 1.2,
-      ease: "power2.inOut",
-      delay: 0.3,
-    })
-      .to(
-        videoContainerRef.current,
-        {
-          y: "0vh",
-          duration: 1.2,
-          ease: "power2.inOut",
-        },
-        "-=1.2"
-      )
-      .call(() => {
-        gsap.set(introContainerRef.current, { display: "none" });
-        document.body.style.overflow = "auto";
-        document.body.style.height = "auto";
-        sessionStorage.setItem("hasPlayed", "true");
-      });
+      tl.to(introContainerRef.current, {
+        y: "-100vh",
+        duration: 1.2,
+        ease: "power2.inOut",
+        delay: 0.3,
+      })
+        .to(
+          videoContainerRef.current,
+          {
+            y: "0vh",
+            duration: 1.2,
+            ease: "power2.inOut",
+          },
+          "-=1.2"
+        )
+        .call(() => {
+          gsap.set(introContainerRef.current, { display: "none" });
+          document.body.style.overflow = "";
+          document.body.style.height = "";
+          document.body.style.position = "";
+          document.body.style.width = "";
+          sessionStorage.setItem("hasPlayed", "true");
+        });
+    });
   }, [assetsLoaded]);
 
   useEffect(() => {
     // Initial animation: logo and monogram fly in
-    const initialTl = gsap.timeline({
-      onComplete: () => {
-        // After logo animation, start color cycling if assets aren't loaded yet
-        if (!assetsLoaded && introContainerRef.current) {
-          colorAnimationRef.current = gsap.to(introContainerRef.current, {
-            backgroundColor: "#B5D782", // Green color
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        }
-      },
-    });
-
-    initialTl
-      .to(cloudRef.current, {
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(.6)",
-      })
-      .to(monogramRef.current, {
-        scale: 1,
-        duration: 0.4,
-        ease: "back.out(2)",
+    import("gsap").then(({ default: gsap }) => {
+      const initialTl = gsap.timeline({
+        onComplete: () => {
+          // After logo animation, start color cycling if assets aren't loaded yet
+          if (!assetsLoaded && introContainerRef.current) {
+            colorAnimationRef.current = gsap.to(introContainerRef.current, {
+              backgroundColor: "#B5D782", // Green color
+              duration: 2,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          }
+        },
       });
+
+      initialTl
+        .to(cloudRef.current, {
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(.6)",
+        })
+        .to(monogramRef.current, {
+          scale: 1,
+          duration: 0.4,
+          ease: "back.out(2)",
+        });
+    });
   }, [assetsLoaded]);
 
   return (
@@ -241,9 +255,8 @@ const HeroSection = () => {
           loop
           muted
           playsInline
-          src={
-            "/videos/intro.mp4"
-          }
+          preload="none"
+          src={"/videos/intro.mp4"}
           sx={{
             width: "100%",
             height: "100%",

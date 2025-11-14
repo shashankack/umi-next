@@ -2,7 +2,6 @@
 
 import Box from "@mui/material/Box";
 import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 import { useMediaQuery, useTheme } from "@mui/material";
 
 type WavyMarqueeProps = {
@@ -41,23 +40,29 @@ const WavyMarquee: React.FC<WavyMarqueeProps> = ({
 
   useEffect(() => {
     if (!textPathRef.current || !singleTextLen) return;
-    // Animate startOffset from 0 to -3*singleTextLen (left) or 3*singleTextLen (right)
-    let anim: gsap.core.Tween | undefined;
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let anim: any;
     const from = 0;
     const to = direction === "right" ? 3 * singleTextLen : -3 * singleTextLen;
-    function loop() {
-      anim = gsap.fromTo(
-        textPathRef.current,
-        { attr: { startOffset: from } },
-        {
-          attr: { startOffset: to },
-          duration: speed * 3,
-          ease: "none",
-          onComplete: loop,
-        }
-      );
-    }
-    loop();
+    
+    // Dynamically import GSAP
+    import("gsap").then(({ default: gsap }) => {
+      function loop() {
+        anim = gsap.fromTo(
+          textPathRef.current,
+          { attr: { startOffset: from } },
+          {
+            attr: { startOffset: to },
+            duration: speed * 3,
+            ease: "none",
+            onComplete: loop,
+          }
+        );
+      }
+      loop();
+    });
+    
     return () => {
       if (anim) anim.kill();
     };

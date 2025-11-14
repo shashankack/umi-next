@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 
 const CurvedMarquee: React.FC = () => {
   const pathRef = useRef<SVGPathElement | null>(null);
@@ -22,11 +21,17 @@ const CurvedMarquee: React.FC = () => {
     if (!pathRef.current || !textPathRef.current) return;
 
     const pathLength = pathRef.current.getTotalLength();
-    const animation = gsap.to(textPathRef.current, {
-      attr: { startOffset: -pathLength + 300 },
-      repeat: -1,
-      ease: "none",
-      duration: 15,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let animation: any;
+
+    // Dynamically import GSAP
+    import("gsap").then(({ default: gsap }) => {
+      animation = gsap.to(textPathRef.current, {
+        attr: { startOffset: -pathLength + 300 },
+        repeat: -1,
+        ease: "none",
+        duration: 15,
+      });
     });
 
     return () => {

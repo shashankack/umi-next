@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface PostItemProps {
   thumbnail?: string;
@@ -13,12 +13,37 @@ interface PostItemProps {
 
 function PostItem({ thumbnail, video, href }: PostItemProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  // Intersection Observer for lazy loading videos
+  useEffect(() => {
+    if (!video || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !videoLoaded) {
+            setVideoLoaded(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [video, videoLoaded]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (videoRef.current) {
+    if (videoRef.current && videoLoaded) {
       videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {
+        // Handle autoplay errors silently
+      });
     }
   };
 
@@ -37,6 +62,7 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
   return (
     <Link href={href} target="_blank">
       <Box
+        ref={containerRef}
         sx={{
           position: "relative",
           width: "100%",
@@ -53,6 +79,7 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
             <Box
               component="img"
               src={thumbnail}
+              loading="lazy"
               sx={{
                 width: "100%",
                 height: "100%",
@@ -60,7 +87,28 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
                 display: isHovered ? "none" : "block",
               }}
             />
-            {/* Video - show and play when hovered */}
+            {/* Video - show and play when hovered, only load when visible */}
+            {videoLoaded && (
+              <Box
+                component="video"
+                ref={videoRef}
+                src={video}
+                muted
+                loop
+                playsInline
+                preload="none"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: isHovered ? "block" : "none",
+                }}
+              />
+            )}
+          </>
+        ) : hasVideo ? (
+          // Case 2: Only video available - play on hover, load when visible
+          videoLoaded ? (
             <Box
               component="video"
               ref={videoRef}
@@ -68,34 +116,33 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
               muted
               loop
               playsInline
+              preload="none"
               sx={{
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                display: isHovered ? "block" : "none",
               }}
             />
-          </>
-        ) : hasVideo ? (
-          // Case 2: Only video available - play on hover
-          <Box
-            component="video"
-            ref={videoRef}
-            src={video}
-            muted
-            loop
-            playsInline
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
+          ) : (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                bgcolor: "grey.200",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="caption">Loading...</Typography>
+            </Box>
+          )
         ) : (
           // Case 3: Only thumbnail available
           <Box
             component="img"
             src={thumbnail}
+            loading="lazy"
             sx={{
               width: "100%",
               height: "100%",
