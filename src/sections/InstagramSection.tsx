@@ -158,10 +158,12 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
 export default function InstagramSection() {
   const posts = [
     {
+      thumbnail: "/videos/posts/post1.png",
       video: "/videos/posts/reel1.mp4",
       href: "https://www.instagram.com/reel/DJ9K0bHSDBF/",
     },
     {
+      thumbnail: "/videos/posts/post2.png",
       video: "/videos/posts/reel2.mp4",
       href: "https://www.instagram.com/umimatchaclub/reel/DPRM1TRCNCO/",
     },

@@ -19,12 +19,11 @@ const HeroSection = () => {
     const hasPlayed = sessionStorage.getItem("hasPlayed") === "true";
 
     if (hasPlayed) {
+      // Skip intro entirely - show content immediately
       import("gsap").then((gsap) => {
         gsap.default.set(introContainerRef.current, { display: "none" });
         gsap.default.set(videoContainerRef.current, { y: "0vh" });
       });
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
       return;
     }
 
@@ -41,56 +40,14 @@ const HeroSection = () => {
       gsap.default.set(monogramRef.current, { scale: 0 });
     });
 
-    // Track all assets that need to be loaded
-    const trackAssetLoading = async () => {
-      const assetsToLoad: Promise<void>[] = [];
-
-      // Track logo images
-      const cloudImg = new Image();
-      cloudImg.src = "/images/icons/empty_cloud.png";
-      assetsToLoad.push(
-        new Promise((resolve) => {
-          cloudImg.onload = () => resolve();
-          cloudImg.onerror = () => resolve();
-        })
-      );
-
-      const monogramImg = new Image();
-      monogramImg.src = "/images/icons/pink_monogram.png";
-      assetsToLoad.push(
-        new Promise((resolve) => {
-          monogramImg.onload = () => resolve();
-          monogramImg.onerror = () => resolve();
-        })
-      );
-
-      // Track video
-      const video = document.createElement("video");
-      // video.src = isMobile
-      //   ? "/videos/mobile_intro.mp4"
-      //   : "/videos/desktop_intro.mp4";
-      video.src = "/videos/intro.mp4";
-      assetsToLoad.push(
-        new Promise((resolve) => {
-          video.onloadeddata = () => resolve();
-          video.onerror = () => resolve();
-        })
-      );
-
-      // Track fonts
-      if (document.fonts) {
-        assetsToLoad.push(document.fonts.ready.then(() => {}).catch(() => {}));
-      }
-
-      // Wait for all assets to load
-      await Promise.all(assetsToLoad);
-
+    // Start animation after a brief delay to let the intro paint
+    // This improves FCP while still showing the intro
+    const timer = setTimeout(() => {
       setAssetsLoaded(true);
-    };
-
-    trackAssetLoading();
+    }, 300); // Small delay to ensure intro is visible first
 
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = "";
       document.body.style.height = "";
       document.body.style.position = "";

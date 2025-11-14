@@ -89,6 +89,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#B5D782" />
+        
+        {/* Preload critical assets for better FCP */}
+        <link rel="preload" href="/images/icons/empty_cloud.png" as="image" />
+        <link rel="preload" href="/images/icons/pink_monogram.png" as="image" />
+        <link rel="preload" href="/videos/intro.mp4" as="video" type="video/mp4" />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
