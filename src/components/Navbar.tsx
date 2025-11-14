@@ -13,6 +13,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
+import NextImage from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import MenuDrawer from "@/components/drawers/MenuDrawer";
@@ -169,10 +170,8 @@ export default function Navbar() {
                     }}
                   >
                     <Box
-                      component="img"
-                      src="/images/vectors/dropdown.svg"
-                      alt="Dropdown Arrow"
                       sx={{
+                        position: "relative",
                         width: 20,
                         height: 20,
                         transformOrigin: "center",
@@ -181,7 +180,15 @@ export default function Navbar() {
                           : "rotate(0deg)",
                         transition: "transform 0.3s ease",
                       }}
-                    />
+                    >
+                      <NextImage
+                        src="/images/vectors/dropdown.svg"
+                        alt="Dropdown Arrow"
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="20px"
+                      />
+                    </Box>
                   </IconButton>
                   <Menu
                     anchorEl={shopAnchorEl}
@@ -281,10 +288,8 @@ export default function Navbar() {
                     }}
                   >
                     <Box
-                      component="img"
-                      src="/images/vectors/dropdown.svg"
-                      alt="Dropdown Arrow"
                       sx={{
+                        position: "relative",
                         width: 20,
                         height: 20,
                         transformOrigin: "center",
@@ -293,7 +298,15 @@ export default function Navbar() {
                           : "rotate(0deg)",
                         transition: "transform 0.3s ease",
                       }}
-                    />
+                    >
+                      <NextImage
+                        src="/images/vectors/dropdown.svg"
+                        alt="Dropdown Arrow"
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="20px"
+                      />
+                    </Box>
                   </IconButton>
                   <Menu
                     anchorEl={moreAnchorEl}
@@ -353,11 +366,20 @@ export default function Navbar() {
             {isMobile && (
               <IconButton onClick={() => setMenuOpen(true)}>
                 <Box
-                  component="img"
-                  src="/images/vectors/menu.svg"
-                  alt="Menu Icon"
-                  width={{ xs: 24, md: 30 }}
-                />
+                  sx={{
+                    position: "relative",
+                    width: { xs: 24, md: 30 },
+                    height: { xs: 24, md: 30 },
+                  }}
+                >
+                  <NextImage
+                    src="/images/vectors/menu.svg"
+                    alt="Menu Icon"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    sizes="30px"
+                  />
+                </Box>
               </IconButton>
             )}
           </Box>
@@ -370,29 +392,46 @@ export default function Navbar() {
           >
             <Link href="/" style={{ textDecoration: "none" }}>
               <Box
-                component="img"
-                src="/images/icons/beige_logo.png"
-                alt="Logo"
-                width={{ xs: 80, md: 110 }}
                 sx={{
+                  position: "relative",
+                  width: { xs: 80, md: 110 },
+                  height: { xs: 80, md: 110 },
                   transition: "all 0.2s ease",
                   opacity: menuOpen ? 0 : 1,
                   "&:hover": {
                     transform: "scale(1.05)",
                   },
                 }}
-              />
+              >
+                <NextImage
+                  src="/images/icons/beige_logo.png"
+                  alt="Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  sizes="(max-width: 768px) 80px, 110px"
+                  priority
+                />
+              </Box>
             </Link>
           </Box>
           {/* Right: Icons */}
           <Box flex={1} display="flex" justifyContent="flex-end" gap={1}>
             <IconButton onClick={() => setSearchOpen(true)}>
               <Box
-                component="img"
-                src="/images/vectors/search.svg"
-                alt="Search Icon"
-                width={{ xs: 24, md: 30 }}
-              />
+                sx={{
+                  position: "relative",
+                  width: { xs: 24, md: 30 },
+                  height: { xs: 24, md: 30 },
+                }}
+              >
+                <NextImage
+                  src="/images/vectors/search.svg"
+                  alt="Search Icon"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  sizes="30px"
+                />
+              </Box>
             </IconButton>
             <IconButton onClick={() => setCartOpen(true)}>
               <Badge
@@ -408,11 +447,20 @@ export default function Navbar() {
                 }}
               >
                 <Box
-                  component="img"
-                  src="/images/vectors/cart.svg"
-                  alt="Cart Icon"
-                  width={{ xs: 24, md: 30 }}
-                />
+                  sx={{
+                    position: "relative",
+                    width: { xs: 24, md: 30 },
+                    height: { xs: 24, md: 30 },
+                  }}
+                >
+                  <NextImage
+                    src="/images/vectors/cart.svg"
+                    alt="Cart Icon"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    sizes="30px"
+                  />
+                </Box>
               </Badge>
             </IconButton>
           </Box>

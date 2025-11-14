@@ -14,6 +14,7 @@ import {
   Alert,
   SelectChangeEvent,
 } from "@mui/material";
+import Image from "next/image";
 import { useTheme } from "@mui/material/styles";
 import { FaShoppingCart } from "react-icons/fa";
 import { Product, ProductVariant } from "@/lib/shopify";
@@ -196,7 +197,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               width={isMobile ? "100%" : "30vw"}
               justifyContent="center"
               alignItems="center"
-              py={{ xs: 2, sm: 0 }}
+              py={{ xs: 2, md: 0 }}
             >
               <Box
                 p={2}
@@ -222,18 +223,24 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   alignItems="center"
                   justifyContent="center"
                   height={{ xs: 280, sm: 300, md: 350, lg: 420, xl: 550 }}
+                  width="100%"
                 >
                   <Box
-                    component="img"
-                    src={selectedImage}
-                    alt={product.title}
                     sx={{
-                      height: "100%",
+                      position: "relative",
                       width: "100%",
-                      objectFit: "contain",
+                      height: "100%",
                       borderRadius: 2,
                     }}
-                  />
+                  >
+                    <Image
+                      src={selectedImage}
+                      alt={product.title}
+                      fill
+                      style={{ objectFit: "contain", borderRadius: "8px" }}
+                      priority
+                    />
+                  </Box>
                 </Box>
                 <Box
                   sx={{
@@ -258,15 +265,12 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   {product.images.edges.map((image, i) => (
                     <Box
                       key={i}
-                      component="img"
-                      src={image.node.url}
-                      alt={`${product.title} - ${i + 1}`}
                       onClick={() => handleThumbnailClick(image.node.url)}
                       sx={{
+                        position: "relative",
                         minWidth: "80px",
                         width: "80px",
                         height: "80px",
-                        objectFit: "contain",
                         borderRadius: 1,
                         cursor: "pointer",
                         border:
@@ -274,11 +278,21 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                             ? `2px solid ${theme.palette.text.secondary}`
                             : "2px solid transparent",
                         transition: "border 0.2s ease",
+                        flexShrink: 0,
                         "&:hover": {
                           border: `2px solid ${theme.palette.text.secondary}`,
                         },
                       }}
-                    />
+                    >
+                      <Image
+                        src={image.node.url}
+                        alt={`${product.title} - ${i + 1}`}
+                        fill
+                        style={{ objectFit: "contain", borderRadius: "4px" }}
+                        sizes="80px"
+                        loading="lazy"
+                      />
+                    </Box>
                   ))}
                 </Box>
               </Box>

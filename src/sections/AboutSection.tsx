@@ -1,5 +1,6 @@
 "use client";
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import Image from "next/image";
 
 export const AboutSection = () => {
   const theme = useTheme();
@@ -23,20 +24,35 @@ export const AboutSection = () => {
               }}
             >
               <Box
-                component="img"
-                src="/images/backgrounds/green_wave.png"
                 sx={{
-                  zIndex: 40,
+                  position: "relative",
                   width: "100vw",
-                  objectFit: "cover",
+                  height: { md: 600, lg: 800 },
+                  bottom: { md: "-50%", lg: "-50%" },
                 }}
-              />
+              >
+                <Image
+                  src="/images/backgrounds/green_wave.png"
+                  alt="Green wave background"
+                  fill
+                  style={{ objectFit: "cover", zIndex: 400 }}
+                  loading="lazy"
+                />
+              </Box>
             </Box>
-            <Box width="50%">
-              <Box
-                component="img"
+            <Box
+              width="50vw"
+              sx={{
+                position: "relative",
+                height: { xs: 300, sm: 400, md: 500, lg: 600, xl: 800 },
+              }}
+            >
+              <Image
                 src="/images/about_section.png"
-                sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                alt="About Umi Matcha"
+                fill
+                style={{ objectFit: "cover" }}
+                loading="lazy"
               />
             </Box>
             <Box
@@ -44,13 +60,17 @@ export const AboutSection = () => {
               bgcolor="background.default"
               p={{ md: 6, lg: 8, xl: 10 }}
             >
-              <Box
-                component="img"
-                src="/images/our_matcha_title.png"
-                sx={{
-                  width: "100%",
-                }}
-              />
+              <Box sx={{ position: "relative", width: "100%", height: "auto" }}>
+                <Image
+                  src="/images/our_matcha_title.png"
+                  alt="Our Matcha"
+                  width={800}
+                  height={200}
+                  style={{ width: "100%", height: "auto" }}
+                  sizes="(max-width: 1200px) 40vw, 35vw"
+                  loading="lazy"
+                />
+              </Box>
               <Typography
                 variant="body1"
                 sx={{
@@ -86,38 +106,55 @@ export const AboutSection = () => {
             }}
           >
             <Box
+              border={1}
+              borderColor="black"
               width={400}
+              mt={7}
               p={2}
               bgcolor="background.default"
               borderRadius={8}
               position="relative"
             >
               <Box
-                component="img"
-                src={"/images/vectors/founder_badge.png"}
                 sx={{
                   position: "absolute",
                   width: 170,
-                  top: "-12%",
+                  height: 170,
+                  top: "-15%",
                   left: "-15%",
+                  zIndex: 100,
                   animation: "umi-rotate 6s linear infinite",
                   "@keyframes umi-rotate": {
                     from: { transform: "rotate(0deg)" },
                     to: { transform: "rotate(360deg)" },
                   },
                 }}
-              />
+              >
+                <Image
+                  src="/images/vectors/founder_badge.png"
+                  alt="Founder badge"
+                  width={170}
+                  height={170}
+                  loading="lazy"
+                />
+              </Box>
 
               <Box
-                component="img"
-                src="/images/founder.png"
                 sx={{
                   borderRadius: 8,
+                  position: "relative",
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  height: 500,
                 }}
-              />
+              >
+                <Image
+                  src="/images/founder.png"
+                  alt="Umi Matcha Founder"
+                  fill
+                  style={{ objectFit: "cover", borderRadius: 32 }}
+                  loading="lazy"
+                />
+              </Box>
             </Box>
 
             <Box width={"50%"} ml={15}>
@@ -156,13 +193,21 @@ export const AboutSection = () => {
       {isMobile && (
         <Stack>
           <Box
-            component="img"
-            src="/images/backgrounds/mobile_about.png"
             sx={{
+              position: "relative",
               width: "100%",
-              objectFit: "cover",
+              zIndex: 10,
+              height: { xs: 220, sm: 350, md: 400 },
             }}
-          />
+          >
+            <Image
+              src="/images/backgrounds/mobile_about.png"
+              alt="About Umi Matcha mobile"
+              fill
+              style={{ objectFit: "cover" }}
+              loading="lazy"
+            />
+          </Box>
 
           <Box bgcolor="primary.main" pt={3} px={2} pb={10}>
             <Typography
@@ -187,8 +232,6 @@ export const AboutSection = () => {
 
           <Stack direction="row" p={4} position="relative">
             <Box
-              component="img"
-              src="/images/backgrounds/green_wave.png"
               sx={{
                 position: "absolute",
                 top: "-5%",
@@ -196,9 +239,19 @@ export const AboutSection = () => {
                 right: 0,
                 zIndex: 10,
                 width: "175%",
-                objectFit: "contain",
+                height: "auto",
               }}
-            />
+            >
+              <Image
+                src="/images/backgrounds/green_wave.png"
+                alt="Green wave decoration"
+                width={1400}
+                height={200}
+                style={{ width: "100%", height: "auto" }}
+                sizes="175vw"
+                loading="lazy"
+              />
+            </Box>
 
             <Box
               p={1}
@@ -208,31 +261,46 @@ export const AboutSection = () => {
               zIndex={20}
             >
               <Box
-                component="img"
-                src={"/images/vectors/founder_badge.png"}
                 sx={{
                   position: "absolute",
                   width: 130,
+                  height: 130,
                   top: "-7%",
                   left: "-10%",
+                  zIndex: 100,
                   animation: "umi-rotate 6s linear infinite",
                   "@keyframes umi-rotate": {
                     from: { transform: "rotate(0deg)" },
                     to: { transform: "rotate(360deg)" },
                   },
                 }}
-              />
+              >
+                <Image
+                  src="/images/vectors/founder_badge.png"
+                  alt="Founder badge"
+                  width={130}
+                  height={130}
+                  loading="lazy"
+                />
+              </Box>
 
               <Box
-                component="img"
-                src="/images/founder.png"
                 sx={{
                   borderRadius: 6,
+                  position: "relative",
                   width: "100%",
                   height: 350,
-                  objectFit: "cover",
                 }}
-              />
+              >
+                <Image
+                  src="/images/founder.png"
+                  alt="Umi Matcha Founder"
+                  fill
+                  style={{ objectFit: "cover", borderRadius: 24 }}
+                  sizes="(max-width: 768px) 90vw, 400px"
+                  loading="lazy"
+                />
+              </Box>
 
               <Typography
                 variant="body1"

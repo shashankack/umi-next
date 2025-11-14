@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
 import { slugify } from "../lib/slug";
 import { useCart } from "@/context/CartContext";
 import {
@@ -251,39 +252,35 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Sticker overlay */}
           {stickerImage && (
             <Box
-              component="img"
-              src={stickerImage}
-              alt="Product sticker"
               sx={{
                 position: "absolute",
                 top: 0,
                 right: 0,
                 width: { xs: 60, sm: 80, md: 100 },
                 height: { xs: 60, sm: 80, md: 100 },
-                objectFit: "contain",
                 zIndex: 10,
                 pointerEvents: "none",
                 transform: "rotate(20deg)",
               }}
-            />
+            >
+              <Image
+                src={stickerImage}
+                alt="Product sticker"
+                fill
+                style={{ objectFit: "contain" }}
+                sizes="(max-width: 600px) 60px, (max-width: 900px) 80px, 100px"
+              />
+            </Box>
           )}
 
           <Box
-            component="img"
             className="product-image"
-            src={
-              product.featuredImage?.url ||
-              product.images?.edges?.[0]?.node?.url ||
-              "/api/placeholder/300/350"
-            }
-            alt={altTag}
             sx={{
               position: "absolute",
               top: "50%",
               left: "50%",
               width: "100%",
               height: "70%",
-              objectFit: "contain",
               transition: interactive
                 ? "transform 0.2s ease-out"
                 : "transform 0.3s ease",
@@ -292,7 +289,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 : `translate(-50%, -50%) scale(1)`,
               transformStyle: "preserve-3d",
             }}
-          />
+          >
+            <Image
+              src={
+                product.featuredImage?.url ||
+                product.images?.edges?.[0]?.node?.url ||
+                "/api/placeholder/300/350"
+              }
+              alt={altTag}
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 600px) 200px, (max-width: 900px) 250px, 350px"
+              loading="lazy"
+            />
+          </Box>
         </Box>
       </Link>
       {showControls && (
@@ -384,14 +394,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   }}
                 >
                   <Box
-                    component="img"
-                    src="/images/vectors/cart.svg"
-                    alt="Add to cart"
                     sx={{
+                      position: "relative",
                       width: { xs: 18, md: 24 },
                       height: { xs: 18, md: 24 },
                     }}
-                  />
+                  >
+                    <Image
+                      src="/images/vectors/cart.svg"
+                      alt="Add to cart"
+                      fill
+                      style={{ objectFit: "contain" }}
+                      sizes="24px"
+                    />
+                  </Box>
                 </Button>
               ) : (
                 <ButtonGroup

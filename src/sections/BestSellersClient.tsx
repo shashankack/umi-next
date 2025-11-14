@@ -13,6 +13,7 @@ import ProductCard from "../components/ProductCard";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { Collection } from "@/lib/shopify";
 import WavyMarquee from "@/components/WavyMarquee";
+import Image from "next/image";
 
 type ProductImage = {
   url: string;
@@ -299,18 +300,26 @@ const BestSellersClient = ({
         </Box>
 
         <Box
-          component="img"
-          src={
-            isMobile
-              ? "/images/vectors/mobile_text.svg"
-              : "/images/vectors/text.svg"
-          }
           sx={{
             position: "relative",
             width: { xs: 270, md: 900 },
+            height: { xs: 50, md: 180 },
             mt: 6,
           }}
-        />
+        >
+          <Image
+            src={
+              isMobile
+                ? "/images/vectors/mobile_text.svg"
+                : "/images/vectors/text.svg"
+            }
+            alt="Best Sellers"
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 270px, 900px"
+            loading="lazy"
+          />
+        </Box>
 
         <Button
           href="/shop"

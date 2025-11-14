@@ -1,5 +1,6 @@
 import { Box, Stack, Typography, Grid } from "@mui/material";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Brewing Guide - How to Make Matcha",
@@ -54,25 +55,45 @@ export default function BrewingPage() {
       }}
     >
       <Box
-        component="img"
-        src="/images/backgrounds/green_wave.png"
         sx={{
-          width: { xs: 1250, sm: 1500, md: 2000 },
-          transform: "rotate(180deg)",
           position: "absolute",
           top: { xs: -320, sm: -400, md: -800 },
+          left: 0,
+          right: 0,
+          width: { xs: 1250, sm: 1500, md: 2000 },
+          height: { xs: 500, sm: 580, md: 600 },
+          transform: "rotate(180deg)",
           zIndex: 2,
         }}
-      />
+      >
+        <Image
+          src="/images/backgrounds/green_wave.png"
+          alt="Green wave background"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 768px) 1250px, (max-width: 900px) 1500px, 2000px"
+          loading="lazy"
+        />
+      </Box>
       <Box
-        component="img"
-        src="/images/backgrounds/beige_wave.png"
         sx={{
-          width: { xs: 1250, sm: 1500, md: 2000 },
           position: "absolute",
-          bottom: { xs: -550, sm: -670, md: -870 },
+          bottom: { xs: -580, sm: -730, md: -900 },
+          left: 0,
+          right: 0,
+          width: { xs: 1250, sm: 1500, md: 2000 },
+          height: { xs: 630, sm: 780, md: 1000 },
         }}
-      />
+      >
+        <Image
+          src="/images/backgrounds/beige_wave.png"
+          alt="Beige wave background"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 768px) 1250px, (max-width: 900px) 1500px, 2000px"
+          loading="lazy"
+        />
+      </Box>
 
       <Typography
         variant="h1"
@@ -89,12 +110,22 @@ export default function BrewingPage() {
 
       <Stack alignItems="center">
         <Box
-          component="img"
-          src="/images/neko/playful.png"
-          width={{ xs: 100, sm: 150, md: 200 }}
-          position="relative"
-          py={{ xs: 2, sm: 4, md: 6 }}
-        />
+          sx={{
+            position: "relative",
+            width: { xs: 100, sm: 150, md: 200 },
+            height: { xs: 100, sm: 150, md: 200 },
+            my: { xs: 2, sm: 4, md: 6 },
+          }}
+        >
+          <Image
+            src="/images/neko/playful.png"
+            alt="Playful mascot"
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 100px, (max-width: 900px) 150px, 200px"
+            loading="lazy"
+          />
+        </Box>
         <Grid
           container
           width="100%"
@@ -110,10 +141,21 @@ export default function BrewingPage() {
                 height="100%"
               >
                 <Box
-                  component="img"
-                  src={step.image}
-                  width={{ xs: 60, sm: 100, md: 130 }}
-                />
+                  sx={{
+                    position: "relative",
+                    width: { xs: 60, sm: 100, md: 130 },
+                    height: { xs: 60, sm: 100, md: 130 },
+                  }}
+                >
+                  <Image
+                    src={step.image}
+                    alt={`Step ${index + 1}`}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    sizes="(max-width: 768px) 60px, (max-width: 900px) 100px, 130px"
+                    loading="lazy"
+                  />
+                </Box>
                 <Typography
                   variant="body1"
                   textAlign="center"

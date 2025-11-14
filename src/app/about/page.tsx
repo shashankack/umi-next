@@ -1,11 +1,13 @@
+"use client";
 import { Box, Stack, Typography } from "@mui/material";
-
-export const metadata = {
-  title: "About",
-  // Add other metadata as needed
-};
+import Image from "next/image";
+import { useResponsiveImage } from "@/hooks/useResponsiveImage";
 
 export default function AboutPage() {
+  const aboutImageSrc = useResponsiveImage(
+    "/images/backgrounds/about_mobile.png",
+    "/images/backgrounds/about.png"
+  );
   return (
     <Stack pt={15} bgcolor="background.default">
       <Typography
@@ -51,26 +53,25 @@ export default function AboutPage() {
         summer breeze warm our mind, body, and soul. But, with the knowledge
         that another wave is waiting to be conquered. Umi Matcha represents a
         symbolic shift within the matcha community. Life is always better with a
-        matcha in hand. We are thrilled to have Umi become a part of your
-        daily routine because it&apos;s truly the most magical part of ours.
+        matcha in hand. We are thrilled to have Umi become a part of your daily
+        routine because it&apos;s truly the most magical part of ours.
       </Typography>
 
-      <Box>
-        <picture>
-          <source
-            srcSet="/images/backgrounds/about_mobile.png"
-            media="(max-width: 768px)"
-          />
-          <img
-            src="/images/backgrounds/about.png"
-            alt="About"
-            style={{
-              width: "100%",
-              height: "auto",
-              objectFit: "cover",
-            }}
-          />
-        </picture>
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: { xs: "30vh", md: "80vh" },
+        }}
+      >
+        <Image
+          src={aboutImageSrc}
+          alt="About"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="100vw"
+          loading="lazy"
+        />
       </Box>
     </Stack>
   );

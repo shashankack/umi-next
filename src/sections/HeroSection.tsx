@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Stack, useTheme, useMediaQuery } from "@mui/material";
+import Image from "next/image";
 
 const HeroSection = () => {
   const theme = useTheme();
@@ -182,8 +183,6 @@ const HeroSection = () => {
         >
           <Box
             ref={cloudRef}
-            component="img"
-            src="/images/icons/empty_cloud.png"
             sx={{
               position: "absolute",
               top: "50%",
@@ -191,13 +190,19 @@ const HeroSection = () => {
               transform: "translate(-50%, -50%)",
               width: "100%",
               height: "100%",
-              objectFit: "contain",
             }}
-          />
+          >
+            <Image
+              src="/images/icons/empty_cloud.png"
+              alt="Umi Cloud Logo"
+              fill
+              priority
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 600px) 40vw, 11vw"
+            />
+          </Box>
           <Box
             ref={monogramRef}
-            component="img"
-            src="/images/icons/pink_monogram.png"
             sx={{
               position: "absolute",
               top: "50%",
@@ -205,9 +210,18 @@ const HeroSection = () => {
               transform: "translate(-50%, -50%)",
               width: { xs: "55%", sm: "60%" },
               height: "auto",
-              objectFit: "contain",
             }}
-          />
+          >
+            <Image
+              src="/images/icons/pink_monogram.png"
+              alt="Umi Monogram"
+              width={200}
+              height={200}
+              priority
+              style={{ width: "100%", height: "auto", objectFit: "contain" }}
+              sizes="(max-width: 600px) 22vw, 6.6vw"
+            />
+          </Box>
         </Box>
       </Box>
 

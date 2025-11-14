@@ -19,6 +19,7 @@ import { useTheme } from "@mui/material/styles";
 import { useCart } from "@/context/CartContext";
 import { cartHelpers, productHelpers } from "@/lib/shopify";
 import Link from "next/link";
+import Image from "next/image";
 
 interface CartDrawerProps {
   open: boolean;
@@ -101,11 +102,20 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
             sx={{ color: theme.palette.primary.main, mr: 2 }}
           >
             <Box
-              component="img"
-              src="/images/vectors/close.svg"
-              alt="Close"
-              width={34}
-            />
+              sx={{
+                position: "relative",
+                width: 34,
+                height: 34,
+              }}
+            >
+              <Image
+                src="/images/vectors/close.svg"
+                alt="Close"
+                fill
+                style={{ objectFit: "contain" }}
+                sizes="34px"
+              />
+            </Box>
           </IconButton>
         </Stack>
 
@@ -167,17 +177,23 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                   <Stack direction="row" spacing={2}>
                     {/* Product Image */}
                     <Box
-                      component="img"
-                      src={line.variant.image?.url || "/api/placeholder/80/80"}
-                      alt={line.product.title}
                       sx={{
+                        position: "relative",
                         width: 72,
                         height: 72,
-                        objectFit: "cover",
                         borderRadius: 2,
                         bgcolor: "white",
+                        flexShrink: 0,
                       }}
-                    />
+                    >
+                      <Image
+                        src={line.variant.image?.url || "/api/placeholder/80/80"}
+                        alt={line.product.title}
+                        fill
+                        style={{ objectFit: "cover", borderRadius: "8px" }}
+                        sizes="72px"
+                      />
+                    </Box>
 
                     {/* Product Info */}
                     <Stack flex={1} spacing={1}>

@@ -1,5 +1,6 @@
 "use client";
 import { Stack, Box, Link, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
 
 export default function NotFound() {
   const theme = useTheme();
@@ -16,10 +17,21 @@ export default function NotFound() {
       }}
     >
       <Box
-        component="img"
-        src="/images/vectors/not_found.png"
-        sx={{ width: { xs: "40vw", md: "20vw" }, height: "auto" }}
-      />
+        sx={{
+          position: "relative",
+          width: { xs: "40vw", md: "20vw" },
+          height: { xs: "40vw", md: "20vw" },
+        }}
+      >
+        <Image
+          src="/images/vectors/not_found.png"
+          alt="404 Not Found"
+          fill
+          style={{ objectFit: "contain" }}
+          sizes="(max-width: 768px) 40vw, 20vw"
+          loading="lazy"
+        />
+      </Box>
       <Stack
         alignItems={{ xs: "center", md: "start" }}
         justifyContent={{ xs: "center", md: "start" }}

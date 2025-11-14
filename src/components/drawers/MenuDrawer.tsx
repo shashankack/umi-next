@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface NavLink {
   title: string;
@@ -53,18 +54,25 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
       }}
     >
       <Box
-        component="img"
-        src="/images/icons/beige_logo.png"
-        alt="Logo"
-        width={{ xs: 90, md: 130 }}
         sx={{
           position: "absolute",
           top: 16,
           left: "50%",
           transform: "translateX(-50%)",
+          width: { xs: 90, md: 130 },
+          height: { xs: 90, md: 130 },
           zIndex: 11,
         }}
-      />
+      >
+        <Image
+          src="/images/icons/beige_logo.png"
+          alt="Logo"
+          fill
+          style={{ objectFit: "contain" }}
+          sizes="(max-width: 768px) 90px, 130px"
+          priority
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -78,11 +86,20 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
           sx={{ alignSelf: "flex-start", mt: 4, ml: 4 }}
         >
           <Box
-            component="img"
-            src="/images/vectors/close.svg"
-            alt="Close Icon"
-            width={{ xs: 24, md: 32 }}
-          />
+            sx={{
+              position: "relative",
+              width: { xs: 24, md: 32 },
+              height: { xs: 24, md: 32 },
+            }}
+          >
+            <Image
+              src="/images/vectors/close.svg"
+              alt="Close Icon"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="32px"
+            />
+          </Box>
         </IconButton>
 
         <List
@@ -144,10 +161,8 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                     }}
                   >
                     <Box
-                      component="img"
-                      src="/images/vectors/dropdown.svg"
-                      alt=""
                       sx={{
+                        position: "relative",
                         width: 20,
                         height: 20,
                         transformOrigin: "center",
@@ -156,7 +171,15 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                           : "rotate(0deg)",
                         transition: "transform 0.3s ease",
                       }}
-                    />
+                    >
+                      <Image
+                        src="/images/vectors/dropdown.svg"
+                        alt="Dropdown arrow"
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="20px"
+                      />
+                    </Box>
                   </IconButton>
                 )}
               </Box>
@@ -201,11 +224,22 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
           ))}
         </List>
         <Box
-          mx="auto"
-          component="img"
-          src="/images/neko/neko.gif"
-          width={160}
-        />
+          sx={{
+            position: "relative",
+            width: 160,
+            height: 160,
+            mx: "auto",
+          }}
+        >
+          <Image
+            src="/images/neko/neko.gif"
+            alt="Neko animation"
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="160px"
+            unoptimized
+          />
+        </Box>
       </Box>
     </Drawer>
   );

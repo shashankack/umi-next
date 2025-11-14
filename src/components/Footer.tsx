@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Stack, Box, Typography, IconButton } from "@mui/material";
+import Image from "next/image";
 
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -81,17 +82,23 @@ export default function Footer() {
         position="relative"
       >
         <Box
-          component="img"
-          src="/images/vectors/whisk.png"
-          loading="eager"
-          decoding="async"
           sx={{
-            bottom: { xs: "-20%", md: -50 },
-            right: { xs: "10%", md: "10%" },
-            width: { xs: "16vw", md: "16vw", lg: "10vw" },
             position: "absolute",
+            bottom: { xs: "0%", sm: "-10%", md: 0 },
+            right: { xs: "10%", md: "10%" },
+            width: { xs: "18vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" },
+            height: { xs: "18vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" },
           }}
-        />
+        >
+          <Image
+            src="/images/vectors/whisk.png"
+            alt="Whisk decoration"
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 16vw, (max-width: 1024px) 16vw, 10vw"
+            loading="lazy"
+          />
+        </Box>
 
         {/* Left */}
         <Stack
@@ -100,15 +107,37 @@ export default function Footer() {
           gap={{ xs: 2, md: 4 }}
         >
           <Box
-            component="img"
-            src="/images/icons/pink_monogram.png"
-            width={{ xs: 60, md: 140 }}
-          />
+            sx={{
+              position: "relative",
+              width: { xs: 60, md: 100, lg: 140 },
+              height: { xs: 60, md: 100, lg: 140 },
+            }}
+          >
+            <Image
+              src="/images/icons/pink_monogram.png"
+              alt="Umi monogram"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 768px) 60px, 140px"
+              loading="lazy"
+            />
+          </Box>
           <Box
-            component="img"
-            src="/images/vectors/bowl.svg"
-            width={{ xs: 60, md: 140 }}
-          />
+            sx={{
+              position: "relative",
+              width: { xs: 60, md: 100, lg: 140 },
+              height: { xs: 60, md: 100, lg: 140 },
+            }}
+          >
+            <Image
+              src="/images/vectors/bowl.svg"
+              alt="Bowl decoration"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 768px) 60px, 140px"
+              loading="lazy"
+            />
+          </Box>
           <Typography
             sx={{
               color: "text.secondary",

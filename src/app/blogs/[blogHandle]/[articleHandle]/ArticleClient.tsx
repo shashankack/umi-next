@@ -16,9 +16,9 @@ import {
   AccordionSummary,
   AccordionDetails,
   Card,
-  CardMedia,
   CardContent,
 } from "@mui/material";
+import Image from "next/image";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "next/link";
 import type { Article } from "@/lib/shopify";
@@ -1056,12 +1056,22 @@ export default function ArticleClient({
                               }}
                             >
                               {related.image && (
-                                <CardMedia
-                                  component="img"
-                                  height="140"
-                                  image={related.image.url}
-                                  alt={related.image.altText || related.title}
-                                />
+                                <Box
+                                  sx={{
+                                    position: "relative",
+                                    width: "100%",
+                                    height: 140,
+                                  }}
+                                >
+                                  <Image
+                                    src={related.image.url}
+                                    alt={related.image.altText || related.title}
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                                    loading="lazy"
+                                  />
+                                </Box>
                               )}
                               <CardContent>
                                 <Typography

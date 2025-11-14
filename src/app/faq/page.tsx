@@ -6,6 +6,7 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Image from "next/image";
 
 import { faqData } from "@/assets/faqData";
 
@@ -24,12 +25,22 @@ const FAQPage = () => {
       }}
     >
       <Box
-        component="img"
-        src="/images/neko/faq.png"
-        alt="Neko FAQ"
-        width={{ xs: 150, sm: 200, md: 250 }}
-        mb={4}
-      />
+        sx={{
+          position: "relative",
+          width: { xs: 150, sm: 200, md: 250 },
+          height: { xs: 150, sm: 200, md: 250 },
+          mb: 4,
+        }}
+      >
+        <Image
+          src="/images/neko/faq.png"
+          alt="Neko FAQ"
+          fill
+          style={{ objectFit: "contain" }}
+          sizes="(max-width: 768px) 150px, (max-width: 900px) 200px, 250px"
+          loading="lazy"
+        />
+      </Box>
 
       {faqData.map((topic, index) => (
         <Accordion

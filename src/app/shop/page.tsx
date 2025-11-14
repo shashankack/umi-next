@@ -3,6 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import { fetchMultipleCollections } from "@/lib/fetchCollection";
 import { Box, Stack, Typography, Grid } from "@mui/material";
 import ShopClientWrapper from "./ShopClientWrapper";
+import Image from "next/image";
 
 export const metadata = {
   title: "Shop",
@@ -39,22 +40,32 @@ export default async function ShopPage() {
       >
         {/* Background Wave */}
         <Box
-          component="img"
-          src="/images/backgrounds/green_wave.png"
           sx={{
-            width: { xs: 1250, sm: 1500, md: 2000 },
-            transform: "rotate(180deg)",
             position: "absolute",
             top: { xs: -280, sm: -300, md: -450 },
+            left: 0,
+            right: 0,
+            width: { xs: 600, sm: 1500, md: "100%" },
+            height: { xs: 490, sm: 580, md: 770 },
+            transform: "rotate(180deg)",
             zIndex: 0,
           }}
-        />
+        >
+          <Image
+            src="/images/backgrounds/green_wave.png"
+            alt="Green wave background"
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 1250px, (max-width: 900px) 1500px, 2000px"
+            loading="lazy"
+          />
+        </Box>
 
         {/* Marquee */}
         <Box
           sx={{
             position: "absolute",
-            top: { xs: 120, sm: 170, md: 180 },
+            top: { xs: 140, sm: 170, md: 180 },
             width: "100%",
             zIndex: 1,
           }}
@@ -144,25 +155,43 @@ export default async function ShopPage() {
           pb={{ xs: 0, md: 5 }}
         >
           <Box
-            component="img"
-            src="/images/backgrounds/green_wave.png"
             sx={{
-              width: { xs: 1250, sm: 1500, md: 2000 },
               position: "absolute",
               bottom: { xs: -300, sm: -350, md: -520 },
+              left: 0,
+              right: 0,
+              width: { xs: 650, sm: 1500, md: 2000 },
+              height: { xs: 550, sm: 600, md: 850 },
               zIndex: 0,
             }}
-          />
+          >
+            <Image
+              src="/images/backgrounds/green_wave.png"
+              alt="Green wave background"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 1250px, (max-width: 900px) 1500px, 2000px"
+              loading="lazy"
+            />
+          </Box>
 
           <Box
-            component="img"
-            src="/images/neko/hello.png"
             sx={{
-              width: { xs: 120, sm: 135, md: 180 },
               position: "relative",
+              width: { xs: 120, sm: 135, md: 180 },
+              height: { xs: 120, sm: 135, md: 180 },
               zIndex: 20,
             }}
-          />
+          >
+            <Image
+              src="/images/neko/hello.png"
+              alt="Hello neko"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 768px) 120px, (max-width: 900px) 135px, 180px"
+              loading="lazy"
+            />
+          </Box>
 
           <Typography
             variant="body1"

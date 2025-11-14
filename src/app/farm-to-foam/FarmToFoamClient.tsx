@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -116,15 +117,22 @@ export default function FarmToFoamClient() {
               {galleryImages.map((image, index) => (
                 <SwiperSlideComponent key={index}>
                   <Box
-                    component="img"
-                    src={image}
-                    alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
                     sx={{
                       width: "100%",
                       height: "100%",
-                      objectFit: "cover",
+                      position: "relative",
                     }}
-                  />
+                  >
+                    <Image
+                      src={image}
+                      alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="100vw"
+                      priority={index === 0}
+                      loading={index === 0 ? undefined : "lazy"}
+                    />
+                  </Box>
                 </SwiperSlideComponent>
               ))}
             </SwiperComponent>

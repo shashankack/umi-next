@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState, useEffect } from "react";
@@ -77,16 +78,22 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
           <>
             {/* Thumbnail - show when not hovered */}
             <Box
-              component="img"
-              src={thumbnail}
-              loading="lazy"
               sx={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                position: "relative",
                 display: isHovered ? "none" : "block",
               }}
-            />
+            >
+              <Image
+                src={thumbnail!}
+                alt="Instagram post thumbnail"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 50vw, 33vw"
+                loading="lazy"
+              />
+            </Box>
             {/* Video - show and play when hovered, only load when visible */}
             {videoLoaded && (
               <Box
@@ -140,15 +147,21 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
         ) : (
           // Case 3: Only thumbnail available
           <Box
-            component="img"
-            src={thumbnail}
-            loading="lazy"
             sx={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              position: "relative",
             }}
-          />
+          >
+            <Image
+              src={thumbnail!}
+              alt="Instagram post"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 50vw, 33vw"
+              loading="lazy"
+            />
+          </Box>
         )}
       </Box>
     </Link>
@@ -333,32 +346,59 @@ export default function InstagramSection() {
         alignItems="center"
       >
         <Box
-          component="img"
-          src="/images/neko/social_left.png"
-          width={{ xs: 80, md: 200 }}
-          position="absolute"
-          left={{ xs: "2%", md: "5%" }}
-          top={{ xs: -100, md: -170 }}
-        />
+          sx={{
+            width: { xs: 80, md: 200 },
+            height: { xs: 80, md: 200 },
+            position: "absolute",
+            left: { xs: "2%", md: "5%" },
+            top: { xs: -100, md: -170 },
+          }}
+        >
+          <Image
+            src="/images/neko/social_left.png"
+            alt="Neko character left"
+            width={200}
+            height={200}
+            style={{ width: "100%", height: "auto" }}
+            loading="lazy"
+          />
+        </Box>
         <Box
-          component="img"
-          src="/images/neko/social_right.png"
-          width={{ xs: 80, md: 200 }}
-          position="absolute"
-          right={{ xs: "2%", md: "5%" }}
-          top={{ xs: -100, md: -170 }}
-        />
+          sx={{
+            width: { xs: 80, md: 200 },
+            height: { xs: 80, md: 200 },
+            position: "absolute",
+            right: { xs: "2%", md: "5%" },
+            top: { xs: -100, md: -170 },
+          }}
+        >
+          <Image
+            src="/images/neko/social_right.png"
+            alt="Neko character right"
+            width={200}
+            height={200}
+            style={{ width: "100%", height: "auto" }}
+            loading="lazy"
+          />
+        </Box>
 
         <Box
-          component="img"
-          src="/images/neko/hello.png"
           sx={{
             width: { xs: 90, md: 200 },
             position: "relative",
             zIndex: 20,
             mt: { xs: 0, md: 4 },
           }}
-        />
+        >
+          <Image
+            src="/images/neko/hello.png"
+            alt="Hello from Neko"
+            width={200}
+            height={150}
+            style={{ width: "100%", height: "auto" }}
+            loading="lazy"
+          />
+        </Box>
 
         <Typography
           variant="body1"
@@ -387,17 +427,24 @@ export default function InstagramSection() {
           }}
         >
           <Box
-            component="img"
-            src="/images/backgrounds/pink_wave.png"
             sx={{
               position: "absolute",
               left: 0,
               right: 0,
               zIndex: 10,
               width: { xs: "180vw", md: "175%" },
-              objectFit: "cover",
+              height: "100%",
             }}
-          />
+          >
+            <Image
+              src="/images/backgrounds/pink_wave.png"
+              alt="Pink wave background"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 180vw, 175vw"
+              loading="lazy"
+            />
+          </Box>
         </Box>
       </Stack>
     </Stack>

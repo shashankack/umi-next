@@ -18,6 +18,7 @@ import { slugify } from "@/lib/slug";
 import { alpha } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { FiArrowUpRight } from "react-icons/fi";
+import Image from "next/image";
 
 export default function SearchPage() {
   const theme = useTheme();
@@ -185,18 +186,24 @@ export default function SearchPage() {
                 >
                   {p.featuredImage?.url ? (
                     <Box
-                      component="img"
-                      src={p.featuredImage.url}
-                      alt={p.title}
-                      loading="lazy"
                       sx={{
+                        position: "relative",
                         width: "100%",
                         height: "100%",
-                        objectFit: "contain",
-                        transition: "transform .3s ease",
-                        ".MuiCard-root:hover &": { transform: "scale(1.05)" },
                       }}
-                    />
+                    >
+                      <Image
+                        src={p.featuredImage.url}
+                        alt={p.title}
+                        fill
+                        style={{
+                          objectFit: "contain",
+                          transition: "transform .3s ease",
+                        }}
+                        sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
+                        loading="lazy"
+                      />
+                    </Box>
                   ) : (
                     <Box
                       sx={{

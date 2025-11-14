@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get in Touch",
@@ -39,7 +40,7 @@ export default function ContactPage() {
   };
 
   return (
-    <Stack alignItems="center" pt={{ xs: 16, md: 22 }} pb={{ xs: 10, md: 20 }}>
+    <Stack alignItems="center" pt={{ xs: 20, md: 22 }} pb={{ xs: 10, md: 20 }}>
       <Stack
         position="relative"
         width={{ xs: 330, sm: 600, md: 1000 }}
@@ -124,17 +125,25 @@ export default function ContactPage() {
             </Stack>
 
             <Box
-              component="img"
-              src="/images/neko/call.png"
-              alt="Contact Us"
-              width={{ xs: 100, md: 180 }}
               sx={{
+                position: "relative",
+                width: { xs: 100, md:  220 },
+                height: { xs: 100, md: 220 },
                 transform: {
                   xs: "rotateY(180deg) translateX(10%)",
                   md: "translateY(0)",
                 },
               }}
-            />
+            >
+              <Image
+                src="/images/neko/call.png"
+                alt="Contact Us"
+                fill
+                style={{ objectFit: "contain" }}
+                sizes="(max-width: 768px) 100px, 180px"
+                loading="lazy"
+              />
+            </Box>
           </Stack>
         </Stack>
       </Stack>

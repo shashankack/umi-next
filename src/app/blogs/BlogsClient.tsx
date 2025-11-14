@@ -6,7 +6,6 @@ import {
   Container,
   Typography,
   Card,
-  CardMedia,
   CardContent,
   Chip,
   Button,
@@ -16,6 +15,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
+import Image from "next/image";
 import type { Article } from "@/lib/shopify";
 import { blogHelpers } from "@/lib/shopify";
 import { FiClock, FiUser, FiCalendar } from "react-icons/fi";
@@ -193,22 +193,27 @@ export default function BlogsClient({
                       backgroundColor: theme.palette.background.default,
                     }}
                   >
-                    <CardMedia
-                      component="img"
-                      image={
-                        featured.image?.url || "/images/placeholder-blog.png"
-                      }
-                      alt={featured.image?.altText || featured.title}
+                    <Box
                       sx={{
+                        position: "relative",
                         height: "100%",
                         width: "100%",
-                        objectFit: "cover",
-                        filter: "saturate(0.95)",
-                        transform: "scale(1)",
-                        transition: "transform .4s ease",
-                        ".MuiCard-root:hover &": { transform: "scale(1.04)" },
                       }}
-                    />
+                    >
+                      <Image
+                        src={
+                          featured.image?.url || "/images/placeholder-blog.png"
+                        }
+                        alt={featured.image?.altText || featured.title}
+                        fill
+                        style={{
+                          objectFit: "cover",
+                          filter: "saturate(0.95)",
+                        }}
+                        sizes="(max-width: 900px) 100vw, 50vw"
+                        priority
+                      />
+                    </Box>
                     {/* Overlay gradient */}
                     <Box
                       sx={{
@@ -412,22 +417,26 @@ export default function BlogsClient({
                           },
                         }}
                       >
-                        <CardMedia
-                          component="img"
-                          image={
-                            article.image?.url || "/images/placeholder-blog.png"
-                          }
-                          alt={article.image?.altText || article.title}
+                        <Box
                           sx={{
+                            position: "relative",
                             width: { xs: "100%", sm: 180 },
-                            height: { xs: 160, sm: "100%" },
-                            objectFit: "cover",
-                            transition: "transform .35s ease",
-                            ".MuiCard-root:hover &": {
-                              transform: "scale(1.03)",
-                            },
+                            height: { xs: 160, sm: 170 },
+                            flexShrink: 0,
                           }}
-                        />
+                        >
+                          <Image
+                            src={
+                              article.image?.url ||
+                              "/images/placeholder-blog.png"
+                            }
+                            alt={article.image?.altText || article.title}
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="(max-width: 600px) 100vw, 180px"
+                            loading="lazy"
+                          />
+                        </Box>
                         <CardContent
                           sx={{
                             p: 2,
