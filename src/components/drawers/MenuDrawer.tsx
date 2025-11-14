@@ -138,7 +138,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                     sx={{
                       position: "absolute",
                       p: 0.5,
-                      mr: -1,
+                      mr: -2,
                       top: 15,
                       right: { xs: "33%", sm: "40%", md: "35%" },
                     }}

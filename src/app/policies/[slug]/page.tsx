@@ -43,7 +43,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
   return (
     <Stack
       bgcolor="background.default"
-      pt={{ xs: 14, md: 20 }}
+      pt={{ xs: 18, md: 20 }}
       pb={{ xs: 0, md: 4 }}
       spacing={2}
       justifyContent="center"
@@ -55,7 +55,6 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
           fontFamily: "Bricolage",
           color: "primary.main",
           fontWeight: 700,
-          marginBottom: "1rem",
           textAlign: "center",
           fontSize: { xs: "6vw", md: "3vw" },
         }}
@@ -108,7 +107,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
                   },
                   "& ul": {
                     listStyleType: "disc",
-                    paddingLeft: "3rem",
+                    paddingLeft: {xs: 3, md: 6},
                     marginBottom: "1rem",
                   },
                   "& a": {

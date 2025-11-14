@@ -10,7 +10,6 @@ const HeroSection = () => {
   const videoContainerRef = useRef(null);
   const cloudRef = useRef(null);
   const monogramRef = useRef(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const colorAnimationRef = useRef<any>(null);
 
   const [assetsLoaded, setAssetsLoaded] = useState(false);
@@ -21,7 +20,6 @@ const HeroSection = () => {
     const hasPlayed = sessionStorage.getItem("hasPlayed") === "true";
 
     if (hasPlayed) {
-      // Skip intro entirely - show content immediately
       import("gsap").then((gsap) => {
         gsap.default.set(introContainerRef.current, { display: "none" });
         gsap.default.set(videoContainerRef.current, { y: "0vh" });
@@ -29,7 +27,6 @@ const HeroSection = () => {
       return;
     }
 
-    // Immediately disable scroll when intro starts
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
     document.body.style.position = "fixed";
@@ -50,7 +47,7 @@ const HeroSection = () => {
       };
 
       videoElement.addEventListener("canplaythrough", handleCanPlay);
-      
+
       // Fallback: if video doesn't load in 5 seconds, continue anyway
       const fallbackTimer = setTimeout(() => {
         setVideoLoaded(true);
@@ -74,15 +71,8 @@ const HeroSection = () => {
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = "";
-      document.body.style.height = "";
-      document.body.style.position = "";
-      document.body.style.width = "";
-      if (colorAnimationRef.current) {
-        colorAnimationRef.current.kill();
-      }
     };
-  }, [isMobile]);
+  }, [videoLoaded]);
 
   useEffect(() => {
     if (!assetsLoaded) return;
@@ -123,7 +113,7 @@ const HeroSection = () => {
   }, [assetsLoaded]);
 
   useEffect(() => {
-    // Initial animation: logo and monogram fly in
+    // Initial animation: logo and monogram fly in - only run once on mount
     import("gsap").then(({ default: gsap }) => {
       const initialTl = gsap.timeline({
         onComplete: () => {
@@ -152,7 +142,8 @@ const HeroSection = () => {
           ease: "back.out(2)",
         });
     });
-  }, [assetsLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   return (
     <Stack
@@ -208,7 +199,7 @@ const HeroSection = () => {
             src="/images/icons/pink_monogram.png"
             sx={{
               position: "absolute",
-              top: "37%",
+              top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: { xs: "55%", sm: "60%" },

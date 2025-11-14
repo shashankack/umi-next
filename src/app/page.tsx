@@ -3,6 +3,7 @@ import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import dynamic from "next/dynamic";
 
+import InstagramSection from "@/sections/InstagramSection";
 // Lazy load sections below the fold to improve FCP
 // These sections won't block the initial render of HeroSection
 const BestSellersSection = dynamic(
@@ -18,10 +19,6 @@ const AboutSection = dynamic(
     loading: () => null,
   }
 );
-
-const InstagramSection = dynamic(() => import("@/sections/InstagramSection"), {
-  loading: () => null,
-});
 
 const SEOSection = dynamic(() => import("@/sections/SEOSection"), {
   loading: () => null,

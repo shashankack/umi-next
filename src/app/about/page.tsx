@@ -51,8 +51,8 @@ export default function AboutPage() {
         summer breeze warm our mind, body, and soul. But, with the knowledge
         that another wave is waiting to be conquered. Umi Matcha represents a
         symbolic shift within the matcha community. Life is always better with a
-        matcha in hand. I&apos;m thrilled to have Umi become a part of your
-        daily routine because it&apos;s truly the most magical part of mine.
+        matcha in hand. We are thrilled to have Umi become a part of your
+        daily routine because it&apos;s truly the most magical part of ours.
       </Typography>
 
       <Box>

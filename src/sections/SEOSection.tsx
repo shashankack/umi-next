@@ -20,8 +20,8 @@ const SEOSection = () => {
         fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
         fontWeight={800}
       >
-        Discover Umi Matcha: India&apos;s Premier Destination for Authentic Japanese
-        Organic Matcha Powder
+        Discover Umi Matcha: India&apos;s Premier Destination for Authentic
+        Japanese Organic Matcha Powder
       </Typography>
       <Typography
         variant="body1"
@@ -31,10 +31,10 @@ const SEOSection = () => {
       >
         Welcome to Umi Matcha, recognized as the best matcha brand India has to
         offer. Our commitment to delivering the best organic matcha directly
-        from Japan&apos;s renowned tea gardens has made us the trusted choice for
-        matcha enthusiasts across the country. As India&apos;s leading source for
-        premium organic matcha powder, we bring you centuries-old Japanese
-        tradition in every vibrant green sip.
+        from Japan&apos;s renowned tea gardens has made us the trusted choice
+        for matcha enthusiasts across the country. As India&apos;s leading
+        source for premium organic matcha powder, we bring you centuries-old
+        Japanese tradition in every vibrant green sip.
       </Typography>
 
       <Collapse in={expanded} timeout={600} unmountOnExit>
@@ -53,8 +53,8 @@ const SEOSection = () => {
           textAlign="justify"
         >
           At Umi Matcha, we understand that discerning customers seek nothing
-          less than excellence. That&apos;s why we&apos;ve established ourselves as the
-          best matcha in India by sourcing only the finest ceremonial and
+          less than excellence. That&apos;s why we&apos;ve established ourselves
+          as the best matcha in India by sourcing only the finest ceremonial and
           premium grade matcha directly from Japan&apos;s most prestigious tea
           regions. Our commitment to quality has positioned us as the best
           matcha brand India can trust for authentic, pure, and potent matcha
@@ -103,8 +103,8 @@ const SEOSection = () => {
           India. We provide complete transparency in our sourcing, with
           information like harvest and cultivar information, regions and
           processing methods for every product. Our customer satisfaction
-          guarantee ensures that when you choose Umi Matcha, you&apos;re investing in
-          a brand that stands behind its quality claims.
+          guarantee ensures that when you choose Umi Matcha, you&apos;re
+          investing in a brand that stands behind its quality claims.
           <br />
           <br />
           Additionally, our expertise in matcha extends beyond just selling
@@ -125,7 +125,8 @@ const SEOSection = () => {
         </Typography>
         <Typography
           variant="h5"
-          mt={{ xs: 0, md: 3 }}
+          mt={{ xs: 3, md: 3 }}
+          mb={{ xs: -2, md: 0 }}
           fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
           fontWeight={800}
         >
@@ -179,7 +180,7 @@ const SEOSection = () => {
         </Typography>
         <Typography
           variant="h5"
-          mt={{ xs: 0, md: 3 }}
+          mt={{ xs: 3, md: 3 }}
           fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
           fontWeight={800}
         >
@@ -210,19 +211,25 @@ const SEOSection = () => {
             Matcha Scoop (Chashaku)&nbsp;
           </Link>
           &nbsp; allows for precise measurement, and our&nbsp;
-          <Link href="/shop/whisk-holder-kusenaoshi" style={{ color: "#F6A09E" }}>
+          <Link
+            href="/shop/whisk-holder-kusenaoshi"
+            style={{ color: "#F6A09E" }}
+          >
             Whisk Holder (Kusenaoshi)&nbsp;
           </Link>
           &nbsp; helps maintain your whisk&apos;s shape between uses. For those
           seeking convenience, our&nbsp;
-          <Link href="/shop/umi-matcha-essential-kit" style={{ color: "#F6A09E" }}>
+          <Link
+            href="/shop/umi-matcha-essential-kit"
+            style={{ color: "#F6A09E" }}
+          >
             Umi Matcha Essentials Kit&nbsp;
           </Link>
           &nbsp; combines all necessary tools in one comprehensive package.
         </Typography>
         <Typography
           variant="h5"
-          mt={{ xs: 0, md: 3 }}
+          mt={{ xs: 4, md: 3 }}
           fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
           fontWeight={800}
         >
@@ -333,8 +340,8 @@ const SEOSection = () => {
           community building around this ancient wellness tradition.
           <br />
           <br />
-          Whether you&apos;re beginning your matcha journey or seeking to elevate
-          your existing practice, Umi Matcha provides the foundation for
+          Whether you&apos;re beginning your matcha journey or seeking to
+          elevate your existing practice, Umi Matcha provides the foundation for
           transformative wellness experiences. Explore our complete collection
           at our{" "}
           <Link href="/shop" style={{ color: "#F6A09E" }}>

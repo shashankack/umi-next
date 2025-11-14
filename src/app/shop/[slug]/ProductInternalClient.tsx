@@ -194,7 +194,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             {/* Image Section */}
             <Stack
               width={isMobile ? "100%" : "30vw"}
-              height="100%"
               justifyContent="center"
               alignItems="center"
               py={{ xs: 2, sm: 0 }}
@@ -306,7 +305,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             >
               <Typography
                 variant="h6"
-                mt={isMobile ? 0 : -4}
+                mt={isMobile ? -4 : -4}
                 mb={isMobile ? -4 : 0}
                 fontSize={{ xs: "8vw", sm: "2.6vw" }}
                 fontWeight={500}
@@ -359,10 +358,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       mt={
                         isMobile
                           ? parsedData.fullDescription
-                            ? 1
+                            ? -2
                             : 2
                           : parsedData.fullDescription
-                          ? 4
+                          ? 1
                           : 0
                       }
                       mb={isMobile ? 2 : 0}
@@ -602,7 +601,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       variant="h5"
                       sx={{
                         p: isMobile ? "6px 10px" : "10px 30px",
-                        fontWeight: 200,
+                        fontWeight: 500,
                         borderRadius: isMobile ? 1 : 3,
                         textAlign: "justify",
                         color: theme.palette.text.secondary,
@@ -649,7 +648,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       gutterBottom
                       sx={{
                         fontFamily: "Bricolage",
-                        fontWeight: 200,
+                        fontWeight: 500,
                         textAlign: "justify",
                         fontSize: isMobile ? "2.8vw" : "1vw",
                       }}
@@ -668,7 +667,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         textAlign: isMobile ? "justify" : "start",
                         fontSize: isMobile ? "3vw" : "1.2vw",
                         mt: 2,
-                        mb: 2,
+                        mb: { xs: -4, md: 2 },
                       }}
                       dangerouslySetInnerHTML={{ __html: parsedData.summary }}
                     />
@@ -872,13 +871,12 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
           <Box
             width="100%"
             bgcolor={theme.palette.secondary.main}
-            px={isMobile ? 3 : 8}
+            px={{ xs: 2, md: 8 }}
             py={4}
-            mb={4}
           >
             <Typography
               color={theme.palette.background.default}
-              fontSize={26}
+              fontSize={22}
               fontFamily="Bricolage"
               fontWeight={600}
             >
@@ -890,7 +888,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 fontFamily: "Bricolage",
                 fontWeight: 500,
                 textAlign: "justify",
-                fontSize: isMobile ? "3.4vw" : "1vw",
+                fontSize: isMobile ? "3vw" : "1vw",
                 color: theme.palette.background.default,
               }}
             >

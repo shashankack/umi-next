@@ -164,6 +164,7 @@ export default function FarmToFoamClient() {
                   fontWeight: 400,
                   boxShadow: "none",
                   textTransform: "none",
+                  mt: -2,
                 }}
                 onClick={() => setShowMore(true)}
               >
@@ -176,7 +177,6 @@ export default function FarmToFoamClient() {
                 textAlign="justify"
                 sx={{
                   color: "background.default",
-                  mt: 2,
                   transformOrigin: "top center",
                 }}
               >

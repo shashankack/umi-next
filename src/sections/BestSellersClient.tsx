@@ -121,35 +121,32 @@ const BestSellersClient = ({
         overflow="hidden"
         position="relative"
         bgcolor="primary.main"
-        pt={{ xs: 3, md: 8 }}
-        pb={{ xs: 9, md: 14, lg: 15, xl: 18 }}
         px={2}
+        py={4}
       >
         <Typography
           variant="h1"
           sx={{
             textAlign: "center",
-            // textShadow: " 0.323px 2.258px 0 #B5D782",
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
-            whiteSpace: "nowrap",
-            fontSize: { xs: "3.8vw", md: "4vw" },
+            fontSize: { xs: "5vw", md: "3.4vw" },
           }}
         >
           Kinder rituals that fill your cup
         </Typography>
-        <CheckeredGrid bottom={0} left={0} right={0} />
       </Box>
 
       <Stack
-        pt={{ xs: 5, md: 6 }}
+        pt={{ xs: 4, md: 14 }}
         pb={{ xs: 10, sm: 10, md: 20 }}
         px={2}
         spacing={5}
         position="relative"
         zIndex={20}
       >
+        <CheckeredGrid top={0} left={0} right={0} />
         <Typography
           sx={{
             textAlign: "center",
@@ -264,7 +261,7 @@ const BestSellersClient = ({
           width="100%"
           height="100%"
           position="absolute"
-          bottom={{xs: 0 , md: -50}}
+          bottom={{ xs: 0, md: -50 }}
           left={0}
           overflow="hidden"
         >
