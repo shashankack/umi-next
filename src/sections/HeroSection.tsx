@@ -14,6 +14,8 @@ const HeroSection = () => {
   const colorAnimationRef = useRef<any>(null);
 
   const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const hasPlayed = sessionStorage.getItem("hasPlayed") === "true";
@@ -40,11 +42,35 @@ const HeroSection = () => {
       gsap.default.set(monogramRef.current, { scale: 0 });
     });
 
-    // Start animation after a brief delay to let the intro paint
-    // This improves FCP while still showing the intro
+    // Wait for video to be ready to play
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      const handleCanPlay = () => {
+        setVideoLoaded(true);
+      };
+
+      videoElement.addEventListener("canplaythrough", handleCanPlay);
+      
+      // Fallback: if video doesn't load in 5 seconds, continue anyway
+      const fallbackTimer = setTimeout(() => {
+        setVideoLoaded(true);
+      }, 5000);
+
+      return () => {
+        videoElement.removeEventListener("canplaythrough", handleCanPlay);
+        clearTimeout(fallbackTimer);
+      };
+    }
+  }, [isMobile]);
+
+  // Start intro animation once video is loaded
+  useEffect(() => {
+    if (!videoLoaded) return;
+
+    // Brief delay before starting intro animation
     const timer = setTimeout(() => {
       setAssetsLoaded(true);
-    }, 300); // Small delay to ensure intro is visible first
+    }, 300);
 
     return () => {
       clearTimeout(timer);
@@ -207,12 +233,13 @@ const HeroSection = () => {
         }}
       >
         <Box
+          ref={videoRef}
           component="video"
           autoPlay
           loop
           muted
           playsInline
-          preload="none"
+          preload="auto"
           src={"/videos/intro.mp4"}
           sx={{
             width: "100%",
