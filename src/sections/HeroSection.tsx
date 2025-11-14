@@ -10,6 +10,7 @@ const HeroSection = () => {
   const videoContainerRef = useRef(null);
   const cloudRef = useRef(null);
   const monogramRef = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const colorAnimationRef = useRef<any>(null);
 
   const [assetsLoaded, setAssetsLoaded] = useState(false);
