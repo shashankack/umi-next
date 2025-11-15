@@ -92,7 +92,13 @@ export default function SearchDrawer({
         setError("");
         const result = await searchProducts(keyword, 8);
         const arr = Array.isArray(result?.edges)
-          ? result.edges.map((e) => e.node)
+          ? result.edges
+              .map((e) => e.node)
+              // Filter to only show products that actually contain the search keyword
+              .filter((p) => {
+                const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""}`.toLowerCase();
+                return searchText.includes(keyword.toLowerCase());
+              })
           : [];
         setRows(arr);
         if (!arr.length) setError("No products found.");

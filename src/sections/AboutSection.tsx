@@ -106,8 +106,6 @@ export const AboutSection = () => {
             }}
           >
             <Box
-              border={1}
-              borderColor="black"
               width={400}
               mt={7}
               p={2}

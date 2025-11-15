@@ -129,7 +129,12 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                 <ListItemButton
                   component={Link}
                   href={link.path}
-                  onClick={onClose}
+                  onClick={(e) => {
+                    // Trigger loading state
+                    const event = new CustomEvent('routeChangeStart');
+                    window.dispatchEvent(event);
+                    onClose();
+                  }}
                   sx={{
                     fontFamily: "Gliker",
                     textDecoration: "none",
@@ -192,7 +197,12 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                       <Link
                         key={cat.handle}
                         href={`/shop#${cat.handle}`}
-                        onClick={onClose}
+                        onClick={(e) => {
+                          // Trigger loading state
+                          const event = new CustomEvent('routeChangeStart');
+                          window.dispatchEvent(event);
+                          onClose();
+                        }}
                         style={{ textDecoration: "none" }}
                       >
                         <Typography

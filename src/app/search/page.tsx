@@ -79,7 +79,12 @@ export default function SearchPage() {
         const merged = scored
           .sort((a, b) => a.__score - b.__score)
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          .map(({ __score, ...rest }) => rest);
+          .map(({ __score, ...rest }) => rest)
+          // Filter to only include products that actually contain the search term
+          .filter((p) => {
+            const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""}`.toLowerCase();
+            return searchTerms.some((term) => searchText.includes(term.toLowerCase()));
+          });
         if (!cancelled) setResults(merged);
         if (!cancelled && merged.length === 0) setError("No products found.");
       } catch {

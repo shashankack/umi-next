@@ -16,6 +16,9 @@ export default function GlobalLoader() {
   useEffect(() => {
     // Handle navigation start
     const handleStart = () => setLoading(true);
+    
+    // Handle custom event from menu drawer
+    const handleCustomStart = () => setLoading(true);
 
     // Listen for clicks on links
     const handleClick = (e: MouseEvent) => {
@@ -38,9 +41,12 @@ export default function GlobalLoader() {
 
     // Add click listener
     document.addEventListener("click", handleClick);
+    // Add custom event listener for menu drawer
+    window.addEventListener('routeChangeStart', handleCustomStart);
 
     return () => {
       document.removeEventListener("click", handleClick);
+      window.removeEventListener('routeChangeStart', handleCustomStart);
     };
   }, [pathname]);
 

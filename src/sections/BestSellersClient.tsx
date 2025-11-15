@@ -303,8 +303,8 @@ const BestSellersClient = ({
           sx={{
             position: "relative",
             width: { xs: 270, md: 900 },
-            height: { xs: 50, md: 180 },
-            mt: 6,
+            height: { xs: 80, md: 180 },
+            mt: 4,
           }}
         >
           <Image

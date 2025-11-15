@@ -161,7 +161,7 @@ export default async function ShopPage() {
               left: 0,
               right: 0,
               width: { xs: 650, sm: 1500, md: 2000 },
-              height: { xs: 550, sm: 600, md: 850 },
+              height: { xs: 500, sm: 600, md: 850 },
               zIndex: 0,
             }}
           >
@@ -178,8 +178,8 @@ export default async function ShopPage() {
           <Box
             sx={{
               position: "relative",
-              width: { xs: 120, sm: 135, md: 180 },
-              height: { xs: 120, sm: 135, md: 180 },
+              width: { xs: 150, sm: 135, md: 180 },
+              height: { xs: 100, sm: 135, md: 180 },
               zIndex: 20,
             }}
           >
@@ -200,7 +200,7 @@ export default async function ShopPage() {
               mt: { xs: 0, md: 2 },
               mb: { xs: 2, md: 0 },
               color: "background.default",
-              fontSize: { xs: 20, sm: "3vw", md: "1.5vw" },
+              fontSize: { xs: 16, sm: "3vw", md: "1.5vw" },
               fontWeight: 500,
               position: "relative",
               zIndex: 20,

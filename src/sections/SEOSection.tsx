@@ -126,7 +126,7 @@ const SEOSection = () => {
         <Typography
           variant="h5"
           mt={{ xs: 3, md: 3 }}
-          mb={{ xs: -2, md: 0 }}
+          mb={{ xs: -1, md: 0 }}
           fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
           fontWeight={800}
         >
@@ -181,6 +181,7 @@ const SEOSection = () => {
         <Typography
           variant="h5"
           mt={{ xs: 3, md: 3 }}
+          mb={{ xs: 2, md: 0 }}
           fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
           fontWeight={800}
         >
