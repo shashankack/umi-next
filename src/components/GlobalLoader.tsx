@@ -2,16 +2,34 @@
 import { useEffect, useState, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 
 export default function GlobalLoader() {
   const [loading, setLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Preload the cat icon immediately on mount
   useEffect(() => {
+    const img = new window.Image();
+    img.src = "/images/neko/slider_thumb.png";
+    img.onload = () => setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    // Wait for page to be fully rendered before hiding loader
+    const handleComplete = () => {
+      // Small delay to ensure content is painted
+      setTimeout(() => {
+        setLoading(false);
+      }, 100);
+    };
+
     // Reset loading state when navigation completes
-    setLoading(false);
+    handleComplete();
+    
     // Clear any pending timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -81,26 +99,30 @@ export default function GlobalLoader() {
         justifyContent: "center",
         opacity: 1,
         transition: "opacity 0.3s ease-in-out",
-        "& img": {
-          willChange: "transform",
-        },
       }}
     >
       <Box
-        component="img"
-        src="/images/neko/slider_thumb.png"
-        alt="Loading"
         sx={{
+          position: "relative",
           width: { xs: 100, md: 150 },
           height: { xs: 100, md: 150 },
-          objectFit: "contain",
           animation: `spin 2s linear infinite`,
+          willChange: "transform",
           "@keyframes spin": {
             "0%": { transform: "rotate(0deg)" },
             "100%": { transform: "rotate(360deg)" },
           },
         }}
-      />
+      >
+        <Image
+          src="/images/neko/slider_thumb.png"
+          alt="Loading"
+          fill
+          priority
+          sizes="150px"
+          style={{ objectFit: "contain" }}
+        />
+      </Box>
       <Typography
         variant="body1"
         align="center"
