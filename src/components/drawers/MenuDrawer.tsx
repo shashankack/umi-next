@@ -24,6 +24,30 @@ interface MenuDrawerProps {
 
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
   const [showShopSubmenu, setShowShopSubmenu] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = React.useState(false);
+
+  // Preload images when component mounts
+  React.useEffect(() => {
+    const preloadImages = async () => {
+      const images = [
+        '/images/backgrounds/navbar_bg.png',
+        '/images/neko/neko.gif',
+        '/images/icons/beige_logo.png'
+      ];
+      await Promise.all(
+        images.map(src => {
+          return new Promise((resolve) => {
+            const img = new window.Image();
+            img.onload = resolve;
+            img.onerror = resolve; // Still resolve on error
+            img.src = src;
+          });
+        })
+      );
+      setImagesLoaded(true);
+    };
+    preloadImages();
+  }, []);
 
   // Define the shop categories that match your shop page sections
   const shopCategories = [
@@ -39,7 +63,10 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
       onClose={onClose}
       sx={{
         "& .MuiDrawer-paper": {
-          backgroundImage: `url(/images/backgrounds/navbar_bg.png)`,
+          backgroundImage: imagesLoaded 
+            ? `url(/images/backgrounds/navbar_bg.png)` 
+            : 'none',
+          backgroundColor: imagesLoaded ? 'transparent' : '#B5D782',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -50,6 +77,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
           boxShadow: "none",
           position: "relative",
           zIndex: 10,
+          transition: 'background-color 0.3s ease',
         },
       }}
     >
@@ -196,12 +224,25 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                     {shopCategories.map((cat) => (
                       <Link
                         key={cat.handle}
-                        href={`/shop#${cat.handle}`}
+                        href={cat.handle ? `/shop#${cat.handle}` : `/shop`}
                         onClick={(e) => {
-                          // Trigger loading state
-                          const event = new CustomEvent('routeChangeStart');
-                          window.dispatchEvent(event);
                           onClose();
+                          // Don't dispatch event for same-page scrolling
+                          if (window.location.pathname === '/shop' && cat.handle) {
+                            e.preventDefault();
+                            setTimeout(() => {
+                              const element = document.getElementById(cat.handle);
+                              if (element) {
+                                element.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "start",
+                                });
+                              }
+                            }, 300); // Delay to allow drawer to close
+                          } else {
+                            // Trigger loading state for page navigation
+                            window.dispatchEvent(new CustomEvent('routeChangeStart'));
+                          }
                         }}
                         style={{ textDecoration: "none" }}
                       >
@@ -239,6 +280,8 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             width: 160,
             height: 160,
             mx: "auto",
+            opacity: imagesLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease',
           }}
         >
           <Image
@@ -248,6 +291,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             style={{ objectFit: "contain" }}
             sizes="160px"
             unoptimized
+            priority
           />
         </Box>
       </Box>

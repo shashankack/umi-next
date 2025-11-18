@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 
@@ -7,46 +7,59 @@ export default function GlobalLoader() {
   const [loading, setLoading] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Reset loading state when navigation completes
     setLoading(false);
+    // Clear any pending timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
   }, [pathname, searchParams]);
 
   useEffect(() => {
     // Handle navigation start
-    const handleStart = () => setLoading(true);
-    
-    // Handle custom event from menu drawer
-    const handleCustomStart = () => setLoading(true);
+    const handleStart = () => {
+      setLoading(true);
+      // Failsafe: auto-hide loader after 5 seconds
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setLoading(false);
+      }, 5000);
+    };
 
-    // Listen for clicks on links
+    // Listen for custom route change events (from Link clicks, router.push, etc.)
+    window.addEventListener('routeChangeStart', handleStart);
+
+    // Listen for clicks on anchor tags (fallback for direct <a> usage)
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
 
       if (anchor) {
         const href = anchor.getAttribute("href");
+        const currentPath = window.location.pathname;
+        
         // Check if it's an internal link
-        if (
-          href &&
-          href.startsWith("/") &&
-          !href.startsWith("/#") &&
-          href !== pathname
-        ) {
-          handleStart();
+        if (href && href.startsWith("/")) {
+          // Extract path without hash
+          const [linkPath] = href.split("#");
+          
+          // Only show loader for actual page changes, not hash navigation
+          if (linkPath && linkPath !== currentPath && linkPath !== pathname) {
+            handleStart();
+          }
         }
       }
     };
 
-    // Add click listener
-    document.addEventListener("click", handleClick);
-    // Add custom event listener for menu drawer
-    window.addEventListener('routeChangeStart', handleCustomStart);
+    document.addEventListener("click", handleClick, true); // Use capture phase
 
     return () => {
-      document.removeEventListener("click", handleClick);
-      window.removeEventListener('routeChangeStart', handleCustomStart);
+      window.removeEventListener('routeChangeStart', handleStart);
+      document.removeEventListener("click", handleClick, true);
     };
   }, [pathname]);
 
@@ -61,7 +74,7 @@ export default function GlobalLoader() {
         right: 0,
         bottom: 0,
         bgcolor: "#B5D782",
-        zIndex: 9999,
+        zIndex: 10000,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

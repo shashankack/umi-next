@@ -67,7 +67,7 @@ const BestSellersClient = ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let gsap: any = null;
 
-    const start = isMobile ? "top 30%" : "top center";
+    const start = isMobile ? "top 40%" : "top center";
 
     const setup = async () => {
       const gsapMod = await import("gsap");
@@ -219,7 +219,7 @@ const BestSellersClient = ({
         )}
       </Stack>
       <Stack
-        height={{ xs: 480, sm: 300, md: 650 }}
+        height={{ xs: 440, sm: 300, md: 650 }}
         bgcolor="background.default"
         position="relative"
         alignItems="center"

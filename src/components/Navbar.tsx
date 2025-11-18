@@ -208,20 +208,26 @@ export default function Navbar() {
                           setShopAnchorEl(null);
                           // If the item has a direct path, navigate to it
                           if ('path' in item && item.path) {
+                            window.dispatchEvent(new CustomEvent('routeChangeStart'));
                             router.push(item.path);
                             return;
                           }
                           // For items with handle, scroll to the section on /shop page
                           if ('handle' in item && item.handle) {
                             if (pathname === "/shop") {
-                              const el = document.getElementById(item.handle);
-                              if (el) {
-                                el.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "start",
-                                });
-                              }
+                              // Already on shop page, just scroll
+                              setTimeout(() => {
+                                const el = document.getElementById(item.handle);
+                                if (el) {
+                                  el.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                  });
+                                }
+                              }, 100);
                             } else {
+                              // Navigate to shop page with hash
+                              window.dispatchEvent(new CustomEvent('routeChangeStart'));
                               router.push(`/shop#${item.handle}`);
                             }
                           }
@@ -327,6 +333,7 @@ export default function Navbar() {
                         key={item.label}
                         onClick={() => {
                           setMoreAnchorEl(null);
+                          window.dispatchEvent(new CustomEvent('routeChangeStart'));
                           router.push(item.path);
                         }}
                         sx={{

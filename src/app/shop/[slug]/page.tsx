@@ -7,6 +7,7 @@ import {
 } from "@/lib/htmlParsers";
 import { notFound } from "next/navigation";
 import ProductInternalClient from "./ProductInternalClient";
+import { getCanonicalUrl } from "@/lib/seo";
 
 interface Props {
   params: Promise<{
@@ -41,9 +42,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "matcha",
       "Umi Matcha",
     ],
+    alternates: {
+      canonical: getCanonicalUrl(`shop/${slug}`),
+    },
     openGraph: {
       title: pageTitle,
       description: pageDescription,
+      url: getCanonicalUrl(`shop/${slug}`),
+      siteName: "Umi Matcha",
+      locale: "en_US",
       images: image ? [{ url: image }] : [],
       type: "website",
     },

@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, Grid } from "@mui/material";
 import { Metadata } from "next";
 import Image from "next/image";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Brewing Guide - How to Make Matcha",
@@ -14,10 +15,16 @@ export const metadata: Metadata = {
     "brewing matcha tea",
     "matcha instructions",
   ],
+  alternates: {
+    canonical: getCanonicalUrl("brewing"),
+  },
   openGraph: {
     title: "Brewing Guide - How to Make Matcha | Umi Matcha",
     description:
       "Learn how to brew perfect matcha the Umi way. Step-by-step guide for preparing delicious matcha lattes.",
+    url: getCanonicalUrl("brewing"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
     type: "website",
   },
 };

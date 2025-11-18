@@ -4,11 +4,49 @@ import { fetchMultipleCollections } from "@/lib/fetchCollection";
 import { Box, Stack, Typography, Grid } from "@mui/material";
 import ShopClientWrapper from "./ShopClientWrapper";
 import Image from "next/image";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export const metadata = {
-  title: "Shop",
-  description: "Welcome to the shop page",
-  keywords: ["shop", "products", "ecommerce"],
+  title: "Shop Matcha | Premium Ceremonial Matcha & Accessories",
+  description:
+    "Shop premium ceremonial matcha from Wazuka, Japan. Browse our collection of organic matcha powder, traditional whisks, chawan bowls, and authentic Japanese tea accessories. Free shipping on orders over $50.",
+  keywords: [
+    "buy matcha online",
+    "ceremonial matcha shop",
+    "organic matcha powder",
+    "matcha whisk",
+    "matcha bowl",
+    "Japanese tea accessories",
+    "premium matcha",
+    "matcha tea set",
+  ],
+  alternates: {
+    canonical: getCanonicalUrl("shop"),
+  },
+  openGraph: {
+    title: "Shop Matcha | Premium Ceremonial Matcha & Accessories",
+    description:
+      "Shop premium ceremonial matcha from Wazuka, Japan. Browse our collection of organic matcha powder and authentic Japanese tea accessories.",
+    url: getCanonicalUrl("shop"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/og/shop.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Umi Matcha Shop",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shop Matcha | Premium Ceremonial Matcha & Accessories",
+    description:
+      "Shop premium ceremonial matcha from Wazuka, Japan and authentic Japanese tea accessories.",
+    images: ["/images/og/shop.jpg"],
+  },
 };
 
 export const dynamic = "force-dynamic";

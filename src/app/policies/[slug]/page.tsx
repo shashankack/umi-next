@@ -1,6 +1,8 @@
 import { use } from "react";
 import { Stack, Typography } from "@mui/material";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/seo";
 import {
   privacyPolicy,
   termsOfService,
@@ -29,6 +31,39 @@ interface PolicyPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PolicyPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const policyData = policyMap[slug];
+
+  if (!policyData) {
+    return {
+      title: "Policy Not Found",
+    };
+  }
+
+  return {
+    title: `${policyData.title} | Umi Matcha`,
+    description: `Read our ${policyData.title.toLowerCase()}. Last updated: ${policyData.lastUpdated}.`,
+    alternates: {
+      canonical: getCanonicalUrl(`policies/${slug}`),
+    },
+    openGraph: {
+      title: `${policyData.title} | Umi Matcha`,
+      description: `Read our ${policyData.title.toLowerCase()}.`,
+      url: getCanonicalUrl(`policies/${slug}`),
+      siteName: "Umi Matcha",
+      locale: "en_US",
+      type: "website",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 const LegalPolicyPage = ({ params }: PolicyPageProps) => {

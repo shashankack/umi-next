@@ -7,8 +7,43 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/seo";
 
 import { faqData } from "@/assets/faqData";
+
+export const metadata: Metadata = {
+  title: "FAQ - Frequently Asked Questions | Umi Matcha",
+  description:
+    "Find answers to common questions about Umi Matcha, our ceremonial matcha powder, brewing methods, shipping, storage, and health benefits. Get all the information you need about our premium Japanese matcha.",
+  keywords: [
+    "matcha FAQ",
+    "matcha questions",
+    "how to store matcha",
+    "matcha benefits",
+    "matcha shipping",
+    "ceremonial matcha guide",
+    "matcha preparation tips",
+  ],
+  alternates: {
+    canonical: getCanonicalUrl("faq"),
+  },
+  openGraph: {
+    title: "FAQ - Frequently Asked Questions | Umi Matcha",
+    description:
+      "Find answers to common questions about Umi Matcha, our ceremonial matcha powder, brewing methods, and more.",
+    url: getCanonicalUrl("faq"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ - Frequently Asked Questions | Umi Matcha",
+    description:
+      "Find answers to common questions about Umi Matcha and our premium ceremonial matcha.",
+  },
+};
 
 const FAQPage = () => {
   return (

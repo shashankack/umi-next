@@ -1,78 +1,50 @@
-"use client";
-import { Box, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import { useResponsiveImage } from "@/hooks/useResponsiveImage";
+import React from "react";
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/seo";
+import AboutClient from "./AboutClient";
+
+export const metadata: Metadata = {
+  title: "About Umi Matcha | Our Story & Mission",
+  description:
+    "Discover the story behind Umi Matcha. We source premium ceremonial matcha from Wazuka, Japan's premier matcha region, partnering with 300+ year old certified organic tea farms to bring authentic Japanese matcha culture to you.",
+  keywords: [
+    "about Umi Matcha",
+    "matcha company",
+    "Japanese tea culture",
+    "organic matcha farm",
+    "Wazuka matcha region",
+    "ceremonial matcha story",
+    "sustainable tea farming",
+  ],
+  alternates: {
+    canonical: getCanonicalUrl("about"),
+  },
+  openGraph: {
+    title: "About Umi Matcha | Our Story & Mission",
+    description:
+      "Discover the story behind Umi Matcha. We source premium ceremonial matcha from Wazuka, Japan's premier matcha region.",
+    url: getCanonicalUrl("about"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/og/about.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Umi Matcha",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Umi Matcha | Our Story & Mission",
+    description:
+      "Discover the story behind Umi Matcha. We source premium ceremonial matcha from Wazuka, Japan.",
+    images: ["/images/og/about.jpg"],
+  },
+};
 
 export default function AboutPage() {
-  const aboutImageSrc = useResponsiveImage(
-    "/images/backgrounds/about_mobile.png",
-    "/images/backgrounds/about.png"
-  );
-  return (
-    <Stack pt={15} bgcolor="background.default">
-      <Typography
-        variant="h1"
-        sx={{
-          color: "primary.main",
-          textShadow: "0.3px 2px 0 #B5D782",
-          textAlign: "center",
-          fontSize: { xs: "2.4rem", sm: "3rem", md: "4rem" },
-          fontWeight: 700,
-          letterSpacing: 1,
-          mb: 2,
-          mt: { xs: 6, md: 4 },
-        }}
-      >
-        About Us
-      </Typography>
-
-      <Typography
-        variant="body1"
-        sx={{
-          mt: { xs: 2, md: 4 },
-          px: { xs: 2, md: 10 },
-          mb: { xs: 3, md: 5 },
-          fontSize: { xs: "2.6vw", md: "1.2vw" },
-          textAlign: "justify",
-          color: { xs: "#000", md: "#000" },
-        }}
-      >
-        Umi 海 comes from the Japanese word ocean.
-        <br />
-        <br />
-        The concept of Umi is inspired by the famous Japanese painting,
-        &quot;The Great Wave of Kanagawa&quot;. Matcha has been a constant in my
-        life through its highest highs and lowest lows and just like that, the
-        great wave depicts life&apos;s journey. It is a never-ending process
-        where once we conquer our fear and meet our goal, we&apos;ll be met
-        again with other vicious waves, other bigger problems & difficulties.
-        <br />
-        <br />
-        However, our tiredness towards the journey will also have its sweetness
-        when we reach a calm sea, where its wave is gentle, and we can feel the
-        summer breeze warm our mind, body, and soul. But, with the knowledge
-        that another wave is waiting to be conquered. Umi Matcha represents a
-        symbolic shift within the matcha community. Life is always better with a
-        matcha in hand. We are thrilled to have Umi become a part of your daily
-        routine because it&apos;s truly the most magical part of ours.
-      </Typography>
-
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          height: { xs: "30vh", md: "80vh" },
-        }}
-      >
-        <Image
-          src={aboutImageSrc}
-          alt="About"
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="100vw"
-          loading="lazy"
-        />
-      </Box>
-    </Stack>
-  );
+  return <AboutClient />;
 }

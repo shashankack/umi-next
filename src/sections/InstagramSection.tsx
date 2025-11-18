@@ -417,7 +417,7 @@ export default function InstagramSection() {
         </Typography>
 
         <Box
-          height={{ xs: "120%", md: "100%" }}
+          height={{ xs: "120%", md: "150%" }}
           overflow="hidden"
           sx={{
             position: "absolute",
@@ -429,19 +429,20 @@ export default function InstagramSection() {
           <Box
             sx={{
               position: "absolute",
+              bottom: { xs: -300, sm: -350, md: -460 },
               left: 0,
               right: 0,
-              zIndex: 10,
-              width: { xs: "180vw", md: "175%" },
-              height: "100%",
+              width: { xs: 650, sm: 1500, md: 2000 },
+              height: { xs: 500, sm: 600, md: 850 },
+              zIndex: 0,
             }}
           >
             <Image
               src="/images/backgrounds/pink_wave.png"
-              alt="Pink wave background"
+              alt="Green wave background"
               fill
               style={{ objectFit: "cover" }}
-              sizes="(max-width: 768px) 180vw, 175vw"
+              sizes="(max-width: 768px) 1250px, (max-width: 900px) 1500px, 2000px"
               loading="lazy"
             />
           </Box>

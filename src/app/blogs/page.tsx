@@ -2,6 +2,7 @@
 import { getLatestArticles } from "@/lib/shopify";
 import type { Article } from "@/lib/shopify";
 import BlogsClient from "./BlogsClient";
+import { getCanonicalUrl } from "@/lib/seo";
 
 // Force dynamic rendering and always fetch fresh data
 export const dynamic = "force-dynamic";
@@ -22,10 +23,16 @@ export const metadata = {
     "tea ceremonies",
     "matcha health benefits",
   ],
+  alternates: {
+    canonical: getCanonicalUrl("blogs"),
+  },
   openGraph: {
     title: "Matcha Stories - Blog | UMI Matcha",
     description:
       "Discover the world of matcha through curated stories, recipes, and cultural insights.",
+    url: getCanonicalUrl("blogs"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
     type: "website",
     images: [
       {

@@ -7,6 +7,7 @@ import {
 import type { Article } from "@/lib/shopify";
 import type { Metadata } from "next";
 import ArticleClient from "./ArticleClient";
+import { getCanonicalUrl } from "@/lib/seo";
 
 interface ArticlePageProps {
   params: Promise<{
@@ -39,9 +40,15 @@ export async function generateMetadata({
       title: article.seo?.title || article.title,
       description: article.seo?.description || excerpt,
       keywords: article.tags,
+      alternates: {
+        canonical: getCanonicalUrl(`blogs/${blogHandle}/${articleHandle}`),
+      },
       openGraph: {
         title: article.title,
         description: excerpt,
+        url: getCanonicalUrl(`blogs/${blogHandle}/${articleHandle}`),
+        siteName: "Umi Matcha",
+        locale: "en_US",
         type: "article",
         publishedTime: article.publishedAt,
         authors: [blogHelpers.getAuthorName(article)],

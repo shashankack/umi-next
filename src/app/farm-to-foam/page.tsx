@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/seo";
 import FarmToFoamClient from "./FarmToFoamClient";
 
 export const metadata: Metadata = {
@@ -13,9 +14,15 @@ export const metadata: Metadata = {
     "ceremonial matcha production",
     "farm to table matcha",
   ],
+  alternates: {
+    canonical: getCanonicalUrl("farm-to-foam"),
+  },
   openGraph: {
     title: "Farm to Foam - Our Matcha Journey | Umi Matcha",
     description: "Discover the journey of Umi Matcha from organic farms in Wazuka, Japan to your cup.",
+    url: getCanonicalUrl("farm-to-foam"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
     type: "website",
   },
 };

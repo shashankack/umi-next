@@ -1,6 +1,7 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { Metadata } from "next";
 import Image from "next/image";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get in Touch",
@@ -13,10 +14,16 @@ export const metadata: Metadata = {
     "matcha inquiries",
     "matcha support",
   ],
+  alternates: {
+    canonical: getCanonicalUrl("contact"),
+  },
   openGraph: {
     title: "Contact Us - Get in Touch | Umi Matcha",
     description:
       "Your Matcha Moments Matter to us. Contact Umi Matcha for inquiries about our organic Japanese matcha.",
+    url: getCanonicalUrl("contact"),
+    siteName: "Umi Matcha",
+    locale: "en_US",
     type: "website",
   },
 };

@@ -42,8 +42,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%" },
         {
-          duration: 0.6,
-          ease: [0.175, 0.885, 0.32, 1.275],
+          duration: .6,
+          delay: 1,
+          ease: [0.22, 1, 0.36, 1.06], // cubic-bezier for smooth overshoot
           type: "tween",
         }
       );
@@ -53,6 +54,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         scopeMonogram.current,
         { scale: 1, x: "-50%", y: "-50%" },
         {
+          delay: 0.1,
           duration: 0.6,
           ease: [0.175, 0.885, 0.32, 1.475],
           type: "tween",
@@ -139,7 +141,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         <Box
           ref={scopeCloud}
           component={motion.div}
-          initial={{ scale: 6, x: "-50%", y: "-50%" }}
+          initial={{ scale: 26, x: "-50%", y: "-50%" }}
           sx={{
             position: "absolute",
             top: "50%",
