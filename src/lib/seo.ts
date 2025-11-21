@@ -35,7 +35,7 @@ export function getOgImageUrl(imagePath: string): string {
 export const seoDefaults = {
   siteName: "Umi Matcha",
   twitterHandle: "@umimatchashop",
-  defaultImage: "/images/og/default.jpg",
+  defaultImage: "/images/og/default.png",
   locale: "en_US",
   type: "website",
 };

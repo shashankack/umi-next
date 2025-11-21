@@ -33,7 +33,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og/shop.jpg",
+        url: "/images/og/shop.png",
         width: 1200,
         height: 630,
         alt: "Umi Matcha Shop",
@@ -45,7 +45,7 @@ export const metadata = {
     title: "Shop Matcha | Premium Ceremonial Matcha & Accessories",
     description:
       "Shop premium ceremonial matcha from Wazuka, Japan and authentic Japanese tea accessories.",
-    images: ["/images/og/shop.jpg"],
+    images: ["/images/og/shop.png"],
   },
 };
 

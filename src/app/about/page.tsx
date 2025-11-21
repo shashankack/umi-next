@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og/about.jpg",
+        url: "/images/og/about.png",
         width: 1200,
         height: 630,
         alt: "About Umi Matcha",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "About Umi Matcha | Our Story & Mission",
     description:
       "Discover the story behind Umi Matcha. We source premium ceremonial matcha from Wazuka, Japan.",
-    images: ["/images/og/about.jpg"],
+    images: ["/images/og/about.png"],
   },
 };
 

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og/home.jpg",
+        url: "/images/og/home.png",
         width: 1200,
         height: 630,
         alt: "Umi Matcha - Premium Organic Ceremonial Matcha",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Umi Matcha | Premium Organic Ceremonial Matcha from Japan",
     description:
       "Experience the finest ceremonial matcha from Wazuka, Japan. Ethically sourced from 300+ year old certified organic tea farms.",
-    images: ["/images/og/home.jpg"],
+    images: ["/images/og/home.png"],
   },
 };
 // Lazy load sections below the fold to improve FCP
