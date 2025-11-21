@@ -1,6 +1,7 @@
 import HeroSection from "@/sections/HeroSection";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/seo";
@@ -74,6 +75,7 @@ const SEOSection = dynamic(() => import("@/sections/SEOSection"), {
 const page = async () => {
   return (
     <>
+      <Analytics />
       <SpeedInsights />
       <HeroSection />
       <BestSellersSection />
