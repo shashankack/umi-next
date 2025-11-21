@@ -35,6 +35,7 @@ export const AboutSection = () => {
                   src="/images/backgrounds/green_wave.png"
                   alt="Green wave background"
                   fill
+                  sizes="100vw"
                   style={{ objectFit: "cover", zIndex: 400 }}
                   loading="lazy"
                 />
@@ -51,6 +52,7 @@ export const AboutSection = () => {
                 src="/images/about_section.png"
                 alt="About Umi Matcha"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: "cover" }}
                 loading="lazy"
               />
@@ -149,6 +151,7 @@ export const AboutSection = () => {
                   src="/images/founder.png"
                   alt="Umi Matcha Founder"
                   fill
+                  sizes="(max-width: 768px) 200px, 300px"
                   style={{ objectFit: "cover", borderRadius: 32 }}
                   loading="lazy"
                 />
@@ -202,6 +205,7 @@ export const AboutSection = () => {
               src="/images/backgrounds/mobile_about.png"
               alt="About Umi Matcha mobile"
               fill
+              sizes="100vw"
               style={{ objectFit: "cover" }}
               loading="lazy"
             />

@@ -13,6 +13,7 @@ import {
   Snackbar,
   Alert,
   SelectChangeEvent,
+  Skeleton,
 } from "@mui/material";
 import Image from "next/image";
 import { useTheme } from "@mui/material/styles";
@@ -42,6 +43,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const [selectedImage, setSelectedImage] = useState(
     product.images.edges[0]?.node.url || ""
   );
+  const [imageLoading, setImageLoading] = useState(true);
+  const [thumbnailsLoading, setThumbnailsLoading] = useState<Record<number, boolean>>(
+    Object.fromEntries(product.images.edges.map((_, i) => [i, true]))
+  );
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
@@ -60,6 +65,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
   const handleThumbnailClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
+    setImageLoading(true); // Reset loading state when changing image
   };
 
   const handleQuantityChange = (e: SelectChangeEvent<number>) => {
@@ -233,12 +239,34 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       borderRadius: 2,
                     }}
                   >
+                    {imageLoading && (
+                      <Skeleton
+                        variant="rectangular"
+                        width="100%"
+                        height="100%"
+                        animation="wave"
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          borderRadius: 2,
+                          bgcolor: "rgba(181, 215, 130, 0.1)",
+                        }}
+                      />
+                    )}
                     <Image
                       src={selectedImage}
                       alt={product.title}
                       fill
-                      style={{ objectFit: "contain", borderRadius: "8px" }}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{ 
+                        objectFit: "contain", 
+                        borderRadius: "8px",
+                        opacity: imageLoading ? 0 : 1,
+                        transition: "opacity 0.3s ease-in-out"
+                      }}
                       priority
+                      onLoad={() => setImageLoading(false)}
                     />
                   </Box>
                 </Box>
@@ -284,13 +312,34 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         },
                       }}
                     >
+                      {thumbnailsLoading[i] && (
+                        <Skeleton
+                          variant="rectangular"
+                          width="100%"
+                          height="100%"
+                          animation="wave"
+                          sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            borderRadius: 1,
+                            bgcolor: "rgba(181, 215, 130, 0.1)",
+                          }}
+                        />
+                      )}
                       <Image
                         src={image.node.url}
                         alt={`${product.title} - ${i + 1}`}
                         fill
-                        style={{ objectFit: "contain", borderRadius: "4px" }}
+                        style={{ 
+                          objectFit: "contain", 
+                          borderRadius: "4px",
+                          opacity: thumbnailsLoading[i] ? 0 : 1,
+                          transition: "opacity 0.3s ease-in-out"
+                        }}
                         sizes="80px"
                         loading="lazy"
+                        onLoad={() => setThumbnailsLoading(prev => ({ ...prev, [i]: false }))}
                       />
                     </Box>
                   ))}
@@ -320,8 +369,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h6"
                 mt={isMobile ? -4 : -4}
-                mb={isMobile ? -4 : 0}
-                fontSize={{ xs: "8vw", sm: "2.6vw" }}
+                mb={isMobile ? -2 : 0}
+                fontSize={{ xs: "7vw", sm: "2.6vw" }}
                 fontWeight={500}
                 textAlign="start"
                 width="100%"
@@ -584,11 +633,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 {/* Out of Stock or Coming Soon Message */}
 
                 <Stack
-                  mt={isMobile ? 2 : 0}
+                  mt={isMobile ? 1 : 0}
                   direction="row"
                   gap={2}
                   width="100%"
-                  mb={isMobile ? -2 : 0}
                   flexWrap="wrap"
                 >
                   {parsedData.highlightedAttributes.map((attr, index) => (
@@ -597,6 +645,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       variant="h5"
                       sx={{
                         p: isMobile ? "6px 10px" : "10px 30px",
+                        mb: { xs: 1, md: 0 },
                         fontWeight: 200,
                         borderRadius: isMobile ? 1 : 3,
                         textAlign: "justify",
@@ -645,7 +694,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       fontWeight: 500,
                       textAlign: "justify",
                       fontSize: isMobile ? "2.8vw" : "1.2vw",
-                      mt: isMobile ? 0 : 2,
+                      mt: isMobile ? -2 : 2,
                       mb: 2,
                       "& strong": {
                         fontWeight: 900,

@@ -7,6 +7,7 @@ import {
   Collapse,
   useMediaQuery,
   useTheme,
+  Skeleton,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -27,6 +28,9 @@ export default function FarmToFoamClient() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [showMore, setShowMore] = useState(false);
   const [swiperLoaded, setSwiperLoaded] = useState(false);
+  const [imagesLoading, setImagesLoading] = useState<Record<number, boolean>>(
+    {}
+  );
 
   // Load Swiper dynamically
   useEffect(() => {
@@ -42,6 +46,15 @@ export default function FarmToFoamClient() {
 
     loadSwiper();
   }, []);
+
+  // Initialize loading states for all images
+  useEffect(() => {
+    const initialLoadingState = galleryImages.reduce((acc, _, index) => {
+      acc[index] = true;
+      return acc;
+    }, {} as Record<number, boolean>);
+    setImagesLoading(initialLoadingState);
+  }, [isMobile]); // Re-initialize when images change
 
   // Use desktop images if not mobile, else use original images
   const galleryImages = isMobile
@@ -123,14 +136,34 @@ export default function FarmToFoamClient() {
                       position: "relative",
                     }}
                   >
+                    {imagesLoading[index] && (
+                      <Skeleton
+                        variant="rectangular"
+                        width="100%"
+                        height="100%"
+                        animation="wave"
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          bgcolor: "rgba(181, 215, 130, 0.2)",
+                          zIndex: 1,
+                        }}
+                      />
+                    )}
                     <Image
                       src={image}
                       alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
                       fill
-                      style={{ objectFit: "cover" }}
+                      style={{ 
+                        objectFit: "cover",
+                        opacity: imagesLoading[index] ? 0 : 1,
+                        transition: "opacity 0.4s ease-in-out"
+                      }}
                       sizes="100vw"
                       priority={index === 0}
                       loading={index === 0 ? undefined : "lazy"}
+                      onLoad={() => setImagesLoading(prev => ({ ...prev, [index]: false }))}
                     />
                   </Box>
                 </SwiperSlideComponent>

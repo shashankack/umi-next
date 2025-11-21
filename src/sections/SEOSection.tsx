@@ -138,7 +138,7 @@ const SEOSection = () => {
           fontSize={{ xs: 12, md: 16, lg: 20 }}
           textAlign="justify"
         >
-          <Link href="/shop/nakai-first-harvest" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/nakai-first-harvest" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Nakai First Harvest
           </Link>
           <br />
@@ -154,7 +154,7 @@ const SEOSection = () => {
           fontSize={{ xs: 12, md: 16, lg: 20 }}
           textAlign="justify"
         >
-          <Link href="/shop/haru-first-harvest" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/haru-first-harvest" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Haru First Harvest
           </Link>
           <br />
@@ -169,7 +169,7 @@ const SEOSection = () => {
           fontSize={{ xs: 12, md: 16, lg: 20 }}
           textAlign="justify"
         >
-          <Link href="/shop/mixcha-instant-premix" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/mixcha-instant-premix" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Mixcha: Instant Premix
           </Link>
           <br />
@@ -196,11 +196,11 @@ const SEOSection = () => {
           <br />
           Understanding that authentic matcha preparation requires proper tools,
           we offer a complete range of traditional Japanese implements.&nbsp;
-          <Link href="/shop/bowl-chawan" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/bowl-chawan" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Our Matcha Bowl (Chawan)&nbsp;
           </Link>
           provides the perfect vessel for whisking, while the&nbsp;
-          <Link href="/shop/whisk-chasen" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/whisk-chasen" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Matcha Whisk (Chasen)&nbsp;
           </Link>
           &nbsp; ensures proper froth formation essential for ceremonial
@@ -208,13 +208,13 @@ const SEOSection = () => {
           <br />
           <br />
           The&nbsp;
-          <Link href="/shop/scoop-chashaku" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/scoop-chashaku" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Matcha Scoop (Chashaku)&nbsp;
           </Link>
           &nbsp; allows for precise measurement, and our&nbsp;
           <Link
             href="/shop/whisk-holder-kusenaoshi"
-            style={{ color: "#F6A09E" }}
+            style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Whisk Holder (Kusenaoshi)&nbsp;
           </Link>
@@ -222,7 +222,7 @@ const SEOSection = () => {
           seeking convenience, our&nbsp;
           <Link
             href="/shop/umi-matcha-essential-kit"
-            style={{ color: "#F6A09E" }}
+            style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Umi Matcha Essentials Kit&nbsp;
           </Link>
@@ -244,19 +244,19 @@ const SEOSection = () => {
         >
           Our thoughtfully designed gift collections make sharing the Umi Matcha
           experience effortless. The&nbsp;
-          <Link href="/shop/sereni-tea-set" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/sereni-tea-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Sereni Tea Set
           </Link>
           &nbsp; offers an elegant introduction to matcha culture, while
           the&nbsp;
-          <Link href="/shop/whisk-me-away-set" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/whisk-me-away-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Whisk Me Away Set
           </Link>
           &nbsp; provides everything needed for authentic preparation.
           <br />
           <br />
           The{" "}
-          <Link href="/shop/scoop-me-up-set" style={{ color: "#F6A09E" }}>
+          <Link href="/shop/scoop-me-up-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
             Scoop Me Up Set
           </Link>{" "}
           represents exceptional value for newcomers to matcha, combining
@@ -345,7 +345,7 @@ const SEOSection = () => {
           elevate your existing practice, Umi Matcha provides the foundation for
           transformative wellness experiences. Explore our complete collection
           at our{" "}
-          <Link href="/shop" style={{ color: "#F6A09E" }}>
+          <Link href="/shop" style={{ color: "#fd918fff", fontWeight: 800 }}>
             shop
           </Link>{" "}
           and discover why discerning customers throughout India choose Umi

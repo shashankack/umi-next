@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, Skeleton } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState, useEffect } from "react";
 
@@ -17,6 +17,7 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
   // Intersection Observer for lazy loading videos
   useEffect(() => {
@@ -39,6 +40,9 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
   }, [video, videoLoaded]);
 
   const handleMouseEnter = () => {
+    // Only allow hover interaction if video is loaded
+    if (!videoLoaded && video) return;
+    
     setIsHovered(true);
     if (videoRef.current && videoLoaded) {
       videoRef.current.currentTime = 0;
@@ -85,16 +89,49 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
                 display: isHovered ? "none" : "block",
               }}
             >
+              {!thumbnailLoaded && (
+                <Skeleton
+                  variant="rectangular"
+                  width="100%"
+                  height="100%"
+                  animation="wave"
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    bgcolor: "rgba(181, 215, 130, 0.2)",
+                  }}
+                />
+              )}
               <Image
                 src={thumbnail!}
                 alt="Instagram post thumbnail"
                 fill
-                style={{ objectFit: "cover" }}
+                style={{ 
+                  objectFit: "cover",
+                  opacity: thumbnailLoaded ? 1 : 0,
+                  transition: "opacity 0.3s ease-in-out"
+                }}
                 sizes="(max-width: 768px) 50vw, 33vw"
                 loading="lazy"
+                onLoad={() => setThumbnailLoaded(true)}
               />
             </Box>
             {/* Video - show and play when hovered, only load when visible */}
+            {!videoLoaded && isHovered && (
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="100%"
+                animation="wave"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  bgcolor: "rgba(181, 215, 130, 0.2)",
+                }}
+              />
+            )}
             {videoLoaded && (
               <Box
                 component="video"
@@ -235,6 +272,8 @@ export default function InstagramSection() {
           maxWidth: 1400,
           mx: "auto",
           mt: 4,
+          position: "relative",
+          zIndex: 10,
           px: 2,
           gap: 2,
           overflowX: "auto",
@@ -278,7 +317,9 @@ export default function InstagramSection() {
 
       {/* Mobile: Show 2 boxes, other 2 scrollable horizontally */}
       <Box
+        position="relative"
         sx={{
+          zIndex: 10,
           display: { xs: "flex", md: "none" },
           width: "100%",
           mt: 4,
@@ -322,6 +363,8 @@ export default function InstagramSection() {
           target="_blank"
           variant="contained"
           sx={{
+            position: "relative",
+            zIndex: 10,
             fontFamily: "Bricolage",
             color: "background.default",
             bgcolor: "secondary.main",
@@ -339,7 +382,6 @@ export default function InstagramSection() {
 
       <Stack
         height={{ xs: "100%", md: "25vw", lg: "20vw" }}
-        borderColor="primary.main"
         width="100%"
         position="relative"
         justifyContent="center"
@@ -422,6 +464,7 @@ export default function InstagramSection() {
           sx={{
             position: "absolute",
             bottom: { xs: 0, md: -10 },
+            height: { xs: 500, sm: 600, md: 1000 },
             left: 0,
             right: 0,
           }}
@@ -429,11 +472,11 @@ export default function InstagramSection() {
           <Box
             sx={{
               position: "absolute",
-              bottom: { xs: -300, sm: -350, md: -460 },
+              bottom: { xs: -350, sm: -350, md: -610 },
               left: 0,
               right: 0,
-              width: { xs: 650, sm: 1500, md: 2000 },
-              height: { xs: 500, sm: 600, md: 850 },
+              width: { xs: 665, sm: 1500, md: "103%" },
+              height: "100%",
               zIndex: 0,
             }}
           >

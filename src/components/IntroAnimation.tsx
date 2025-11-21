@@ -18,9 +18,11 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
   const [scopeCloud, animateCloud] = useAnimate();
   const [scopeMonogram, animateMonogram] = useAnimate();
   const [scopeNext, animateNext] = useAnimate();
-  
+
   // Check immediately to avoid flash of intro screen
-  const hasPlayed = typeof window !== "undefined" && sessionStorage.getItem("hasPlayed") === "true";
+  const hasPlayed =
+    typeof window !== "undefined" &&
+    sessionStorage.getItem("hasPlayed") === "true";
   const [isComplete, setIsComplete] = useState(hasPlayed);
 
   useEffect(() => {
@@ -40,9 +42,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
       // Cloud stamps down
       await animateCloud(
         scopeCloud.current,
-        { scale: 1, x: "-50%", y: "-50%" },
+        { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
-          duration: .6,
+          duration: 0.6,
           delay: 1,
           ease: [0.22, 1, 0.36, 1.06], // cubic-bezier for smooth overshoot
           type: "tween",
@@ -141,7 +143,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         <Box
           ref={scopeCloud}
           component={motion.div}
-          initial={{ scale: 26, x: "-50%", y: "-50%" }}
+          initial={{ scale: 26, x: "-50%", y: "-50%", opacity: 0 }}
           sx={{
             position: "absolute",
             top: "50%",

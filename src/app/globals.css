@@ -31,6 +31,9 @@
 @font-face {
   font-family: "Bricolage";
   src: url("/fonts/bricolage.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 *::-webkit-scrollbar {
