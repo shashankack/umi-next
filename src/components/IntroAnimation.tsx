@@ -33,19 +33,20 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
       return;
     }
 
-    if (!videoReady) return;
-
     // Lock scroll
     document.body.style.overflow = "hidden";
 
     const runAnimation = async () => {
+      // Initial delay before animation starts
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Cloud stamps down
       await animateCloud(
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
           duration: 0.6,
-          delay: 1,
+          delay: 0,
           ease: [0.22, 1, 0.36, 1.06], // cubic-bezier for smooth overshoot
           type: "tween",
         }
@@ -63,10 +64,30 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         }
       );
 
-      // Pause and wait for video to be ready
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Pulse background colors while waiting for video
+      const colorPulse = async () => {
+        while (!videoReady) {
+          // Pulse to green
+          await animateIntro(
+            scopeIntro.current,
+            { backgroundColor: "#B5D782" },
+            { duration: 0.8, ease: "easeInOut" }
+          );
+          if (!videoReady) {
+            // Pulse back to pink
+            await animateIntro(
+              scopeIntro.current,
+              { backgroundColor: "#F6A09E" },
+              { duration: 0.8, ease: "easeInOut" }
+            );
+          }
+        }
+      };
 
-      // Background color transition (video is ready now)
+      // Start color pulsing
+      await colorPulse();
+
+      // Video is ready, transition to primary color
       await animateIntro(
         scopeIntro.current,
         { backgroundColor: theme.palette.primary.main },

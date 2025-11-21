@@ -45,7 +45,7 @@ const HeroSection = () => {
   return (
     <>
       <IntroAnimation 
-        nextSection={videoSectionRef} 
+        nextSection={videoSectionRef}
         videoReady={videoLoaded}
       />
       
@@ -66,7 +66,7 @@ const HeroSection = () => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           src="/videos/intro.mp4"
           onCanPlay={handleVideoCanPlay}
           onLoadedData={handleVideoCanPlay}
