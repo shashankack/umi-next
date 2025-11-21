@@ -109,8 +109,7 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
                 fill
                 style={{ 
                   objectFit: "cover",
-                  opacity: thumbnailLoaded ? 1 : 0,
-                  transition: "opacity 0.3s ease-in-out"
+                  display: thumbnailLoaded ? "block" : "none"
                 }}
                 sizes="(max-width: 768px) 50vw, 33vw"
                 loading="lazy"

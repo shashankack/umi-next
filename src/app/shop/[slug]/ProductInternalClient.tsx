@@ -13,7 +13,6 @@ import {
   Snackbar,
   Alert,
   SelectChangeEvent,
-  Skeleton,
 } from "@mui/material";
 import Image from "next/image";
 import { useTheme } from "@mui/material/styles";
@@ -43,10 +42,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const [selectedImage, setSelectedImage] = useState(
     product.images.edges[0]?.node.url || ""
   );
-  const [imageLoading, setImageLoading] = useState(true);
-  const [thumbnailsLoading, setThumbnailsLoading] = useState<Record<number, boolean>>(
-    Object.fromEntries(product.images.edges.map((_, i) => [i, true]))
-  );
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
@@ -65,7 +60,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
   const handleThumbnailClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
-    setImageLoading(true); // Reset loading state when changing image
   };
 
   const handleQuantityChange = (e: SelectChangeEvent<number>) => {
@@ -239,21 +233,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       borderRadius: 2,
                     }}
                   >
-                    {imageLoading && (
-                      <Skeleton
-                        variant="rectangular"
-                        width="100%"
-                        height="100%"
-                        animation="wave"
-                        sx={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          borderRadius: 2,
-                          bgcolor: "rgba(181, 215, 130, 0.1)",
-                        }}
-                      />
-                    )}
                     <Image
                       src={selectedImage}
                       alt={product.title}
@@ -261,12 +240,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sizes="(max-width: 768px) 100vw, 50vw"
                       style={{ 
                         objectFit: "contain", 
-                        borderRadius: "8px",
-                        opacity: imageLoading ? 0 : 1,
-                        transition: "opacity 0.3s ease-in-out"
+                        borderRadius: "8px"
                       }}
                       priority
-                      onLoad={() => setImageLoading(false)}
                     />
                   </Box>
                 </Box>
@@ -312,34 +288,16 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         },
                       }}
                     >
-                      {thumbnailsLoading[i] && (
-                        <Skeleton
-                          variant="rectangular"
-                          width="100%"
-                          height="100%"
-                          animation="wave"
-                          sx={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            borderRadius: 1,
-                            bgcolor: "rgba(181, 215, 130, 0.1)",
-                          }}
-                        />
-                      )}
                       <Image
                         src={image.node.url}
                         alt={`${product.title} - ${i + 1}`}
                         fill
                         style={{ 
                           objectFit: "contain", 
-                          borderRadius: "4px",
-                          opacity: thumbnailsLoading[i] ? 0 : 1,
-                          transition: "opacity 0.3s ease-in-out"
+                          borderRadius: "4px"
                         }}
                         sizes="80px"
                         loading="lazy"
-                        onLoad={() => setThumbnailsLoading(prev => ({ ...prev, [i]: false }))}
                       />
                     </Box>
                   ))}
