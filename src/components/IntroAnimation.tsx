@@ -36,9 +36,41 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
     // Lock scroll
     document.body.style.overflow = "hidden";
 
+    // Start preloading resources immediately
+    const preloadResources = () => {
+      // Preload hero video
+      const videoLink = document.createElement('link');
+      videoLink.rel = 'preload';
+      videoLink.as = 'video';
+      videoLink.href = '/videos/intro.mp4';
+      document.head.appendChild(videoLink);
+
+      // Preload critical images
+      const criticalImages = [
+        '/images/vectors/mobile_text.svg',
+        '/images/vectors/text.svg',
+        '/images/neko/surfing.png',
+      ];
+
+      criticalImages.forEach(src => {
+        const img = new window.Image();
+        img.src = src;
+      });
+
+      // Prefetch fonts if not already loaded
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          console.log('Fonts loaded');
+        });
+      }
+    };
+
+    // Start preloading immediately
+    preloadResources();
+
     const runAnimation = async () => {
-      // Initial delay before animation starts
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Initial delay before animation starts - give time for initial resource loading
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
       // Cloud stamps down
       await animateCloud(
@@ -47,7 +79,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         {
           duration: 0.6,
           delay: 0,
-          ease: [0.22, 1, 0.36, 1.06], // cubic-bezier for smooth overshoot
+          ease: [0.22, 1, 0.36, 1.06],
           type: "tween",
         }
       );
@@ -57,7 +89,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         scopeMonogram.current,
         { scale: 1, x: "-50%", y: "-50%" },
         {
-          delay: 0.1,
+          delay: 0,
           duration: 0.6,
           ease: [0.175, 0.885, 0.32, 1.475],
           type: "tween",
@@ -65,33 +97,34 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
       );
 
       // Pulse background colors while waiting for video
-      const colorPulse = async () => {
-        while (!videoReady) {
-          // Pulse to green
+      let pulseCount = 0;
+      const maxPulses = 4; // Allow 4 pulses (4.8 seconds) for resource loading
+      
+      while (!videoReady && pulseCount < maxPulses) {
+        // Pulse to green
+        await animateIntro(
+          scopeIntro.current,
+          { backgroundColor: "#B5D782" },
+          { duration: 0.6, ease: "easeInOut" }
+        );
+        
+        if (!videoReady && pulseCount < maxPulses - 1) {
+          // Pulse back to pink
           await animateIntro(
             scopeIntro.current,
-            { backgroundColor: "#B5D782" },
-            { duration: 0.8, ease: "easeInOut" }
+            { backgroundColor: "#F6A09E" },
+            { duration: 0.6, ease: "easeInOut" }
           );
-          if (!videoReady) {
-            // Pulse back to pink
-            await animateIntro(
-              scopeIntro.current,
-              { backgroundColor: "#F6A09E" },
-              { duration: 0.8, ease: "easeInOut" }
-            );
-          }
         }
-      };
+        
+        pulseCount++;
+      }
 
-      // Start color pulsing
-      await colorPulse();
-
-      // Video is ready, transition to primary color
+      // Video is ready (or timeout), transition to primary color
       await animateIntro(
         scopeIntro.current,
         { backgroundColor: theme.palette.primary.main },
-        { duration: 0.6, ease: [0.455, 0.03, 0.515, 0.955] } // power2.inOut
+        { duration: 0.5, ease: [0.455, 0.03, 0.515, 0.955] }
       );
 
       // Slide intro up and nextSection into view simultaneously
@@ -99,7 +132,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         animateIntro(
           scopeIntro.current,
           { y: "-100vh" },
-          { duration: 1, ease: [0.455, 0.03, 0.515, 0.955] }
+          { duration: 0.9, ease: [0.455, 0.03, 0.515, 0.955] }
         ),
       ];
 
@@ -108,7 +141,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           animateNext(
             nextSection.current,
             { y: 0 },
-            { duration: 1, ease: [0.455, 0.03, 0.515, 0.955] }
+            { duration: 0.9, ease: [0.455, 0.03, 0.515, 0.955] }
           )
         );
       }
@@ -179,6 +212,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
             alt="Umi Cloud Logo"
             fill
             priority
+            fetchPriority="high"
             style={{ objectFit: "contain" }}
             sizes="(max-width: 600px) 40vw, 11vw"
           />
@@ -202,6 +236,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
             width={200}
             height={200}
             priority
+            fetchPriority="high"
             style={{ width: "100%", height: "auto", objectFit: "contain" }}
             sizes="(max-width: 600px) 22vw, 6.6vw"
           />

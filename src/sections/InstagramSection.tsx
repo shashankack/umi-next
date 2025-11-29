@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Box, Button, Stack, Typography, Skeleton } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { CheckeredGrid } from "@/components/CheckeredGrid";
 import { useRef, useState, useEffect } from "react";
 
@@ -17,7 +17,6 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
   // Intersection Observer for lazy loading videos
   useEffect(() => {
@@ -40,9 +39,6 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
   }, [video, videoLoaded]);
 
   const handleMouseEnter = () => {
-    // Only allow hover interaction if video is loaded
-    if (!videoLoaded && video) return;
-    
     setIsHovered(true);
     if (videoRef.current && videoLoaded) {
       videoRef.current.currentTime = 0;
@@ -89,48 +85,18 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
                 display: isHovered ? "none" : "block",
               }}
             >
-              {!thumbnailLoaded && (
-                <Skeleton
-                  variant="rectangular"
-                  width="100%"
-                  height="100%"
-                  animation="wave"
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    bgcolor: "rgba(181, 215, 130, 0.2)",
-                  }}
-                />
-              )}
               <Image
                 src={thumbnail!}
                 alt="Instagram post thumbnail"
                 fill
-                style={{ 
+                style={{
                   objectFit: "cover",
-                  display: thumbnailLoaded ? "block" : "none"
                 }}
                 sizes="(max-width: 768px) 50vw, 33vw"
                 loading="lazy"
-                onLoad={() => setThumbnailLoaded(true)}
               />
             </Box>
             {/* Video - show and play when hovered, only load when visible */}
-            {!videoLoaded && isHovered && (
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height="100%"
-                animation="wave"
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  bgcolor: "rgba(181, 215, 130, 0.2)",
-                }}
-              />
-            )}
             {videoLoaded && (
               <Box
                 component="video"
@@ -151,35 +117,20 @@ function PostItem({ thumbnail, video, href }: PostItemProps) {
           </>
         ) : hasVideo ? (
           // Case 2: Only video available - play on hover, load when visible
-          videoLoaded ? (
-            <Box
-              component="video"
-              ref={videoRef}
-              src={video}
-              muted
-              loop
-              playsInline
-              preload="none"
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          ) : (
-            <Box
-              sx={{
-                width: "100%",
-                height: "100%",
-                bgcolor: "grey.200",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography variant="caption">Loading...</Typography>
-            </Box>
-          )
+          <Box
+            component="video"
+            ref={videoRef}
+            src={video}
+            muted
+            loop
+            playsInline
+            preload="none"
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
         ) : (
           // Case 3: Only thumbnail available
           <Box
@@ -372,7 +323,7 @@ export default function InstagramSection() {
             px: 2,
             py: 0,
             my: { xs: 6, md: 6 },
-            fontSize: { xs: "4vw", md: "1.5rem" },
+            fontSize: { xs: "4vw", sm: "2vw", md: "2vw", lg: "1.3vw" },
           }}
         >
           Follow
@@ -388,8 +339,8 @@ export default function InstagramSection() {
       >
         <Box
           sx={{
-            width: { xs: 80, md: 200 },
-            height: { xs: 80, md: 200 },
+            width: { xs: 80, md: 150, lg: 200 },
+            height: { xs: 80, md: 150, lg: 200 },
             position: "absolute",
             left: { xs: "2%", md: "5%" },
             top: { xs: -100, md: -170 },
@@ -406,8 +357,8 @@ export default function InstagramSection() {
         </Box>
         <Box
           sx={{
-            width: { xs: 80, md: 200 },
-            height: { xs: 80, md: 200 },
+            width: { xs: 80, md: 150, lg: 200 },
+            height: { xs: 80, md: 150, lg: 200 },
             position: "absolute",
             right: { xs: "2%", md: "5%" },
             top: { xs: -100, md: -170 },
@@ -471,10 +422,16 @@ export default function InstagramSection() {
           <Box
             sx={{
               position: "absolute",
-              bottom: { xs: -350, sm: -350, md: -610 },
+              bottom: {
+                xs: "-70%",
+                sm: "-70%",
+                md: "-70%",
+                lg: "-75%",
+                xl: "-62%",
+              },
               left: 0,
               right: 0,
-              width: { xs: 665, sm: 1500, md: "103%" },
+              width: "100%",
               height: "100%",
               zIndex: 0,
             }}

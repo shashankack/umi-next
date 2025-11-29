@@ -106,10 +106,11 @@ export default function BrewingPage() {
         variant="h1"
         sx={{
           position: "relative",
-          fontSize: { xs: 30, sm: 40, md: 70 },
+          fontSize: { xs: 30, sm: 40, md: 60 },
           textAlign: "center",
           zIndex: 2,
           letterSpacing: 1,
+          mt: { xs: 3, md: 6 },
         }}
       >
         Brew it the Umi way

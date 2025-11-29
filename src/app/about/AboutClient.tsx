@@ -16,11 +16,11 @@ export default function AboutClient() {
           color: "primary.main",
           textShadow: "0.3px 2px 0 #B5D782",
           textAlign: "center",
-          fontSize: { xs: "2.4rem", sm: "3rem", md: "4rem" },
+          fontSize: { xs: "2.4rem", sm: "3rem", md: "3vw" },
           fontWeight: 700,
           letterSpacing: 1,
           mb: 2,
-          mt: { xs: 6, md: 4 },
+          mt: { xs: 6, md: 8 },
         }}
       >
         About Us

@@ -81,7 +81,7 @@ const page = async () => {
       <BestSellersSection />
       <AboutSection />
       <InstagramSection />
-      <SEOSection />\
+      <SEOSection />
     </>
   );
 };

@@ -242,6 +242,9 @@ const BestSellersClient = ({
         <Box
           component={motion.img}
           src="/images/neko/surfing.png"
+          alt="Neko surfing"
+          loading="lazy"
+          decoding="async"
           sx={{
             position: "relative",
             zIndex: 20,

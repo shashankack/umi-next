@@ -50,7 +50,7 @@ export default function Footer() {
   const LinkStyles = {
     color: "text.secondary",
     mb: 1,
-    fontSize: { xs: 10, md: "1.6vw", xl: "1.2vw" },
+    fontSize: { xs: 10, md: "1.6vw", lg: "1.2vw", xl: "1.2vw" },
     transition: "all 0.3s ease",
     "&:hover": {
       color: "text.primary",
@@ -63,7 +63,7 @@ export default function Footer() {
     bgcolor: "secondary.main",
     transition: "all 0.3s ease",
     p: { xs: 0.5, md: 1 },
-    "& svg": { fontSize: { xs: 16, md: 30 } },
+    "& svg": { fontSize: { xs: 16, md: 18, lg: 20, xl: 30 } },
 
     "&:hover": {
       bgcolor: "secondary.main",
@@ -74,7 +74,7 @@ export default function Footer() {
   return (
     <>
       <Stack
-        py={{ xs: 2, md: 4 }}
+        py={{ xs: 2, md: 2 }}
         bgcolor="background.default"
         justifyContent="space-around"
         alignItems="stretch"
@@ -85,9 +85,21 @@ export default function Footer() {
           sx={{
             position: "absolute",
             bottom: { xs: "0%", sm: "-10%", md: 0 },
-            right: { xs: "10%", md: "10%" },
-            width: { xs: "18vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" },
-            height: { xs: "18vw", sm: "15vw", md: "12vw", lg: "12vw", xl: "10vw" },
+            right: { xs: "5%", md: "10%" },
+            width: {
+              xs: "18vw",
+              sm: "15vw",
+              md: "12vw",
+              lg: "10vw",
+              xl: "8vw",
+            },
+            height: {
+              xs: "18vw",
+              sm: "15vw",
+              md: "12vw",
+              lg: "10vw",
+              xl: "8vw",
+            },
           }}
         >
           <Image
@@ -104,13 +116,14 @@ export default function Footer() {
         <Stack
           justifyContent="space-between"
           alignItems="center"
-          gap={{ xs: 2, md: 4 }}
+          gap={{ xs: 0, md: 2 }}
         >
           <Box
             sx={{
               position: "relative",
-              width: { xs: 60, md: 100, lg: 140 },
-              height: { xs: 60, md: 100, lg: 140 },
+              width: { xs: 60, md: 100, lg: 100, xl: 120 },
+              height: { xs: 60, md: 100, lg: 100, xl: 120 },
+              mb: -2,
             }}
           >
             <Image
@@ -125,8 +138,8 @@ export default function Footer() {
           <Box
             sx={{
               position: "relative",
-              width: { xs: 60, md: 100, lg: 140 },
-              height: { xs: 60, md: 100, lg: 140 },
+              width: { xs: 60, md: 100, lg: 100, xl: 120 },
+              height: { xs: 60, md: 100, lg: 100, xl: 120 },
             }}
           >
             <Image
@@ -151,7 +164,7 @@ export default function Footer() {
         </Stack>
 
         {/* Center */}
-        <Stack justifyContent="space-between">
+        <Stack justifyContent="start" spacing={{ xs: 2, md: 4 }}>
           <Stack>
             {navLinks[0].map((link, index) => (
               <Link
@@ -165,7 +178,7 @@ export default function Footer() {
               </Link>
             ))}
           </Stack>
-          <Stack direction="row" gap={{ xs: 0.5, md: 2 }}>
+          <Stack direction="row" gap={{ xs: 0.5, md: 1, lg: 1 }}>
             {navLinks[2].map((link, index) => (
               <Link
                 key={index}
@@ -182,23 +195,28 @@ export default function Footer() {
           </Stack>
         </Stack>
 
-        <Stack justifyContent="space-between">
-          <Stack>
-            {navLinks[1].map((link, index) => (
-              <Link
-                key={index}
-                href={link.path}
-                style={{ textDecoration: "none" }}
-              >
-                <Typography variant="body1" sx={LinkStyles}>
-                  {link.title}
-                </Typography>
-              </Link>
-            ))}
-          </Stack>
+        {/* Right */}
+        <Stack>
+          {navLinks[1].map((link, index) => (
+            <Link
+              key={index}
+              href={link.path}
+              style={{ textDecoration: "none" }}
+            >
+              <Typography variant="body1" sx={LinkStyles}>
+                {link.title}
+              </Typography>
+            </Link>
+          ))}
         </Stack>
       </Stack>
-      <Box width="100%" textAlign="center" py={2} bgcolor="background.default">
+      <Box
+        width="100%"
+        textAlign="center"
+        pb={{ xs: 2, md: 2 }}
+        pt={{ xs: 2, md: 0 }}
+        bgcolor="background.default"
+      >
         <Typography
           variant="body1"
           sx={{

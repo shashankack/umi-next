@@ -290,7 +290,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
             fill
             style={{ objectFit: "contain" }}
             sizes="160px"
-            unoptimized
             priority
           />
         </Box>

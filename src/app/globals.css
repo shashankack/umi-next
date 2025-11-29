@@ -17,7 +17,7 @@
   src: url("/fonts/gliker_sb.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -33,7 +33,7 @@
   src: url("/fonts/bricolage.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 *::-webkit-scrollbar {
@@ -44,6 +44,13 @@ body {
   color: #fdf8ce;
   background-color: #b5d782;
   font-family: "Bricolage", "Genty", "Gliker", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
 a {

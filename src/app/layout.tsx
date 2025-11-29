@@ -105,20 +105,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        <link
-          rel="preload"
-          href="/fonts/stolzl.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Genty.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
+        
+        {/* Defer non-critical resources */}
+        <link rel="preconnect" href="https://cdn.shopify.com" />
+        <link rel="dns-prefetch" href="https://cdn.shopify.com" />
+        
+        {/* Preload hero video */}
+        <link rel="preload" href="/videos/intro.mp4" as="video" type="video/mp4" />
+        
+        {/* Preload critical hero images */}
+        <link rel="preload" href="/images/neko/surfing.png" as="image" />
+        <link rel="preload" href="/images/vectors/text.svg" as="image" />
+        <link rel="preload" href="/images/icons/empty_cloud.png" as="image" />
+        <link rel="preload" href="/images/icons/pink_monogram.png" as="image" />
         
         <script
           type="application/ld+json"

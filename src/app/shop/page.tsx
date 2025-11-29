@@ -198,8 +198,8 @@ export default async function ShopPage() {
               bottom: { xs: -300, sm: -350, md: -520 },
               left: 0,
               right: 0,
-              width: { xs: 650, sm: 1500, md: 2000 },
-              height: { xs: 500, sm: 600, md: 850 },
+              width: "100%",
+              height: { xs: 500, sm: 600, md: 800 },
               zIndex: 0,
             }}
           >
@@ -235,7 +235,7 @@ export default async function ShopPage() {
             variant="body1"
             sx={{
               textAlign: "center",
-              mt: { xs: 0, md: 2 },
+              mt: 0,
               mb: { xs: 2, md: 0 },
               color: "background.default",
               fontSize: { xs: 16, sm: "3vw", md: "1.5vw" },
