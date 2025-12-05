@@ -414,7 +414,7 @@ export default function InstagramSection() {
           sx={{
             position: "absolute",
             bottom: { xs: 0, md: -10 },
-            height: { xs: 500, sm: 600, md: 1000 },
+            height: { xs: 500, sm: 600, md: 1100 },
             left: 0,
             right: 0,
           }}
@@ -427,7 +427,7 @@ export default function InstagramSection() {
                 sm: "-70%",
                 md: "-70%",
                 lg: "-75%",
-                xl: "-62%",
+                xl: "-63%",
               },
               left: 0,
               right: 0,
