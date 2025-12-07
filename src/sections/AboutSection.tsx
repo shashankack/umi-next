@@ -119,7 +119,6 @@ export const AboutSection = () => {
                 sx={{
                   position: "absolute",
                   width: 170,
-                  height: 170,
                   top: "-15%",
                   left: "-15%",
                   zIndex: 100,
@@ -135,6 +134,8 @@ export const AboutSection = () => {
                   alt="Founder badge"
                   width={170}
                   height={170}
+                  sizes="170px"
+                  style={{ width: "100%", height: "auto" }}
                   loading="lazy"
                 />
               </Box>

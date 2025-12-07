@@ -38,21 +38,14 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
 
     // Start preloading resources immediately
     const preloadResources = () => {
-      // Preload hero video
-      const videoLink = document.createElement('link');
-      videoLink.rel = 'preload';
-      videoLink.as = 'video';
-      videoLink.href = '/videos/intro.mp4';
-      document.head.appendChild(videoLink);
-
       // Preload critical images
       const criticalImages = [
-        '/images/vectors/mobile_text.svg',
-        '/images/vectors/text.svg',
-        '/images/neko/surfing.png',
+        "/images/vectors/mobile_text.svg",
+        "/images/vectors/text.svg",
+        "/images/neko/surfing.png",
       ];
 
-      criticalImages.forEach(src => {
+      criticalImages.forEach((src) => {
         const img = new window.Image();
         img.src = src;
       });
@@ -60,7 +53,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
       // Prefetch fonts if not already loaded
       if (document.fonts) {
         document.fonts.ready.then(() => {
-          console.log('Fonts loaded');
+          console.log("Fonts loaded");
         });
       }
     };
@@ -69,70 +62,67 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
     preloadResources();
 
     const runAnimation = async () => {
-      // Initial delay before animation starts - give time for initial resource loading
-      await new Promise((resolve) => setTimeout(resolve, 800));
-
-      // Cloud stamps down
+      // Cloud stamps down with smoother easing
       await animateCloud(
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
-          duration: 0.6,
+          duration: 0.8,
           delay: 0,
-          ease: [0.22, 1, 0.36, 1.06],
+          ease: [0.34, 1.56, 0.64, 1], // Smooth spring-like ease
           type: "tween",
         }
       );
 
-      // Monogram scales in with overshoot
+      // Monogram scales in with smooth bounce
       await animateMonogram(
         scopeMonogram.current,
         { scale: 1, x: "-50%", y: "-50%" },
         {
           delay: 0,
-          duration: 0.6,
-          ease: [0.175, 0.885, 0.32, 1.475],
+          duration: 0.8,
+          ease: [0.68, -0.55, 0.265, 1.55], // Smooth elastic ease
           type: "tween",
         }
       );
 
-      // Pulse background colors while waiting for video
+      // Pulse background colors while waiting for video - smoother transitions
       let pulseCount = 0;
-      const maxPulses = 4; // Allow 4 pulses (4.8 seconds) for resource loading
-      
+      const maxPulses = 4;
+
       while (!videoReady && pulseCount < maxPulses) {
-        // Pulse to green
+        // Pulse to green with smoother ease
         await animateIntro(
           scopeIntro.current,
           { backgroundColor: "#B5D782" },
-          { duration: 0.6, ease: "easeInOut" }
+          { duration: 0.8, ease: [0.45, 0, 0.55, 1] } // Smoother cubic-bezier
         );
-        
+
         if (!videoReady && pulseCount < maxPulses - 1) {
           // Pulse back to pink
           await animateIntro(
             scopeIntro.current,
             { backgroundColor: "#F6A09E" },
-            { duration: 0.6, ease: "easeInOut" }
+            { duration: 0.8, ease: [0.45, 0, 0.55, 1] }
           );
         }
-        
+
         pulseCount++;
       }
 
-      // Video is ready (or timeout), transition to primary color
+      // Video is ready, transition to primary color smoothly
       await animateIntro(
         scopeIntro.current,
         { backgroundColor: theme.palette.primary.main },
-        { duration: 0.5, ease: [0.455, 0.03, 0.515, 0.955] }
+        { duration: 0.6, ease: [0.4, 0, 0.2, 1] } // Material Design easing
       );
 
-      // Slide intro up and nextSection into view simultaneously
+      // Slide intro up with buttery smooth transition
       const animations = [
         animateIntro(
           scopeIntro.current,
           { y: "-100vh" },
-          { duration: 0.9, ease: [0.455, 0.03, 0.515, 0.955] }
+          { duration: 1.2, ease: [0.83, 0, 0.17, 1] } // Ultra-smooth power4.out
         ),
       ];
 
@@ -141,7 +131,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           animateNext(
             nextSection.current,
             { y: 0 },
-            { duration: 0.9, ease: [0.455, 0.03, 0.515, 0.955] }
+            { duration: 1.2, ease: [0.83, 0, 0.17, 1] } // Matching smooth ease
           )
         );
       }
@@ -197,7 +187,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         <Box
           ref={scopeCloud}
           component={motion.div}
-          initial={{ scale: 26, x: "-50%", y: "-50%", opacity: 0 }}
+          initial={{ scale: 46, x: "-50%", y: "-50%", opacity: 0 }}
           sx={{
             position: "absolute",
             top: "50%",
@@ -208,7 +198,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           }}
         >
           <Image
-            src="/images/icons/empty_cloud.png"
+            src="/images/icons/empty_cloud.svg"
             alt="Umi Cloud Logo"
             fill
             priority
@@ -231,7 +221,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           }}
         >
           <Image
-            src="/images/icons/pink_monogram.png"
+            src="/images/icons/pink_monogram.svg"
             alt="Umi Monogram"
             width={200}
             height={200}

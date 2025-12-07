@@ -340,7 +340,6 @@ export default function InstagramSection() {
         <Box
           sx={{
             width: { xs: 80, md: 150, lg: 200 },
-            height: { xs: 80, md: 150, lg: 200 },
             position: "absolute",
             left: { xs: "2%", md: "5%" },
             top: { xs: -100, md: -170 },
@@ -351,6 +350,7 @@ export default function InstagramSection() {
             alt="Neko character left"
             width={200}
             height={200}
+            sizes="(max-width: 768px) 80px, (max-width: 1024px) 150px, 200px"
             style={{ width: "100%", height: "auto" }}
             loading="lazy"
           />
@@ -358,7 +358,6 @@ export default function InstagramSection() {
         <Box
           sx={{
             width: { xs: 80, md: 150, lg: 200 },
-            height: { xs: 80, md: 150, lg: 200 },
             position: "absolute",
             right: { xs: "2%", md: "5%" },
             top: { xs: -100, md: -170 },
@@ -369,6 +368,7 @@ export default function InstagramSection() {
             alt="Neko character right"
             width={200}
             height={200}
+            sizes="(max-width: 768px) 80px, (max-width: 1024px) 150px, 200px"
             style={{ width: "100%", height: "auto" }}
             loading="lazy"
           />
@@ -387,6 +387,7 @@ export default function InstagramSection() {
             alt="Hello from Neko"
             width={200}
             height={150}
+            sizes="(max-width: 768px) 90px, 200px"
             style={{ width: "100%", height: "auto" }}
             loading="lazy"
           />

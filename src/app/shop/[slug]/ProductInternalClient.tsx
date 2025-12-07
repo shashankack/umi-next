@@ -238,9 +238,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       alt={product.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      style={{ 
-                        objectFit: "contain", 
-                        borderRadius: "8px"
+                      style={{
+                        objectFit: "contain",
+                        borderRadius: "8px",
                       }}
                       priority
                     />
@@ -292,9 +292,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         src={image.node.url}
                         alt={`${product.title} - ${i + 1}`}
                         fill
-                        style={{ 
-                          objectFit: "contain", 
-                          borderRadius: "4px"
+                        style={{
+                          objectFit: "contain",
+                          borderRadius: "4px",
                         }}
                         sizes="80px"
                         loading="lazy"
@@ -318,7 +318,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 isMobile
                   ? parsedData.fullDescription
                     ? 4
-                    : 2
+                    : 0
                   : parsedData.fullDescription
                   ? 1
                   : 2
@@ -597,26 +597,27 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   width="100%"
                   flexWrap="wrap"
                 >
-                  {parsedData.highlightedAttributes.map((attr, index) => (
-                    <Typography
-                      key={index}
-                      variant="h5"
-                      sx={{
-                        p: isMobile ? "6px 10px" : "10px 30px",
-                        mb: { xs: 1, md: 0 },
-                        fontWeight: 200,
-                        borderRadius: isMobile ? 1 : 3,
-                        textAlign: "justify",
-                        color: theme.palette.text.secondary,
-                        fontFamily: "Bricolage",
-                        backgroundColor: theme.palette.background.default,
-                        fontSize: isMobile ? "3vw" : ".9vw",
-                        boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                      }}
-                    >
-                      {attr}
-                    </Typography>
-                  ))}
+                  {parsedData.attributes.length > 0 &&
+                    parsedData.highlightedAttributes.map((attr, index) => (
+                      <Typography
+                        key={index}
+                        variant="h5"
+                        sx={{
+                          p: isMobile ? "6px 10px" : "10px 30px",
+                          mb: { xs: 2, md: 0 },
+                          fontWeight: 200,
+                          borderRadius: isMobile ? 1 : 3,
+                          textAlign: "justify",
+                          color: theme.palette.text.secondary,
+                          fontFamily: "Bricolage",
+                          backgroundColor: theme.palette.background.default,
+                          fontSize: isMobile ? "3vw" : ".9vw",
+                          boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
+                        }}
+                      >
+                        {attr}
+                      </Typography>
+                    ))}
                   {weightDisplay && (
                     <Typography
                       variant="h5"

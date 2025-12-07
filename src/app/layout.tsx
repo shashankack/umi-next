@@ -4,19 +4,23 @@ import { ReactNode } from "react";
 import ThemeRegistry from "@/components/ThemeRegistry";
 import { CartProvider } from "@/context/CartContext";
 import { Metadata } from "next";
-import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/structuredData";
+import {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+} from "@/lib/structuredData";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalLoader from "@/components/GlobalLoader";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://umimatchashop.com'),
+  metadataBase: new URL("https://umimatchashop.com"),
   title: {
     default: "Umi Matcha - Best Organic Matcha from Japan in India",
     template: "%s | Umi Matcha",
   },
-  description: "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup. Shop ceremonial grade matcha, matcha accessories, and bundles.",
+  description:
+    "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup. Shop ceremonial grade matcha, matcha accessories, and bundles.",
   keywords: [
     "matcha",
     "organic matcha",
@@ -45,7 +49,8 @@ export const metadata: Metadata = {
     url: "https://umimatchashop.com",
     siteName: "Umi Matcha",
     title: "Umi Matcha - Best Organic Matcha from Japan in India",
-    description: "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup.",
+    description:
+      "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup.",
     images: [
       {
         url: "/images/icons/pink_logo.png",
@@ -58,7 +63,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Umi Matcha - Best Organic Matcha from Japan in India",
-    description: "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup.",
+    description:
+      "Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup.",
     images: ["/images/icons/pink_logo.png"],
   },
   robots: {
@@ -67,9 +73,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
@@ -89,7 +95,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#B5D782" />
-        
+
         {/* Preload critical fonts to prevent reloading on every page */}
         <link
           rel="preload"
@@ -105,23 +111,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        
+
         {/* Defer non-critical resources */}
         <link rel="preconnect" href="https://cdn.shopify.com" />
         <link rel="dns-prefetch" href="https://cdn.shopify.com" />
-        
-        {/* Preload hero video */}
-        <link rel="preload" href="/videos/intro.mp4" as="video" type="video/mp4" />
-        
-        {/* Preload critical hero images */}
-        <link rel="preload" href="/images/neko/surfing.png" as="image" />
-        <link rel="preload" href="/images/vectors/text.svg" as="image" />
-        <link rel="preload" href="/images/icons/empty_cloud.png" as="image" />
-        <link rel="preload" href="/images/icons/pink_monogram.png" as="image" />
-        
+
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
         />
         <script
           type="application/ld+json"
