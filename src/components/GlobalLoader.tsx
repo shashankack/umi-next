@@ -11,11 +11,19 @@ export default function GlobalLoader() {
   const searchParams = useSearchParams();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Preload the cat icon immediately on mount
+  // Preload the cat icon on idle
   useEffect(() => {
-    const img = new window.Image();
-    img.src = "/images/neko/slider_thumb.png";
-    img.onload = () => setIsReady(true);
+    const preloadIcon = () => {
+      const img = new window.Image();
+      img.src = "/images/neko/slider_thumb.png";
+      img.onload = () => setIsReady(true);
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadIcon);
+    } else {
+      setTimeout(preloadIcon, 100);
+    }
   }, []);
 
   useEffect(() => {

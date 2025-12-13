@@ -110,7 +110,7 @@ export default function BrewingPage() {
           textAlign: "center",
           zIndex: 2,
           letterSpacing: 1,
-          mt: { xs: 3, md: 6 },
+          mt: { xs: 0, md: 2, lg: 4, xl: 6},
         }}
       >
         Brew it the Umi way
@@ -120,8 +120,8 @@ export default function BrewingPage() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: 100, sm: 150, md: 200 },
-            height: { xs: 100, sm: 150, md: 200 },
+            width: { xs: 100, sm: 120, md: 150 },
+            height: { xs: 100, sm: 120, md: 150 },
             my: { xs: 2, sm: 4, md: 6 },
           }}
         >

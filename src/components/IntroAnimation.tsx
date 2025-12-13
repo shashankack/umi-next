@@ -52,9 +52,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
 
       // Prefetch fonts if not already loaded
       if (document.fonts) {
-        document.fonts.ready.then(() => {
-          console.log("Fonts loaded");
-        });
+        document.fonts.ready.catch(() => {});
       }
     };
 
@@ -62,14 +60,14 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
     preloadResources();
 
     const runAnimation = async () => {
-      // Cloud stamps down with smoother easing
+      // Cloud stamps down with smooth back.out easing - START IMMEDIATELY
       await animateCloud(
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
-          duration: 0.8,
+          duration: 1,
           delay: 0,
-          ease: [0.34, 1.56, 0.64, 1], // Smooth spring-like ease
+          ease: [0.175, 0.885, 0.32, 1.275], // back.out easing
           type: "tween",
         }
       );
@@ -86,24 +84,34 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         }
       );
 
-      // Pulse background colors while waiting for video - smoother transitions
-      let pulseCount = 0;
-      const maxPulses = 4;
+      // Now wait for fonts to be ready while pulsing colors
+      const fontsLoaded = document.fonts ? document.fonts.ready : Promise.resolve();
+      let fontCheckComplete = false;
+      
+      fontsLoaded.then(() => {
+        fontCheckComplete = true;
+      }).catch(() => {
+        fontCheckComplete = true;
+      });
 
-      while (!videoReady && pulseCount < maxPulses) {
-        // Pulse to green with smoother ease
+      // Pulse background colors while waiting for video AND fonts - 2 second duration per color
+      let pulseCount = 0;
+      const maxPulses = 1; // Max 4 seconds wait time (2s green + 2s pink)
+
+      while ((!videoReady || !fontCheckComplete) && pulseCount < maxPulses) {
+        // Pulse to green with smooth ease - 2 second duration
         await animateIntro(
           scopeIntro.current,
           { backgroundColor: "#B5D782" },
-          { duration: 0.8, ease: [0.45, 0, 0.55, 1] } // Smoother cubic-bezier
+          { duration: 1.5, ease: [0.45, 0, 0.55, 1] }
         );
 
-        if (!videoReady && pulseCount < maxPulses - 1) {
-          // Pulse back to pink
+        if ((!videoReady || !fontCheckComplete) && pulseCount < maxPulses - 1) {
+          // Pulse back to pink - 2 second duration
           await animateIntro(
             scopeIntro.current,
             { backgroundColor: "#F6A09E" },
-            { duration: 0.8, ease: [0.45, 0, 0.55, 1] }
+            { duration: 1.5, ease: [0.45, 0, 0.55, 1] }
           );
         }
 
@@ -187,7 +195,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         <Box
           ref={scopeCloud}
           component={motion.div}
-          initial={{ scale: 46, x: "-50%", y: "-50%", opacity: 0 }}
+          initial={{ scale: 4, x: "-50%", y: "-50%", opacity: 0 }}
           sx={{
             position: "absolute",
             top: "50%",

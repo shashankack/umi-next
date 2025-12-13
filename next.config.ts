@@ -22,13 +22,19 @@ const nextConfig: NextConfig = {
 
   // Enable experimental optimizations
   experimental: {
-    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+    optimizePackageImports: ['@mui/material', '@mui/icons-material', 'framer-motion'],
   },
 
   // Compiler options
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
+  // Output configuration for better performance
+  poweredByHeader: false,
+
+  // Compression
+  compress: true,
 
   // Headers for security and SEO
   async headers() {

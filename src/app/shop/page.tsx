@@ -235,17 +235,18 @@ export default async function ShopPage() {
             variant="body1"
             sx={{
               textAlign: "center",
-              mt: 0,
+              mt: { xs: 0, md: -4 },
               mb: { xs: 2, md: 0 },
               color: "background.default",
-              fontSize: { xs: 16, sm: "3vw", md: "1.5vw" },
+              fontSize: { xs: 16, sm: 20, md: 26 },
               fontWeight: 500,
               position: "relative",
               zIndex: 20,
               width: { xs: "50%", sm: "30%", md: "100%" },
             }}
           >
-            Matcha your flow Shipping Pan India
+            Matcha your flow <br />
+            Shipping Pan India
           </Typography>
         </Stack>
       </Stack>

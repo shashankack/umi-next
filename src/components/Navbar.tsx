@@ -46,17 +46,30 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const preloadImage = (src: string) => {
-      try {
-        const img = new Image();
-        img.src = src;
-      } catch {
-        // ignore
-      }
+    // Lazy preload non-critical images using requestIdleCallback
+    const preloadImages = () => {
+      const images = [
+        "/images/backgrounds/navbar_bg.png",
+        "/images/icons/beige_logo.png",
+        "/images/neko/neko.gif"
+      ];
+      
+      images.forEach((src) => {
+        try {
+          const img = new Image();
+          img.loading = "lazy";
+          img.src = src;
+        } catch {
+          // ignore
+        }
+      });
     };
-    preloadImage("/images/backgrounds/navbar_bg.png");
-    preloadImage("/images/icons/beige_logo.png");
-    preloadImage("/images/neko/neko.gif");
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => preloadImages());
+    } else {
+      setTimeout(preloadImages, 1000);
+    }
     const scrollThreshold = isTransparentPage ? 600 : 80;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;

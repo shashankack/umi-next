@@ -17,15 +17,15 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Bricolage",
+    fontFamily: '"Bricolage", "Arial", sans-serif',
 
     h1: {
-      fontFamily: "Gliker",
+      fontFamily: '"Gliker", "Bricolage", "Arial", sans-serif',
       fontWeight: 700,
     },
 
     h6: {
-      fontFamily: "Genty",
+      fontFamily: '"Genty", "Bricolage", "Arial", sans-serif',
     },
   },
 });

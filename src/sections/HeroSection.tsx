@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useState, useCallback, useEffect, useMemo } from "react";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import IntroAnimation from "@/components/IntroAnimation";
@@ -10,7 +10,10 @@ const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Check if intro has already been played
-  const hasPlayed = typeof window !== "undefined" && sessionStorage.getItem("hasPlayed") === "true";
+  const hasPlayed = useMemo(() => 
+    typeof window !== "undefined" && sessionStorage.getItem("hasPlayed") === "true",
+    []
+  );
 
   const handleVideoCanPlay = useCallback(() => {
     setVideoLoaded(true);
@@ -66,7 +69,7 @@ const HeroSection = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           src="/videos/intro.mp4"
           onCanPlay={handleVideoCanPlay}
           onLoadedData={handleVideoCanPlay}
@@ -74,6 +77,7 @@ const HeroSection = () => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            backgroundColor: "#B5D782",
           }}
         />
       </Box>

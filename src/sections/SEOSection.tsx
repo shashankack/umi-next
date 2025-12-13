@@ -17,7 +17,7 @@ const SEOSection = () => {
       <Typography
         variant="h4"
         mt={2}
-        fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+        fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
         fontWeight={800}
       >
         Discover Umi Matcha: India&apos;s Premier Destination for Authentic
@@ -26,7 +26,7 @@ const SEOSection = () => {
       <Typography
         variant="body1"
         mt={2}
-        fontSize={{ xs: 12, md: 16, lg: 20 }}
+        fontSize={{ xs: 12, md: 16, lg: 16 }}
         textAlign="justify"
       >
         Welcome to Umi Matcha, recognized as the best matcha brand India has to
@@ -41,7 +41,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           Why Umi Matcha Represents the Best Matcha in India
@@ -49,7 +49,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           At Umi Matcha, we understand that discerning customers seek nothing
@@ -72,7 +72,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           Why Choose Umi Matcha as the Best Matcha Brand India
@@ -80,7 +80,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           What sets Umi Matcha apart as the best matcha brand India offers is
@@ -117,7 +117,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           Umi Matcha Product Collection: From Ceremonial Excellence to Daily
@@ -127,7 +127,7 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: -1, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
           fontWeight={800}
         >
           Premium Matcha Selections
@@ -135,10 +135,13 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
-          <Link href="/shop/nakai-first-harvest" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/nakai-first-harvest"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Nakai First Harvest
           </Link>
           <br />
@@ -151,10 +154,13 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
-          <Link href="/shop/haru-first-harvest" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/haru-first-harvest"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Haru First Harvest
           </Link>
           <br />
@@ -166,10 +172,13 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
-          <Link href="/shop/mixcha-instant-premix" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/mixcha-instant-premix"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Mixcha: Instant Premix
           </Link>
           <br />
@@ -182,7 +191,7 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: 2, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
           fontWeight={800}
         >
           Traditional Tea Ceremony Essentials
@@ -190,17 +199,23 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={-2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           <br />
           Understanding that authentic matcha preparation requires proper tools,
           we offer a complete range of traditional Japanese implements.&nbsp;
-          <Link href="/shop/bowl-chawan" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/bowl-chawan"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Our Matcha Bowl (Chawan)&nbsp;
           </Link>
           provides the perfect vessel for whisking, while the&nbsp;
-          <Link href="/shop/whisk-chasen" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/whisk-chasen"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Matcha Whisk (Chasen)&nbsp;
           </Link>
           &nbsp; ensures proper froth formation essential for ceremonial
@@ -208,7 +223,10 @@ const SEOSection = () => {
           <br />
           <br />
           The&nbsp;
-          <Link href="/shop/scoop-chashaku" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/scoop-chashaku"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Matcha Scoop (Chashaku)&nbsp;
           </Link>
           &nbsp; allows for precise measurement, and our&nbsp;
@@ -231,7 +249,7 @@ const SEOSection = () => {
         <Typography
           variant="h5"
           mt={{ xs: 4, md: 3 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 26 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
           fontWeight={800}
         >
           Curated Gift Sets
@@ -239,24 +257,33 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           Our thoughtfully designed gift collections make sharing the Umi Matcha
           experience effortless. The&nbsp;
-          <Link href="/shop/sereni-tea-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/sereni-tea-set"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Sereni Tea Set
           </Link>
           &nbsp; offers an elegant introduction to matcha culture, while
           the&nbsp;
-          <Link href="/shop/whisk-me-away-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/whisk-me-away-set"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Whisk Me Away Set
           </Link>
           &nbsp; provides everything needed for authentic preparation.
           <br />
           <br />
           The{" "}
-          <Link href="/shop/scoop-me-up-set" style={{ color: "#fd918fff", fontWeight: 800 }}>
+          <Link
+            href="/shop/scoop-me-up-set"
+            style={{ color: "#fd918fff", fontWeight: 800 }}
+          >
             Scoop Me Up Set
           </Link>{" "}
           represents exceptional value for newcomers to matcha, combining
@@ -266,7 +293,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           The Umi Matcha Difference: Quality, Authenticity, and Trust
@@ -274,7 +301,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           What distinguishes Umi Matcha as the best organic matcha provider in
@@ -294,7 +321,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           Health and Wellness: The Umi Matcha Advantage
@@ -302,7 +329,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           The wellness benefits of our premium matcha extend far beyond
@@ -323,7 +350,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 34 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
           fontWeight={800}
         >
           Experience Authentic Japanese Tradition with Umi Matcha
@@ -331,7 +358,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 20 }}
+          fontSize={{ xs: 12, md: 16, lg: 16 }}
           textAlign="justify"
         >
           At Umi Matcha, we believe that exceptional matcha should be accessible

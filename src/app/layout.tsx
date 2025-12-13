@@ -96,7 +96,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#B5D782" />
 
-        {/* Preload critical fonts to prevent reloading on every page */}
+        {/* Preload ALL fonts to prevent FOUT/FOIT glitches across site */}
         <link
           rel="preload"
           href="/fonts/bricolage.ttf"
@@ -111,6 +111,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/fonts/Genty.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/stolzl.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link rel="preconnect" href="https://vercel.live" crossOrigin="anonymous" />
 
         {/* Defer non-critical resources */}
         <link rel="preconnect" href="https://cdn.shopify.com" />
