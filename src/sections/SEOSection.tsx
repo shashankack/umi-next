@@ -17,7 +17,7 @@ const SEOSection = () => {
       <Typography
         variant="h4"
         mt={2}
-        fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+        fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
         fontWeight={800}
       >
         Discover Umi Matcha: India&apos;s Premier Destination for Authentic
@@ -26,7 +26,7 @@ const SEOSection = () => {
       <Typography
         variant="body1"
         mt={2}
-        fontSize={{ xs: 12, md: 16, lg: 16 }}
+        fontSize={{ xs: 12, md: 16, lg: "1vw" }}
         textAlign="justify"
       >
         Welcome to Umi Matcha, recognized as the best matcha brand India has to
@@ -41,7 +41,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           Why Umi Matcha Represents the Best Matcha in India
@@ -49,7 +49,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           At Umi Matcha, we understand that discerning customers seek nothing
@@ -72,7 +72,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           Why Choose Umi Matcha as the Best Matcha Brand India
@@ -80,7 +80,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           What sets Umi Matcha apart as the best matcha brand India offers is
@@ -117,7 +117,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           Umi Matcha Product Collection: From Ceremonial Excellence to Daily
@@ -127,7 +127,7 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: -1, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
           fontWeight={800}
         >
           Premium Matcha Selections
@@ -135,7 +135,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           <Link
@@ -154,7 +154,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           <Link
@@ -172,7 +172,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           <Link
@@ -191,7 +191,7 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: 2, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
           fontWeight={800}
         >
           Traditional Tea Ceremony Essentials
@@ -199,7 +199,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={-2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           <br />
@@ -249,7 +249,7 @@ const SEOSection = () => {
         <Typography
           variant="h5"
           mt={{ xs: 4, md: 3 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 24 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
           fontWeight={800}
         >
           Curated Gift Sets
@@ -257,7 +257,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           Our thoughtfully designed gift collections make sharing the Umi Matcha
@@ -293,7 +293,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           The Umi Matcha Difference: Quality, Authenticity, and Trust
@@ -301,7 +301,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           What distinguishes Umi Matcha as the best organic matcha provider in
@@ -321,7 +321,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           Health and Wellness: The Umi Matcha Advantage
@@ -329,7 +329,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           The wellness benefits of our premium matcha extend far beyond
@@ -350,7 +350,7 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: 28 }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
           fontWeight={800}
         >
           Experience Authentic Japanese Tradition with Umi Matcha
@@ -358,7 +358,7 @@ const SEOSection = () => {
         <Typography
           variant="body1"
           mt={2}
-          fontSize={{ xs: 12, md: 16, lg: 16 }}
+          fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
           At Umi Matcha, we believe that exceptional matcha should be accessible

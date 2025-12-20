@@ -79,7 +79,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         {
           delay: 0,
           duration: 0.8,
-          ease: [0.68, -0.55, 0.265, 1.55], // Smooth elastic ease
+          ease: [0.68, 1.55, 0.265, 1.55], // Smooth elastic ease
           type: "tween",
         }
       );
