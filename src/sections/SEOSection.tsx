@@ -17,7 +17,8 @@ const SEOSection = () => {
       <Typography
         variant="h4"
         mt={2}
-        fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+        fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+        fontFamily="Bricolage Bold"
         fontWeight={800}
       >
         Discover Umi Matcha: India&apos;s Premier Destination for Authentic
@@ -41,14 +42,15 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           Why Umi Matcha Represents the Best Matcha in India
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -72,14 +74,15 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           Why Choose Umi Matcha as the Best Matcha Brand India
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -117,7 +120,8 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           Umi Matcha Product Collection: From Ceremonial Excellence to Daily
@@ -127,14 +131,14 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: -1, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.1vw" }}
           fontWeight={800}
         >
           Premium Matcha Selections
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -153,7 +157,7 @@ const SEOSection = () => {
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -171,7 +175,7 @@ const SEOSection = () => {
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -191,7 +195,7 @@ const SEOSection = () => {
           variant="h5"
           mt={{ xs: 3, md: 3 }}
           mb={{ xs: 2, md: 0 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.1vw" }}
           fontWeight={800}
         >
           Traditional Tea Ceremony Essentials
@@ -249,14 +253,14 @@ const SEOSection = () => {
         <Typography
           variant="h5"
           mt={{ xs: 4, md: 3 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.4vw" }}
+          fontSize={{ xs: "3.6vw", md: 24, lg: "1.1vw" }}
           fontWeight={800}
         >
           Curated Gift Sets
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -293,14 +297,15 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           The Umi Matcha Difference: Quality, Authenticity, and Trust
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -321,14 +326,15 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           Health and Wellness: The Umi Matcha Advantage
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
@@ -350,14 +356,15 @@ const SEOSection = () => {
         <Typography
           variant="h4"
           mt={{ xs: 3, md: 6 }}
-          fontSize={{ xs: "3.6vw", md: 24, lg: "1.6vw" }}
+          fontSize={{ xs: 12, md: 24, lg: "1.4vw" }}
+          fontFamily="Bricolage Bold"
           fontWeight={800}
         >
           Experience Authentic Japanese Tradition with Umi Matcha
         </Typography>
         <Typography
           variant="body1"
-          mt={2}
+          mt={1}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >

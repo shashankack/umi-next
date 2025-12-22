@@ -65,7 +65,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
-          duration: 1,
+          duration: .8,
           delay: 0,
           ease: [0.175, 0.885, 0.32, 1.275], // back.out easing
           type: "tween",
@@ -78,8 +78,8 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         { scale: 1, x: "-50%", y: "-50%" },
         {
           delay: 0,
-          duration: 0.8,
-          ease: [0.68, 1.55, 0.265, 1.55], // Smooth elastic ease
+          duration: 0.6,
+          ease: [0.68, 1, 0.265, 1.2], // Smooth elastic ease
           type: "tween",
         }
       );

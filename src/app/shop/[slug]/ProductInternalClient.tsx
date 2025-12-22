@@ -898,9 +898,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
           >
             <Typography
               color={theme.palette.background.default}
-              fontSize={22}
+              fontSize={{ xs: "3vw", md: "1.2vw" }}
               fontFamily="Bricolage"
-              fontWeight={600}
+              fontWeight={800}
             >
               Full description:
             </Typography>
@@ -910,7 +910,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 fontFamily: "Bricolage",
                 fontWeight: 500,
                 textAlign: "justify",
-                fontSize: isMobile ? "3vw" : "1vw",
+                fontSize: { xs: "2.8vw", md: "1vw" },
                 color: theme.palette.background.default,
               }}
             >
