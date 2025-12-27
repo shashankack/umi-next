@@ -342,7 +342,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               </Typography>
 
               {parsedData.tagline && (
-                <Box>
+                <Box mt={isMobile ? 2 : 0}>
                   <Typography
                     variant="h5"
                     sx={{
