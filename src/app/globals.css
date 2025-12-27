@@ -9,7 +9,7 @@
   src: url("/fonts/Genty.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
   font-feature-settings: normal;
 }
 
@@ -18,7 +18,7 @@
   src: url("/fonts/gliker_sb.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
   font-feature-settings: normal;
 }
 
@@ -27,7 +27,7 @@
   src: url("/fonts/stolzl.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
   font-feature-settings: normal;
 }
 
@@ -36,7 +36,7 @@
   src: url("/fonts/bricolage.ttf") format("truetype");
   /* font-weight: normal; */
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
   font-feature-settings: normal;
 }
 @font-face {
@@ -44,7 +44,7 @@
   src: url("/fonts/bricolage.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
   font-feature-settings: normal;
 }
 
