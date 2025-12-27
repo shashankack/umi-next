@@ -49,7 +49,7 @@ export const AboutSection = () => {
               }}
             >
               <Image
-                src="/images/about_section.png"
+                src="/images/about_section.webp"
                 alt="About Umi Matcha"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -149,7 +149,7 @@ export const AboutSection = () => {
                 }}
               >
                 <Image
-                  src="/images/founder.png"
+                  src="/images/founder.webp"
                   alt="Umi Matcha Founder"
                   fill
                   sizes="(max-width: 768px) 200px, 300px"
@@ -296,7 +296,7 @@ export const AboutSection = () => {
                 }}
               >
                 <Image
-                  src="/images/founder.png"
+                  src="/images/founder.webp"
                   alt="Umi Matcha Founder"
                   fill
                   style={{ objectFit: "cover", borderRadius: 24 }}

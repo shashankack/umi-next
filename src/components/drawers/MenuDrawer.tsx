@@ -30,7 +30,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
   React.useEffect(() => {
     const preloadImages = async () => {
       const images = [
-        '/images/backgrounds/navbar_bg.png',
+        '/images/backgrounds/navbar_bg.webp',
         '/images/neko/neko.gif',
         '/images/icons/beige_logo.png'
       ];
@@ -64,7 +64,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
       sx={{
         "& .MuiDrawer-paper": {
           backgroundImage: imagesLoaded 
-            ? `url(/images/backgrounds/navbar_bg.png)` 
+            ? `url(/images/backgrounds/navbar_bg.webp)` 
             : 'none',
           backgroundColor: imagesLoaded ? 'transparent' : '#B5D782',
           backgroundSize: "cover",

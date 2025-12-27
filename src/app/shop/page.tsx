@@ -49,8 +49,8 @@ export const metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Enable ISR with 1-hour revalidation for better performance
+export const revalidate = 3600;
 
 const categoriesData = [
   { handle: "matcha", title: "Matcha", limit: 12 },

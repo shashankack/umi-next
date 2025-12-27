@@ -49,7 +49,7 @@ export default function Navbar() {
     // Lazy preload non-critical images using requestIdleCallback
     const preloadImages = () => {
       const images = [
-        "/images/backgrounds/navbar_bg.png",
+        "/images/backgrounds/navbar_bg.webp",
         "/images/icons/beige_logo.png",
         "/images/neko/neko.gif"
       ];

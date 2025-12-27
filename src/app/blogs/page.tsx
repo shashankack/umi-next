@@ -4,9 +4,8 @@ import type { Article } from "@/lib/shopify";
 import BlogsClient from "./BlogsClient";
 import { getCanonicalUrl } from "@/lib/seo";
 
-// Force dynamic rendering and always fetch fresh data
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Enable ISR with 1-hour revalidation for better performance
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Matcha Stories - Blog | UMI Matcha",

@@ -69,7 +69,8 @@ const HeroSection = () => {
           loop
           muted
           playsInline
-          preload="none"
+          preload="metadata"
+          poster="/images/backgrounds/video-poster.jpg"
           src="/videos/intro.mp4"
           onCanPlay={handleVideoCanPlay}
           onLoadedData={handleVideoCanPlay}

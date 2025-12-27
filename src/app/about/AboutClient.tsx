@@ -6,7 +6,7 @@ import { useResponsiveImage } from "@/hooks/useResponsiveImage";
 export default function AboutClient() {
   const aboutImageSrc = useResponsiveImage(
     "/images/backgrounds/about_mobile.png",
-    "/images/backgrounds/about.png"
+    "/images/backgrounds/about.webp"
   );
   return (
     <Stack pt={15} bgcolor="background.default">

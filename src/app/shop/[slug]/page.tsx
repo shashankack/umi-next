@@ -9,6 +9,9 @@ import { notFound } from "next/navigation";
 import ProductInternalClient from "./ProductInternalClient";
 import { getCanonicalUrl } from "@/lib/seo";
 
+// Enable ISR with 30-minute revalidation for product pages
+export const revalidate = 1800;
+
 interface Props {
   params: Promise<{
     slug: string;
@@ -70,6 +73,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : "out of stock",
     },
   };
+}
+
+// Pre-generate pages for popular products at build time
+export async function generateStaticParams() {
+  // Add your best-selling product slugs here
+  // This pre-generates these pages at build time for instant loading
+  return [
+    { slug: 'ceremonial-matcha-30g' },
+    { slug: 'ceremonial-matcha-100g' },
+    { slug: 'matcha-whisk-bamboo-chasen' },
+    { slug: 'matcha-bowl-chawan' },
+    { slug: 'matcha-spoon-chashaku' },
+    { slug: 'umi-starter-kit' },
+    // Add more product slugs as needed
+  ];
 }
 
 export default async function ProductPage({ params }: Props) {

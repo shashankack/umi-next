@@ -60,6 +60,11 @@ const BestSellersClient = ({
 
   // Scroll-linked animation for the wave y value
   useEffect(() => {
+    // Skip animation on mobile or if reduced motion is preferred
+    if (isMobile || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let ctx: any = null;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,9 +72,10 @@ const BestSellersClient = ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let gsap: any = null;
 
-    const start = isMobile ? "top 40%" : "top center";
+    const start = "top center";
 
     const setup = async () => {
+      // Lazy load GSAP only when needed
       const gsapMod = await import("gsap");
       gsap = gsapMod.default || gsapMod;
       const st = await import("gsap/ScrollTrigger");

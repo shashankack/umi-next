@@ -96,24 +96,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#B5D782" />
 
-        {/* Preload ALL fonts to prevent FOUT/FOIT glitches across site */}
+        {/* Preload critical fonts only - defer others */}
         <link
           rel="preload"
           href="/fonts/bricolage.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/gliker_sb.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Genty.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"

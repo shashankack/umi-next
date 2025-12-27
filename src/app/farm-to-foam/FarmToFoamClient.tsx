@@ -46,14 +46,14 @@ export default function FarmToFoamClient() {
   // Use desktop images if not mobile, else use original images
   const galleryImages = isMobile
     ? [
-        "/images/matcha-gallery/image_1.png",
+        "/images/matcha-gallery/image_1.webp",
         "/images/matcha-gallery/image_2.png",
         "/images/matcha-gallery/image_3.png",
-        "/images/matcha-gallery/image_4.png",
+        "/images/matcha-gallery/image_4.webp",
         "/images/matcha-gallery/image_5.png",
-        "/images/matcha-gallery/image_6.png",
-        "/images/matcha-gallery/image_7.png",
-        "/images/matcha-gallery/image_8.png",
+        "/images/matcha-gallery/image_6.webp",
+        "/images/matcha-gallery/image_7.webp",
+        "/images/matcha-gallery/image_8.webp",
       ]
     : [
         "/images/matcha-gallery/desktop/image1.webp",
