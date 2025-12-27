@@ -314,20 +314,12 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               justifyContent="start"
               pt={3}
               px={{ xs: 1, sm: 0 }}
-              gap={
-                isMobile
-                  ? parsedData.fullDescription
-                    ? 4
-                    : 0
-                  : parsedData.fullDescription
-                  ? 1
-                  : 2
-              }
+              gap={isMobile ? 0 : 2}
             >
               <Typography
                 variant="h6"
                 mt={isMobile ? -4 : -4}
-                mb={isMobile ? -2 : 0}
+                // mb={isMobile ? -2 : 0}
                 fontSize={{ xs: "7vw", sm: "2.6vw" }}
                 fontWeight={500}
                 textAlign="start"
@@ -350,7 +342,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       fontWeight: 700,
                       textAlign: "justify",
                       fontSize: isMobile ? "3.4vw" : "1.2vw",
-                      lineHeight: isMobile ? 1.3 : 0.8,
+                      lineHeight: isMobile ? 1.3 : 1.4,
                     }}
                     dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
                   />
@@ -359,15 +351,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
               <Stack
                 mt={isMobile ? 0 : 0}
-                gap={
-                  isMobile
-                    ? parsedData.fullDescription
-                      ? 0
-                      : 2
-                    : parsedData.fullDescription
-                    ? 2
-                    : 3
-                }
+                gap={isMobile ? 0 : 2}
                 mb={isMobile ? 2 : 0}
                 width="100%"
               >
@@ -376,15 +360,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     <Typography
                       variant="body1"
                       fontWeight={800}
-                      mt={
-                        isMobile
-                          ? parsedData.fullDescription
-                            ? -2
-                            : 2
-                          : parsedData.fullDescription
-                          ? 1
-                          : 0
-                      }
+                      mt={isMobile ? 0 : 0}
                       mb={isMobile ? 2 : 0}
                       sx={{ fontSize: isMobile ? "4vw" : "1.6vw" }}
                     >

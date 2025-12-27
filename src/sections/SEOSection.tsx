@@ -138,7 +138,7 @@ const SEOSection = () => {
         </Typography>
         <Typography
           variant="body1"
-          mt={1}
+          mt={2}
           fontSize={{ xs: 12, md: 16, lg: "1vw" }}
           textAlign="justify"
         >
