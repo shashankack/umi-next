@@ -60,8 +60,8 @@ const BestSellersClient = ({
 
   // Scroll-linked animation for the wave y value
   useEffect(() => {
-    // Skip animation on mobile or if reduced motion is preferred
-    if (isMobile || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Skip animation only if reduced motion is preferred
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
 
@@ -72,7 +72,7 @@ const BestSellersClient = ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let gsap: any = null;
 
-    const start = "top center";
+    const start = isMobile ? "top 40%" : "top center";
 
     const setup = async () => {
       // Lazy load GSAP only when needed
