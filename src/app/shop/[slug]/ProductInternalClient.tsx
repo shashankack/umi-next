@@ -319,7 +319,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h6"
                 mt={isMobile ? -4 : -4}
-                // mb={isMobile ? -2 : 0}
                 fontSize={{ xs: "7vw", sm: "2.6vw" }}
                 fontWeight={500}
                 textAlign="start"
@@ -334,34 +333,29 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               </Typography>
 
               {parsedData.tagline && (
-                <Box mt={isMobile ? 2 : 0}>
+                <Box mt={isMobile ? 1 : 0}>
                   <Typography
                     variant="h5"
                     sx={{
                       fontFamily: "Bricolage",
-                      fontWeight: 700,
+                      fontWeight: 600,
                       textAlign: "justify",
-                      fontSize: isMobile ? "3.4vw" : "1.2vw",
-                      lineHeight: isMobile ? 1.3 : 1.4,
+                      fontSize: isMobile ? "3.2vw" : "1.2vw",
+                      lineHeight: isMobile ? 0.8 : 1,
                     }}
                     dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
                   />
                 </Box>
               )}
 
-              <Stack
-                mt={isMobile ? 0 : 0}
-                gap={isMobile ? 0 : 2}
-                mb={isMobile ? 2 : 0}
-                width="100%"
-              >
-                <Stack>
+              <Stack mb={isMobile ? 4 : 0} gap={2} width="100%">
+                {/* Cart Button and  Dropdown */}
+                <Stack gap={{ xs: 2, md: 4 }}>
                   {selectedVariant && (
                     <Typography
                       variant="body1"
                       fontWeight={800}
-                      mt={isMobile ? 0 : 0}
-                      mb={isMobile ? 2 : 0}
+                      mt={{ xs: 2, md: 3 }}
                       sx={{ fontSize: isMobile ? "4vw" : "1.6vw" }}
                     >
                       {isComingSoon ? (
@@ -450,129 +444,123 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       ))}
                     </Select>
                   )}
-                </Stack>
 
-                <Stack
-                  width="100%"
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="start"
-                  gap={2}
-                >
-                  {!isComingSoon && !isOutOfStock && (
-                    <Select
-                      value={quantity}
-                      onChange={handleQuantityChange}
-                      size="small"
-                      displayEmpty
-                      sx={{
-                        backgroundColor: theme.palette.background.default,
-                        color: theme.palette.text.secondary,
-                        borderRadius: 2,
-                        boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                        fontFamily: "Bricolage",
-                        fontWeight: 500,
-                        fontSize: isMobile ? "0.7rem" : "0.9vw",
-                        minWidth: 80,
-                        "& .MuiSelect-icon": {
+                  <Stack
+                    width="100%"
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="start"
+                    gap={2}
+                  >
+                    {!isComingSoon && !isOutOfStock && (
+                      <Select
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                        size="small"
+                        displayEmpty
+                        sx={{
+                          backgroundColor: theme.palette.background.default,
                           color: theme.palette.text.secondary,
-                        },
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "none",
-                        },
-                        "&:hover": {
-                          backgroundColor: theme.palette.text.secondary,
-                          color: theme.palette.background.default,
+                          borderRadius: 2,
+                          boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
+                          fontFamily: "Bricolage",
+                          fontWeight: 500,
+                          fontSize: isMobile ? "0.7rem" : "0.9vw",
+                          minWidth: 80,
                           "& .MuiSelect-icon": {
-                            color: theme.palette.background.default,
-                          },
-                        },
-                      }}
-                      MenuProps={{
-                        PaperProps: {
-                          sx: {
-                            mt: 1,
-                            backgroundColor: theme.palette.background.default,
                             color: theme.palette.text.secondary,
-                            boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
-                            borderRadius: 2,
-                            "& .MuiMenuItem-root": {
-                              fontFamily: "Bricolage",
-                              fontSize: isMobile ? "3.5vw" : "0.9vw",
-                              "&:hover": {
-                                backgroundColor: theme.palette.text.secondary,
-                                color: theme.palette.background.default,
-                              },
-                              "&.Mui-selected": {
-                                backgroundColor: theme.palette.text.secondary,
-                                color: theme.palette.background.default,
+                          },
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "none",
+                          },
+                          "&:hover": {
+                            backgroundColor: theme.palette.text.secondary,
+                            color: theme.palette.background.default,
+                            "& .MuiSelect-icon": {
+                              color: theme.palette.background.default,
+                            },
+                          },
+                        }}
+                        MenuProps={{
+                          PaperProps: {
+                            sx: {
+                              mt: 1,
+                              backgroundColor: theme.palette.background.default,
+                              color: theme.palette.text.secondary,
+                              boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
+                              borderRadius: 2,
+                              "& .MuiMenuItem-root": {
+                                fontFamily: "Bricolage",
+                                fontSize: isMobile ? "3.5vw" : "0.9vw",
+                                "&:hover": {
+                                  backgroundColor: theme.palette.text.secondary,
+                                  color: theme.palette.background.default,
+                                },
+                                "&.Mui-selected": {
+                                  backgroundColor: theme.palette.text.secondary,
+                                  color: theme.palette.background.default,
+                                },
                               },
                             },
                           },
+                        }}
+                      >
+                        {[...Array(10).keys()].map((i) => (
+                          <MenuItem key={i + 1} value={i + 1}>
+                            {i + 1}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    )}
+
+                    <Button
+                      onClick={handleAddToCart}
+                      variant="contained"
+                      disabled={
+                        !selectedVariant ||
+                        isLoading ||
+                        isComingSoon ||
+                        isOutOfStock
+                      }
+                      fullWidth={isMobile}
+                      sx={{
+                        fontFamily: "Bricolage",
+                        fontWeight: 400,
+                        textAlign: "justify",
+                        fontSize: isMobile ? "0.7rem" : "1rem",
+                        backgroundColor: theme.palette.background.default,
+                        color: theme.palette.text.secondary,
+                        boxShadow: `4px  4px 0px ${theme.palette.text.secondary}`,
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: theme.palette.text.secondary,
+                          color: theme.palette.background.default,
+                          boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
+                        },
+                        "&:disabled": {
+                          backgroundColor: "grey.400",
+                          color: "grey.600",
+                          boxShadow: `4px 4px 0px grey.500`,
                         },
                       }}
+                      endIcon={
+                        !isComingSoon && !isOutOfStock ? (
+                          <FaShoppingCart />
+                        ) : null
+                      }
                     >
-                      {[...Array(10).keys()].map((i) => (
-                        <MenuItem key={i + 1} value={i + 1}>
-                          {i + 1}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-
-                  <Button
-                    onClick={handleAddToCart}
-                    variant="contained"
-                    disabled={
-                      !selectedVariant ||
-                      isLoading ||
-                      isComingSoon ||
-                      isOutOfStock
-                    }
-                    fullWidth={isMobile}
-                    sx={{
-                      fontFamily: "Bricolage",
-                      fontWeight: 400,
-                      textAlign: "justify",
-                      fontSize: isMobile ? "0.7rem" : "1rem",
-                      backgroundColor: theme.palette.background.default,
-                      color: theme.palette.text.secondary,
-                      boxShadow: `4px  4px 0px ${theme.palette.text.secondary}`,
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        backgroundColor: theme.palette.text.secondary,
-                        color: theme.palette.background.default,
-                        boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
-                      },
-                      "&:disabled": {
-                        backgroundColor: "grey.400",
-                        color: "grey.600",
-                        boxShadow: `4px 4px 0px grey.500`,
-                      },
-                    }}
-                    endIcon={
-                      !isComingSoon && !isOutOfStock ? <FaShoppingCart /> : null
-                    }
-                  >
-                    {isLoading
-                      ? "Adding..."
-                      : isComingSoon
-                      ? "Coming Soon"
-                      : isOutOfStock
-                      ? "Out of Stock"
-                      : "Add to Cart"}
-                  </Button>
+                      {isLoading
+                        ? "Adding..."
+                        : isComingSoon
+                        ? "Coming Soon"
+                        : isOutOfStock
+                        ? "Out of Stock"
+                        : "Add to Cart"}
+                    </Button>
+                  </Stack>
                 </Stack>
 
-                {/* Out of Stock or Coming Soon Message */}
-
-                <Stack
-                  mt={isMobile ? 1 : 0}
-                  direction="row"
-                  gap={2}
-                  width="100%"
-                  flexWrap="wrap"
-                >
+                <Stack direction="row" gap={2} width="100%" flexWrap="wrap">
                   {parsedData.attributes.length > 0 &&
                     parsedData.highlightedAttributes.map((attr, index) => (
                       <Typography

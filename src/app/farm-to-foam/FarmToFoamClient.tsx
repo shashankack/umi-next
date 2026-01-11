@@ -127,8 +127,8 @@ export default function FarmToFoamClient() {
                       src={image}
                       alt={`Matcha farm in Wazuka, Japan - Image ${index + 1}`}
                       fill
-                      style={{ 
-                        objectFit: "cover"
+                      style={{
+                        objectFit: "cover",
                       }}
                       sizes="100vw"
                       priority={index === 0}
@@ -150,9 +150,11 @@ export default function FarmToFoamClient() {
         }}
       >
         <Typography
-          fontSize={{ xs: 14, md: 22 }}
           textAlign="justify"
-          sx={{ color: "background.default" }}
+          sx={{
+            color: "background.default",
+            fontSize: { xs: "2.6vw", md: "1.2vw" },
+          }}
         >
           Umi partners up exclusively with certified organic farms in Japan,
           where matcha is cultivated with care, free from pesticides and harmful
@@ -186,6 +188,7 @@ export default function FarmToFoamClient() {
                 fontSize={14}
                 textAlign="justify"
                 sx={{
+                  fontSize: { xs: "2.6vw", md: "1.2vw" },
                   color: "background.default",
                   transformOrigin: "top center",
                 }}
@@ -213,9 +216,11 @@ export default function FarmToFoamClient() {
           </>
         ) : (
           <Typography
-            fontSize={{ xs: 14, md: 22 }}
             textAlign="justify"
-            sx={{ color: "background.default" }}
+            sx={{
+              color: "background.default",
+              fontSize: { xs: "2.6vw", md: "1.2vw" },
+            }}
           >
             Our farm is rooted in integrity, where matcha is grown without
             herbicides, pesticides, or synthetic fertilizers. Every leaf is

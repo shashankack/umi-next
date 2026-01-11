@@ -78,7 +78,7 @@ export const AboutSection = () => {
                 sx={{
                   mt: 6,
                   color: "text.secondary",
-                  fontSize: { md: "1.4vw" },
+                  fontSize: { md: "1.2vw" },
                   textAlign: "justify",
                   fontWeight: 500,
                 }}
@@ -164,7 +164,7 @@ export const AboutSection = () => {
                 variant="body1"
                 sx={{
                   color: "background.default",
-                  fontSize: 22,
+                  fontSize: { md: "1.2vw" },
                   textAlign: "justify",
                 }}
               >

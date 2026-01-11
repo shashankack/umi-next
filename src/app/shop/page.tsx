@@ -143,7 +143,7 @@ export default async function ShopPage() {
                   scrollMarginTop: { xs: "120px", md: "150px" }, // Offset for fixed navbar
                 }}
               >
-                <Box justifyContent="center" mx="auto" width={750}>
+                <Box justifyContent="center" mx="auto" width={600}>
                   {/* Collection Title */}
                   <Typography
                     variant="h1"
@@ -171,7 +171,7 @@ export default async function ShopPage() {
                       <Grid size={6} key={product.id}>
                         <ProductCard
                           product={product}
-                          size={{ xs: 180, sm: 300, md: 350 }}
+                          size={{ xs: 180, sm: 300, md: 280 }}
                           showControls
                         />
                       </Grid>
