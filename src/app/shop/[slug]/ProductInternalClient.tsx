@@ -40,14 +40,14 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const { addItem, isLoading } = useCart();
 
   const [selectedImage, setSelectedImage] = useState(
-    product.images.edges[0]?.node.url || ""
+    product.images.edges[0]?.node.url || "",
   );
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
       const variants = product.variants.edges;
       return variants.length === 1 ? variants[0].node : null;
-    }
+    },
   );
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -97,7 +97,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const handleVariantChange = (e: SelectChangeEvent<string>) => {
     const variantId = e.target.value;
     const newVariant = product.variants.edges.find(
-      (edge) => edge.node.id === variantId
+      (edge) => edge.node.id === variantId,
     )?.node;
 
     if (newVariant) {
@@ -115,7 +115,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
     const weightOption = variant.selectedOptions.find(
       (opt) =>
-        opt.name.toLowerCase() === "weight" || opt.name.toLowerCase() === "size"
+        opt.name.toLowerCase() === "weight" ||
+        opt.name.toLowerCase() === "size",
     );
 
     return weightOption?.value;
@@ -180,8 +181,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 ? 0
                 : 6
               : parsedData.productProfile.left.length > 0
-              ? 0
-              : 10
+                ? 0
+                : 10
           }
           px={isMobile ? 2 : 10}
         >
@@ -319,7 +320,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h6"
                 mt={isMobile ? -4 : -4}
-                fontSize={{ xs: "7vw", sm: "2.6vw" }}
+                fontSize={{ xs: "7vw", sm: "50px" }}
                 fontWeight={500}
                 textAlign="start"
                 width="100%"
@@ -332,6 +333,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 {product.title}
               </Typography>
 
+              {/* tagline */}
               {parsedData.tagline && (
                 <Box mt={isMobile ? 1 : 0}>
                   <Typography
@@ -350,13 +352,13 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
               <Stack mb={isMobile ? 4 : 0} gap={2} width="100%">
                 {/* Cart Button and  Dropdown */}
-                <Stack gap={{ xs: 2, md: 4 }}>
+                <Stack gap={{ xs: 2, md: 3 }}>
                   {selectedVariant && (
                     <Typography
                       variant="body1"
                       fontWeight={800}
-                      mt={{ xs: 2, md: 3 }}
-                      sx={{ fontSize: isMobile ? "4vw" : "1.6vw" }}
+                      // mt={{ xs: 2, md: 3 }}
+                      sx={{ fontSize: isMobile ? "4vw" : "26px" }}
                     >
                       {isComingSoon ? (
                         <Box
@@ -552,24 +554,47 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       {isLoading
                         ? "Adding..."
                         : isComingSoon
-                        ? "Coming Soon"
-                        : isOutOfStock
-                        ? "Out of Stock"
-                        : "Add to Cart"}
+                          ? "Coming Soon"
+                          : isOutOfStock
+                            ? "Out of Stock"
+                            : "Add to Cart"}
                     </Button>
                   </Stack>
                 </Stack>
-
-                <Stack direction="row" gap={2} width="100%" flexWrap="wrap">
-                  {parsedData.attributes.length > 0 &&
-                    parsedData.highlightedAttributes.map((attr, index) => (
+                {parsedData.highlightedAttributes.length > 0 && (
+                  <Stack
+                    direction="row"
+                    gap={2}
+                    width="100%"
+                    flexWrap="wrap"
+                    mt={{ xs: 0, md: 1, xl: 2 }}
+                  >
+                    {parsedData.highlightedAttributes.map((attr, index) => (
                       <Typography
                         key={index}
                         variant="h5"
                         sx={{
+                          p: isMobile ? "8px 14px" : "10px 30px",
+                          fontWeight: 600,
+                          borderRadius: isMobile ? 2 : 2,
+                          textAlign: "justify",
+                          color: theme.palette.text.secondary,
+                          fontFamily: "Bricolage",
+                          backgroundColor: theme.palette.background.default,
+                          fontSize: isMobile ? "14px" : "16px",
+                          boxShadow: `0px 3px 0px 0px ${theme.palette.text.secondary}`,
+                        }}
+                      >
+                        {attr}
+                      </Typography>
+                    ))}
+
+                    {weightDisplay && (
+                      <Typography
+                        variant="h5"
+                        sx={{
                           p: isMobile ? "6px 10px" : "10px 30px",
-                          mb: { xs: 2, md: 0 },
-                          fontWeight: 200,
+                          fontWeight: 500,
                           borderRadius: isMobile ? 1 : 3,
                           textAlign: "justify",
                           color: theme.palette.text.secondary,
@@ -579,28 +604,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                           boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
                         }}
                       >
-                        {attr}
+                        weight: {weightDisplay}
                       </Typography>
-                    ))}
-                  {weightDisplay && (
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        p: isMobile ? "6px 10px" : "10px 30px",
-                        fontWeight: 500,
-                        borderRadius: isMobile ? 1 : 3,
-                        textAlign: "justify",
-                        color: theme.palette.text.secondary,
-                        fontFamily: "Bricolage",
-                        backgroundColor: theme.palette.background.default,
-                        fontSize: isMobile ? "3vw" : ".9vw",
-                        boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                      }}
-                    >
-                      weight: {weightDisplay}
-                    </Typography>
-                  )}
-                </Stack>
+                    )}
+                  </Stack>
+                )}
               </Stack>
 
               <Stack
