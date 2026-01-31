@@ -90,7 +90,7 @@ export default function ArticleClient({
         if (!isTopLevel) return;
 
         const textNode = Array.from(li.childNodes).find(
-          (node) => node.nodeType === 3
+          (node) => node.nodeType === 3,
         );
         const directText = textNode ? textNode.textContent?.trim() : "";
 
@@ -110,7 +110,7 @@ export default function ArticleClient({
                   .includes(directText.toLowerCase()) ||
                 directText
                   .toLowerCase()
-                  .includes(heading.textContent?.trim().toLowerCase() || "")
+                  .includes(heading.textContent?.trim().toLowerCase() || ""),
             ) as HTMLElement | undefined) || null;
         }
 
@@ -136,7 +136,7 @@ export default function ArticleClient({
 
             if (!subMatchingHeading) {
               const allHeadings = doc.querySelectorAll(
-                "h1, h2, h3, h4, h5, h6"
+                "h1, h2, h3, h4, h5, h6",
               );
               subMatchingHeading =
                 (Array.from(allHeadings).find(
@@ -147,7 +147,9 @@ export default function ArticleClient({
                       .includes(subText.toLowerCase()) ||
                     subText
                       .toLowerCase()
-                      .includes(heading.textContent?.trim().toLowerCase() || "")
+                      .includes(
+                        heading.textContent?.trim().toLowerCase() || "",
+                      ),
                 ) as HTMLElement | undefined) || null;
             }
 
@@ -170,7 +172,7 @@ export default function ArticleClient({
 
     // Fallback: Extract headings directly
     const headingsWithIds = doc.querySelectorAll(
-      "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]"
+      "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
     );
     if (headingsWithIds.length > 0) {
       return Array.from(headingsWithIds).map((heading) => ({
@@ -209,7 +211,7 @@ export default function ArticleClient({
 
   const chips = useMemo(
     () => (Array.isArray(article?.tags) ? article.tags.slice(0, 12) : []),
-    [article?.tags]
+    [article?.tags],
   );
 
   const handleFaqChange =
@@ -285,8 +287,6 @@ export default function ArticleClient({
             },
 
             "& img": {
-              maxWidth: "100%",
-              width: "100%",
               height: { xs: "200px", sm: "300px", md: "400px" },
               objectFit: "cover",
               borderRadius: 3,
@@ -391,8 +391,6 @@ export default function ArticleClient({
                 fontSize: { xs: "3.6vw", md: "1vw" },
               },
               "& img": {
-                maxWidth: "100%",
-                width: "100%",
                 height: { xs: "200px", sm: "300px", md: "400px" },
                 objectFit: "cover",
                 borderRadius: 3,
@@ -432,7 +430,7 @@ export default function ArticleClient({
               },
             }}
             dangerouslySetInnerHTML={{ __html: beforeFaq }}
-          />
+          />,
         );
       }
 
@@ -588,7 +586,7 @@ export default function ArticleClient({
               </AccordionDetails>
             </Accordion>
           ))}
-        </Box>
+        </Box>,
       );
 
       currentHtml = afterFaq;
@@ -628,8 +626,6 @@ export default function ArticleClient({
               fontSize: { xs: "3.6vw", md: "1vw" },
             },
             "& img": {
-              maxWidth: "100%",
-              width: "100%",
               height: { xs: "200px", sm: "300px", md: "400px" },
               objectFit: "cover",
               borderRadius: 3,
@@ -669,7 +665,7 @@ export default function ArticleClient({
             },
           }}
           dangerouslySetInnerHTML={{ __html: currentHtml }}
-        />
+        />,
       );
     }
 

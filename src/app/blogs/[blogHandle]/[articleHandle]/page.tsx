@@ -8,6 +8,7 @@ import type { Article } from "@/lib/shopify";
 import type { Metadata } from "next";
 import ArticleClient from "./ArticleClient";
 import { getCanonicalUrl } from "@/lib/seo";
+import { getArticleSchema } from "@/lib/blogSchemas";
 
 interface ArticlePageProps {
   params: Promise<{
@@ -102,5 +103,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  return <ArticleClient article={article} relatedArticles={relatedArticles} />;
+  // Get JSON-LD structured data for this article (if configured)
+  const schemaData = getArticleSchema(articleHandle, article);
+
+  return (
+    <>
+      {schemaData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      )}
+      <ArticleClient article={article} relatedArticles={relatedArticles} />
+    </>
+  );
 }
