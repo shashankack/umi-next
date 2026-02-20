@@ -97,7 +97,21 @@ function extractMultipleTextContent(doc: Document, selector: string): string[] {
 
 function extractMultipleInnerHTML(doc: Document, selector: string): string[] {
   const elements = doc.querySelectorAll(selector);
-  return Array.from(elements).map((el) => el.innerHTML.trim());
+  return Array.from(elements).map((el) => {
+    let html = el.innerHTML.trim();
+    // Also grab any immediately-following <ul> that isn't a special named list
+    let next = el.nextElementSibling;
+    while (
+      next &&
+      next.tagName === "UL" &&
+      !next.classList.contains("attributes") &&
+      !next.classList.contains("highlighted-attributes")
+    ) {
+      html += next.outerHTML;
+      next = next.nextElementSibling;
+    }
+    return html;
+  });
 }
 
 function extractTableData(doc: Document, selector: string): { left: string[]; right: string[] } {
@@ -128,7 +142,22 @@ function extractWithRegex(html: string, regex: RegExp): string | null {
 
 function extractMultipleWithRegex(html: string, regex: RegExp): string[] {
   const matches = Array.from(html.matchAll(regex));
-  return matches.map((match) => match[1]?.trim() || "").filter(Boolean);
+  return matches
+    .map((match) => {
+      let content = match[1]?.trim() || "";
+      if (!content) return "";
+      // After the closing </p>, grab any immediately-following <ul> that
+      // doesn't have a recognised class (attributes / highlighted-attributes)
+      const afterParagraph = html.slice((match.index ?? 0) + match[0].length);
+      const ulMatch = afterParagraph.match(
+        /^\s*(<ul(?![^>]*class="[^"]*(?:attributes|highlighted-attributes)[^"]*")[^>]*>[\s\S]*?<\/ul>)/
+      );
+      if (ulMatch) {
+        content += ulMatch[1];
+      }
+      return content;
+    })
+    .filter(Boolean);
 }
 
 function extractListItems(html: string, className: string): string[] {

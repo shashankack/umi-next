@@ -13,10 +13,17 @@ import {
   Snackbar,
   Alert,
   SelectChangeEvent,
+  Divider,
+  IconButton,
 } from "@mui/material";
 import Image from "next/image";
 import { useTheme } from "@mui/material/styles";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
 import { Product, ProductVariant } from "@/lib/shopify";
 import { parseProductDescription } from "@/lib/htmlParsers";
 import { useCart } from "@/context/CartContext";
@@ -25,6 +32,7 @@ import {
   generateBreadcrumbSchema,
 } from "@/lib/structuredData";
 import { slugify } from "@/lib/slug";
+import Link from "next/link";
 
 interface ProductInternalClientProps {
   product: Product;
@@ -33,15 +41,12 @@ interface ProductInternalClientProps {
 const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   product,
 }) => {
-  // console.log("ProductInternalClient received product:", product);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { addItem, isLoading } = useCart();
 
-  const [selectedImage, setSelectedImage] = useState(
-    product.images.edges[0]?.node.url || "",
-  );
+  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
@@ -58,10 +63,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     return parseProductDescription(product.descriptionHtml);
   }, [product.descriptionHtml]);
 
-  const handleThumbnailClick = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
-  };
-
   const handleQuantityChange = (e: SelectChangeEvent<number>) => {
     setQuantity(Number(e.target.value));
   };
@@ -72,11 +73,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
       setShowError(true);
       return;
     }
-
     try {
       await addItem(selectedVariant.id, quantity);
       setShowSuccess(true);
-      // Reset quantity to 1 after successful add
       setQuantity(1);
     } catch (error) {
       console.error("Failed to add to cart:", error);
@@ -85,10 +84,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     }
   };
 
-  const handleCloseSuccess = () => {
-    setShowSuccess(false);
-  };
-
+  const handleCloseSuccess = () => setShowSuccess(false);
   const handleCloseError = () => {
     setShowError(false);
     setErrorMessage("");
@@ -99,12 +95,14 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     const newVariant = product.variants.edges.find(
       (edge) => edge.node.id === variantId,
     )?.node;
-
     if (newVariant) {
       setSelectedVariant(newVariant);
-
-      if (newVariant.image?.url) {
-        setSelectedImage(newVariant.image.url);
+      // Jump Swiper to the matching image when variant changes
+      if (newVariant.image?.url && swiperRef) {
+        const idx = product.images.edges.findIndex(
+          (e) => e.node.url === newVariant.image?.url,
+        );
+        if (idx !== -1) swiperRef.slideTo(idx);
       }
     }
   };
@@ -112,13 +110,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   // Get variant weight display
   const getWeightDisplay = (variant: ProductVariant | null) => {
     if (!variant || !variant.selectedOptions) return null;
-
     const weightOption = variant.selectedOptions.find(
       (opt) =>
         opt.name.toLowerCase() === "weight" ||
         opt.name.toLowerCase() === "size",
     );
-
     return weightOption?.value;
   };
 
@@ -133,8 +129,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const quantityAvailable = selectedVariant?.quantityAvailable ?? 0;
   const isOutOfStock = !isAvailable || quantityAvailable === 0;
 
-  // console.log("Rendering ProductInternalClient, product title:", product.title);
-
   // Generate structured data
   const productSchema = generateProductSchema(product);
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -145,6 +139,42 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
       url: `https://umimatchashop.com/shop/${slugify(product.title)}`,
     },
   ]);
+
+  // ─── Shared style tokens ───────────────────────────────────────────────────
+  const selectSx = {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.secondary,
+    borderRadius: 2,
+    boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
+    fontFamily: "Bricolage",
+    fontWeight: 500,
+    "& .MuiSelect-icon": { color: theme.palette.text.secondary },
+    "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+  };
+
+  const menuPropsSx = {
+    PaperProps: {
+      sx: {
+        mt: 1,
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.secondary,
+        boxShadow: `2px 4px 8px rgba(0,0,0,0.15)`,
+        borderRadius: 2,
+        "& .MuiMenuItem-root": {
+          fontFamily: "Bricolage",
+          fontSize: isMobile ? "3.5vw" : "0.9vw",
+          "&:hover": {
+            backgroundColor: theme.palette.text.secondary,
+            color: theme.palette.background.default,
+          },
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.text.secondary,
+            color: theme.palette.background.default,
+          },
+        },
+      },
+    },
+  };
 
   return (
     <>
@@ -164,459 +194,481 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
         minHeight="100vh"
         pt={isMobile ? 10 : 10}
       >
-        {/* Top Section - Product Details */}
+        {/* ── TOP SECTION ─────────────────────────────────────────────────── */}
         <Stack
           width="100%"
-          minHeight={isMobile ? "100%" : "60vh"}
-          direction="row"
-          bgcolor={theme.palette.secondary.main}
-          borderRadius={6}
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="start"
-          mt={isMobile ? 8 : 10}
-          mb={
-            isMobile
-              ? parsedData.productProfile.left.length > 0
-                ? 0
-                : 6
-              : parsedData.productProfile.left.length > 0
-                ? 0
-                : 10
-          }
-          px={isMobile ? 2 : 10}
+          px={isMobile ? 2 : 8}
+          pt={isMobile ? 6 : 8}
+          pb={isMobile ? 4 : 6}
+          mb={parsedData.productProfile.left.length > 0 ? 0 : 4}
         >
-          {/* Image and Text Section */}
+          {/* Breadcrumb */}
           <Stack
-            direction={isMobile ? "column" : "row"}
-            width="100%"
-            gap={isMobile ? 2 : 5}
-            px={isMobile ? 1 : 0}
+            direction="row"
+            gap={1}
+            mb={isMobile ? 3 : 4}
+            alignItems="center"
           >
-            {/* Image Section */}
-            <Stack
-              width={isMobile ? "100%" : "30vw"}
-              height={600}
-              justifyContent="center"
-              alignItems="center"
-              py={{ xs: 2, md: 0 }}
-            >
-              <Box
-                p={2}
-                boxShadow={
-                  isMobile
-                    ? "none"
-                    : `3px 3px 0px 0px ${theme.palette.text.secondary}`
-                }
-                borderRadius={4}
-                bgcolor={theme.palette.background.default}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <Box
-                  mb={isMobile ? 2 : 0}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  height={{ xs: 280, sm: 300, md: 350, lg: 420, xl: 550 }}
-                  width="100%"
-                >
-                  <Box
-                    sx={{
-                      position: "relative",
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Image
-                      src={selectedImage}
-                      alt={product.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      style={{
-                        objectFit: "contain",
-                        borderRadius: "8px",
-                      }}
-                      priority
-                    />
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    gap: 0.5,
-                    overflowX: "auto",
-                    overflowY: "hidden",
-                    pb: 1,
-                    "&::-webkit-scrollbar": {
-                      height: "6px",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                      backgroundColor: "transparent",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      backgroundColor: theme.palette.text.secondary,
-                      borderRadius: "3px",
-                    },
-                  }}
-                >
-                  {product.images.edges.map((image, i) => (
-                    <Box
-                      key={i}
-                      onClick={() => handleThumbnailClick(image.node.url)}
+            {[
+              { label: "Home", href: "/" },
+              { label: "Shop", href: "/shop" },
+              { label: product.title, href: null },
+            ].map(({ label, href }, i, arr) => (
+              <React.Fragment key={label}>
+                {href ? (
+                  <Link href={href} style={{ textDecoration: "none" }}>
+                    <Typography
                       sx={{
-                        position: "relative",
-                        minWidth: "80px",
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: 1,
-                        cursor: "pointer",
-                        border:
-                          image.node.url === selectedImage
-                            ? `2px solid ${theme.palette.text.secondary}`
-                            : "2px solid transparent",
-                        transition: "border 0.2s ease",
-                        flexShrink: 0,
+                        fontFamily: "Bricolage",
+                        fontSize: isMobile ? "2.8vw" : "0.75vw",
+                        fontWeight: 400,
+                        color: `#fd918fff`,
+                        textTransform: "capitalize",
+                        letterSpacing: 0.5,
+                        transition: "color 0.2s ease",
                         "&:hover": {
-                          border: `2px solid ${theme.palette.text.secondary}`,
+                          color: theme.palette.background.default,
                         },
                       }}
                     >
-                      <Image
-                        src={image.node.url}
-                        alt={`${product.title} - ${i + 1}`}
-                        fill
-                        style={{
-                          objectFit: "contain",
-                          borderRadius: "4px",
-                        }}
-                        sizes="80px"
-                        loading="lazy"
-                      />
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-            </Stack>
+                      {label}
+                    </Typography>
+                  </Link>
+                ) : (
+                  <Typography
+                    sx={{
+                      fontFamily: "Bricolage",
+                      fontSize: isMobile ? "2.8vw" : "0.75vw",
+                      fontWeight: 700,
+                      color: theme.palette.background.default,
+                      textTransform: "capitalize",
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    {label}
+                  </Typography>
+                )}
+                {i < arr.length - 1 && (
+                  <Typography
+                    sx={{
+                      color: `${theme.palette.background.default}66`,
+                      fontSize: isMobile ? "2.5vw" : "0.75vw",
+                    }}
+                  >
+                    /
+                  </Typography>
+                )}
+              </React.Fragment>
+            ))}
+          </Stack>
 
-            {/* Text Section */}
-            <Stack
-              width="100%"
-              height="100%"
-              color={theme.palette.background.default}
-              alignItems="start"
-              justifyContent="start"
-              pt={3}
-              px={{ xs: 1, sm: 0 }}
-              gap={isMobile ? 0 : 2}
+          {/* Two-column layout */}
+          <Stack
+            direction={isMobile ? "column" : "row"}
+            gap={isMobile ? 4 : 8}
+            alignItems={isMobile ? "stretch" : "flex-start"}
+          >
+            {/* ── LEFT: Image Swiper ───────────────────────────────────── */}
+            <Box
+              width={isMobile ? "100%" : "48%"}
+              flexShrink={0}
+              sx={
+                isMobile
+                  ? {}
+                  : { position: "sticky", top: 96, alignSelf: "flex-start" }
+              }
             >
+              <Box
+                sx={{
+                  position: "relative",
+                  borderRadius: 4,
+                  bgcolor: theme.palette.background.default,
+                  overflow: "hidden",
+                  height: isMobile ? 340 : 540,
+                  // Swiper pagination dots
+                  "& .swiper-pagination": {
+                    bottom: "12px",
+                  },
+                  "& .swiper-pagination-bullet": {
+                    width: 8,
+                    height: 8,
+                    backgroundColor: theme.palette.text.secondary,
+                    opacity: 0.35,
+                    transition: "opacity 0.2s, transform 0.2s",
+                  },
+                  "& .swiper-pagination-bullet-active": {
+                    opacity: 1,
+                    transform: "scale(1.3)",
+                  },
+                }}
+              >
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  pagination={{ clickable: true }}
+                  onSwiper={setSwiperRef}
+                  onSlideChange={(s) => setActiveIndex(s.realIndex)}
+                  style={{ width: "100%", height: "100%" }}
+                  loop={product.images.edges.length > 1}
+                >
+                  {product.images.edges.map((image, i) => (
+                    <SwiperSlide key={i}>
+                      <Box
+                        sx={{
+                          position: "relative",
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          p: 2,
+                        }}
+                      >
+                        <Image
+                          src={image.node.url}
+                          alt={`${product.title} ${i + 1}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 48vw"
+                          style={{ objectFit: "contain", padding: "16px" }}
+                          priority={i === 0}
+                          loading={i === 0 ? "eager" : "lazy"}
+                        />
+                      </Box>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+
+                {/* Custom prev / next buttons */}
+                {product.images.edges.length > 1 && (
+                  <>
+                    <IconButton
+                      onClick={() => swiperRef?.slidePrev()}
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        left: 8,
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        zIndex: 10,
+                        bgcolor: theme.palette.background.default,
+                        color: theme.palette.text.secondary,
+                        boxShadow: `2px 2px 0px ${theme.palette.text.secondary}`,
+                        border: `1.5px solid ${theme.palette.text.secondary}`,
+                        width: 36,
+                        height: 36,
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                          bgcolor: theme.palette.text.secondary,
+                          color: theme.palette.background.default,
+                        },
+                      }}
+                    >
+                      <FaChevronLeft size={14} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => swiperRef?.slideNext()}
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        right: 8,
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        zIndex: 10,
+                        bgcolor: theme.palette.background.default,
+                        color: theme.palette.text.secondary,
+                        boxShadow: `2px 2px 0px ${theme.palette.text.secondary}`,
+                        border: `1.5px solid ${theme.palette.text.secondary}`,
+                        width: 36,
+                        height: 36,
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                          bgcolor: theme.palette.text.secondary,
+                          color: theme.palette.background.default,
+                        },
+                      }}
+                    >
+                      <FaChevronRight size={14} />
+                    </IconButton>
+                  </>
+                )}
+              </Box>
+            </Box>
+
+            {/* ── RIGHT: Product Info ──────────────────────────────────── */}
+            <Stack flex={1} gap={0} color={theme.palette.background.default}>
+              {/* Title */}
               <Typography
                 variant="h1"
-                mt={isMobile ? -4 : -4}
-                fontSize={{ xs: "7vw", sm: "40px" }}
-                fontWeight={500}
-                textAlign="start"
-                width="100%"
-                color={theme.palette.background.default}
                 sx={{
-                  letterSpacing: 1.3,
-                  textShadow: `1px 5px 0px ${theme.palette.text.secondary}`,
+                  fontSize: isMobile ? "7vw" : "clamp(28px, 2.2vw, 48px)",
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                  lineHeight: 1.15,
+                  textShadow: `1px 4px 0px ${theme.palette.text.secondary}`,
+                  mb: 1,
                 }}
               >
                 {product.title}
               </Typography>
 
-              {/* tagline */}
+              {/* Tagline */}
               {parsedData.tagline && (
-                <Box mt={isMobile ? 1 : 0}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      fontFamily: "Bricolage",
-                      fontWeight: 600,
-                      textAlign: "justify",
-                      fontSize: isMobile ? "3.2vw" : "1.2vw",
-                      lineHeight: isMobile ? 0.8 : 1,
-                    }}
-                    dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
-                  />
+                <Typography
+                  sx={{
+                    fontFamily: "Bricolage",
+                    fontWeight: 500,
+                    fontSize: isMobile ? "3.2vw" : "1vw",
+                    lineHeight: 1.1,
+                    opacity: 0.85,
+                    mb: 2,
+                  }}
+                  dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
+                />
+              )}
+
+              <Divider
+                sx={{
+                  borderColor: `${theme.palette.background.default}33`,
+                  mb: 3,
+                }}
+              />
+
+              {/* Price */}
+              {selectedVariant && (
+                <Box mb={2.5}>
+                  {isComingSoon ? (
+                    <Typography
+                      sx={{
+                        fontFamily: "Bricolage",
+                        fontWeight: 800,
+                        fontSize: isMobile ? "5vw" : "1.2vw",
+                        color: theme.palette.text.secondary,
+                        bgcolor: theme.palette.background.default,
+                        display: "inline-block",
+                        px: 2,
+                        py: 0.5,
+                        borderRadius: 2,
+                        letterSpacing: 2,
+                      }}
+                    >
+                      COMING SOON
+                    </Typography>
+                  ) : (
+                    <Typography
+                      sx={{
+                        fontFamily: "Bricolage",
+                        fontWeight: 800,
+                        fontSize: isMobile ? "6vw" : "1.8vw",
+                        letterSpacing: 0.5,
+                      }}
+                    >
+                      {`₹ ${Math.floor(currentPrice)}/-`}
+                    </Typography>
+                  )}
                 </Box>
               )}
 
-              <Stack mb={isMobile ? 4 : 0} gap={2} width="100%">
-                {/* Cart Button and  Dropdown */}
-                <Stack gap={{ xs: 2, md: 3 }}>
-                  {selectedVariant && (
-                    <Typography
-                      variant="body1"
-                      fontWeight={800}
-                      // mt={{ xs: 2, md: 3 }}
-                      sx={{ fontSize: isMobile ? "4vw" : "26px" }}
-                    >
-                      {isComingSoon ? (
-                        <Box
-                          component="span"
-                          sx={{
-                            color: theme.palette.text.secondary,
-                            fontWeight: 700,
-                            fontSize: isMobile ? "5vw" : "1.8vw",
-                          }}
-                        >
-                          COMING SOON
-                        </Box>
-                      ) : (
-                        // `₹ ${Math.floor(currentPrice)}/-`
-                        `₹COMING SOON`
-                      )}
-                    </Typography>
-                  )}
-
-                  {product.variants.edges.length > 1 && (
-                    <Select
-                      value={selectedVariant?.id || ""}
-                      onChange={handleVariantChange}
-                      displayEmpty
-                      size="small"
-                      sx={{
-                        mt: 2,
-                        width: isMobile ? "100%" : "30%",
-                        backgroundColor: theme.palette.background.default,
-                        color: theme.palette.text.secondary,
-                        borderRadius: 2,
-                        boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                        fontFamily: "Bricolage",
-                        fontWeight: 500,
-                        fontSize: isMobile ? "1rem" : "0.9vw",
-                        minWidth: 160,
-                        "& .MuiSelect-icon": {
-                          color: theme.palette.text.secondary,
-                        },
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          border: "none",
-                        },
-                      }}
-                      MenuProps={{
-                        PaperProps: {
-                          sx: {
-                            mt: 1,
-                            backgroundColor: theme.palette.background.default,
-                            color: theme.palette.text.secondary,
-                            boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
-                            borderRadius: 2,
-                            "& .MuiMenuItem-root": {
-                              fontFamily: "Bricolage",
-                              fontSize: isMobile ? "3.5vw" : "0.9vw",
-                              "&:hover": {
-                                backgroundColor: theme.palette.text.secondary,
-                                color: theme.palette.background.default,
-                              },
-                              "&.Mui-selected": {
-                                backgroundColor: theme.palette.text.secondary,
-                                color: theme.palette.background.default,
-                              },
-                            },
-                          },
-                        },
-                      }}
-                    >
-                      <MenuItem value="" disabled>
-                        Choose your matcha
-                      </MenuItem>
-                      {product.variants.edges.map(({ node }) => (
-                        <MenuItem key={node.id} value={node.id}>
-                          <Box
-                            display="flex"
-                            justifyContent="space-between"
-                            width="100%"
-                            alignItems="center"
-                          >
-                            <span>{node.title}</span>
-                            <span>
-                              ₹{Math.floor(parseFloat(node.price.amount))}
-                            </span>
-                          </Box>
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-
-                  <Stack
-                    width="100%"
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="start"
-                    gap={2}
+              {/* Variant selector */}
+              {product.variants.edges.length > 1 && (
+                <Box mb={2.5}>
+                  <Typography
+                    sx={{
+                      fontFamily: "Bricolage",
+                      fontSize: isMobile ? "3vw" : "0.8vw",
+                      fontWeight: 600,
+                      opacity: 0.7,
+                      mb: 1,
+                      textTransform: "uppercase",
+                      letterSpacing: 1,
+                    }}
                   >
-                    {!isComingSoon && !isOutOfStock && (
-                      <Select
-                        value={quantity}
-                        onChange={handleQuantityChange}
-                        size="small"
-                        displayEmpty
-                        sx={{
-                          backgroundColor: theme.palette.background.default,
-                          color: theme.palette.text.secondary,
-                          borderRadius: 2,
-                          boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
-                          fontFamily: "Bricolage",
-                          fontWeight: 500,
-                          fontSize: isMobile ? "0.7rem" : "0.9vw",
-                          minWidth: 80,
-                          "& .MuiSelect-icon": {
-                            color: theme.palette.text.secondary,
-                          },
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            border: "none",
-                          },
-                          "&:hover": {
-                            backgroundColor: theme.palette.text.secondary,
-                            color: theme.palette.background.default,
-                            "& .MuiSelect-icon": {
-                              color: theme.palette.background.default,
-                            },
-                          },
-                        }}
-                        MenuProps={{
-                          PaperProps: {
-                            sx: {
-                              mt: 1,
-                              backgroundColor: theme.palette.background.default,
-                              color: theme.palette.text.secondary,
-                              boxShadow: `2px 4px 8px rgba(0, 0, 0, 0.15)`,
-                              borderRadius: 2,
-                              "& .MuiMenuItem-root": {
-                                fontFamily: "Bricolage",
-                                fontSize: isMobile ? "3.5vw" : "0.9vw",
-                                "&:hover": {
-                                  backgroundColor: theme.palette.text.secondary,
-                                  color: theme.palette.background.default,
-                                },
-                                "&.Mui-selected": {
-                                  backgroundColor: theme.palette.text.secondary,
-                                  color: theme.palette.background.default,
-                                },
-                              },
-                            },
-                          },
-                        }}
-                      >
-                        {[...Array(10).keys()].map((i) => (
-                          <MenuItem key={i + 1} value={i + 1}>
-                            {i + 1}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    )}
+                    Select Variant
+                  </Typography>
+                  <Select
+                    value={selectedVariant?.id || ""}
+                    onChange={handleVariantChange}
+                    displayEmpty
+                    size="small"
+                    sx={{
+                      ...selectSx,
+                      width: isMobile ? "100%" : "60%",
+                      fontSize: isMobile ? "1rem" : "0.9vw",
+                      minWidth: 160,
+                    }}
+                    MenuProps={menuPropsSx}
+                  >
+                    <MenuItem value="" disabled>
+                      Choose your matcha
+                    </MenuItem>
+                    {product.variants.edges.map(({ node }) => (
+                      <MenuItem key={node.id} value={node.id}>
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          width="100%"
+                          alignItems="center"
+                        >
+                          <span>{node.title}</span>
+                          <span>
+                            ₹{Math.floor(parseFloat(node.price.amount))}
+                          </span>
+                        </Box>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Box>
+              )}
 
-                    <Button
-                      onClick={handleAddToCart}
-                      variant="contained"
-                      disabled={
-                        !selectedVariant ||
-                        isLoading ||
-                        isComingSoon ||
-                        isOutOfStock
-                      }
-                      fullWidth={isMobile}
+              {/* Quantity + Add to Cart */}
+              <Stack
+                direction="row"
+                gap={2}
+                alignItems="center"
+                mb={3}
+                flexWrap="wrap"
+              >
+                {!isComingSoon && !isOutOfStock && (
+                  <Box>
+                    <Typography
                       sx={{
                         fontFamily: "Bricolage",
-                        fontWeight: 400,
-                        textAlign: "justify",
-                        fontSize: isMobile ? "0.7rem" : "1rem",
-                        backgroundColor: theme.palette.background.default,
-                        color: theme.palette.text.secondary,
-                        boxShadow: `4px  4px 0px ${theme.palette.text.secondary}`,
-                        transition: "all 0.3s ease",
+                        fontSize: isMobile ? "3vw" : "0.8vw",
+                        fontWeight: 600,
+                        opacity: 0.7,
+                        mb: 1,
+                        textTransform: "uppercase",
+                        letterSpacing: 1,
+                      }}
+                    >
+                      Qty
+                    </Typography>
+                    <Select
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                      size="small"
+                      displayEmpty
+                      sx={{
+                        ...selectSx,
+                        minWidth: 80,
+                        fontSize: isMobile ? "0.8rem" : "0.9vw",
                         "&:hover": {
                           backgroundColor: theme.palette.text.secondary,
                           color: theme.palette.background.default,
-                          boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
-                        },
-                        "&:disabled": {
-                          backgroundColor: "grey.400",
-                          color: "grey.600",
-                          boxShadow: `4px 4px 0px grey.500`,
+                          "& .MuiSelect-icon": {
+                            color: theme.palette.background.default,
+                          },
                         },
                       }}
-                      endIcon={
-                        !isComingSoon && !isOutOfStock ? (
-                          <FaShoppingCart />
-                        ) : null
-                      }
+                      MenuProps={menuPropsSx}
                     >
-                      {isLoading
-                        ? "Adding..."
-                        : isComingSoon
-                          ? "Coming Soon"
-                          : isOutOfStock
-                            ? "Out of Stock"
-                            : "Add to Cart"}
-                    </Button>
-                  </Stack>
-                </Stack>
-                {parsedData.highlightedAttributes.length > 0 && (
-                  <Stack
-                    direction="row"
-                    gap={2}
-                    width="100%"
-                    flexWrap="wrap"
-                    mt={{ xs: 0, md: 1, xl: 2 }}
+                      {[...Array(10).keys()].map((i) => (
+                        <MenuItem key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </Box>
+                )}
+
+                <Box flex={isMobile ? 1 : "unset"} alignSelf="flex-end">
+                  <Button
+                    onClick={handleAddToCart}
+                    variant="contained"
+                    fullWidth={isMobile}
+                    disabled={
+                      !selectedVariant ||
+                      isLoading ||
+                      isComingSoon ||
+                      isOutOfStock
+                    }
+                    endIcon={
+                      !isComingSoon && !isOutOfStock ? <FaShoppingCart /> : null
+                    }
+                    sx={{
+                      fontFamily: "Bricolage",
+                      fontWeight: 600,
+                      fontSize: isMobile ? "0.85rem" : "1rem",
+                      px: isMobile ? 3 : 4,
+                      py: 1.25,
+                      backgroundColor: theme.palette.background.default,
+                      color: theme.palette.text.secondary,
+                      boxShadow: `4px 4px 0px ${theme.palette.text.secondary}`,
+                      borderRadius: 2,
+                      transition: "all 0.25s ease",
+                      "&:hover": {
+                        backgroundColor: theme.palette.text.secondary,
+                        color: theme.palette.background.default,
+                        boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
+                      },
+                      "&:disabled": {
+                        backgroundColor: "grey.400",
+                        color: "grey.600",
+                        boxShadow: "none",
+                      },
+                    }}
                   >
+                    {isLoading
+                      ? "Adding..."
+                      : isComingSoon
+                        ? "Coming Soon"
+                        : isOutOfStock
+                          ? "Out of Stock"
+                          : "Add to Cart"}
+                  </Button>
+                </Box>
+              </Stack>
+
+              {/* Highlighted attribute chips + weight */}
+              {(parsedData.highlightedAttributes.length > 0 ||
+                weightDisplay) && (
+                <>
+                  <Divider
+                    sx={{
+                      borderColor: `${theme.palette.background.default}33`,
+                      mb: 2.5,
+                    }}
+                  />
+                  <Stack direction="row" gap={1.5} flexWrap="wrap" mb={3}>
                     {parsedData.highlightedAttributes.map((attr, index) => (
                       <Typography
                         key={index}
-                        variant="h5"
                         sx={{
-                          p: isMobile ? "8px 14px" : "10px 30px",
-                          fontWeight: 600,
-                          borderRadius: isMobile ? 2 : 2,
-                          textAlign: "justify",
-                          color: theme.palette.text.secondary,
+                          px: isMobile ? "12px" : "20px",
+                          py: isMobile ? "6px" : "8px",
                           fontFamily: "Bricolage",
-                          backgroundColor: theme.palette.background.default,
-                          fontSize: isMobile ? "14px" : "16px",
+                          fontWeight: 600,
+                          fontSize: isMobile ? "2.8vw" : "0.8vw",
+                          borderRadius: 2,
+                          color: theme.palette.text.secondary,
+                          bgcolor: theme.palette.background.default,
                           boxShadow: `0px 3px 0px 0px ${theme.palette.text.secondary}`,
                         }}
                       >
                         {attr}
                       </Typography>
                     ))}
-
                     {weightDisplay && (
                       <Typography
-                        variant="h5"
                         sx={{
-                          p: isMobile ? "6px 10px" : "10px 30px",
-                          fontWeight: 500,
-                          borderRadius: isMobile ? 1 : 3,
-                          textAlign: "justify",
-                          color: theme.palette.text.secondary,
+                          px: isMobile ? "10px" : "20px",
+                          py: isMobile ? "6px" : "8px",
                           fontFamily: "Bricolage",
-                          backgroundColor: theme.palette.background.default,
-                          fontSize: isMobile ? "3vw" : ".9vw",
-                          boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
+                          fontWeight: 500,
+                          fontSize: isMobile ? "2.8vw" : "0.8vw",
+                          borderRadius: 2,
+                          color: theme.palette.text.secondary,
+                          bgcolor: theme.palette.background.default,
+                          boxShadow: `0px 3px 0px 0px ${theme.palette.text.secondary}`,
                         }}
                       >
-                        weight: {weightDisplay}
+                        Weight: {weightDisplay}
                       </Typography>
                     )}
                   </Stack>
-                )}
-              </Stack>
+                </>
+              )}
 
-              <Stack
-                fontFamily="Bricolage"
-                fontWeight={200}
-                textAlign="justify"
-              >
+              {/* Description paragraphs */}
+              <Stack gap={0}>
                 {parsedData.paragraphs.map((paragraph, index) => (
                   <Typography
                     key={index}
@@ -625,12 +677,20 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       fontFamily: "Bricolage",
                       fontWeight: 500,
                       textAlign: "justify",
-                      fontSize: isMobile ? "2.8vw" : "1.2vw",
-                      mt: isMobile ? -2 : 2,
-                      mb: 2,
-                      "& strong": {
-                        fontWeight: 900,
-                        fontSize: isMobile ? "3vw" : "1.2vw",
+                      fontSize: isMobile ? "3vw" : "1vw",
+                      lineHeight: 1.7,
+                      mb: 1.5,
+                      "& strong": { fontWeight: 900 },
+                      "& ul": {
+                        paddingLeft: "1.4em",
+                        margin: "2em 0",
+                        listStyleType: "disc",
+                      },
+                      "& li": {
+                        marginBottom: "0.3em",
+                        fontSize: isMobile ? "3vw" : "1vw",
+                        fontFamily: "Bricolage",
+                        fontWeight: 500,
                       },
                     }}
                     dangerouslySetInnerHTML={{ __html: paragraph }}
@@ -640,12 +700,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   {parsedData.attributes.map((attr, index) => (
                     <Typography
                       key={index}
-                      gutterBottom
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 500,
-                        textAlign: "justify",
-                        fontSize: isMobile ? "2.8vw" : "1vw",
+                        fontSize: isMobile ? "2.8vw" : "0.9vw",
                       }}
                     >
                       {attr}
@@ -653,27 +711,23 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   ))}
                 </Stack>
                 {parsedData.summary && (
-                  <Box>
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        fontFamily: "Bricolage",
-                        fontWeight: 800,
-                        textAlign: isMobile ? "justify" : "start",
-                        fontSize: isMobile ? "3vw" : "1.2vw",
-                        mt: 2,
-                        mb: { xs: -4, md: 2 },
-                      }}
-                      dangerouslySetInnerHTML={{ __html: parsedData.summary }}
-                    />
-                  </Box>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontFamily: "Bricolage",
+                      fontWeight: 800,
+                      fontSize: isMobile ? "3vw" : "1.1vw",
+                      mt: 2,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: parsedData.summary }}
+                  />
                 )}
               </Stack>
             </Stack>
           </Stack>
         </Stack>
 
-        {/* Bottom Section - Product Profile & Tasting Notes */}
+        {/* ── BOTTOM SECTION: Product Profile & Tasting Notes ─────────────── */}
         {parsedData.productProfile.left.length > 0 &&
           parsedData.tastingNotes.left.length > 0 && (
             <Stack
@@ -796,7 +850,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   <Box width="100%">
                     {parsedData.tastingNotes.left.map((label, index) => {
                       const value = parsedData.tastingNotes.right[index];
-
                       return (
                         <Box
                           key={index}
@@ -861,7 +914,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             </Stack>
           )}
 
-        {/* Full Description */}
+        {/* ── Full Description ─────────────────────────────────────────────── */}
         {parsedData.fullDescription && (
           <Box
             width="100%"
