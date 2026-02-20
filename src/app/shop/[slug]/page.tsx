@@ -9,8 +9,8 @@ import { notFound } from "next/navigation";
 import ProductInternalClient from "./ProductInternalClient";
 import { getCanonicalUrl } from "@/lib/seo";
 
-// Enable ISR with 30-minute revalidation for product pages
-export const revalidate = 1800;
+// Revalidate every 60 seconds so product changes from Shopify appear promptly
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{

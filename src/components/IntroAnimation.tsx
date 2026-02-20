@@ -65,11 +65,11 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         scopeCloud.current,
         { scale: 1, x: "-50%", y: "-50%", opacity: 1 },
         {
-          duration: .8,
+          duration: 0.8,
           delay: 0,
           ease: [0.175, 0.885, 0.32, 1.275], // back.out easing
           type: "tween",
-        }
+        },
       );
 
       // Monogram scales in with smooth bounce
@@ -81,18 +81,22 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           duration: 0.6,
           ease: [0.68, 1, 0.265, 1.2], // Smooth elastic ease
           type: "tween",
-        }
+        },
       );
 
       // Now wait for fonts to be ready while pulsing colors
-      const fontsLoaded = document.fonts ? document.fonts.ready : Promise.resolve();
+      const fontsLoaded = document.fonts
+        ? document.fonts.ready
+        : Promise.resolve();
       let fontCheckComplete = false;
-      
-      fontsLoaded.then(() => {
-        fontCheckComplete = true;
-      }).catch(() => {
-        fontCheckComplete = true;
-      });
+
+      fontsLoaded
+        .then(() => {
+          fontCheckComplete = true;
+        })
+        .catch(() => {
+          fontCheckComplete = true;
+        });
 
       // Pulse background colors while waiting for video AND fonts - 2 second duration per color
       let pulseCount = 0;
@@ -103,7 +107,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         await animateIntro(
           scopeIntro.current,
           { backgroundColor: "#B5D782" },
-          { duration: 1.5, ease: [0.45, 0, 0.55, 1] }
+          { duration: 1.5, ease: [0.45, 0, 0.55, 1] },
         );
 
         if ((!videoReady || !fontCheckComplete) && pulseCount < maxPulses - 1) {
@@ -111,7 +115,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           await animateIntro(
             scopeIntro.current,
             { backgroundColor: "#F6A09E" },
-            { duration: 1.5, ease: [0.45, 0, 0.55, 1] }
+            { duration: 1.5, ease: [0.45, 0, 0.55, 1] },
           );
         }
 
@@ -122,7 +126,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
       await animateIntro(
         scopeIntro.current,
         { backgroundColor: theme.palette.primary.main },
-        { duration: 0.6, ease: [0.4, 0, 0.2, 1] } // Material Design easing
+        { duration: 0.6, ease: [0.4, 0, 0.2, 1] }, // Material Design easing
       );
 
       // Slide intro up with buttery smooth transition
@@ -130,7 +134,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
         animateIntro(
           scopeIntro.current,
           { y: "-100vh" },
-          { duration: 1.2, ease: [0.83, 0, 0.17, 1] } // Ultra-smooth power4.out
+          { duration: 1.2, ease: [0.83, 0, 0.17, 1] }, // Ultra-smooth power4.out
         ),
       ];
 
@@ -139,8 +143,8 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           animateNext(
             nextSection.current,
             { y: 0 },
-            { duration: 1.2, ease: [0.83, 0, 0.17, 1] } // Matching smooth ease
-          )
+            { duration: 1.2, ease: [0.83, 0, 0.17, 1] }, // Matching smooth ease
+          ),
         );
       }
 
@@ -221,9 +225,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
           initial={{ scale: 0, x: "-50%", y: "-50%" }}
           sx={{
             position: "absolute",
-            top: "50%",
+            top: "52.5%",
             left: "50%",
-            width: { xs: "65%", sm: "60%" },
+            width: { xs: "65%", sm: "65%" },
             height: "auto",
             willChange: "transform",
           }}

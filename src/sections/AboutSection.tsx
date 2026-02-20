@@ -76,21 +76,25 @@ export const AboutSection = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  mt: 6,
+                  mt: 3,
                   color: "text.secondary",
                   fontSize: { md: "1.2vw" },
                   textAlign: "justify",
                   fontWeight: 500,
                 }}
               >
-                At Umi, we take our matcha seriously, like hillside farms in
-                Japan seriously. We partner up exclusively with certified
-                organic farms in Japan, where matcha is cultivated with care,
-                free from pesticides and harmful additives. Our matcha is
-                harvested during the spring 1st flush from Japan’s most renowned
-                matcha growing regions. Grown with care, it’s 100% organic, free
-                from pesticides and synthetic additives which retains its
-                natural purity and vibrant green color.
+                At Umi, we take matcha seriously like hillside-farm-in-Japan
+                kind of seriously. We have partnered up with small farms across
+                different regions so you can experience incredible matcha beyond
+                just Uji. All our matcha comes from the spring first flush,
+                harvested from some of Japan’s most renowned tea growing areas.
+                <br />
+                <br />
+                Yes, great matcha can be scarce but not where small, tucked-away
+                farms whisper genuine care into each harvest. We strive to bring
+                you new, rare, and cherished cultivars from across Japan,
+                carefully sourced from humble farms who focus on quality above
+                everything else.
               </Typography>
             </Box>
           </Stack>
@@ -222,14 +226,18 @@ export const AboutSection = () => {
                 fontWeight: 500,
               }}
             >
-              At Umi, we take our matcha seriously, like hillside farms in Japan
-              seriously. We partner up exclusively with certified organic farms
-              in Japan, where matcha is cultivated with care, free from
-              pesticides and harmful additives. Our matcha is harvested during
-              the spring 1st flush from Japan’s most renowned matcha growing
-              regions. Grown with care, it’s 100% organic, free from pesticides
-              and synthetic additives which retains its natural purity and
-              vibrant green color.
+              At Umi, we take matcha seriously like hillside-farm-in-Japan kind
+              of seriously. We have partnered up with small farms across
+              different regions so you can experience incredible matcha beyond
+              just Uji. All our matcha comes from the spring first flush,
+              harvested from some of Japan’s most renowned tea growing areas.
+              <br />
+              <br />
+              Yes, great matcha can be scarce but not where small, tucked-away
+              farms whisper genuine care into each harvest. We strive to bring
+              you new, rare, and cherished cultivars from across Japan,
+              carefully sourced from humble farms who focus on quality above
+              everything else.
             </Typography>
           </Box>
 

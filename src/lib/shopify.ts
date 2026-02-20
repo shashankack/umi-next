@@ -410,8 +410,8 @@ async function shopifyFetch<T = unknown>(
   } = {}
 ): Promise<T> {
   const {
-    cache: useCache = true,
-    cacheTTL = 5 * 60 * 1000, // 5 minutes
+    cache: useCache = false, // Disabled by default — rely on Next.js Data Cache
+    cacheTTL = 60 * 1000, // 1 minute (only used when cache is explicitly enabled)
     timeout = 10000, // 10 seconds
     maxRetries = 3,
   } = options;
@@ -443,6 +443,8 @@ async function shopifyFetch<T = unknown>(
           variables,
         }),
         signal: controller.signal,
+        // Tell Next.js Data Cache to revalidate product data every 60 seconds
+        next: isMutation ? undefined : { revalidate: 60 },
       });
 
       clearTimeout(timeoutId);
@@ -468,7 +470,7 @@ async function shopifyFetch<T = unknown>(
         throw new ShopifyApiError("No data returned from Shopify API");
       }
 
-      // Cache successful responses for non-mutations
+      // Cache successful responses in-memory only when explicitly enabled
       if (useCache && !isMutation) {
         cache.set(cacheKey, data.data, cacheTTL);
       }

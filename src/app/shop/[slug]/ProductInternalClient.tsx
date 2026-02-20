@@ -196,6 +196,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             {/* Image Section */}
             <Stack
               width={isMobile ? "100%" : "30vw"}
+              height={600}
               justifyContent="center"
               alignItems="center"
               py={{ xs: 2, md: 0 }}
@@ -318,9 +319,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               gap={isMobile ? 0 : 2}
             >
               <Typography
-                variant="h6"
+                variant="h1"
                 mt={isMobile ? -4 : -4}
-                fontSize={{ xs: "7vw", sm: "50px" }}
+                fontSize={{ xs: "7vw", sm: "40px" }}
                 fontWeight={500}
                 textAlign="start"
                 width="100%"

@@ -72,6 +72,9 @@ const SEOSection = dynamic(() => import("@/sections/SEOSection"), {
   loading: () => null,
 });
 
+// Revalidate every 60 seconds so BestSellers reflect the latest Shopify products
+export const revalidate = 60;
+
 const page = async () => {
   return (
     <>

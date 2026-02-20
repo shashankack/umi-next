@@ -49,8 +49,8 @@ export const metadata = {
   },
 };
 
-// Enable ISR with 1-hour revalidation for better performance
-export const revalidate = 3600;
+// Revalidate every 60 seconds so new Shopify products appear promptly
+export const revalidate = 60;
 
 const categoriesData = [
   { handle: "matcha", title: "Matcha", limit: 12 },
