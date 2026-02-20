@@ -461,7 +461,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         letterSpacing: 0.5,
                       }}
                     >
-                      {`₹ ${Math.floor(currentPrice)}/-`}
+                      {/* {`₹ ${Math.floor(currentPrice)}/-`} */}
+                      COMING SOON
                     </Typography>
                   )}
                 </Box>
