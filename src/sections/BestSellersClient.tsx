@@ -52,16 +52,16 @@ const BestSellersClient = ({
 
   // Filter out "UMI DUO BUNDLE" from both product lists
   const filteredMatchaProducts = matchaProducts.filter(
-    ({ node: product }) => product.title !== "Umi Duo Bundle"
+    ({ node: product }) => product.title !== "Umi Duo Bundle",
   );
   const filteredMatchaWareProducts = matchaWareProducts.filter(
-    ({ node: product }) => product.title !== "Umi Duo Bundle"
+    ({ node: product }) => product.title !== "Umi Duo Bundle",
   );
 
   // Scroll-linked animation for the wave y value
   useEffect(() => {
     // Skip animation only if reduced motion is preferred
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
@@ -241,7 +241,7 @@ const BestSellersClient = ({
             speed={10}
             direction="left"
             fontSize={isMobile ? "16px" : isTablet ? "22px" : "28px"}
-            height={{ xs: 200, sm: 240, md: 200, lg: 200 }}
+            height={{ xs: 190, sm: 240, md: 200, lg: 200 }}
           />
         </Box>
 

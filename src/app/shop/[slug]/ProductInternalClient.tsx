@@ -97,6 +97,9 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     )?.node;
     if (newVariant) {
       setSelectedVariant(newVariant);
+      // Reset quantity if it exceeds new variant's available stock
+      const newQty = newVariant.quantityAvailable ?? 0;
+      setQuantity((prev) => (prev > newQty ? Math.max(1, newQty) : prev));
       // Jump Swiper to the matching image when variant changes
       if (newVariant.image?.url && swiperRef) {
         const idx = product.images.edges.findIndex(
@@ -561,11 +564,13 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       }}
                       MenuProps={menuPropsSx}
                     >
-                      {[...Array(10).keys()].map((i) => (
-                        <MenuItem key={i + 1} value={i + 1}>
-                          {i + 1}
-                        </MenuItem>
-                      ))}
+                      {[...Array(Math.min(quantityAvailable, 10)).keys()].map(
+                        (i) => (
+                          <MenuItem key={i + 1} value={i + 1}>
+                            {i + 1}
+                          </MenuItem>
+                        ),
+                      )}
                     </Select>
                   </Box>
                 )}
