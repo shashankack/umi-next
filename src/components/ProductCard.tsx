@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { slugify } from "../lib/slug";
 import { useCart } from "@/context/CartContext";
 import {
   handleAddToCart,
@@ -36,6 +35,7 @@ type ProductVariant = {
 type Product = {
   id: string;
   title: string;
+  handle: string;
   featuredImage?: ProductImage;
   images?: {
     edges: { node: ProductImage }[];
@@ -74,7 +74,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const { addItem, cart, isLoading } = useCart();
 
-  const slug = slugify(product.title);
+  const slug = product.handle;
   const height =
     typeof size === "object"
       ? Object.fromEntries(

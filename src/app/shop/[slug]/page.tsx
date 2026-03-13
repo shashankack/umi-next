@@ -1,10 +1,5 @@
 import { Metadata } from "next";
-import { getProductBySlug } from "@/lib/shopify";
-import {
-  extractPageTitle,
-  extractPageDescription,
-  extractPageKeywords,
-} from "@/lib/htmlParsers";
+import { getProductByHandle, getAllProducts } from "@/lib/shopify";
 import { notFound } from "next/navigation";
 import ProductInternalClient from "./ProductInternalClient";
 import { getCanonicalUrl } from "@/lib/seo";
@@ -21,7 +16,7 @@ interface Props {
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const product = await getProductByHandle(slug);
 
   if (!product) {
     return {
@@ -29,10 +24,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const pageTitle = extractPageTitle(product.descriptionHtml) || product.title;
-  const pageDescription =
-    extractPageDescription(product.descriptionHtml) || product.description;
-  const pageKeywords = extractPageKeywords(product.descriptionHtml);
+  // Use Shopify SEO fields (set in product admin → SEO section)
+  const pageTitle = product.seo?.title || product.title;
+  const pageDescription = product.seo?.description || product.description;
+  // Keywords: add tags prefixed with "kw:" in Shopify admin (e.g. "kw:ceremonial matcha")
+  // This keeps functional tags (bestseller, limited) separate from SEO keywords
+  const keywords = product.tags
+    .filter((tag) => tag.toLowerCase().startsWith("kw:"))
+    .map((tag) => tag.slice(3).trim())
+    .filter(Boolean);
+  if (keywords.length === 0) keywords.push(product.title, "matcha", "Umi Matcha");
 
   const image = product.featuredImage?.url || product.images.edges[0]?.node.url;
   const price = product.priceRange.minVariantPrice;
@@ -40,11 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${pageTitle} | Umi Matcha`,
     description: pageDescription,
-    keywords: pageKeywords?.split(",").map((k) => k.trim()) || [
-      product.title,
-      "matcha",
-      "Umi Matcha",
-    ],
+    keywords,
     alternates: {
       canonical: getCanonicalUrl(`shop/${slug}`),
     },
@@ -75,27 +72,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Pre-generate pages for popular products at build time
+// Pre-generate pages for all products at build time using their Shopify URL handles
 export async function generateStaticParams() {
-  // Add your best-selling product slugs here
-  // This pre-generates these pages at build time for instant loading
-  return [
-    { slug: 'ceremonial-matcha-30g' },
-    { slug: 'ceremonial-matcha-100g' },
-    { slug: 'matcha-whisk-bamboo-chasen' },
-    { slug: 'matcha-bowl-chawan' },
-    { slug: 'matcha-spoon-chashaku' },
-    { slug: 'umi-starter-kit' },
-    // Add more product slugs as needed
-  ];
+  try {
+    const productsData = await getAllProducts(250);
+    return productsData.edges.map(({ node }) => ({ slug: node.handle }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  // console.log("Fetching product with slug:", slug);
 
-  const product = await getProductBySlug(slug);
-  // console.log("Product fetched:", product ? product.title : "Not found");
+  const product = await getProductByHandle(slug);
 
   if (!product) {
     notFound();

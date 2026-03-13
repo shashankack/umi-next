@@ -31,7 +31,6 @@ import {
   generateProductSchema,
   generateBreadcrumbSchema,
 } from "@/lib/structuredData";
-import { slugify } from "@/lib/slug";
 import Link from "next/link";
 
 interface ProductInternalClientProps {
@@ -139,7 +138,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     { name: "Shop", url: "https://umimatchashop.com/shop" },
     {
       name: product.title,
-      url: `https://umimatchashop.com/shop/${slugify(product.title)}`,
+      url: `https://umimatchashop.com/shop/${product.handle}`,
     },
   ]);
 
@@ -165,7 +164,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
         borderRadius: 2,
         "& .MuiMenuItem-root": {
           fontFamily: "Bricolage",
-          fontSize: isMobile ? "3.5vw" : "0.9vw",
+          fontSize: { xs: "3.5vw", md: "0.9vw" },
           "&:hover": {
             backgroundColor: theme.palette.text.secondary,
             color: theme.palette.background.default,
@@ -195,21 +194,21 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
         bgcolor={theme.palette.secondary.main}
         width="100%"
         minHeight="100vh"
-        pt={isMobile ? 10 : 10}
+        pt={{ xs: 10, md: 10 }}
       >
         {/* ── TOP SECTION ─────────────────────────────────────────────────── */}
         <Stack
           width="100%"
-          px={isMobile ? 2 : 8}
-          pt={isMobile ? 6 : 8}
-          pb={isMobile ? 4 : 6}
-          mb={parsedData.productProfile.left.length > 0 ? 0 : 4}
+          px={{ xs: 2, md: 8 }}
+          pt={{ xs: 8, md: 10 }}
+          pb={{ xs: 0, md: 10 }}
+          mb={parsedData.productProfile.left.length > 0 ? -8 : 8}
         >
           {/* Breadcrumb */}
           <Stack
             direction="row"
             gap={1}
-            mb={isMobile ? 3 : 4}
+            mb={{ xs: 1, md: 4 }}
             alignItems="center"
           >
             {[
@@ -223,7 +222,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     <Typography
                       sx={{
                         fontFamily: "Bricolage",
-                        fontSize: isMobile ? "2.8vw" : "0.75vw",
+                        fontSize: { xs: "3vw", md: "0.75vw" },
                         fontWeight: 400,
                         color: `#fd918fff`,
                         textTransform: "capitalize",
@@ -241,7 +240,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   <Typography
                     sx={{
                       fontFamily: "Bricolage",
-                      fontSize: isMobile ? "2.8vw" : "0.75vw",
+                      fontSize: { xs: "3.4vw", md: "0.75vw" },
                       fontWeight: 700,
                       color: theme.palette.background.default,
                       textTransform: "capitalize",
@@ -255,7 +254,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   <Typography
                     sx={{
                       color: `${theme.palette.background.default}66`,
-                      fontSize: isMobile ? "2.5vw" : "0.75vw",
+                      fontSize: { xs: "2.5vw", md: "0.75vw" },
                     }}
                   >
                     /
@@ -267,13 +266,13 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
           {/* Two-column layout */}
           <Stack
-            direction={isMobile ? "column" : "row"}
-            gap={isMobile ? 4 : 8}
-            alignItems={isMobile ? "stretch" : "flex-start"}
+            direction={{ xs: "column", md: "row" }}
+            gap={{ xs: 4, md: 8 }}
+            alignItems={{ xs: "stretch", md: "flex-start" }}
           >
             {/* ── LEFT: Image Swiper ───────────────────────────────────── */}
             <Box
-              width={isMobile ? "100%" : "48%"}
+              width={{ xs: "100%", md: "48%" }}
               flexShrink={0}
               sx={
                 isMobile
@@ -284,10 +283,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Box
                 sx={{
                   position: "relative",
-                  borderRadius: 4,
+                  borderRadius: { xs: 4, md: 8 },
                   bgcolor: theme.palette.background.default,
                   overflow: "hidden",
-                  height: isMobile ? 340 : 540,
+                  height: { xs: 340, md: 540 },
                   // Swiper pagination dots
                   "& .swiper-pagination": {
                     bottom: "12px",
@@ -402,7 +401,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: isMobile ? "7vw" : "clamp(28px, 2.2vw, 48px)",
+                  fontSize: { xs: "7vw", md: "clamp(28px, 2.2vw, 48px)" },
                   fontWeight: 700,
                   letterSpacing: 1,
                   lineHeight: 1.15,
@@ -419,10 +418,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   sx={{
                     fontFamily: "Bricolage",
                     fontWeight: 500,
-                    fontSize: isMobile ? "3.2vw" : "1vw",
-                    lineHeight: 1.1,
+                    fontSize: { xs: "3.4vw", md: "1.2rem" },
+                    lineHeight: { xs: 1.1, md: 0.8 },
                     opacity: 0.85,
                     mb: 2,
+                    mt: { xs: 3, md: 2 },
                   }}
                   dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
                 />
@@ -443,7 +443,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 800,
-                        fontSize: isMobile ? "5vw" : "1.2vw",
+                        fontSize: { xs: "5vw", md: "1.2vw" },
                         color: theme.palette.text.secondary,
                         bgcolor: theme.palette.background.default,
                         display: "inline-block",
@@ -460,7 +460,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 800,
-                        fontSize: isMobile ? "6vw" : "1.8vw",
+                        fontSize: { xs: "6vw", md: "1.8vw" },
                         letterSpacing: 0.5,
                       }}
                     >
@@ -477,7 +477,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   <Typography
                     sx={{
                       fontFamily: "Bricolage",
-                      fontSize: isMobile ? "3vw" : "0.8vw",
+                      fontSize: { xs: "3vw", md: "0.8vw" },
                       fontWeight: 600,
                       opacity: 0.7,
                       mb: 1,
@@ -535,7 +535,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     <Typography
                       sx={{
                         fontFamily: "Bricolage",
-                        fontSize: isMobile ? "3vw" : "0.8vw",
+                        fontSize: { xs: "3vw", md: "0.8vw" },
                         fontWeight: 600,
                         opacity: 0.7,
                         mb: 1,
@@ -553,7 +553,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         ...selectSx,
                         minWidth: 80,
-                        fontSize: isMobile ? "0.8rem" : "0.9vw",
+                        fontSize: { xs: "0.8rem", md: "0.9vw" },
                         "&:hover": {
                           backgroundColor: theme.palette.text.secondary,
                           color: theme.palette.background.default,
@@ -575,7 +575,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   </Box>
                 )}
 
-                <Box flex={isMobile ? 1 : "unset"} alignSelf="flex-end">
+                <Box flex={{ xs: 1, md: "unset" }} alignSelf="flex-end">
                   <Button
                     onClick={handleAddToCart}
                     variant="contained"
@@ -592,8 +592,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     sx={{
                       fontFamily: "Bricolage",
                       fontWeight: 600,
-                      fontSize: isMobile ? "0.85rem" : "1rem",
-                      px: isMobile ? 3 : 4,
+                      fontSize: { xs: "0.85rem", md: "1rem" },
+                      px: { xs: 3, md: 4 },
                       py: 1.25,
                       backgroundColor: theme.palette.background.default,
                       color: theme.palette.text.secondary,
@@ -655,11 +655,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     {weightDisplay && (
                       <Typography
                         sx={{
-                          px: isMobile ? "10px" : "20px",
-                          py: isMobile ? "6px" : "8px",
+                          px: { xs: "10px", md: "20px" },
+                          py: { xs: "6px", md: "8px" },
                           fontFamily: "Bricolage",
                           fontWeight: 500,
-                          fontSize: isMobile ? "2.8vw" : "0.8vw",
+                          fontSize: { xs: "2.8vw", md: "0.8vw" },
                           borderRadius: 2,
                           color: theme.palette.text.secondary,
                           bgcolor: theme.palette.background.default,
@@ -683,9 +683,8 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       fontFamily: "Bricolage",
                       fontWeight: 500,
                       textAlign: "justify",
-                      fontSize: isMobile ? "3vw" : "1vw",
+                      fontSize: { xs: "3vw", md: "1vw" },
                       lineHeight: 1.7,
-                      mb: 1.5,
                       "& strong": { fontWeight: 900 },
                       "& ul": {
                         paddingLeft: "1.4em",
@@ -694,7 +693,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       },
                       "& li": {
                         marginBottom: "0.3em",
-                        fontSize: isMobile ? "3vw" : "1vw",
+                        fontSize: { xs: "3vw", md: "1vw" },
                         fontFamily: "Bricolage",
                         fontWeight: 500,
                       },
@@ -709,7 +708,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 500,
-                        fontSize: isMobile ? "2.8vw" : "0.9vw",
+                        fontSize: { xs: "2.8vw", md: "0.9vw" },
                       }}
                     >
                       {attr}
@@ -722,7 +721,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     sx={{
                       fontFamily: "Bricolage",
                       fontWeight: 800,
-                      fontSize: isMobile ? "3vw" : "1.1vw",
+                      fontSize: { xs: "3vw", md: "1.1vw" },
                       mt: 2,
                     }}
                     dangerouslySetInnerHTML={{ __html: parsedData.summary }}
@@ -757,20 +756,20 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   variant="h4"
                   fontFamily="Gliker"
                   textTransform="capitalize"
-                  fontSize={isMobile ? "5vw" : "2vw"}
+                  fontSize={{ xs: "5vw", md: "2vw" }}
                 >
                   product profile
                 </Typography>
 
                 <Box
-                  width={isMobile ? "100%" : "50vw"}
-                  height={isMobile ? "auto" : 550}
+                  width={{ xs: "100%", md: "50vw" }}
+                  height={{ xs: "auto", md: 550 }}
                   position="relative"
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   border={`4px solid ${theme.palette.text.secondary}`}
-                  borderRadius={isMobile ? 2 : 8}
+                  borderRadius={{ xs: 2, md: 8 }}
                   fontFamily="Bricolage"
                   overflow="hidden"
                 >
@@ -778,9 +777,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     sx={{
                       backgroundColor: theme.palette.background.default,
                       overflow: "hidden",
-                      borderRadius: isMobile
-                        ? "4px 0 4px 4px"
-                        : "28px 0 28px 28px",
+                      borderRadius: {
+                        xs: "4px 0 4px 4px",
+                        md: "28px 0 28px 28px",
+                      },
                       width: "100%",
                       height: "100%",
                     }}
@@ -837,18 +837,18 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   variant="h4"
                   fontFamily="Gliker"
                   textTransform="capitalize"
-                  fontSize={isMobile ? "5vw" : "2vw"}
+                  fontSize={{ xs: "5vw", md: "2vw" }}
                 >
                   tasting notes
                 </Typography>
                 <Box
-                  borderRadius={isMobile ? 4 : 8}
+                  borderRadius={{ xs: 4, md: 8 }}
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   flexDirection="column"
-                  width={isMobile ? "100%" : "40vw"}
-                  height={550}
+                  width={{ xs: "100%", md: "40vw" }}
+                  height={{ xs: "auto", md: 550 }}
                   sx={{
                     backgroundColor: theme.palette.secondary.main,
                   }}
@@ -885,7 +885,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                               width: "90%",
                               borderRadius: 6,
                               "&.Mui-disabled": {
-                                height: isMobile ? "100%" : "auto",
+                                height: { xs: "100%", md: "auto" },
                                 color: theme.palette.text.secondary,
                                 backgroundColor:
                                   theme.palette.background.default,

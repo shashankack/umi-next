@@ -22,6 +22,7 @@ type ProductImage = {
 
 type Product = {
   id: string;
+  handle: string;
   title: string;
   featuredImage?: ProductImage;
   images?: {

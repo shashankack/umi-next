@@ -31,7 +31,6 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { searchProducts } from "@/lib/shopify";
 import type { Product } from "@/lib/shopify";
-import { slugify } from "@/lib/slug";
 
 export default function SearchDrawer({
   open,
@@ -116,9 +115,9 @@ export default function SearchDrawer({
 
   // If a product object is passed, go to its product page; otherwise, go to search page
   const goSearch = useCallback(
-    (termOrProduct?: string | { title?: string }) => {
-      if (typeof termOrProduct === "object" && termOrProduct?.title) {
-        router.push(`/shop/${slugify(termOrProduct.title)}`);
+    (termOrProduct?: string | { handle?: string; title?: string }) => {
+      if (typeof termOrProduct === "object" && termOrProduct?.handle) {
+        router.push(`/shop/${termOrProduct.handle}`);
         close();
         return;
       }

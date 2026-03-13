@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
 import { getAllProducts, getLatestArticles } from '@/lib/shopify';
-import { slugify } from '@/lib/slug';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://umimatchashop.com';
@@ -38,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           return null;
         }
         return {
-          url: `${baseUrl}/shop/${slugify(product.title)}`,
+          url: `${baseUrl}/shop/${product.handle}`,
           lastModified,
           changeFrequency: 'weekly' as const,
           priority: 0.7,

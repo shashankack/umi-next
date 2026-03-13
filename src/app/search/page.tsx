@@ -14,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import { searchProducts } from "@/lib/shopify";
 import type { Product } from "@/lib/shopify";
-import { slugify } from "@/lib/slug";
 import { alpha } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -164,12 +163,12 @@ export default function SearchPage() {
                 role="link"
                 tabIndex={0}
                 aria-label={`Open ${p.title}`}
-                onClick={() => router.push(`/shop/${slugify(p.title)}`)}
+                onClick={() => router.push(`/shop/${p.handle}`)}
                 disableRipple
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    router.push(`/shop/${slugify(p.title)}`);
+                    router.push(`/shop/${p.handle}`);
                   }
                 }}
                 sx={{
