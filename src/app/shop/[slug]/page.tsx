@@ -37,9 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const image = product.featuredImage?.url || product.images.edges[0]?.node.url;
   const price = product.priceRange.minVariantPrice;
+  const titleWithBrand = /\bumi\s*matcha\b/i.test(pageTitle)
+    ? pageTitle
+    : `${pageTitle} | Umi Matcha`;
 
   return {
-    title: `${pageTitle} | Umi Matcha`,
+    // Use absolute title so root layout template does not append another suffix.
+    title: { absolute: titleWithBrand },
     description: pageDescription,
     keywords,
     alternates: {

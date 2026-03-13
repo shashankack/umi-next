@@ -14,7 +14,7 @@ import Footer from "@/components/Footer";
 import GlobalLoader from "@/components/GlobalLoader";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://umimatchashop.com"),
+  metadataBase: new URL("https://www.umimatchashop.com"),
   title: {
     default: "Umi Matcha - Best Organic Matcha from Japan in India",
     template: "%s | Umi Matcha",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://umimatchashop.com",
+    url: "https://www.umimatchashop.com",
     siteName: "Umi Matcha",
     title: "Umi Matcha - Best Organic Matcha from Japan in India",
     description:

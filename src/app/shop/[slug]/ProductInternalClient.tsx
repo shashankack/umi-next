@@ -134,11 +134,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   // Generate structured data
   const productSchema = generateProductSchema(product);
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "https://umimatchashop.com" },
-    { name: "Shop", url: "https://umimatchashop.com/shop" },
+    { name: "Home", url: "https://www.umimatchashop.com" },
+    { name: "Shop", url: "https://www.umimatchashop.com/shop" },
     {
       name: product.title,
-      url: `https://umimatchashop.com/shop/${product.handle}`,
+      url: `https://www.umimatchashop.com/shop/${product.handle}`,
     },
   ]);
 

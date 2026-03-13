@@ -2,7 +2,7 @@
  * SEO utility functions for generating canonical URLs and metadata
  */
 
-const BASE_URL = "https://umimatchashop.com";
+const BASE_URL = "https://www.umimatchashop.com";
 
 /**
  * Generate canonical URL for a given path

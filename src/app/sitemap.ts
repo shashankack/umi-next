@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllProducts, getLatestArticles } from '@/lib/shopify';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://umimatchashop.com';
+  const baseUrl = 'https://www.umimatchashop.com';
 
   // Static routes
   const staticRoutes = [

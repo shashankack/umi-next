@@ -5,8 +5,8 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Umi Matcha',
-    url: 'https://umimatchashop.com',
-    logo: 'https://umimatchashop.com/images/icons/pink_logo.png',
+    url: 'https://www.umimatchashop.com',
+    logo: 'https://www.umimatchashop.com/images/icons/pink_logo.png',
     description: 'Premium organic matcha from 300+ year old farms in Wazuka, Japan. Kinder rituals that fill your cup.',
     contactPoint: {
       '@type': 'ContactPoint',
@@ -32,11 +32,11 @@ export function generateWebsiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Umi Matcha',
-    url: 'https://umimatchashop.com',
+    url: 'https://www.umimatchashop.com',
     description: 'Premium organic matcha from Japan. Shop ceremonial grade matcha, accessories, and bundles.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://umimatchashop.com/shop?search={search_term_string}',
+      target: 'https://www.umimatchashop.com/shop?search={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
@@ -63,7 +63,7 @@ export function generateProductSchema(product: Product) {
       availability: product.availableForSale
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      url: `https://umimatchashop.com/shop/${product.handle}`,
+      url: `https://www.umimatchashop.com/shop/${product.handle}`,
     },
   };
 }
@@ -99,7 +99,7 @@ export function generateArticleSchema(article: Article) {
       name: 'Umi Matcha',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://umimatchashop.com/images/icons/pink_logo.png',
+        url: 'https://www.umimatchashop.com/images/icons/pink_logo.png',
       },
     },
   };
