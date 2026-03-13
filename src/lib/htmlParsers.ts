@@ -203,30 +203,6 @@ function extractTableDataServer(html: string, className: string): { left: string
 // ========== INDIVIDUAL PARSER FUNCTIONS (For specific use cases) ==========
 
 /**
- * Extract page title for SEO
- */
-export function extractPageTitle(descriptionHtml: string): string | null {
-  const parsed = parseProductDescription(descriptionHtml);
-  return parsed.pageTitle;
-}
-
-/**
- * Extract page description for SEO
- */
-export function extractPageDescription(descriptionHtml: string): string | null {
-  const parsed = parseProductDescription(descriptionHtml);
-  return parsed.pageDescription;
-}
-
-/**
- * Extract page keywords for SEO
- */
-export function extractPageKeywords(descriptionHtml: string): string | null {
-  const parsed = parseProductDescription(descriptionHtml);
-  return parsed.pageKeywords;
-}
-
-/**
  * Extract tagline
  */
 export function extractTagline(descriptionHtml: string): string | null {

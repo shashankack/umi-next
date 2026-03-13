@@ -17,7 +17,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
   const [scopeIntro, animateIntro] = useAnimate();
   const [scopeCloud, animateCloud] = useAnimate();
   const [scopeMonogram, animateMonogram] = useAnimate();
-  const [scopeNext, animateNext] = useAnimate();
+  const [, animateNext] = useAnimate();
 
   // Check immediately to avoid flash of intro screen
   const hasPlayed =
@@ -27,9 +27,6 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
 
   useEffect(() => {
     if (hasPlayed) {
-      if (nextSection.current) {
-        nextSection.current.style.transform = "translateY(0)";
-      }
       return;
     }
 
@@ -158,6 +155,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({
 
     runAnimation();
   }, [
+    hasPlayed,
     videoReady,
     nextSection,
     theme.palette.primary.main,

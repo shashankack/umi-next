@@ -7,7 +7,6 @@ import {
   Typography,
   Card,
   CardContent,
-  Chip,
   Grid,
   Alert,
 } from "@mui/material";
@@ -16,7 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Article } from "@/lib/shopify";
 import { blogHelpers } from "@/lib/shopify";
-import { FiClock, FiCalendar, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 interface BlogsClientProps {
   initialArticles: Article[];

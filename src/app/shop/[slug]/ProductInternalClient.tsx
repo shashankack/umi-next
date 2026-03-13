@@ -45,7 +45,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const { addItem, isLoading } = useCart();
 
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
@@ -308,7 +307,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   modules={[Navigation, Pagination]}
                   pagination={{ clickable: true }}
                   onSwiper={setSwiperRef}
-                  onSlideChange={(s) => setActiveIndex(s.realIndex)}
                   style={{ width: "100%", height: "100%" }}
                   loop={product.images.edges.length > 1}
                 >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function ShopClientWrapper({
   children,
@@ -9,7 +9,6 @@ export default function ShopClientWrapper({
   children: React.ReactNode;
 }) {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   useEffect(() => {
     // Check if there's a hash in the URL on mount or when searchParams change

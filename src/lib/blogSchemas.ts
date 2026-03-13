@@ -20,7 +20,7 @@ type RecipeSchema = {
 
 type BlogSchema = {
   "@context": "https://schema.org/";
-  "@graph": Array<RecipeSchema | any>; // Can add more types as needed
+  "@graph": Array<RecipeSchema | Record<string, unknown>>;
 };
 
 // Schema configurations for different articles

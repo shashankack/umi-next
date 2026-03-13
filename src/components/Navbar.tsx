@@ -26,7 +26,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [hideOnScroll, setHideOnScroll] = useState(false);
   const lastScrollY = useRef(0);
   const { itemCount } = useCart();
@@ -45,7 +44,6 @@ export default function Navbar() {
   const isTransparentPage = isHomePage || isArticlePage;
 
   useEffect(() => {
-    setMounted(true);
     // Lazy preload non-critical images using requestIdleCallback
     const preloadImages = () => {
       const images = [
@@ -113,7 +111,7 @@ export default function Navbar() {
       elevation={0}
       sx={{
         backgroundColor: shouldBeTransparent ? "transparent" : "secondary.main",
-        transition: mounted ? "background-color 0.3s, transform 0.3s" : "none",
+        transition: "background-color 0.3s, transform 0.3s",
         px: { xs: 0, md: 3 },
         py: { xs: 4, md: 2 },
         transform: hideOnScroll ? "translateY(-110%)" : "translateY(0)",

@@ -815,30 +815,6 @@ export async function getProductByHandle(
   return data.product;
 }
 
-// 2.5. Fetch product by slug (matches against slugified title)
-export async function getProductBySlug(slug: string): Promise<Product | null> {
-  // Import slugify function
-  const slugify = (text: string) => {
-    return text
-      .toString()
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036F]/g, "") // Remove accents
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, "-") // Replace non-alphanumeric with hyphens
-      .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
-  };
-
-  // Fetch all products and find matching slug
-  const products = await getAllProducts(250, null, null, true); // Get up to 250 products
-
-  const matchedProduct = products.edges.find(({ node }) => {
-    return slugify(node.title) === slug;
-  });
-
-  return matchedProduct?.node || null;
-}
-
 // 3. Fetch single product by ID (always detailed)
 export async function getProductById(id: string): Promise<Product | null> {
   const GET_PRODUCT_BY_ID = `
@@ -1973,7 +1949,6 @@ const shopifyClient = {
   // Core API functions
   getAllProducts,
   getProductByHandle,
-  getProductBySlug,
   getProductById,
   searchProducts,
   createCart,

@@ -157,7 +157,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
                 <ListItemButton
                   component={Link}
                   href={link.path}
-                  onClick={(e) => {
+                  onClick={() => {
                     // Trigger loading state
                     const event = new CustomEvent('routeChangeStart');
                     window.dispatchEvent(event);

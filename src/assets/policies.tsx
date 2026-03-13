@@ -69,7 +69,7 @@ suspension or discontinuance of the Service.
       content: `
         Certain products or Services may be available exclusively online through the website. These
 products or Services may have limited quantities and are subject to return or exchange only
-according to our Refund Policy: <a href=""https://umimatchashop.com/refund-policy>Refund Policy </a> <br/><br/>
+according to our Refund Policy: <a href="https://www.umimatchashop.com/policies/refund-policy">Refund Policy</a> <br/><br/>
 We have made every effort to display as accurately as possible the colors and images of our
 products that appear at the store. We cannot guarantee that your computer monitor's display
 of any color will be accurate. <br/><br/>

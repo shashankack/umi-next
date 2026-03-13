@@ -6,7 +6,6 @@ import Image from "next/image";
 
 export default function GlobalLoader() {
   const [loading, setLoading] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -16,7 +15,6 @@ export default function GlobalLoader() {
     const preloadIcon = () => {
       const img = new window.Image();
       img.src = "/images/neko/slider_thumb.png";
-      img.onload = () => setIsReady(true);
     };
 
     if ('requestIdleCallback' in window) {
