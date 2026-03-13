@@ -14,12 +14,23 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import NextImage from "next/image";
+import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
-import MenuDrawer from "@/components/drawers/MenuDrawer";
-import CartDrawer from "@/components/drawers/CartDrawer";
-import SearchDrawer from "@/components/drawers/SearchDrawer";
 import { useCart } from "@/context/CartContext";
+
+const MenuDrawer = dynamic(() => import("@/components/drawers/MenuDrawer"), {
+  ssr: false,
+});
+const CartDrawer = dynamic(() => import("@/components/drawers/CartDrawer"), {
+  ssr: false,
+});
+const SearchDrawer = dynamic(
+  () => import("@/components/drawers/SearchDrawer"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -484,7 +495,7 @@ export default function Navbar() {
           </Box>
         </Stack>
       </Toolbar>
-      {/* Mobile: Drawer for menu (unchanged) */}
+      {/* Mobile: Drawer for menu */}
       {isMobile && (
         <MenuDrawer
           open={menuOpen}
@@ -501,7 +512,7 @@ export default function Navbar() {
       )}
       {/* Search Drawer */}
       <SearchDrawer open={searchOpen} onClose={() => setSearchOpen(false)} />
-      {/* Cart Drawer (always available) */}
+      {/* Cart Drawer */}
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </AppBar>
   );

@@ -26,8 +26,10 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
   const [showShopSubmenu, setShowShopSubmenu] = useState(false);
   const [imagesLoaded, setImagesLoaded] = React.useState(false);
 
-  // Preload images when component mounts
+  // Preload background assets only when opening the drawer.
   React.useEffect(() => {
+    if (!open || imagesLoaded) return;
+
     const preloadImages = async () => {
       const images = [
         '/images/backgrounds/navbar_bg.webp',
@@ -46,8 +48,8 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ open, onClose, navLinks }) => {
       );
       setImagesLoaded(true);
     };
-    preloadImages();
-  }, []);
+    void preloadImages();
+  }, [open, imagesLoaded]);
 
   // Define the shop categories that match your shop page sections
   const shopCategories = [

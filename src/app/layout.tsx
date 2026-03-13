@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import "./globals.css";
 import { ReactNode } from "react";
+import dynamic from "next/dynamic";
 import ThemeRegistry from "@/components/ThemeRegistry";
 import { CartProvider } from "@/context/CartContext";
 import { Metadata } from "next";
@@ -11,7 +12,8 @@ import {
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import GlobalLoader from "@/components/GlobalLoader";
+
+const GlobalLoader = dynamic(() => import("@/components/GlobalLoader"));
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.umimatchashop.com"),
