@@ -399,7 +399,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "7vw", md: "clamp(28px, 2.2vw, 48px)" },
+                  fontSize: { xs: "6vw", md: "clamp(28px, 2.2vw, 48px)" },
                   fontWeight: 700,
                   letterSpacing: 1,
                   lineHeight: 1.15,
@@ -458,7 +458,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 800,
-                        fontSize: { xs: "6vw", md: "1.8vw" },
+                        fontSize: { xs: "5vw", md: "1.2vw" },
                         letterSpacing: 0.5,
                       }}
                     >
@@ -699,13 +699,13 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     dangerouslySetInnerHTML={{ __html: paragraph }}
                   />
                 ))}
-                <Stack direction="row" gap={4} flexWrap="wrap">
+                <Stack direction="row" gap={2} flexWrap="wrap" mt={2}>
                   {parsedData.attributes.map((attr, index) => (
                     <Typography
                       key={index}
                       sx={{
                         fontFamily: "Bricolage",
-                        fontWeight: 500,
+                        fontWeight: 600,
                         fontSize: { xs: "2.8vw", md: "0.9vw" },
                       }}
                     >
