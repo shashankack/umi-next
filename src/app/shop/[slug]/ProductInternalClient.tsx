@@ -399,7 +399,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "6vw", md: "clamp(28px, 2.2vw, 48px)" },
+                  fontSize: { xs: "5vw", md: "clamp(28px, 2.2vw, 48px)" },
                   fontWeight: 700,
                   letterSpacing: 1,
                   lineHeight: 1.15,
@@ -429,7 +429,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
               <Divider
                 sx={{
                   borderColor: `${theme.palette.background.default}33`,
-                  mb: 3,
+                  mb: { xs: 1, md: 3 },
                 }}
               />
 
@@ -458,7 +458,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       sx={{
                         fontFamily: "Bricolage",
                         fontWeight: 800,
-                        fontSize: { xs: "5vw", md: "1.2vw" },
+                        fontSize: { xs: "4vw", md: "1.2vw" },
                         letterSpacing: 0.5,
                       }}
                     >
