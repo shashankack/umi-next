@@ -176,6 +176,7 @@ export default function FarmToFoamClient() {
                   fontWeight: 400,
                   boxShadow: "none",
                   textTransform: "none",
+                  fontSize: { xs: "2.6vw", md: "1.2vw" },
                   mt: -2,
                 }}
                 onClick={() => setShowMore(true)}

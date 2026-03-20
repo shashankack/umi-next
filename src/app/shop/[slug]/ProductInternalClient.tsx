@@ -416,11 +416,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   sx={{
                     fontFamily: "Bricolage",
                     fontWeight: 500,
-                    fontSize: { xs: "3.4vw", md: "1.2rem" },
-                    lineHeight: { xs: 1.1, md: 0.8 },
+                    fontSize: { xs: "3vw", md: "1vw" },
+                    lineHeight: { xs: 1, md: 0.8 },
                     opacity: 0.85,
                     mb: 2,
-                    mt: { xs: 3, md: 2 },
+                    mt: { xs: 1, md: 2 },
                   }}
                   dangerouslySetInnerHTML={{ __html: parsedData.tagline }}
                 />
@@ -851,7 +851,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     backgroundColor: theme.palette.secondary.main,
                   }}
                 >
-                  <Box width="100%">
+                  <Box width="100%" py={2}>
                     {parsedData.tastingNotes.left.map((label, index) => {
                       const value = parsedData.tastingNotes.right[index];
                       return (
