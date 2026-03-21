@@ -403,7 +403,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   fontWeight: 700,
                   letterSpacing: 1,
                   lineHeight: 1.15,
-                  textShadow: `1px 4px 0px ${theme.palette.text.secondary}`,
+                  textShadow: {
+                    xs: `1px 2px 0px ${theme.palette.text.secondary}`,
+                    md: `1px 4px 0px ${theme.palette.text.secondary}`,
+                  },
                   mb: 1,
                 }}
               >
