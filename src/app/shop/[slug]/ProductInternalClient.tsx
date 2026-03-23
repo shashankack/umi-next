@@ -285,7 +285,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   borderRadius: { xs: 4, md: 8 },
                   bgcolor: theme.palette.background.default,
                   overflow: "hidden",
-                  height: { xs: 340, md: 540 },
+                  width: "100%",
+                  aspectRatio: "3 / 2",
+                  minHeight: { xs: 280, md: 420 },
+                  maxHeight: { xs: 440, md: 620 },
                   // Swiper pagination dots
                   "& .swiper-pagination": {
                     bottom: "12px",
@@ -327,8 +330,11 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                           src={image.node.url}
                           alt={`${product.title} ${i + 1}`}
                           fill
-                          sizes="(max-width: 768px) 100vw, 48vw"
-                          style={{ objectFit: "contain", padding: "16px" }}
+                          sizes="(max-width: 900px) 92vw, 48vw"
+                          style={{
+                            objectFit: "contain",
+                            padding: isMobile ? "12px" : "18px",
+                          }}
                           priority={i === 0}
                           loading={i === 0 ? "eager" : "lazy"}
                         />
