@@ -95,7 +95,11 @@ export default function SearchDrawer({
               .map((e) => e.node)
               // Filter to only show products that actually contain the search keyword
               .filter((p) => {
-                const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""}`.toLowerCase();
+                const tags = Array.isArray(p.tags) ? p.tags : [];
+                const tagsWithoutKwPrefix = tags
+                  .map((tag) => tag.replace(/^kw:/i, "").trim())
+                  .join(" ");
+                const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""} ${tags.join(" ")} ${tagsWithoutKwPrefix}`.toLowerCase();
                 return searchText.includes(keyword.toLowerCase());
               })
           : [];

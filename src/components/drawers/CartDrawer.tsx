@@ -187,7 +187,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                       }}
                     >
                       <Image
-                        src={line.variant.image?.url || "/api/placeholder/80/80"}
+                        src={
+                          line.variant.image?.url || "/api/placeholder/80/80"
+                        }
                         alt={line.product.title}
                         fill
                         style={{ objectFit: "cover", borderRadius: "8px" }}
@@ -218,21 +220,32 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                       </Link>
 
                       {/* Variant Options */}
-                      {line.variant.selectedOptions.map((option) => (
-                        <Typography
-                          key={option.name}
-                          variant="body2"
-                          sx={{
-                            fontFamily: "Bricolage",
-                            fontSize: { xs: "3.5vw", md: "0.85vw" },
-                            fontWeight: 400,
-                            color: theme.palette.secondary.main,
-                            mt: 0.2,
-                          }}
-                        >
-                          {option.name}: {option.value}
-                        </Typography>
-                      ))}
+                      {line.variant.selectedOptions
+                        .filter((option) => {
+                          const optionName = option.name.trim().toLowerCase();
+                          const optionValue = option.value.trim().toLowerCase();
+
+                          // Shopify uses this placeholder when a product has no real variants.
+                          return !(
+                            optionName === "title" &&
+                            optionValue === "default title"
+                          );
+                        })
+                        .map((option) => (
+                          <Typography
+                            key={option.name}
+                            variant="body2"
+                            sx={{
+                              fontFamily: "Bricolage",
+                              fontSize: { xs: "3.5vw", md: "0.85vw" },
+                              fontWeight: 400,
+                              color: theme.palette.secondary.main,
+                              mt: 0.2,
+                            }}
+                          >
+                            {option.name}: {option.value}
+                          </Typography>
+                        ))}
 
                       {/* Quantity & Price */}
                       <Stack
@@ -265,7 +278,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                           onClick={() =>
                             handleQuantityChange(
                               line.id,
-                              Math.max(1, line.quantity - 1)
+                              Math.max(1, line.quantity - 1),
                             )
                           }
                           disabled={isLoading}

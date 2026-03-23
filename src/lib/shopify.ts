@@ -834,6 +834,61 @@ export async function getProductById(id: string): Promise<Product | null> {
   return data.product;
 }
 
+function quoteShopifySearchValue(value: string): string {
+  const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  return `"${escaped}"`;
+}
+
+function buildSearchKeywordCandidates(searchTerm: string): string[] {
+  const tokens = searchTerm
+    .toLowerCase()
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean);
+
+  const terms = new Set<string>();
+  const addTerm = (term: string) => {
+    const normalized = term.trim().toLowerCase();
+    if (normalized.length >= 2) {
+      terms.add(normalized);
+    }
+  };
+
+  addTerm(searchTerm);
+
+  for (const token of tokens) {
+    addTerm(token);
+    if (token.endsWith("s") && token.length > 3) {
+      addTerm(token.slice(0, -1));
+    } else if (token.length > 2) {
+      addTerm(`${token}s`);
+    }
+  }
+
+  return Array.from(terms).slice(0, 8);
+}
+
+function buildSearchProductsQuery(searchTerm: string): string {
+  const normalized = searchTerm.trim();
+  if (!normalized) return "";
+
+  const keywords = buildSearchKeywordCandidates(normalized);
+  const keywordClauses = keywords.map((keyword) =>
+    quoteShopifySearchValue(keyword)
+  );
+  const kwTagClauses = keywords.map(
+    (keyword) => `tag:${quoteShopifySearchValue(`kw:${keyword}`)}`
+  );
+
+  return [
+    `(${normalized})`,
+    keywordClauses.length ? `(${keywordClauses.join(" OR ")})` : "",
+    kwTagClauses.length ? `(${kwTagClauses.join(" OR ")})` : "",
+  ]
+    .filter(Boolean)
+    .join(" OR ");
+}
+
 // 4. Search products with fragment selection
 export async function searchProducts(
   searchTerm: string,
@@ -877,7 +932,7 @@ export async function searchProducts(
     sortKey: SearchSortKey;
     after?: string;
   } = {
-    query: searchTerm,
+    query: buildSearchProductsQuery(searchTerm),
     first,
     sortKey,
   };

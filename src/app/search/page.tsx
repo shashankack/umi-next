@@ -81,7 +81,11 @@ export default function SearchPage() {
           .map(({ __score, ...rest }) => rest)
           // Filter to only include products that actually contain the search term
           .filter((p) => {
-            const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""}`.toLowerCase();
+            const tags = Array.isArray(p.tags) ? p.tags : [];
+            const tagsWithoutKwPrefix = tags
+              .map((tag) => tag.replace(/^kw:/i, "").trim())
+              .join(" ");
+            const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""} ${tags.join(" ")} ${tagsWithoutKwPrefix}`.toLowerCase();
             return searchTerms.some((term) => searchText.includes(term.toLowerCase()));
           });
         if (!cancelled) setResults(merged);
