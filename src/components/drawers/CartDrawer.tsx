@@ -192,7 +192,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
                         }
                         alt={line.product.title}
                         fill
-                        style={{ objectFit: "cover", borderRadius: "8px" }}
+                        style={{ objectFit: "contain", borderRadius: "8px" }}
                         sizes="72px"
                       />
                     </Box>

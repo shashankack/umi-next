@@ -24,6 +24,18 @@ export interface Image {
   height?: number;
 }
 
+export interface Media {
+  id: string;
+  mediaContentType: "IMAGE" | "VIDEO" | "MODEL_3D" | "EXTERNAL_VIDEO" | "GIF";
+  alt?: string;
+  image?: Image;
+  sources?: Array<{
+    url: string;
+    mimeType?: string;
+  }>;
+  previewImage?: Image;
+}
+
 export interface ProductOption {
   id: string;
   name: string;
@@ -71,6 +83,9 @@ export interface Product {
   };
   images: {
     edges: Array<{ node: Image }>;
+  };
+  media?: {
+    edges: Array<{ node: Media }>;
   };
   featuredImage?: Image;
   variants: {
@@ -604,6 +619,38 @@ const PRODUCT_DETAILED_FRAGMENT = `
           altText
           width
           height
+        }
+      }
+    }
+    media(first: 10) {
+      edges {
+        node {
+          id
+          mediaContentType
+          alt
+          ... on MediaImage {
+            image {
+              id
+              url
+              altText
+              width
+              height
+            }
+          }
+          ... on Video {
+            id
+            sources {
+              url
+              mimeType
+            }
+            previewImage {
+              id
+              url
+              altText
+              width
+              height
+            }
+          }
         }
       }
     }

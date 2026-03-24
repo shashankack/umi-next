@@ -8,8 +8,6 @@ export const AboutSection = () => {
 
   return (
     <Stack overflow={"hidden"}>
-      <Box height={{ xs: 40, md: 60 }} bgcolor="primary.main"></Box>
-
       {!isMobile && (
         <Stack overflow="hidden">
           <Stack direction="row" position="relative" overflow="hidden">

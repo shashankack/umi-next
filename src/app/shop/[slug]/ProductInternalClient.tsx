@@ -141,6 +141,67 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     },
   ]);
 
+  // ─── Combine images and media for carousel ───────────────────────────────
+  const carouselItems = useMemo(() => {
+    const items: Array<{
+      id: string;
+      type: "image" | "video" | "gif";
+      url?: string;
+      videoUrl?: string;
+      previewUrl?: string;
+      alt?: string;
+    }> = [];
+
+    // Use media field if available (contains both images, videos, and gifs)
+    // Otherwise fall back to images field for backward compatibility
+    if (product.media?.edges && product.media.edges.length > 0) {
+      product.media.edges.forEach((edge) => {
+        const mediaNode = edge.node;
+        if (mediaNode.mediaContentType === "VIDEO" && mediaNode.sources?.[0]) {
+          items.push({
+            id: mediaNode.id,
+            type: "video",
+            videoUrl: mediaNode.sources[0].url,
+            previewUrl: mediaNode.previewImage?.url,
+            alt: mediaNode.alt || product.title,
+          });
+        } else if (
+          mediaNode.mediaContentType === "GIF" &&
+          mediaNode.image?.url
+        ) {
+          items.push({
+            id: mediaNode.id,
+            type: "gif",
+            url: mediaNode.image.url,
+            alt: mediaNode.alt || mediaNode.image.altText || product.title,
+          });
+        } else if (
+          mediaNode.mediaContentType === "IMAGE" &&
+          mediaNode.image?.url
+        ) {
+          items.push({
+            id: mediaNode.id,
+            type: "image",
+            url: mediaNode.image.url,
+            alt: mediaNode.alt || mediaNode.image.altText || product.title,
+          });
+        }
+      });
+    } else {
+      // Fallback to images field if media is not available
+      product.images.edges.forEach((edge) => {
+        items.push({
+          id: edge.node.id,
+          type: "image",
+          url: edge.node.url,
+          alt: edge.node.altText || product.title,
+        });
+      });
+    }
+
+    return items;
+  }, [product]);
+
   // ─── Shared style tokens ───────────────────────────────────────────────────
   const selectSx = {
     backgroundColor: theme.palette.background.default,
@@ -287,11 +348,12 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   overflow: "hidden",
                   width: "100%",
                   aspectRatio: "3 / 2",
-                  minHeight: { xs: 280, md: 420 },
-                  maxHeight: { xs: 440, md: 620 },
+                  // minHeight: { xs: 280, md: 420 },
+                  // maxHeight: { xs: 440, md: 620 },
+
                   // Swiper pagination dots
                   "& .swiper-pagination": {
-                    bottom: "12px",
+                    bottom: "2%",
                   },
                   "& .swiper-pagination-bullet": {
                     width: 8,
@@ -311,10 +373,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                   pagination={{ clickable: true }}
                   onSwiper={setSwiperRef}
                   style={{ width: "100%", height: "100%" }}
-                  loop={product.images.edges.length > 1}
+                  loop={carouselItems.length > 1}
                 >
-                  {product.images.edges.map((image, i) => (
-                    <SwiperSlide key={i}>
+                  {carouselItems.map((item, i) => (
+                    <SwiperSlide key={item.id}>
                       <Box
                         sx={{
                           position: "relative",
@@ -326,25 +388,42 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                           p: 2,
                         }}
                       >
-                        <Image
-                          src={image.node.url}
-                          alt={`${product.title} ${i + 1}`}
-                          fill
-                          sizes="(max-width: 900px) 92vw, 48vw"
-                          style={{
-                            objectFit: "contain",
-                            padding: isMobile ? "12px" : "18px",
-                          }}
-                          priority={i === 0}
-                          loading={i === 0 ? "eager" : "lazy"}
-                        />
+                        {item.type === "image" || item.type === "gif" ? (
+                          <Image
+                            src={item.url!}
+                            alt={item.alt || `${product.title} ${i + 1}`}
+                            fill
+                            sizes="(max-width: 900px) 92vw, 48vw"
+                            style={{
+                              objectFit: "contain",
+                            }}
+                            priority={i === 0}
+                            loading={i === 0 ? "eager" : "lazy"}
+                            unoptimized={item.type === "gif"}
+                          />
+                        ) : (
+                          <video
+                            src={item.videoUrl}
+                            poster={item.previewUrl}
+                            style={{
+                              objectFit: "contain",
+                              width: "100%",
+                              height: "100%",
+                              display: "block",
+                            }}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                          />
+                        )}
                       </Box>
                     </SwiperSlide>
                   ))}
                 </Swiper>
 
                 {/* Custom prev / next buttons */}
-                {product.images.edges.length > 1 && (
+                {carouselItems.length > 1 && (
                   <>
                     <IconButton
                       onClick={() => swiperRef?.slidePrev()}

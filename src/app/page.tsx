@@ -58,14 +58,14 @@ const BestSellersSection = dynamic(
   () => import("@/sections/BestSellersSectionServer"),
   {
     loading: () => null, // or a skeleton loader
-  }
+  },
 );
 
 const AboutSection = dynamic(
   () => import("@/sections/AboutSection").then((mod) => mod.AboutSection),
   {
     loading: () => null,
-  }
+  },
 );
 
 const SEOSection = dynamic(() => import("@/sections/SEOSection"), {
