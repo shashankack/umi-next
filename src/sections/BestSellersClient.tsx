@@ -130,7 +130,7 @@ const BestSellersClient = ({
         position="relative"
         bgcolor="primary.main"
         px={2}
-        py={4}
+        py={{ xs: 2, md: 4 }}
       >
         <Typography
           variant="h1"
@@ -139,7 +139,7 @@ const BestSellersClient = ({
             textTransform: "capitalize",
             letterSpacing: 3,
             fontWeight: 600,
-            fontSize: { xs: "5vw", md: "3.4vw" },
+            fontSize: { xs: "4vw", md: "3.4vw" },
           }}
         >
           Kinder rituals that fill your cup
