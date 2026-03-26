@@ -78,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const height =
     typeof size === "object"
       ? Object.fromEntries(
-          Object.entries(size).map(([k, v]) => [k, (v as number) * 1.3])
+          Object.entries(size).map(([k, v]) => [k, (v as number) * 1.3]),
         )
       : (size as number) * 1.2;
 
@@ -111,7 +111,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   React.useEffect(() => {
     if (cart && variantId) {
       const cartLine = cart.lines.edges.find(
-        ({ node }) => node.merchandise.id === variantId
+        ({ node }) => node.merchandise.id === variantId,
       )?.node;
       setLocalQuantity(cartLine?.quantity || 0);
     }
@@ -290,8 +290,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 },
               }}
             >
-              {/* {isComingSoon ? "COMING SOON" : `₹${Math.floor(price)}`} */}
-              COMING SOON
+              {isComingSoon ? "COMING SOON" : `₹${Math.floor(price)}`}
+              {/* COMING SOON */}
             </Button>
 
             {/* Cart Controls Button/Group */}

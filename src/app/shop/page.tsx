@@ -60,7 +60,7 @@ const categoriesData = [
 
 export default async function ShopPage() {
   const collections = await fetchMultipleCollections(
-    categoriesData.map(({ handle, limit }) => ({ handle, limit }))
+    categoriesData.map(({ handle, limit }) => ({ handle, limit })),
   );
 
   return (
