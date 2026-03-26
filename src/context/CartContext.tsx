@@ -91,11 +91,36 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const newCart = await createCart([]);
       setCart(newCart);
       localStorage.setItem(CART_ID_KEY, newCart.id);
+      return newCart;
     } catch (err) {
       console.error("Failed to create cart:", err);
       setError("Failed to create cart");
+      return null;
     }
   };
+
+  /**
+   * Ensure we have a valid cart object (create if missing/expired).
+   */
+  const ensureCart = useCallback(async (): Promise<Cart | null> => {
+    const currentCartId = cart?.id ?? localStorage.getItem(CART_ID_KEY);
+
+    if (currentCartId) {
+      try {
+        const existingCart = await getCart(currentCartId);
+        if (existingCart) {
+          setCart(existingCart);
+          return existingCart;
+        }
+      } catch (err) {
+        console.error("Failed to fetch cart:", err);
+      }
+    }
+
+    const newCart = await createNewCart();
+    if (newCart) return newCart;
+    return null;
+  }, [cart?.id]);
 
   /**
    * Refresh cart data from Shopify
@@ -119,9 +144,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
    */
   const addItem = useCallback(
     async (variantId: string, quantity: number = 1) => {
-      if (!cart?.id) {
+      const activeCart = cart?.id ? cart : await ensureCart();
+      if (!activeCart?.id) {
         setError("Cart not initialized");
-        return;
+        throw new Error("Cart not initialized");
       }
 
       try {
@@ -129,7 +155,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setError(null);
 
         // Check if item already exists in cart
-        const existingLine = cartHelpers.findLineByVariant(cart, variantId);
+        const existingLine = cartHelpers.findLineByVariant(activeCart, variantId);
 
         if (existingLine) {
           // Update existing line quantity
@@ -140,14 +166,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
               quantity: newQuantity,
             },
           ];
-          const updatedCart = await updateCartLines(cart.id, lines);
+          const updatedCart = await updateCartLines(activeCart.id, lines);
           setCart(updatedCart);
         } else {
           // Add new line
           const lines: CartLineInput[] = [
             cartHelpers.createCartLine(variantId, quantity),
           ];
-          const updatedCart = await addToCart(cart.id, lines);
+          const updatedCart = await addToCart(activeCart.id, lines);
           setCart(updatedCart);
         }
       } catch (err) {
@@ -158,7 +184,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
       }
     },
-    [cart]
+    [cart, ensureCart]
   );
 
   /**

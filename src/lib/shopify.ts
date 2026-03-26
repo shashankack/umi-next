@@ -319,7 +319,7 @@ const validateEnvironment = (): void => {
 // Validate environment on module load
 validateEnvironment();
 
-const SHOPIFY_STOREFRONT_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/2024-10/graphql.json`;
+const SHOPIFY_STOREFRONT_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/2024-04/graphql.json`;
 const SHOPIFY_STOREFRONT_ACCESS_TOKEN =
   process.env.NEXT_PUBLIC_STOREFRONT_TOKEN!;
 
@@ -820,6 +820,13 @@ export async function getAllProducts(
           cursor
           node {
             ...${fragmentName}
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
           }
         }
       }
@@ -965,6 +972,13 @@ export async function searchProducts(
           node {
             ... on Product {
               ...${fragmentName}
+              variants(first: 1) {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
             }
           }
         }
@@ -1304,6 +1318,13 @@ export async function getProductRecommendations(
     query GetProductRecommendations($productId: ID!, $first: Int!) {
       productRecommendations(productId: $productId) {
         ...ProductBasicFragment
+        variants(first: 1) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
       }
     }
     ${PRODUCT_BASIC_FRAGMENT}
@@ -1391,6 +1412,13 @@ export async function getProductsByCollectionName(
             cursor
             node {
               ...${fragmentName}
+              variants(first: 1) {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
             }
           }
         }

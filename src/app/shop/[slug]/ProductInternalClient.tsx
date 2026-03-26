@@ -701,7 +701,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                     {isLoading
                       ? "Adding..."
                       : isComingSoon
-                        ? "Coming Soon"
+                        ? "Variant Not Selected"
                         : isOutOfStock
                           ? "Out of Stock"
                           : "Add to Cart"}
