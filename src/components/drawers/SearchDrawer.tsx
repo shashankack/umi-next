@@ -99,7 +99,8 @@ export default function SearchDrawer({
                 const tagsWithoutKwPrefix = tags
                   .map((tag) => tag.replace(/^kw:/i, "").trim())
                   .join(" ");
-                const searchText = `${p.title || ""} ${p.handle || ""} ${p.description || ""} ${tags.join(" ")} ${tagsWithoutKwPrefix}`.toLowerCase();
+                const searchText =
+                  `${p.title || ""} ${p.handle || ""} ${p.description || ""} ${tags.join(" ")} ${tagsWithoutKwPrefix}`.toLowerCase();
                 return searchText.includes(keyword.toLowerCase());
               })
           : [];
@@ -135,7 +136,7 @@ export default function SearchDrawer({
       router.push(`/search?q=${encodeURIComponent(next)}`);
       close();
     },
-    [q, router, close]
+    [q, router, close],
   );
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -316,15 +317,15 @@ export default function SearchDrawer({
             >
               <ListItemAvatar sx={{ minWidth: 52 }}>
                 {r.featuredImage?.url ? (
-                  <Avatar
+                  <Box
+                    component="img"
                     src={r.featuredImage.url}
                     alt={r.title}
-                    variant="rounded"
                     sx={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 10,
-                      transition: "transform .12s ease",
+                      width:  50,
+                      height: 50,
+                      objectFit: "contain",
+                      transition: "all .12s ease",
                       ".MuiListItemButton-root:hover &": {
                         transform: "scale(1.03)",
                       },

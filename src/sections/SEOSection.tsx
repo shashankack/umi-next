@@ -143,17 +143,17 @@ const SEOSection = () => {
           textAlign="justify"
         >
           <Link
-            href="/shop/nakai-first-harvest"
+            href="/shop/okumidori-ceremonial-matcha"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
-            Nakai First Harvest
+            Okumidori Ceremonial Matcha
           </Link>
           <br />
-          Our flagship Nakai First Harvest represents the epitome of ceremonial
-          grade excellence. Harvested from the youngest tea leaves during the
-          first spring picking, this best japanese matcha powder delivers an
-          unparalleled taste experience with natural sweetness and minimal
-          bitterness.
+          Our flagship Okumidori Ceremonial Matcha represents the epitome of
+          ceremonial grade excellence. Harvested from the youngest tea leaves
+          during the first spring picking, this best japanese matcha powder
+          delivers an unparalleled taste experience with natural sweetness and
+          minimal bitterness.
         </Typography>
         <Typography
           variant="body1"
@@ -162,16 +162,16 @@ const SEOSection = () => {
           textAlign="justify"
         >
           <Link
-            href="/shop/haru-first-harvest"
+            href="/shop/haru-ceremonial-matcha"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
-            Haru First Harvest
+            Haru Matcha
           </Link>
           <br />
-          The Haru First Harvest offers another exceptional option for those
-          seeking authentic, best Japanese matcha quality. Perfect for
-          traditional whisking and meditation, this grade showcases the pure
-          essence of Japanese tea mastery
+          The Haru Matcha offers another exceptional option for those seeking
+          authentic, best Japanese matcha quality. Perfect for traditional
+          whisking and meditation, this grade showcases the pure essence of
+          Japanese tea mastery
         </Typography>
         <Typography
           variant="body1"
@@ -180,7 +180,7 @@ const SEOSection = () => {
           textAlign="justify"
         >
           <Link
-            href="/shop/mixcha-instant-premix"
+            href="/shop/instant-matcha-latte-mix"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Mixcha: Instant Premix
@@ -210,14 +210,14 @@ const SEOSection = () => {
           Understanding that authentic matcha preparation requires proper tools,
           we offer a complete range of traditional Japanese implements.&nbsp;
           <Link
-            href="/shop/bowl-chawan"
+            href="/shop/matcha-bowl-chawan"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Our Matcha Bowl (Chawan)&nbsp;
           </Link>
           provides the perfect vessel for whisking, while the&nbsp;
           <Link
-            href="/shop/whisk-chasen"
+            href="/shop/bamboo-matcha-whisk"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Matcha Whisk (Chasen)&nbsp;
@@ -228,14 +228,14 @@ const SEOSection = () => {
           <br />
           The&nbsp;
           <Link
-            href="/shop/scoop-chashaku"
+            href="/shop/bamboo-matcha-scoop"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Matcha Scoop (Chashaku)&nbsp;
           </Link>
           &nbsp; allows for precise measurement, and our&nbsp;
           <Link
-            href="/shop/whisk-holder-kusenaoshi"
+            href="/shop/matcha-whisk-holder"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Whisk Holder (Kusenaoshi)&nbsp;
@@ -243,10 +243,10 @@ const SEOSection = () => {
           &nbsp; helps maintain your whisk&apos;s shape between uses. For those
           seeking convenience, our&nbsp;
           <Link
-            href="/shop/umi-matcha-essential-kit"
+            href="/shop/matcha-starter-kit"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
-            Umi Matcha Essentials Kit&nbsp;
+            Umi Matcha Essential Kit&nbsp;
           </Link>
           &nbsp; combines all necessary tools in one comprehensive package.
         </Typography>
@@ -267,7 +267,7 @@ const SEOSection = () => {
           Our thoughtfully designed gift collections make sharing the Umi Matcha
           experience effortless. The&nbsp;
           <Link
-            href="/shop/sereni-tea-set"
+            href="/shop/premium-matcha-tea-set"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Sereni Tea Set
@@ -275,7 +275,7 @@ const SEOSection = () => {
           &nbsp; offers an elegant introduction to matcha culture, while
           the&nbsp;
           <Link
-            href="/shop/whisk-me-away-set"
+            href="/shop/matcha-whisk-set"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Whisk Me Away Set
@@ -285,7 +285,7 @@ const SEOSection = () => {
           <br />
           The{" "}
           <Link
-            href="/shop/scoop-me-up-set"
+            href="/shop/matcha-scoop-set"
             style={{ color: "#fd918fff", fontWeight: 800 }}
           >
             Scoop Me Up Set
