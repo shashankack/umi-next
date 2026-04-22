@@ -96,8 +96,15 @@ export default function Navbar() {
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll);
+
+    const handleOpenCartDrawer = () => {
+      setCartOpen(true);
+    };
+
+    window.addEventListener("openCartDrawer", handleOpenCartDrawer);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("openCartDrawer", handleOpenCartDrawer);
     };
   }, [isTransparentPage]);
 

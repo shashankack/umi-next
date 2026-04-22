@@ -46,13 +46,15 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [pendingAction, setPendingAction] = useState<"cart" | "buyNow" | null>(
+    null,
+  );
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
       const variants = product.variants.edges;
       return variants.length === 1 ? variants[0].node : null;
     },
   );
-  const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -65,6 +67,10 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     setQuantity(Number(e.target.value));
   };
 
+  const openCartDrawer = () => {
+    window.dispatchEvent(new CustomEvent("openCartDrawer"));
+  };
+
   const handleAddToCart = async () => {
     if (!selectedVariant?.id) {
       setErrorMessage("Please select a variant");
@@ -72,17 +78,45 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
       return;
     }
     try {
+      setPendingAction("cart");
       await addItem(selectedVariant.id, quantity);
-      setShowSuccess(true);
+      openCartDrawer();
       setQuantity(1);
     } catch (error) {
       console.error("Failed to add to cart:", error);
       setErrorMessage("Failed to add item to cart. Please try again.");
       setShowError(true);
+    } finally {
+      setPendingAction(null);
     }
   };
 
-  const handleCloseSuccess = () => setShowSuccess(false);
+  const handleBuyNow = async () => {
+    if (!selectedVariant?.id) {
+      setErrorMessage("Please select a variant");
+      setShowError(true);
+      return;
+    }
+
+    try {
+      setPendingAction("buyNow");
+      const updatedCart = await addItem(selectedVariant.id, quantity);
+      const checkoutUrl = updatedCart?.checkoutUrl;
+
+      if (!checkoutUrl) {
+        throw new Error("Checkout URL is unavailable");
+      }
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      console.error("Failed to start checkout:", error);
+      setErrorMessage("Failed to start checkout. Please try again.");
+      setShowError(true);
+    } finally {
+      setPendingAction(null);
+    }
+  };
+
   const handleCloseError = () => {
     setShowError(false);
     setErrorMessage("");
@@ -129,6 +163,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const isComingSoon = currentPrice === 0;
   const quantityAvailable = selectedVariant?.quantityAvailable ?? 0;
   const isOutOfStock = !isAvailable || quantityAvailable === 0;
+  const isActionInProgress = isLoading || pendingAction !== null;
 
   // Generate structured data
   const productSchema = generateProductSchema(product);
@@ -210,6 +245,17 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     boxShadow: `0px 4px 0px 0px ${theme.palette.text.secondary}`,
     fontFamily: "Bricolage",
     fontWeight: 500,
+    minWidth: { xs: 60, md: 80 },
+    fontSize: { xs: "1rem", md: "1.2vw" },
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.text.secondary,
+      color: theme.palette.background.default,
+      boxShadow: `0px 4px 0px 0px ${theme.palette.background.default}`,
+      "& .MuiSelect-icon": {
+        color: theme.palette.background.default,
+      },
+    },
     "& .MuiSelect-icon": { color: theme.palette.text.secondary },
     "& .MuiOutlinedInput-notchedOutline": { border: "none" },
   };
@@ -238,6 +284,33 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     },
   };
 
+  const buttonStyles = {
+    minWidth: { xs: "auto", sm: 180 },
+    fontFamily: "Bricolage",
+    fontWeight: 700,
+    fontSize: { xs: "0.85rem", md: "1rem" },
+    px: { xs: 3, md: 4 },
+    py: 1.25,
+    borderRadius: 2,
+    transition: "all 0.25s ease",
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.secondary,
+    borderColor: theme.palette.background.default,
+    boxShadow: `4px 4px 0px ${theme.palette.text.secondary}`,
+    "&:hover": {
+      backgroundColor: theme.palette.text.secondary,
+      color: theme.palette.background.default,
+      borderColor: theme.palette.text.secondary,
+      boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
+    },
+    "&:disabled": {
+      backgroundColor: "grey.400",
+      color: "grey.600",
+      borderColor: "grey.400",
+      boxShadow: "none",
+    },
+  };
+
   return (
     <>
       {/* Structured Data */}
@@ -260,7 +333,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
         <Stack
           width="100%"
           px={{ xs: 2, md: 8 }}
-          pt={{ xs: 8, md: 10 }}
+          pt={{ xs: 8, md: 13 }}
           pb={{ xs: 0, md: 10 }}
           mb={parsedData.productProfile.left.length > 0 ? -8 : 8}
         >
@@ -523,38 +596,46 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
 
               {/* Price */}
               {selectedVariant && (
-                <Box mb={2.5}>
-                  {isComingSoon ? (
-                    <Typography
-                      sx={{
-                        fontFamily: "Bricolage",
-                        fontWeight: 800,
-                        fontSize: { xs: "5vw", md: "1.2vw" },
-                        color: theme.palette.text.secondary,
-                        bgcolor: theme.palette.background.default,
-                        display: "inline-block",
-                        px: 2,
-                        py: 0.5,
-                        borderRadius: 2,
-                        letterSpacing: 2,
-                      }}
-                    >
-                      COMING SOON
-                    </Typography>
-                  ) : (
-                    <Typography
-                      sx={{
-                        fontFamily: "Bricolage",
-                        fontWeight: 800,
-                        fontSize: { xs: "4vw", md: "1.2vw" },
-                        letterSpacing: 0.5,
-                      }}
-                    >
-                      {`₹ ${Math.floor(currentPrice)}/-`}
-                      {/* COMING SOON */}
-                    </Typography>
-                  )}
-                </Box>
+                <Stack
+                  direction="row"
+                  justifyContent="start"
+                  alignItems="center"
+                  mb={2}
+                  gap={2}
+                >
+                  <Box>
+                    {isComingSoon ? (
+                      <Typography
+                        sx={{
+                          fontFamily: "Bricolage",
+                          fontWeight: 800,
+                          fontSize: { xs: "5vw", md: "1.2vw" },
+                          color: theme.palette.text.secondary,
+                          bgcolor: theme.palette.background.default,
+                          display: "inline-block",
+                          px: 2,
+                          py: 0.5,
+                          borderRadius: 2,
+                          letterSpacing: 2,
+                        }}
+                      >
+                        COMING SOON
+                      </Typography>
+                    ) : (
+                      <Typography
+                        sx={{
+                          fontFamily: "Bricolage",
+                          fontWeight: 800,
+                          fontSize: { xs: "4vw", md: "1.2vw" },
+                          letterSpacing: 0.5,
+                        }}
+                      >
+                        {`₹ ${Math.floor(currentPrice)}/-`}
+                        {/* COMING SOON */}
+                      </Typography>
+                    )}
+                  </Box>
+                </Stack>
               )}
 
               {/* Variant selector */}
@@ -616,21 +697,14 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                 mb={3}
                 flexWrap="wrap"
               >
-                {!isComingSoon && !isOutOfStock && (
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontFamily: "Bricolage",
-                        fontSize: { xs: "3vw", md: "0.8vw" },
-                        fontWeight: 600,
-                        opacity: 0.7,
-                        mb: 1,
-                        textTransform: "uppercase",
-                        letterSpacing: 1,
-                      }}
-                    >
-                      Qty
-                    </Typography>
+                <Stack
+                  direction="row"
+                  gap={1.5}
+                  flex={1}
+                  flexWrap="wrap"
+                  alignSelf="flex-end"
+                >
+                  {!isComingSoon && !isOutOfStock && (
                     <Select
                       value={quantity}
                       onChange={handleQuantityChange}
@@ -638,15 +712,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                       displayEmpty
                       sx={{
                         ...selectSx,
-                        minWidth: 80,
-                        fontSize: { xs: "0.8rem", md: "0.9vw" },
-                        "&:hover": {
-                          backgroundColor: theme.palette.text.secondary,
-                          color: theme.palette.background.default,
-                          "& .MuiSelect-icon": {
-                            color: theme.palette.background.default,
-                          },
-                        },
                       }}
                       MenuProps={menuPropsSx}
                     >
@@ -658,47 +723,42 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                         ),
                       )}
                     </Select>
-                  </Box>
-                )}
-
-                <Box flex={{ xs: 1, md: "unset" }} alignSelf="flex-end">
+                  )}
+                  <Button
+                    onClick={handleBuyNow}
+                    variant="outlined"
+                    // fullWidth
+                    disabled={
+                      !selectedVariant ||
+                      isActionInProgress ||
+                      isComingSoon ||
+                      isOutOfStock
+                    }
+                    sx={{
+                      ...buttonStyles,
+                    }}
+                  >
+                    {pendingAction === "buyNow" ? "Processing..." : "Buy Now"}
+                  </Button>
                   <Button
                     onClick={handleAddToCart}
                     variant="contained"
-                    fullWidth={isMobile}
+                    // fullWidth
                     disabled={
                       !selectedVariant ||
-                      isLoading ||
+                      isActionInProgress ||
                       isComingSoon ||
                       isOutOfStock
                     }
                     endIcon={
-                      !isComingSoon && !isOutOfStock ? <FaShoppingCart /> : null
+                      pendingAction === "cart" ? null : !isComingSoon &&
+                        !isOutOfStock ? (
+                        <FaShoppingCart />
+                      ) : null
                     }
-                    sx={{
-                      fontFamily: "Bricolage",
-                      fontWeight: 600,
-                      fontSize: { xs: "0.85rem", md: "1rem" },
-                      px: { xs: 3, md: 4 },
-                      py: 1.25,
-                      backgroundColor: theme.palette.background.default,
-                      color: theme.palette.text.secondary,
-                      boxShadow: `4px 4px 0px ${theme.palette.text.secondary}`,
-                      borderRadius: 2,
-                      transition: "all 0.25s ease",
-                      "&:hover": {
-                        backgroundColor: theme.palette.text.secondary,
-                        color: theme.palette.background.default,
-                        boxShadow: `4px 4px 0px ${theme.palette.background.default}`,
-                      },
-                      "&:disabled": {
-                        backgroundColor: "grey.400",
-                        color: "grey.600",
-                        boxShadow: "none",
-                      },
-                    }}
+                    sx={{ ...buttonStyles }}
                   >
-                    {isLoading
+                    {pendingAction === "cart"
                       ? "Adding..."
                       : isComingSoon
                         ? "Variant Not Selected"
@@ -706,7 +766,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
                           ? "Out of Stock"
                           : "Add to Cart"}
                   </Button>
-                </Box>
+                </Stack>
               </Stack>
 
               {/* Highlighted attribute chips + weight */}
@@ -1036,31 +1096,6 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
             </Typography>
           </Box>
         )}
-
-        {/* Success Snackbar */}
-        <Snackbar
-          open={showSuccess}
-          autoHideDuration={3000}
-          onClose={handleCloseSuccess}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
-            onClose={handleCloseSuccess}
-            severity="success"
-            sx={{
-              width: "100%",
-              backgroundColor: theme.palette.secondary.main,
-              color: theme.palette.background.default,
-              fontFamily: "Bricolage",
-              fontWeight: 500,
-              "& .MuiAlert-icon": {
-                color: theme.palette.background.default,
-              },
-            }}
-          >
-            Item added to cart successfully!
-          </Alert>
-        </Snackbar>
 
         {/* Error Snackbar */}
         <Snackbar

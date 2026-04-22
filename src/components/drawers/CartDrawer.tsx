@@ -470,18 +470,20 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
               {isLoading ? "Processing..." : "Proceed to Checkout"}
             </Button>
 
-            <Typography
-              variant="body2"
+            <Button
+              variant="text"
+              href="/shop"
+              fullWidth
               sx={{
                 textAlign: "center",
                 mt: 2,
                 fontSize: { xs: "0.7rem", md: "0.75rem" },
                 color: theme.palette.secondary.main,
-                opacity: 0.7,
+                // opacity: 0.7,
               }}
             >
-              Shipping calculated at checkout
-            </Typography>
+              Browse more products
+            </Button>
           </Box>
         )}
       </Box>

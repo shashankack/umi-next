@@ -26,7 +26,7 @@ interface CartContextValue {
   isLoading: boolean;
   error: string | null;
   itemCount: number;
-  addItem: (variantId: string, quantity?: number) => Promise<void>;
+  addItem: (variantId: string, quantity?: number) => Promise<Cart | null>;
   removeItem: (lineId: string) => Promise<void>;
   updateItemQuantity: (lineId: string, quantity: number) => Promise<void>;
   clearError: () => void;
@@ -168,6 +168,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           ];
           const updatedCart = await updateCartLines(activeCart.id, lines);
           setCart(updatedCart);
+          return updatedCart;
         } else {
           // Add new line
           const lines: CartLineInput[] = [
@@ -175,6 +176,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           ];
           const updatedCart = await addToCart(activeCart.id, lines);
           setCart(updatedCart);
+          return updatedCart;
         }
       } catch (err) {
         console.error("Failed to add item:", err);
@@ -183,6 +185,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       } finally {
         setIsLoading(false);
       }
+
+      return null;
     },
     [cart, ensureCart]
   );
