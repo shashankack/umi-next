@@ -18,6 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useTheme } from "@mui/material/styles";
 import { useCart } from "@/context/CartContext";
 import { cartHelpers, productHelpers } from "@/lib/shopify";
+import { appendTrackingParamsToUrl } from "@/lib/trackingParams";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -53,8 +54,26 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ open, onClose }) => {
   };
 
   const handleCheckout = () => {
+    const fbq =
+      typeof window !== "undefined"
+        ? (window as Window & { fbq?: (...args: unknown[]) => void }).fbq
+        : undefined;
+
+    if (fbq && totals) {
+      fbq("track", "InitiateCheckout", {
+        content_ids: cartLines.map((line) => line.variant.id),
+        content_type: "product",
+        num_items: totals.itemCount,
+        value: Number(parseFloat(totals.total.amount).toFixed(2)),
+        currency: totals.total.currencyCode || "INR",
+      });
+    }
+
     if (cart?.checkoutUrl) {
-      window.location.href = cart.checkoutUrl;
+      window.location.href = appendTrackingParamsToUrl(
+        cart.checkoutUrl,
+        "cart-checkout",
+      );
     }
   };
 

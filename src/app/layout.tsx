@@ -127,7 +127,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        <link rel="preconnect" href="https://vercel.live" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://vercel.live"
+          crossOrigin="anonymous"
+        />
 
         {/* Defer non-critical resources */}
         <link rel="preconnect" href="https://cdn.shopify.com" />
@@ -143,6 +147,66 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+              n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+              document,'script','https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '801240169709340');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var KEY = 'umi_tracking_params';
+                  var DEBUG_KEY = 'umi_tracking_debug';
+                  var KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid','ttclid','msclkid','gbraid','wbraid'];
+                  var params = new URLSearchParams(window.location.search);
+                  var existing = JSON.parse(localStorage.getItem(KEY) || '{}');
+                  var updated = false;
+                  var debug = params.get('umi_track_debug');
+
+                  if (debug === '1' || debug === 'true') {
+                    localStorage.setItem(DEBUG_KEY, '1');
+                  } else if (debug === '0' || debug === 'false') {
+                    localStorage.removeItem(DEBUG_KEY);
+                  }
+
+                  KEYS.forEach(function(k) {
+                    var v = params.get(k);
+                    if (v) {
+                      existing[k] = v;
+                      updated = true;
+                    }
+                  });
+
+                  if (updated) {
+                    localStorage.setItem(KEY, JSON.stringify(existing));
+                  }
+                } catch (e) {
+                  // no-op
+                }
+              })();
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=801240169709340&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </head>
       <body>
         <ThemeRegistry>

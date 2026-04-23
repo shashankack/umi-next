@@ -110,6 +110,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
     window.dispatchEvent(new CustomEvent("openCartDrawer"));
   };
 
+  const trackMetaAddToCart = () => {
+    if (typeof window === "undefined") return;
+    const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
+    if (!fbq || !variantId) return;
+
+    fbq("track", "AddToCart", {
+      content_ids: [variantId],
+      content_name: product.title,
+      content_type: "product",
+      value: Number(price.toFixed(2)),
+      currency: "INR",
+    });
+  };
+
   const handleAddToCartClick = async (e: React.MouseEvent) => {
     console.log("[ProductCard] add-to-cart click", {
       productHandle: product.handle,
@@ -125,6 +139,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     try {
       setIsAddingToCart(true);
       await addItem(variantId, 1);
+      trackMetaAddToCart();
       setShowSuccess(true);
       openCartDrawer();
     } catch (error) {
@@ -151,6 +166,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     try {
       setIsAddingToCart(true);
       await addItem(variantId, 1);
+      trackMetaAddToCart();
       setShowSuccess(true);
       openCartDrawer();
     } catch (error) {

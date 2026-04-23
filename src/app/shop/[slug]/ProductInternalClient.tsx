@@ -31,6 +31,7 @@ import {
   generateProductSchema,
   generateBreadcrumbSchema,
 } from "@/lib/structuredData";
+import { appendTrackingParamsToUrl } from "@/lib/trackingParams";
 import Link from "next/link";
 
 interface ProductInternalClientProps {
@@ -71,6 +72,35 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     window.dispatchEvent(new CustomEvent("openCartDrawer"));
   };
 
+  const trackMetaAddToCart = () => {
+    if (typeof window === "undefined") return;
+    const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
+    if (!fbq || !selectedVariant) return;
+
+    fbq("track", "AddToCart", {
+      content_ids: [selectedVariant.id],
+      content_name: product.title,
+      content_type: "product",
+      value: Number((currentPrice * quantity).toFixed(2)),
+      currency: "INR",
+    });
+  };
+
+  const trackMetaInitiateCheckout = () => {
+    if (typeof window === "undefined") return;
+    const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
+    if (!fbq || !selectedVariant) return;
+
+    fbq("track", "InitiateCheckout", {
+      content_ids: [selectedVariant.id],
+      content_name: product.title,
+      content_type: "product",
+      num_items: quantity,
+      value: Number((currentPrice * quantity).toFixed(2)),
+      currency: "INR",
+    });
+  };
+
   const handleAddToCart = async () => {
     if (!selectedVariant?.id) {
       setErrorMessage("Please select a variant");
@@ -80,6 +110,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     try {
       setPendingAction("cart");
       await addItem(selectedVariant.id, quantity);
+      trackMetaAddToCart();
       openCartDrawer();
       setQuantity(1);
     } catch (error) {
@@ -101,13 +132,15 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
     try {
       setPendingAction("buyNow");
       const updatedCart = await addItem(selectedVariant.id, quantity);
+      trackMetaAddToCart();
       const checkoutUrl = updatedCart?.checkoutUrl;
 
       if (!checkoutUrl) {
         throw new Error("Checkout URL is unavailable");
       }
 
-      window.location.href = checkoutUrl;
+      trackMetaInitiateCheckout();
+      window.location.href = appendTrackingParamsToUrl(checkoutUrl, "buy-now");
     } catch (error) {
       console.error("Failed to start checkout:", error);
       setErrorMessage("Failed to start checkout. Please try again.");
