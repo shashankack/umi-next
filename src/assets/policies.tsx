@@ -671,7 +671,7 @@ export const shippingPolicy = {
       heading: "Order Processing & Shipping",
       content: `
         <ul>
-          <li>All orders are processed and shipped within 4–5 days from the date of purchase. In certain circumstances, delays by courier or delivery partners may occur, which could extend the delivery timeline beyond the estimated timeframe.</li>
+          <li>All orders are processed and shipped within 4–5 business days from the date of purchase. In certain circumstances, delays by courier or delivery partners may occur, which could extend the delivery timeline beyond the estimated timeframe.</li>
           <li>Please note that delays may occur due to unforeseen circumstances beyond the control of Umi, such as extreme weather, courier delays, or operational disruptions.</li>
           <li>Orders are shipped via air shipping for fast and reliable delivery.</li>
           <li>Once your order is picked up from our warehouse, tracking information and delivery updates will be provided directly by our shipping partner.</li>
