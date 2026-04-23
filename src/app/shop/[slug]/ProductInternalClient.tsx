@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -58,6 +58,7 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   );
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const hasTrackedViewContent = useRef(false);
 
   // Parse product description
   const parsedData = useMemo(() => {
@@ -197,6 +198,28 @@ const ProductInternalClient: React.FC<ProductInternalClientProps> = ({
   const quantityAvailable = selectedVariant?.quantityAvailable ?? 0;
   const isOutOfStock = !isAvailable || quantityAvailable === 0;
   const isActionInProgress = isLoading || pendingAction !== null;
+
+  useEffect(() => {
+    if (hasTrackedViewContent.current) return;
+    if (!selectedVariant?.id) return;
+
+    const fbq =
+      typeof window !== "undefined"
+        ? (window as Window & { fbq?: (...args: unknown[]) => void }).fbq
+        : undefined;
+
+    if (!fbq) return;
+
+    fbq("track", "ViewContent", {
+      content_ids: [selectedVariant.id],
+      content_name: product.title,
+      content_type: "product",
+      value: Number(currentPrice.toFixed(2)),
+      currency: "INR",
+    });
+
+    hasTrackedViewContent.current = true;
+  }, [currentPrice, product.title, selectedVariant?.id]);
 
   // Generate structured data
   const productSchema = generateProductSchema(product);
