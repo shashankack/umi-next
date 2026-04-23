@@ -106,6 +106,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
     setErrorMessage("");
   };
 
+  const openCartDrawer = () => {
+    window.dispatchEvent(new CustomEvent("openCartDrawer"));
+  };
+
   const handleAddToCartClick = async (e: React.MouseEvent) => {
     console.log("[ProductCard] add-to-cart click", {
       productHandle: product.handle,
@@ -122,6 +126,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       setIsAddingToCart(true);
       await addItem(variantId, 1);
       setShowSuccess(true);
+      openCartDrawer();
     } catch (error) {
       console.error("Failed to add to cart:", error);
       setErrorMessage("Failed to add item to cart. Please try again.");
@@ -147,6 +152,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       setIsAddingToCart(true);
       await addItem(variantId, 1);
       setShowSuccess(true);
+      openCartDrawer();
     } catch (error) {
       console.error("Failed to add to cart:", error);
       setErrorMessage("Failed to update cart. Please try again.");
