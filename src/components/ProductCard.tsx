@@ -33,6 +33,7 @@ type Product = {
   id: string;
   title: string;
   handle: string;
+  availableForSale?: boolean;
   featuredImage?: ProductImage;
   images?: {
     edges: { node: ProductImage }[];
@@ -93,12 +94,22 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   // Get product price and variant
-  const price = product.priceRange?.minVariantPrice
-    ? parseFloat(product.priceRange.minVariantPrice.amount)
-    : 0;
-  const firstVariant = product.variants?.edges?.[0]?.node;
-  const variantId = firstVariant?.id;
+  const firstAvailableVariant = product.variants?.edges?.find(
+    ({ node }) => node.availableForSale,
+  )?.node;
+  const fallbackVariant = product.variants?.edges?.[0]?.node;
+  const displayVariant = firstAvailableVariant ?? fallbackVariant;
+  const price = displayVariant?.price
+    ? parseFloat(displayVariant.price.amount)
+    : product.priceRange?.minVariantPrice
+      ? parseFloat(product.priceRange.minVariantPrice.amount)
+      : 0;
+  const variantId = displayVariant?.id;
   const isComingSoon = price === 0;
+  const isOutOfStock =
+    product.availableForSale === false ||
+    displayVariant?.availableForSale === false ||
+    displayVariant?.quantityAvailable === 0;
 
   const handleCloseSuccess = () => setShowSuccess(false);
   const handleCloseError = () => {
@@ -129,12 +140,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       productHandle: product.handle,
       variantId,
       isComingSoon,
+      isOutOfStock,
       isLoading,
       isAddingToCart,
     });
     e.preventDefault();
     e.stopPropagation();
-    if (!variantId || isComingSoon) return;
+    if (!variantId || isComingSoon || isOutOfStock) return;
 
     try {
       setIsAddingToCart(true);
@@ -156,12 +168,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       productHandle: product.handle,
       variantId,
       isComingSoon,
+      isOutOfStock,
       isLoading,
       isAddingToCart,
     });
     e.preventDefault();
     e.stopPropagation();
-    if (!variantId || isComingSoon) return;
+    if (!variantId || isComingSoon || isOutOfStock) return;
 
     try {
       setIsAddingToCart(true);
@@ -458,24 +471,28 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 (localQuantity === 0 ? (
                   <Button
                     onClick={handleAddToCartClick}
-                    disabled={isAddingToCart || isLoading}
+                    disabled={isAddingToCart || isLoading || isOutOfStock}
                     sx={cartActionButtonSx}
                   >
-                    <Box
-                      sx={{
-                        position: "relative",
-                        width: iconSize,
-                        height: iconSize,
-                      }}
-                    >
-                      <Image
-                        src="/images/vectors/cart.svg"
-                        alt="Add to cart"
-                        fill
-                        style={{ objectFit: "contain" }}
-                        sizes="24px"
-                      />
-                    </Box>
+                    {isOutOfStock ? (
+                      "Sold Out"
+                    ) : (
+                      <Box
+                        sx={{
+                          position: "relative",
+                          width: iconSize,
+                          height: iconSize,
+                        }}
+                      >
+                        <Image
+                          src="/images/vectors/cart.svg"
+                          alt="Add to cart"
+                          fill
+                          style={{ objectFit: "contain" }}
+                          sizes="24px"
+                        />
+                      </Box>
+                    )}
                   </Button>
                 ) : (
                   <ButtonGroup sx={qtyGroupSx}>
@@ -505,7 +522,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     </Button>
                     <IconButton
                       onClick={handleIncreaseClick}
-                      disabled={isAddingToCart || isLoading}
+                      disabled={isAddingToCart || isLoading || isOutOfStock}
                       size="small"
                       sx={qtyIconButtonSx}
                     >
