@@ -602,7 +602,7 @@ protection.
 
 export const refundPolicy = {
   title: "Return & Refund Policy",
-  lastUpdated: "May 2025",
+  lastUpdated: "May 2026",
   sections: [
     {
       heading: "Introduction",
@@ -613,20 +613,28 @@ export const refundPolicy = {
     {
       heading: "Matcha Products",
       content: `
-        Due to the nature of our matcha products and for safety and hygiene reasons,
-        we do not accept any returns or offer refunds on our matcha range under any circumstances.
-        All matcha purchases are final.
+        Due to the nature of matcha products and for safety and hygiene reasons, we do not accept any returns or offer refunds on our matcha range under any circumstances. All matcha purchases are final.
+        <br/><br/>
+        A refund or a replacement will be provided, if your order:
+        <ul>
+          <li>Arrives damaged</li>
+          <li>Contains an incorrect item</li>
+          <li>Is lost in transit</li>
+        </ul>
+        <br/>
+        Please contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> within 48 hours of delivery, along with your order number and clear photos. Once verified, we will arrange a replacement. If a replacement is not possible due to stock unavailability, a refund will be issued.
+        <br/><br/>
+        We do not accept returns, exchanges, or cancellations for change of mind purchases.
       `,
     },
     {
       heading: "Matchaware (Matcha Accessories)",
       content: `
-        We only accept returns for matchaware items (e.g., chawans, whisks, scoops) if the product
-        arrives in a damaged or defective condition.
+        We only accept returns for matchaware items (e.g., chawans, whisks, scoops, etc.) if the product arrives in a damaged or defective condition.
         <br/><br/>
         If your matchaware item is damaged or defective upon delivery, please follow these steps:
         <ul>
-          <li>Contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> within 48 hours of receiving the product.</li>
+          <li>Contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> within 24 hours of receiving the product.</li>
           <li>Provide your order number, a brief description of the issue, and clear photos of the damaged or defective item.</li>
           <li>Upon verification, we will arrange for a replacement or issue a refund, as appropriate.</li>
         </ul>
@@ -638,19 +646,16 @@ export const refundPolicy = {
         <ul>
           <li>Returns are only accepted for matchaware products that are unused and in their original packaging.</li>
           <li>We reserve the right to reject any return request that does not meet the above criteria.</li>
-          <li>Refunds, if approved, will be processed to the original method of payment within 7–10 business days.</li>
+          <li>Refunds, if approved, will be processed to the original method of payment within 7–10 business days after the product is received at our warehouse.</li>
         </ul>
         <br/>
-        We appreciate your understanding and support. If you have any questions, please contact us at
-        <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a>.
+        We appreciate your understanding and support. If you have any questions, please contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a>.
       `,
     },
     {
       heading: "Changes to This Policy",
       content: `
-        We may update this Policy from time to time, including to reflect changes to our practices or
-        for other operational, legal, or regulatory reasons. We will post the revised Policy on the Site,
-        update the "Last updated" date and take any other steps required by applicable law.
+        We may update this Policy from time to time, including to reflect changes to our practices or for other operational, legal, or regulatory reasons. We will post the revised Policy on the Site, update the "Last updated" date and take any other steps required by applicable law.
       `,
     },
   ],

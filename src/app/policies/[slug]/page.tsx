@@ -78,7 +78,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
   return (
     <Stack
       bgcolor="background.default"
-      pt={{ xs: 18, md: 20 }}
+      pt={{ xs: 20, md: 24 }}
       pb={{ xs: 0, md: 4 }}
       spacing={2}
       justifyContent="center"
@@ -99,7 +99,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
       <Stack>
         {policyData.sections.map(
           (section: PolicyData["sections"][0], index: number) => (
-            <Stack key={index} mb={4} maxWidth="1600px" px={2}>
+            <Stack key={index} mb={{xs: 3, md: 4}} maxWidth="1600px" px={2}>
               <Typography
                 sx={{
                   fontFamily: "Bricolage",
@@ -142,8 +142,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
                   },
                   "& ul": {
                     listStyleType: "disc",
-                    paddingLeft: {xs: 3, md: 6},
-                    marginBottom: "1rem",
+                    paddingLeft: { xs: 3, md: 6 },
                   },
                   "& a": {
                     color: "primary.main",
@@ -157,7 +156,7 @@ const LegalPolicyPage = ({ params }: PolicyPageProps) => {
                 dangerouslySetInnerHTML={{ __html: section.content }}
               />
             </Stack>
-          )
+          ),
         )}
       </Stack>
     </Stack>
