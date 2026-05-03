@@ -626,7 +626,7 @@ export const refundPolicy = {
         <br/><br/>
         If your matchaware item is damaged or defective upon delivery, please follow these steps:
         <ul>
-          <li>Contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> within 24 hours of receiving the product.</li>
+          <li>Contact us at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> within 48 hours of receiving the product.</li>
           <li>Provide your order number, a brief description of the issue, and clear photos of the damaged or defective item.</li>
           <li>Upon verification, we will arrange for a replacement or issue a refund, as appropriate.</li>
         </ul>
@@ -657,64 +657,120 @@ export const refundPolicy = {
 };
 
 export const shippingPolicy = {
-  title: "Shipping & Delivery Policy",
-  lastUpdated: "May 2025", // Optional field
+  title: "Shipping Policy",
+  lastUpdated: "May 2026",
   sections: [
     {
-      heading: "Introduction",
+      heading: "",
       content: `
-        At Umi (Mirai Enterprises), we are committed to delivering your order swiftly and securely.
-        Please take a moment to review our shipping and delivery policy.
+        At Umi (Mirai Enterprises), we ensure that every order is handled with care and dispatched in a timely manner. Please take a moment to review our shipping and delivery policy.
       `,
     },
     {
-      heading: "Order Processing & Shipping",
+      heading: "Order Processing and Non Shipping Days",
       content: `
-        <ul>
-          <li>All orders are processed and shipped within 4–5 business days from the date of purchase. In certain circumstances, delays by courier or delivery partners may occur, which could extend the delivery timeline beyond the estimated timeframe.</li>
-          <li>Please note that delays may occur due to unforeseen circumstances beyond the control of Umi, such as extreme weather, courier delays, or operational disruptions.</li>
-          <li>Orders are shipped via air shipping for fast and reliable delivery.</li>
-          <li>Once your order is picked up from our warehouse, tracking information and delivery updates will be provided directly by our shipping partner.</li>
-        </ul>
+        All orders are processed and dispatched within 4–5 business days from the date of purchase, excluding Saturdays, Sundays and public holidays. Once your order is dispatched, you'll receive a confirmation message with tracking details.
       `,
     },
     {
-      heading: "Delivery Duration & Timing",
+      heading: "Delivery Timelines",
       content: `
+        Delivery timelines may vary depending on your location and the courier partner.
+        <br/><br/>
+        <strong>Estimated delivery timelines:</strong>
         <ul>
-          <li>Estimated delivery times may vary depending on your location and the shipping partner’s logistics.</li>
-          <li>Orders will be delivered within 3-7 days from the date of dispatch, depending on the pincode of the consignee.</li>
-          <li>Delivery dates and time slots are managed solely by the shipping provider, and Umi has no control over the exact time of delivery.</li>
-          <li>We recommend tracking your order using the link provided by the shipping partner for the most accurate updates.</li>
+          <li>Bangalore City: 1–2 business days</li>
+          <li>Other Metro Cities: 3–5 business days</li>
+          <li>Other Cities & Towns: 4–10 business days</li>
         </ul>
+        <br/>
+        Delivery timelines are estimates and may vary due to courier delays or weather conditions. While we strive to ensure timely delivery, these timelines are indicative and not guaranteed.
       `,
     },
     {
-      heading: "Shipping Insurance & Damages",
+      heading: "Delays",
       content: `
+        Under certain circumstances, delays may occur due to factors beyond our control, including those related to courier, weather conditions, operational disruptions or local delivery personnel. In such cases, delivery may take longer than expected.
+      `,
+    },
+    {
+      heading: "Shipping Charges",
+      content: `
+        We offer complimentary shipping on orders over Rs. 999. Shipping charges, if applicable, will be calculated and displayed at checkout.
+      `,
+    },
+    {
+      heading: "Shipping Insurance and Damages",
+      content: `
+        Every order is shipped with comprehensive transit insurance to ensure your purchase reaches you safely.
+        <br/><br/>
+        In the rare event that your order is damaged during transit, notify us within 48 hours at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a> with the Subject: [Damaged in transit] [Order #xxxx]
+        <br/><br/>
+        To be eligible for a refund or replacement, clear photos of the damaged item(s) and packaging must be sent via email within 48 hours of delivery. Claims will not be attended to over Whatsapp, Instagram DM or other modes.
+      `,
+    },
+    {
+      heading: "Order Tracking",
+      content: `
+        Once your order has been shipped, you will receive tracking details from our logistics partner to monitor its progress.
+      `,
+    },
+    {
+      heading: "Address Accuracy",
+      content: `
+        Please ensure that all shipping details are accurate at the time of placing your order.
+        <br/><br/>
+        Shipping details, including the address and other personal information, are auto-filled exactly as entered by a customer at checkout and processed through our logistics aggregator. Once an order is placed, these details cannot be manually modified by us.
+        <br/><br/>
+        Umi will not be responsible for delays or failed deliveries resulting from incorrect or incomplete address information.
+      `,
+    },
+    {
+      heading: "Failed Delivery / Return-to-Origin (RTO)",
+      content: `
+        If a shipment is returned due to:
         <ul>
-          <li>Every order is shipped with comprehensive transit insurance to ensure your purchase reaches you safely.</li>
-          <li>In the rare event that your order is damaged during transit, notify us within 24 hours at <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a>.</li>
-          <li>To be eligible for a refund or replacement, clear photos of the damaged item(s) and packaging must be provided along with your email.</li>
+          <li>Incorrect or incomplete address</li>
+          <li>Incorrect phone number</li>
+          <li>Customer unavailability after valid delivery attempts</li>
+          <li>Order refusal after dispatch</li>
         </ul>
+        <br/>
+        A refund will be issued once the package is received back at our warehouse, minus RTO charges to cover return shipping charges.
+      `,
+    },
+    {
+      heading: "Remote/Unserviceable Pin codes",
+      content: `
+        In the event that a pin code is deemed unserviceable due to:
+        <ul>
+          <li>Logistics-related issues</li>
+          <li>Remote or inaccessible locations</li>
+          <li>Adverse weather conditions</li>
+          <li>Strikes or local blockades</li>
+        </ul>
+        <br/>
+        The order will be cancelled, and a full refund will be issued to the original payment source.
+      `,
+    },
+    {
+      heading: "Contact",
+      content: `
+        For any questions regarding your order or shipping, please reach out to us on <a href="mailto:hello@umimatchashop.com">hello@umimatchashop.com</a>
       `,
     },
     {
       heading: "Additional Notes",
       content: `
-        <ul>
-          <li>Shipping times may slightly vary based on location and unforeseen delays.</li>
-          <li>We currently ship only within India.</li>
-        </ul>
-        <br/>
+        We currently ship only within India.
+        <br/><br/>
         Thank you for choosing Umi. We appreciate your support and are happy to help with any shipping-related questions.
       `,
     },
     {
       heading: "Changes to This Policy",
       content: `
-        We may update this Policy from time to time, including to reflect changes to our practices or for other operational, legal, or regulatory reasons.
-        We will post the revised Policy on the Site, update the "Last updated" date and take any other steps required by applicable law.
+        We may update this Policy from time to time, including to reflect changes to our practices or for other operational, legal, or regulatory reasons. We will post the revised Policy on the Site, update the "Last updated" date and take any other steps required by applicable law.
       `,
     },
   ],
